@@ -2,7 +2,7 @@
 
 # Product Vision
 
-The Simple List Scanner system is for the household consumer and shopper who wants an easy way to create their shopping list for the store and keep track of what they already have. The SLS system solves the problems of forgetting to add items to your list, buying products you already had, and the pain of making a shopping list, while allowing for easy access virtually. The Simple List Scanner system allows the user to scan items that are being thrown away to automatically create a shopping list available to the user online. Unlike the alternative, OutofMilk, our product uses an IoT device to simplify the process of scanning and recording an item. Also, compared to Genican, our product is available online via both phones and computers, and gives users freedom to manually edit their list if desired, or take a hands-off approach.
+The Simple List Scanner system is for the household consumers and shoppers who want an easy way to create their shopping list for the store and keep track of what they already have. The SLS system solves the problems of forgetting to add items to your list, buying products you already had, and the pain of making a shopping list, while allowing for easy access virtually. The Simple List Scanner system allows the user to scan items that are being thrown away to automatically create a shopping list available to the user online. Unlike the alternative, OutofMilk, our product uses an IoT device to simplify the process of scanning and recording an item. Also, compared to Genican, our product is available online via both phones and computers, and gives users freedom to manually edit their list if desired, or take a hands-off approach.
 
 ## Team Members
 
