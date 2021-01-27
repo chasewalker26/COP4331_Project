@@ -2,11 +2,7 @@
 
 # Product Vision
 
-- We want to create an IoT device to allow a user to have automatic shopping list creation when they throw items away that are recurring purchases.
-
-- The device would be a barcode scanner interfaced with a raspberry pi that will allow the user to easily scan an item before disposal. The scanned barcode will be read with an API and code will be created to send the barcode from the device to a database. 
-
-- The database will connect with a website for the user to access their shopping cart. A public database holding barcode information will be used to display the item on the web page by it’s human-readable name.
+The Simple List Scanner system is for the household consumer and shopper who wants an easy way to create their shopping list for the store and keep track of what they already have. The SLS system solves the problems of forgetting to add items to your list, buying products you already had, and the pain of making a shopping list, while allowing for easy access virtually. The Simple List Scanner system allows the user to scan items that are being thrown away to automatically create a shopping list available to the user online. Unlike the alternative, OutofMilk, our product uses an IoT device to simplify the process of scanning and recording an item. Also, compared to Genican, our product is available online via both phones and computers, and gives users freedom to manually edit their list if desired, or take a hands-off approach.
 
 ## Team Members
 
