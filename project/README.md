@@ -1,0 +1,1 @@
+The project structure goes in this directory.
