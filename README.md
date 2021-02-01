@@ -15,6 +15,7 @@ The Simple List Scanner system is for the household consumers and shoppers who w
 
 # Sprint 1
 - [Product Backlog](https://trello.com/b/Af6rjxIc/cop4331)
+- [Sprint Backlog](https://trello.com/b/Af6rjxIc/cop4331)
 
 
 ## Task Allocation
