@@ -6,7 +6,7 @@ The Simple List Scanner system is for the household consumers and shoppers who w
 
 ## Team Members
 
-- Chase Walker
+- Chase Walker - chasewalker26
 - Anjali Ramsahai - anjalir09
 - Christopher Gray - AKpowder
 - Omer Gul
