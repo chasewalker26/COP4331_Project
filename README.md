@@ -6,16 +6,23 @@ The Simple List Scanner system is for the household consumers and shoppers who w
 
 ## Team Members
 
-- Chase Walker - chasewalker26
-- Anjali Ramsahai - anjalir09
-- Christopher Gray - AKpowder
+- Chase Walker - [chasewalker26](https://github.com/chasewalker26)
+- Anjali Ramsahai - [anjalir09](https://github.com/anjalir09)
+- Christopher Gray - [AKpowder](https://github.com/AKpowder)
 - Omer Gul - [omermelihgul](https://github.com/omermelihgul)
-- Alisher Sultangazin - sultalish
+- Alisher Sultangazin - [sultalish](https://github.com/sultalish)
 
 
 # Sprint 1
 - [Product Backlog](https://trello.com/b/Af6rjxIc/cop4331)
 - [Sprint Backlog](https://trello.com/b/Af6rjxIc/cop4331)
+- Requirements
+- Burndown Chart
+- Velocity Chart
+- System Architecture
+- Source Code
+- Automated Tests
+- Product Demonstration
 
 
 ## Task Allocation
