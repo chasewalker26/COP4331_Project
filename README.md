@@ -10,7 +10,7 @@ The Simple List Scanner system is for the household consumers and shoppers who w
 - Anjali Ramsahai - anjalir09
 - Christopher Gray - AKpowder
 - Omer Gul
-- Alisher Sultangazin
+- Alisher Sultangazin - sultalish
 
 
 # Sprint 1
