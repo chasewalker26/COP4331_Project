@@ -8,7 +8,7 @@ The Simple List Scanner system is for the household consumers and shoppers who w
 
 - Chase Walker
 - Anjali Ramsahai
-- Christopher Gray
+- Christopher Gray - AKpowder
 - Omer Gul
 - Alisher Sultangazin
 
