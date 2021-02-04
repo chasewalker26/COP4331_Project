@@ -2,7 +2,11 @@
 
 # Product Vision
 
-The Simple List Scanner system is for the household consumers and shoppers who want an easy way to create their shopping list for the store and keep track of what they already have. The SLS system solves the problems of forgetting to add items to your list, buying products you already had, and the pain of making a shopping list, while allowing for easy access virtually. The Simple List Scanner system allows the user to scan items that are being thrown away to automatically create a shopping list available to the user online. Unlike the alternative, OutofMilk, our product uses an IoT device to simplify the process of scanning and recording an item. Also, compared to Genican, our product is available online via both phones and computers, and gives users freedom to manually edit their list if desired, or take a hands-off approach.
+The Simple List Scanner system is for the household consumers and shoppers who want an easy way to create their shopping list for the store and keep track of what they already have. The SLS system solves the problems of forgetting to add items to your list, buying products you already had, and the pain of making a shopping list, while allowing for easy virtual access.
+
+The system uses an IoT device consisting of a barcode scanner and raspberry pi to allow the user to scan items being thrown away. These items are automatically added to an online shopping list and inventory system that gives users the freedom to manually edit their list if desired or take a hands-off approach to shopping list management. The all-in-one aspect of this system makes it perfect for those who want extra shopping convenience in their life.
+
+Unlike shopping list manager OutofMilk, our system’s IoT device provides the user with a more hands-off approach to creating and maintaining a shopping list with automatic updates when products are scanned. In contrast, Genican does utilize an IoT device, but our product is available online via computer or mobile devices while Genican uses a mobile app only, and our system is a budget-friendly option compared to the more expensive entry price of Genican.
 
 ## Team Members
 
