@@ -22,7 +22,7 @@ Unlike shopping list manager OutofMilk, our system’s IoT device provides the u
 - [Sprint Backlog](https://trello.com/b/Af6rjxIc/cop4331)
 - [Requirements](https://trello.com/b/Af6rjxIc/cop4331)
 - [Burndown Chart](https://docs.google.com/spreadsheets/d/183Dg6Bm59MUCFB1R2GCbdrus6IbwDEImLzfAo2zPLKg/edit#gid=0)
-- Velocity Chart
+- [Velocity Chart](https://docs.google.com/spreadsheets/d/1IDBxwgaPQL3OXrfwmEl2Y9RwI4CI29koruPL0Dz6inc/edit?usp=sharing)
 
 
 ## Task Allocation
