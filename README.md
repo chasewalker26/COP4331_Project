@@ -17,7 +17,7 @@ The Simple List Scanner system is for the household consumers and shoppers who w
 - [Product Backlog](https://trello.com/b/Af6rjxIc/cop4331)
 - [Sprint Backlog](https://trello.com/b/Af6rjxIc/cop4331)
 - [Requirements](https://trello.com/b/Af6rjxIc/cop4331)
-- Burndown Chart
+- [Burndown Chart](https://docs.google.com/spreadsheets/d/183Dg6Bm59MUCFB1R2GCbdrus6IbwDEImLzfAo2zPLKg/edit#gid=0)
 - Velocity Chart
 
 
