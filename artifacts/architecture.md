@@ -4,7 +4,7 @@
 
 # Data Design
 
-![Entity Relationship Diagram](https://github.com/chasewalker26/COP4331_Project/tree/main/artifacts/images/ERD.jpg?raw=true)
+![Entity Relationship Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/ERD.jpg?raw=true)
 
 # Business Rules
 
