@@ -4,11 +4,27 @@
 
 # Data Design
 
+![Entity Relationship Diagram](https://github.com/chasewalker26/COP4331_Project/tree/main/artifacts/images/ERD.jpg?raw=true)
+
 # Business Rules
 
 # User Interface Design
 
 # Resource Management
+
+##Hosting
+Storage:					10GB
+Data transfer:				360MB/ day
+SSL:						yes
+
+Database
+Simultaneous connections:	100
+Storage:					1GB
+
+UPC Database (API)
+Lookups:					100/day
+
+The resources needed are well within the capabilities of the intended implementation environment. We have generous limits to get started. In addition, our Firebase plan can be resized according to a future need.
 
 # Security
 
@@ -16,7 +32,11 @@
 
 # Scalability
 
+For this project, we will be using a cloud service, which means that we will outsource most of the responsibilities of running and maintaining servers and databases to a third party. Therefore, we will be able to address any growth easily by upgrading the plan that we are using. However, the system is not expected to grow and we have enough resources available to implement a modest version of the project. The current limitations of the service we are using is described in the resource management section.
+
 # Interoperability
+
+The system is not expected to share data with other software. However, IoT devices are going to be able to update the database. Each device will have a unique id and connection to the database. They will continuously run a Python program which will allow them to stay connected with the database. If users choose to associate a device id with their accounts on the web app, their shopping list stored on our database will be modified according to the data gathered from the devices.
 
 # Internationalization/Localization
 
