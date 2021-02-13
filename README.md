@@ -36,7 +36,7 @@ All team members worked together in this sprint to create the user stories in th
 - [Velocity Chart](https://docs.google.com/spreadsheets/d/1IDBxwgaPQL3OXrfwmEl2Y9RwI4CI29koruPL0Dz6inc/edit?usp=sharing)
 - [System Architecture](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/architecture.md)
 - [Source Code](https://github.com/chasewalker26/COP4331_Project/tree/main/project/Website)
-- [Product Demonstration]()
+- [Product Demonstration](https://www.youtube.com/watch?v=jdqj_ON-W2c&feature=youtu.be)
 
 ## Task Allocation
 - Chase Walker - User Interface diagrams, class diagram
