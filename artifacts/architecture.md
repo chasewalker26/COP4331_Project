@@ -1,4 +1,5 @@
 # Program Organization
+**Level 1: System Context Diagram**
 SimpleList's user use the SimpleList Website to view account information regarding his Shopping List, item history, and to make changes in his Shopping List. The SimpleList Website itself uses Rasberry Pi to do this, as Raspberry Pi gets information from the UPC database. The user himself uses the Scanner to send information to the Raspberry Pi, which lets Raspberry Pi know what to search for.
 
 ![System Context Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/Level%201_%20System%20Context%20Diagram.png)
