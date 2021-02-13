@@ -18,6 +18,7 @@ Unlike shopping list manager OutofMilk, our system’s IoT device provides the u
 
 
 # Sprint 1
+
 - [Product Backlog](https://trello.com/b/Af6rjxIc/cop4331)
 - [Sprint Backlog](https://trello.com/b/Af6rjxIc/cop4331)
 - [Requirements](https://trello.com/b/Af6rjxIc/cop4331)
@@ -27,9 +28,22 @@ Unlike shopping list manager OutofMilk, our system’s IoT device provides the u
 
 ## Task Allocation
 
+All team members worked together in this sprint to create the user stories in the product backlog, and the requirements for the first 5 stories. All team members were also involved in the setup process for their development environments, and creating accounts to use the database.
 # Sprint 2
 
+- [Trello Board](https://trello.com/b/Af6rjxIc/cop4331)
+- [Burndown Chart](https://docs.google.com/spreadsheets/d/183Dg6Bm59MUCFB1R2GCbdrus6IbwDEImLzfAo2zPLKg/edit#gid=185093314)
+- [Velocity Chart](https://docs.google.com/spreadsheets/d/1IDBxwgaPQL3OXrfwmEl2Y9RwI4CI29koruPL0Dz6inc/edit?usp=sharing)
+- [System Architecture](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/architecture.md)
+- [Source Code](https://github.com/chasewalker26/COP4331_Project/tree/main/project/Website)
+- [Product Demonstration]()
+
 ## Task Allocation
+- Chase Walker - User Interface diagrams, class diagram
+- Anjali Ramsahai - Remaining system architecture document sections
+- Christopher Gray - class diagram
+- Omer Gul - Entity Relationship Diagram
+- Alisher Sultangazin - C4 models (context, container, and component)
 
 # Sprint 3
 
