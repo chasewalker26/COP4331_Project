@@ -14,10 +14,12 @@ SimpleList's user use the SimpleList Website to view account information regardi
 | ShoppingList  | Given the user wants to view their list, when they go to the webpage, they can access their list on the site  | U001,U003,U004      |
 | Inventory     | Given the user wants to view their list, when they go to the webpage, they can access their inventory on the site  | U017, U003,U004  |
 | Contact       | Given that the user purchases the SimpleList Scanner, they will be provided with the ability to contact the developers through the web application to discuss issues they may come across     |     U014     |
-|<abstract>List |                |               |
+| abstract List |Given that the user adds an item to their list, when they save the item, the list should show the item and the item should be added to the database| U007,U016,U008,U009 |
 |  User         | Given that the user wants privacy, when they sign up for an account their information will be stored in firebase, and give them private access to the site. | U004 |
 |  Product      |Given that a user wants to scan an item, when it is scanned, it should be received and translated by the raspberry pi |  U002, U011,  |
 |  Scanner      |Given that the user has purchased the SimpleList Scanner, when they go to setup the system, then there should be minimal setup necessary for the user to allow easy and quick use.| U011,U012,U013    |
+
+I added one of the User stories for refernce, and all of UUID assosciated. 
 
 # Data Design
 
