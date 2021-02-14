@@ -29,6 +29,27 @@ I added one of the User stories for refernce, and all of UUID assosciated.
 
 # User Interface Design
 
+![Class Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/UI%20relationship%20diagram.png)
+
+|    UI diagram      |    User Interacion    |     UUID(s)    |
+| ------------------ | --------------------- | -------------- |
+| 1 | This screen shows what the user will see after submitting the clear crossed-out items dialogue box, the items will no longer be on the screen. | U003, U021 |
+| 2 | This box appears when the user presses clear with specific items crossed out, saving removes them, and cancel leaves the items crossed-out on the list. | U003, U021 |
+| 3 | When clicking on a red barcode displayed on the list the user will be prompted to give the item a name. This red item appears when an item is unrecognized by the barcode API. | U003 |
+| 4 | This shows that when a user clicks on shopping list items they can cross/uncross them to mark them for clearing. | U003, U021 |
+| 5 | This is the sign in/sign up screen using Google’s login API for security and efficiency. | U004, U005 |
+| 6 | This is the shopping list screen that the user will be sent to after login and interact with. | U003 |
+| 7 | This is what is shown when the user presses clear without any items crossed out. This will clear the whole list at once. | U003, U021 |
+| 8 | This is what the user is shown when they want to add an item to their shopping list. | U007 |
+| 9 | This is what is shown after the user clears the shopping list by using the dialogue box in 7. | U003, U021 |
+| 10 | This is the shopping list template on mobile screens. | U001 |
+| 11 | This is the navigation on mobile screens. | U001 |
+| 12 | This is the navigation menu. Shown by clicking the hamburger, closed by clicking the X. | U001 |
+| 13 | This is the contact form, it is navigated to using the nav menu. Submitting a message emails the developers. | U014 |
+| 14 | This screen allows users to set custom warnings, and preferred inventory amounts for items in their inventory. This is done by clicking on an inventory item. | U008, U009, U010 |
+| 15 | This is the user’s inventory screen, it is navigated to using the nav menu. | U017 |
+| 16 | This is the add an item to the inventory screen opened by pressing the add button. It allows users to add items to the inventory manually. | U019 |
+
 # Resource Management
 
 ## Hosting
