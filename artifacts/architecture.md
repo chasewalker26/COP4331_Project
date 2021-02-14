@@ -52,16 +52,16 @@ I added one of the User stories for reference, and all of UUIDs assosciated.
 
 # Resource Management
 
-## Hosting
+### Hosting
 Storage:                  10GB
 Data transfer:            360MB/ day
 SSL:                      yes
 
-Database
+### Database
 Simultaneous connections:	100
 Storage:					        1GB
 
-UPC Database (API)
+### UPC Database (API)
 Lookups:					        100/day
 
 The resources needed are well within the capabilities of the intended implementation environment. We have generous limits to get started. In addition, our Firebase plan can be resized according to a future need.
