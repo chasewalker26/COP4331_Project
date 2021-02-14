@@ -23,7 +23,7 @@ I added one of the User stories for reference, and all of UUIDs assosciated.
 
 # Data Design
 
-![Entity Relationship Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/ERD.jpg?raw=true)
+![Entity Relationship Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/Entity%20Relationship%20Diagram.jpg?raw=true)
 
 # Business Rules
 
