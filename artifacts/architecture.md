@@ -3,11 +3,11 @@
 
 The SimpleList website is used to allow users to view their shopping list, inventory, and to make edits to their list and inventory. The site receives it's information from a database that stores items received from a Raspberry Pi. To send items to the database the Raspberry Pi translates barcodes it scans with the UPC database API. The Raspberry Pi receives barcodes from the scanner device activated by the user. This process allows the item(s) to be displayed on the site.
 
-![System Context Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/Level%201_%20System%20Context%20Diagram.png)
-![Container Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/Level%202_%20Container%20Diagram.png)
-![Component Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/Level%203%20Component%20Diagram.png)
+![System Context Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/Level%201_%20System%20Context%20Diagram.png?raw=true)
+![Container Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/Level%202_%20Container%20Diagram.png?raw=true)
+![Component Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/Level%203%20Component%20Diagram.png?raw=true)
 # Code Design
-![Class Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/Class%20Diagrams-descriptions.png)
+![Class Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/Class%20Diagrams-descriptions.png?raw=true)
 
 |    class      | User Story    |       UUID    |
 | ------------- | ------------- | ------------- |
@@ -29,7 +29,7 @@ I added one of the User stories for reference, and all of UUIDs assosciated.
 
 # User Interface Design
 
-![Class Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/UI%20relationship%20diagram.png)
+![Class Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/UI%20relationship%20diagram.png?raw=true)
 
 |    UI diagram      |    User Interaction    |     UUID(s)    |
 | ------------------ | ---------------------- | -------------- |
