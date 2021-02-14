@@ -63,20 +63,37 @@ The system is not expected to share data with other software. However, IoT devic
 
 # Internationalization/Localization
 
+In the SimpleList Scanner system we will be using JS, Firebase, ASCII, Unix but converting to EST time, Python, and HTML. We will not have to convert to different languages since our system is only available in the US and will only recognize US-based products, as of right now. We may consider implementing website translations for prompts which would be relatively easy given Firebase’s wide-variety of add-ons to the website but it should not be necessary as we are pulling from a barcode database with specific brands and names that are straightforward and recognizable in the US. 
+
 # Input/Output
+
+For our system, inputs will be provided through an IoT device, the Raspberry Pi, and directly through the website. In the event of errors occurring with the scanner where it is unable to recognize a barcode when pulling from the scanner, the user will be prompted to input the corresponding name and give the user the barcode number for context. This along with providing the time of being scanned should allow the users enough information to input their items if the UPC database is unable to recognize the barcode and issues arise. Also, if an error occurs with the website, either the Inventory or ShoppingList, the user is given the ability to contact the developers as which we will have an email setup to receive and help solve any issues. Usually issues will likely be able to be solved on the backend as this product will be online and allow for easy alteration by developers if it is a software issue. Issues that may arise with the IoT device would require more in-depth customer service interaction between developer and user. 
 
 # Error Processing
 
-SimpList will be using an API to get the details of products through their barcodes. We expect that details of many products will be in its database since they were able to gather more than 1.5 million barcode numbers from all around the world. However, we don't what to assume that our users will be scanning only the products that are in the database. Therefore, if we detect that the API fails to respond to our request, we will ask our users to manuly enter the details of the product that they wanted to add to their shopping lists.
+SimpleList will be using an API to get the details of products through their barcodes. We expect that details of many products will be in its database since they were able to gather more than 1.5 million barcode numbers from all around the world. However, we don't what to assume that our users will be scanning only the products that are in the database. Therefore, if we detect that the API fails to respond to our request, we will ask our users to manuly enter the details of the product that they wanted to add to their shopping lists.
 
 # Fault Tolerance
 
 # Architectural Feasibility
 
+For this project the system includes a combination of an IoT device, HTML website created using Firebase, and using the UPC database to collect data for each users’ product database. In determining how to implement our plan, we found multiple similar examples but none that matched ours exactly. For simplicity, we decided to use a UPC database for the barcode conversions as it was unrealistic for us to create our own larger database to pull from as attempting to find all of the possible barcode combinations and look up their correlations would be less than ideal for the time period we have to make the scanner. Also, we chose to include systems that allow the user to have periodical reminders as it is impossible for users to scan items such as produce. It’s important that the user can have full use of the app even if they can’t scan something so full access to editing and adding to the list is also necessary. The architecture can be deemed as feasible with the implementation of a few pre-existing softwares as we are able to create a working system by connecting the raspberry pi to an online database and having the system automatically update as the user needs. 
+
 # Overengineering
+
+In our project we stayed on the side of simplicity for our classes in order to allow for easy to read code and easily identifiable systems. We have 7 classes, each that are for specific parts of the system. For example, our scanner class is in fact more convoluted as it pulls from the database once and adds it to a local database to allow the website to have to do minimal work and reduce the number of times the system is required to pull from the UPC database. Also, ShoppingList and Inventory are children of the larger List class to allow for when altering anything between the ShoppingList and Inventory it is easily identifiable but allow for them to pull from the same overall list class to allow for minimal discrepancies between the two. We’ve allowed for each class to interact with one another but attempted to do minimal nesting of classes to allow for less convolution and expect less errors and dependencies within our system. In each section we will be implementing try-catch statements to allow the system to continue to work despite issues that may arise and the user may contact us through the contact page to fix possible issues they may come across.
 
 # Build-vs-Buy Decisions
 
+UPC Database
+Firebase
+We chose to use the resources of Firebase to create a custom website from scratch rather than using a template because it allows for us to create a minimal and easy-to-use website as well as add a database that can connect to the raspberry pi. Also, we chose to build these parts rather than buying as it gave more originality to our project by allowing us more free will to alter aspects of our project that if purchasing or using already made software would make it much more difficult to alter. We also decided to purchase a scanner to break down and a raspberry pi to save time as it already includes the necessary hardware components to put the system together. Overall, building the majority of our project was necessary to simplify the process and limit possible issues that may arise.
+
 # Reuse
 
+Our HTML website, IoT device system and database of inventory will all be created and customized to the users’ and developers’ needs. In this case the only pre-existing software that we plan to utilize includes the google sign-in option for firebase and the UPC database website. The use of google sign-in would allow for easy and secure access for the user and allow for a more individualized login system that already has a fail-safe in place. We also chose to use the UPC database as it would be more realistic to pull product information directly from a more universally-used and updated database as it is not feasible to create a comprehensive barcode database of our own in the short time period of 8 weeks. 
+
 # Change Strategy
+
+# General Architecture Quality
+
