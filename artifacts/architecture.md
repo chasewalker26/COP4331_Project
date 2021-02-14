@@ -26,13 +26,15 @@ The SimpleList website is used to allow users to view their shopping list, inven
 |  Product      |Given that a user wants to scan an item, when it is scanned, it should be received and translated by the raspberry pi |  U002, U011,  |
 |  Scanner      |Given that the user has purchased the SimpleList Scanner, when they go to setup the system, then there should be minimal setup necessary for the user to allow easy and quick use.| U011,U012,U013    |
 
-I added one of the User stories for reference, and all of UUIDs assosciated. 
+I added one of the User stories for reference, and all of the UUIDs assosciated. 
 
 # Data Design
 
 ![Entity Relationship Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/Entity%20Relationship%20Diagram.jpg?raw=true)
 
 # Business Rules
+
+The only business rule that defines architectural processes is the requirement that information on the website that is seen by the users always matches the information in the database. This rule required the design of our methods for list creation to always be ready for information in the database to be updated to provide the user with the most current information available.
 
 # User Interface Design
 
@@ -99,9 +101,12 @@ For our system, inputs will be provided through an IoT device, the Raspberry Pi,
 
 # Error Processing
 
-SimpleList will be using an API to get the details of products through their barcodes. We expect that details of many products will be in its database since they were able to gather more than 1.5 million barcode numbers from all around the world. However, we don't what to assume that our users will be scanning only the products that are in the database. Therefore, if we detect that the API fails to respond to our request, we will ask our users to manually enter the details of the product that they wanted to add to their shopping lists.
+Error processing in our system will take a detective approach. When errors are found a program will notify the user and prevent whatever action caused the error from completing. The detection of these errors will be active, with validation of all user inputs to prevent a broken system state or invalid database submissions. Exceptions can be thrown by invalid input and caught to check for what error message to display to the user, so that the user can correct their input. On the site most errors should be displayed in red text above the interactive element responsible for the error if it came from user input. The program should discard all errors that do not break the system state, and repair errors that do. These should generally be repaired with a system refresh/reset. All input data will be assumed dirty and will be checked and processed by the class that it belongs to. This will allow specific processing for many types of user input that vary between each class. All error handling will be done using Javascript, JQuery, and Pythons native error handling implementations.
+
 
 # Fault Tolerance
+
+When the UPC database cannot recognize an item, instead of ignoring the item, it will be shown on the site as a barcode for the user to name. This will prevent system failure from an unnameable barcode affecting the raspberry pi code or the database items. To prevent sign in errors the team chose to use Google sign-in for its reliability and built-in password reset functionalities. The raspberry pi will be able to detect a system failure error and reboot itself should one occur to prevent an infinite state of unusability. 
 
 # Architectural Feasibility
 
@@ -113,9 +118,11 @@ In our project we stayed on the side of simplicity for our classes in order to a
 
 # Build-vs-Buy Decisions
 
-UPC Database
-Firebase
-We chose to use the resources of Firebase to create a custom website from scratch rather than using a template because it allows for us to create a minimal and easy-to-use website as well as add a database that can connect to the raspberry pi. Also, we chose to build these parts rather than buying as it gave more originality to our project by allowing us more free will to alter aspects of our project that if purchasing or using already made software would make it much more difficult to alter. We also decided to purchase a scanner to break down and a raspberry pi to save time as it already includes the necessary hardware components to put the system together. Overall, building the majority of our project was necessary to simplify the process and limit possible issues that may arise.
+We chose to create a custom website rather than use a template because it allows for us to create a minimal and easy-to-use website as well as easily add our own database connection for the site’s main functionality. We also chose building over buying as it gave more freedom and customization for our project.
+The website will utilize Bootstrap for it’s built-in portability, classes, and column system that will allow for a responsive page that still guarantees the developers creative freedom and provides fast development. 
+We decided to purchase the scanner and raspberry pi to save time as it already includes the necessary hardware components to put the system together, while remaining a lower cost than prebuilt systems that exist such as Genican.
+We are using the UPC database API to translate our barcodes to english because it would be near impossible for our team to create our own database of barcodes as thorough as the APIs, and it would be marginally more expensive.
+For user sign-in and account management we chose Google’s sign-in API that provides better security and ease than a built approach would at no cost to the developers.
 
 # Reuse
 
@@ -127,4 +134,10 @@ Some changes that we’ve considered for the architecture includes giving the po
 
 
 # General Architecture Quality
+
+The architecture handles all requirements and user stories that define our project and system. It has been designed specifically to meet the requirements and the developers will not build more or less than what is required to meet the needs of the users.
+The architecture is conceptually coherent and fits together in a way that is logical, practical, and implementable.
+The top level design is largely independent of language and machine except for a few exceptions.A website must be made with HTML and CSS which is system independent, but is a requirement that the system was designed around as a website was the user’s request. All other languages used do not force system dependency and the architecture was designed to allow the use of any language outside of web-specific languages.
+All motivations for major decisions not solely influenced by user stories have been provided in this document. There is a clear understanding about the choices made and the influences that helped the developers make them. The classes have been defined and described to a level that all developers understand and find feasible and achievable.
+
 
