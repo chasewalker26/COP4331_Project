@@ -47,6 +47,8 @@ The resources needed are well within the capabilities of the intended implementa
 
 # Security
 
+We know that coding guidelines should be developed with security implications in mind. Therefore, we value the privacy of our users and plan to keep their sensitive information encrypted in our servers. For instance, most of the people prefer to use the same password across their different accounts. If we choose to store their passwords in an unencrypted format, we might risk their other accounts too. In order for such cases not to occur, our first priority is to use trusted encryption libraries to safely store sensitive information in our servers.
+
 # Performance
 
 # Scalability
