@@ -4,8 +4,15 @@
 The SimpleList website is used to allow users to view their shopping list, inventory, and to make edits to their list and inventory. The site receives it's information from a database that stores items received from a Raspberry Pi. To send items to the database the Raspberry Pi translates barcodes it scans with the UPC database API. The Raspberry Pi receives barcodes from the scanner device activated by the user. This process allows the item(s) to be displayed on the site.
 
 ![System Context Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/Level%201_%20System%20Context%20Diagram.png?raw=true)
+
+**Level 2: System Container Diagram**
 ![Container Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/Level%202_%20Container%20Diagram.png?raw=true)
+
+**Level 3: System Component Diagram**
 ![Component Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/Level%203%20Component%20Diagram.png?raw=true)
+
+**Level 4: System Code Diagram**
+
 # Code Design
 ![Class Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/Class%20Diagrams-descriptions.png?raw=true)
 
@@ -84,7 +91,7 @@ The system is not expected to share data with other software. However, IoT devic
 
 # Internationalization/Localization
 
-In the SimpleList Scanner system we will be using JS, Firebase, ASCII, Unix but converting to EST time, Python, and HTML. We will not have to convert to different languages since our system is only available in the US and will only recognize US-based products, as of right now. We may consider implementing website translations for prompts which would be relatively easy given Firebase’s wide-variety of add-ons to the website but it should not be necessary as we are pulling from a barcode database with specific brands and names that are straightforward and recognizable in the US. 
+Internationalization will not be needed for our system. The system will only be available in the United States, and all resources used will be effective for this locale. Any times shown on the site will be shown in standard EST time for the purposes of the project. Since the UPC database contains items that are recognizable to those in the US no processing will need to be done to those items.
 
 # Input/Output
 
@@ -102,7 +109,7 @@ For this project the system includes a combination of an IoT device, HTML websit
 
 # Overengineering
 
-In our project we stayed on the side of simplicity for our classes in order to allow for easy to read code and easily identifiable systems. We have 7 classes, each that are for specific parts of the system. For example, our scanner class is in fact more convoluted as it pulls from the database once and adds it to a local database to allow the website to have to do minimal work and reduce the number of times the system is required to pull from the UPC database. Also, ShoppingList and Inventory are children of the larger List class to allow for when altering anything between the ShoppingList and Inventory it is easily identifiable but allow for them to pull from the same overall list class to allow for minimal discrepancies between the two. We’ve allowed for each class to interact with one another but attempted to do minimal nesting of classes to allow for less convolution and expect less errors and dependencies within our system. In each section we will be implementing try-catch statements to allow the system to continue to work despite issues that may arise and the user may contact us through the contact page to fix possible issues they may come across.
+In our project we stayed on the side of simplicity for our classes in order to allow for easy to read code and easily identifiable systems. We have 7 classes, each that are for specific parts of the system. For example, our scanner class is in fact more convoluted as it pulls from the database once and adds it to a local database to allow the website to have to do minimal work and reduce the number of times the system is required to pull from the UPC database. Also, ShoppingList and Inventory are children of the larger List class to allow for differences in the two lists to be handled by their own object, but allows them to retain common features. We’ve allowed for each class to interact with one another but attempted to do minimal nesting of classes to allow for less convolution and expect less errors and dependencies within our system. In each section we will be implementing try-catch statements to allow the system to continue to work despite issues that may arise and the user may contact us through the contact page to fix possible issues they may come across.
 
 # Build-vs-Buy Decisions
 
@@ -115,6 +122,9 @@ We chose to use the resources of Firebase to create a custom website from scratc
 Our HTML website, IoT device system and database of inventory will all be created and customized to the users’ and developers’ needs. In this case the only pre-existing software that we plan to utilize includes the google sign-in option for firebase and the UPC database website. The use of google sign-in would allow for easy and secure access for the user and allow for a more individualized login system that already has a fail-safe in place. We also chose to use the UPC database as it would be more realistic to pull product information directly from a more universally-used and updated database as it is not feasible to create a comprehensive barcode database of our own in the short time period of 8 weeks. 
 
 # Change Strategy
+
+Some changes that we’ve considered for the architecture includes giving the possibility of having the option to create separate lists per household. This could be implemented through unique QR codes that can be developed to be scanned first correlating to separate lists. Also we’ve discussed attempting to create or find a larger barcode database that could allow for international use. To implement this we’d have to find a larger database or create our own barcode database to link our product database that has a larger barcode inventory than the original UPC database or possibly check multiple databases and implement them as fail-safes. Based on our class setups, changes are more likely to occur in the backend through the Scanner class if we’re changing which database it pulls from, and if we are changing the user information we would solely have to update the user class to add sub-users. Most changes depending on the focus are expected to only require us to update one or two classes for the changes to be implemented.
+
 
 # General Architecture Quality
 
