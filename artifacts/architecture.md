@@ -7,7 +7,7 @@ SimpleList's user use the SimpleList Website to view account information regardi
 ![Container Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/Level%202_%20Container%20Diagram.png)
 ![Component Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/Level%203%20Component%20Diagram.png)
 # Code Design
-![Class Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/Event%20Storming%20and%20Class%20Diagrams-Class%20Diagrams.png)
+![Class Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/Class%20Diagrams-descriptions.png)
 
 |    class      | User Story    |       UUID    |
 | ------------- | ------------- | ------------- |
