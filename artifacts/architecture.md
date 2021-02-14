@@ -1,7 +1,7 @@
 # Program Organization
 **Level 1: System Context Diagram**
 
-SimpleList's user use the SimpleList Website to view account information regarding his Shopping List, item history, and to make changes in his Shopping List. The SimpleList Website itself uses Rasberry Pi to do this, as Raspberry Pi gets information from the UPC database. The user himself uses the Scanner to send information to the Raspberry Pi, which lets Raspberry Pi know what to search for.
+The SimpleList website is used to allow users to view their shopping list, inventory, and to make edits to their list and inventory. The site receives it's information from a database that stores items received from a Raspberry Pi. To send items to the database the Raspberry Pi translates barcodes it scans with the UPC database API. The Raspberry Pi receives barcodes from the scanner device activated by the user. This process allows the item(s) to be displayed on the site.
 
 ![System Context Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/Level%201_%20System%20Context%20Diagram.png)
 ![Container Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/Level%202_%20Container%20Diagram.png)
@@ -19,7 +19,7 @@ SimpleList's user use the SimpleList Website to view account information regardi
 |  Product      |Given that a user wants to scan an item, when it is scanned, it should be received and translated by the raspberry pi |  U002, U011,  |
 |  Scanner      |Given that the user has purchased the SimpleList Scanner, when they go to setup the system, then there should be minimal setup necessary for the user to allow easy and quick use.| U011,U012,U013    |
 
-I added one of the User stories for refernce, and all of UUID assosciated. 
+I added one of the User stories for reference, and all of UUIDs assosciated. 
 
 # Data Design
 
@@ -31,8 +31,8 @@ I added one of the User stories for refernce, and all of UUID assosciated.
 
 ![Class Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/UI%20relationship%20diagram.png)
 
-|    UI diagram      |    User Interacion    |     UUID(s)    |
-| ------------------ | --------------------- | -------------- |
+|    UI diagram      |    User Interaction    |     UUID(s)    |
+| ------------------ | ---------------------- | -------------- |
 | 1 | This screen shows what the user will see after submitting the clear crossed-out items dialogue box, the items will no longer be on the screen. | U003, U021 |
 | 2 | This box appears when the user presses clear with specific items crossed out, saving removes them, and cancel leaves the items crossed-out on the list. | U003, U021 |
 | 3 | When clicking on a red barcode displayed on the list the user will be prompted to give the item a name. This red item appears when an item is unrecognized by the barcode API. | U003 |
@@ -92,7 +92,7 @@ For our system, inputs will be provided through an IoT device, the Raspberry Pi,
 
 # Error Processing
 
-SimpleList will be using an API to get the details of products through their barcodes. We expect that details of many products will be in its database since they were able to gather more than 1.5 million barcode numbers from all around the world. However, we don't what to assume that our users will be scanning only the products that are in the database. Therefore, if we detect that the API fails to respond to our request, we will ask our users to manuly enter the details of the product that they wanted to add to their shopping lists.
+SimpleList will be using an API to get the details of products through their barcodes. We expect that details of many products will be in its database since they were able to gather more than 1.5 million barcode numbers from all around the world. However, we don't what to assume that our users will be scanning only the products that are in the database. Therefore, if we detect that the API fails to respond to our request, we will ask our users to manually enter the details of the product that they wanted to add to their shopping lists.
 
 # Fault Tolerance
 
