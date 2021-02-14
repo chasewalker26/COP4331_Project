@@ -29,6 +29,7 @@ Unlike shopping list manager OutofMilk, our system’s IoT device provides the u
 ## Task Allocation
 
 All team members worked together in this sprint to create the user stories in the product backlog, and the requirements for the first 5 stories. All team members were also involved in the setup process for their development environments, and creating accounts to use the database.
+
 # Sprint 2
 
 - [Trello Board](https://trello.com/b/Af6rjxIc/cop4331)
@@ -39,32 +40,58 @@ All team members worked together in this sprint to create the user stories in th
 - [Product Demonstration](https://www.youtube.com/watch?v=jdqj_ON-W2c&feature=youtu.be)
 
 ## Task Allocation
+
 - Chase Walker - User Interface diagrams, class diagram
 - Anjali Ramsahai - Remaining system architecture document sections
 - Christopher Gray - class diagram
-- Omer Gul - Entity Relationship Diagram
+- Omer Gul - Entity Relationship Diagram, system architecture document
 - Alisher Sultangazin - C4 models (context, container, and component)
 
 # Sprint 3
 
+
+
 ## Task Allocation
+
+
 
 # Sprint 4
 
+
+
 ## Task Allocation
+
+
 
 # Sprint 5
 
+
+
 ## Task Allocation
+
+
 
 # Sprint 6
 
+
+
 ## Task Allocation
+
+
 
 # Sprint 7
 
+
+
 ## Task Allocation
+
+
 
 # Sprint 8
 
+
+
 ## Task Allocation
+
+
+
