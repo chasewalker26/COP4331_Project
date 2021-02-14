@@ -51,6 +51,8 @@ We know that coding guidelines should be developed with security implications in
 
 # Performance
 
+Performance is not a concern for this project. We are not targeting to have a massive number of users. Our service (PaaS) provider cuts down on the resources we are getting if our app does not get any requests for a preiod of time. This may cause same delays druing the loading process; however, we don’t see it as a big concern for this project.
+
 # Scalability
 
 For this project, we will be using a cloud service, which means that we will outsource most of the responsibilities of running and maintaining servers and databases to a third party. Therefore, we will be able to address any growth easily by upgrading the plan that we are using. However, the system is not expected to grow and we have enough resources available to implement a modest version of the project. The current limitations of the service we are using is described in the resource management section.
