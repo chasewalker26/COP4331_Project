@@ -67,6 +67,8 @@ The system is not expected to share data with other software. However, IoT devic
 
 # Error Processing
 
+SimpList will be using an API to get the details of products through their barcodes. We expect that details of many products will be in its database since they were able to gather more than 1.5 million barcode numbers from all around the world. However, we don't what to assume that our users will be scanning only the products that are in the database. Therefore, if we detect that the API fails to respond to our request, we will ask our users to manuly enter the details of the product that they wanted to add to their shopping lists.
+
 # Fault Tolerance
 
 # Architectural Feasibility
