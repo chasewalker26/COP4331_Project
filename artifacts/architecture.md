@@ -21,7 +21,7 @@ Then, we see  Web Application container that has a Main Page which let's the use
 
 Then we have 3 Controllers providing access points for the JSON/HTTPS API, with each controller using other components to access data from the Main User Database, and by using Raspberry Pi which needs a scanner to start making API calls to the UPC Database. Also, Security Component that provides functionality with signing in uses User ID Component form The Main User Database which stores all user IDs and information related to each user ID and uses User's Name Component which stores all user names, User's Shopping List Components which stores the Current Shopping list of the user, User's Password Component that stores passwords of each user, and User's Items Component which stores information about the items user added/deleted from his shopping list.
 
-![Component Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/Level%203%20Component%20Diagram.png?raw=true)
+![Component Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/Level%203_%20Component%20Diagram(new).png)
 
 # Code Design
 ![Class Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/Class%20Diagrams-descriptions.png?raw=true)
