@@ -122,7 +122,7 @@ The system is not expected to share data with other software. However, IoT devic
 
 # Internationalization/Localization
 
-Internationalization will not be needed for our system. The system will only be available in the United States, and all resources used will be effective for this locale. Any times shown on the site will be shown in standard EST time for the purposes of the project. Since the UPC database contains items that are recognizable to those in the US no processing will need to be done to those items.
+Internationalization will not be needed for our system. The system will only be available in the United States, and all resources used will be effective for this locale. All text will be Unicode so translation is available and possible for users with the need. Any times shown on the site will be shown in standard EST time for the purposes of the project. Since the UPC database contains items that are recognizable to those in the US no processing will need to be done to those items.
 
 # Input/Output
 
