@@ -5,13 +5,23 @@ The SimpleList website is used to allow users to view their shopping list, inven
 
 ![System Context Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/Level%201_%20System%20Context%20Diagram.png?raw=true)
 
-**Level 2: System Container Diagram**
+**Level 2: Container Diagram**
+
+This is a Container Diagram that shows that the SimpleList's Website is made up of four containers: a Web-Application, Single-Page Application, an API Application, and a Main User Database. A Web Application is an (HTML/CSS/JS) application web application that simply serves static content. including content that makes up the Single-Page Application. The Single-Page Application is an angular application that runs in the user's webbrowser that provides all of the SimpleList's features.
+
+Sigle-Page Application uses JSON/HTTPS API, which is is provided by API application running on the server. The API Application gets user information from the Main User Database and form UPC Database by using Raspberry Pi. User could use a Scanner to modify the database.
+
 ![Container Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/Level%202_%20Container%20Diagram.png?raw=true)
 
 **Level 3: System Component Diagram**
-![Component Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/Level%203%20Component%20Diagram.png?raw=true)
 
-**Level 4: System Code Diagram**
+Here, we Buttons Component that provide user an access to use other actions of the website, and there's a Design Component that let's the user see the design of the website.
+
+Then, we see  Web Application container that has a Main Page which let's the user to go to different pages on the website, so that the user can use the web application.
+
+Then we have 3 Controllers providing access points for the JSON/HTTPS API, with each controller using other components to access data from the Main User Database, and by using Raspberry Pi which needs a scanner to start making API calls to the UPC Database. Also, Security Component that provides functionality with signing in uses User ID Component form The Main User Database which stores all user IDs and information related to each user ID and uses User's Name Component which stores all user names, User's Shopping List Components which stores the Current Shopping list of the user, User's Password Component that stores passwords of each user, and User's Items Component which stores information about the items user added/deleted from his shopping list.
+
+![Component Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/Level%203%20Component%20Diagram.png?raw=true)
 
 # Code Design
 ![Class Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/Class%20Diagrams-descriptions.png?raw=true)
