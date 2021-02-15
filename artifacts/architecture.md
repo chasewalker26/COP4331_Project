@@ -23,6 +23,26 @@ Then we have 3 Controllers providing access points for the JSON/HTTPS API, with 
 
 ![Component Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/Level%203_%20Component%20Diagram(new).png)
 
+|     class     | Block | User Story  |     UUID      |
+| ------------- | ----- |-------------| ------------- |
+| Web, List/inventory | Single-Page Application, Web Application | As a user, I want the ability to view my shopping list online, so that I can have access wherever I go | U001|
+| Web, List/inventory | Web Application | As a user, I want the ability to view my inventory online, so that I can have access wherever I go | U017 |
+| Scanner/pi, Database | Scanner, Raspberry Pi, UPC Database, Main User Database | As a busy person, I want to be able to scan the items I throw away, so they can be added to my list | U002 |
+| Scanner/Pi, Database| Main User Database | As a busy person, I want to see what I scanned on the website within 30s of me scanning it, so that it can be there in a reasonable amount of time | U018 |
+| Web, List/inventory, Database | Main User Database | As a shopper, I want the shopping list to be up to date, so that I do not buy what I already have | U003 |
+| Web, List/inventory | Main User Database | As a shopper, I would like to the inventory of items that I have to be current, so that I can choose to get something that I wish I had more of at the store | U006 |
+| Web | API Application | As a user, I want my list and inventory to be private so that nobody else can view it | U004 |
+| Web | API Application | As a user, I want to be able to view my private list and inventory, so that I can access it without risk | U005 |
+| Web, List/inventory, Database | API Application | As a shopper, I'd want to be able to manually add items to the shopping list so that I do not need to wait to throw an item away to have it on the list | U007 |
+| Web, List/inventory, Database | API Application, Raspberry Pi | As a parent with a large family, I would like to be able to set custom limits on inventory count, so that I can have an item added to my shopping list before I have none left | U008 |
+| Web, List/inventory, Database | API Application, Raspberry Pi | As a frequent produce consumer, I would like to set custom time periods for items to be added to the shopping lists because produce often does not have barcodes | U009 |
+| Web, List/inventory | Single-Page Application, API Application, Main User Database | As a shopper, I would like to be able to edit my inventory, so that I can change the values for extra things I purchased or forgot to scan | U010 |
+| Web, List/inventory | Single-Page Application, API Application, Main User Database | As a shopper, I would like to be able to add items to my inventory, so that I can fill out my inventory without scanning items | U019 |
+| Help, Scanner/pi | Web Application | As a user, I want to have a tutorial on how to setup the scanner, so I can use it efficiently | U013 |
+| Web, Help | Web Application | As a user, I want to be able to contact the developers, so that I can get help with issues | U014 |
+| Web, List/inventory, Database | API Application | As a member in a large family household, I'd like to be able to separate shopping lists for different users in the household | U015 |
+
+
 # Code Design
 ![Class Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/Class%20Diagrams-descriptions.png?raw=true)
 
