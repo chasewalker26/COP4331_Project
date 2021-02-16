@@ -33,9 +33,13 @@
         </div>
     </nav>
 
-    <div class="alert alert-success" role="alert" style="margin:20px">
-        Hello, world!
+    <div class="row justify-content-center text-center" style="margin:20px">
+        <div class="col-lg-6" id="home">
+
+        </div>
     </div>
+
+
 
     <!-- JQUERY -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -43,20 +47,24 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
+    <!-- initialize firebase -->
+    <script src="https://www.gstatic.com/firebasejs/3.3.2/firebase.js"></script>
+
+    <!-- js file links -->
+    <script src="js/FBdata.js"></script>
+
     <script>
         window.onload = function()
         {
-            console.log("Hello World");
+            firebase.database().ref("/ProductList/123456789/123456789").on("value", function(snapshot){
+                lists = snapshot.val();
+                lists = JSON.stringify(lists).split(/[{,},",":]/);
+                $("#home").html("");
+                for (var i = 0; i < lists.length; i++)
+                    if (lists[i] != "")
+                        $("#home").append(lists[i] + "<br>");
+            });
         }
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.firestore().doc('/foo/bar').get().then(() => { });
-        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        // firebase.analytics(); // call to activate
-        // firebase.analytics().logEvent('tutorial_completed');
-        // firebase.performance(); // call to activate
     </script>
 </body>
 
