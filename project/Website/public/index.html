@@ -54,19 +54,9 @@
 
     <!-- js file links -->
     <script src="js/FBdata.js"></script>
+    <script src="js/main.js"></script>
 
     <script>
-        window.onload = function()
-        {
-            firebase.database().ref("/ProductList/123456789/123456789").on("value", function(snapshot){
-                lists = snapshot.val();
-                lists = JSON.stringify(lists).split(/[{,},",":]/);
-                $("#home").html("");
-                for (var i = 0; i < lists.length; i++)
-                    if (lists[i] != "")
-                        $("#home").append(lists[i] + "<br>");
-            });
-        }
     </script>
 </body>
 
