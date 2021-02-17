@@ -21,7 +21,7 @@ Then, we see  Web Application container that has a Main Page which let's the use
 
 Then we have 3 Controllers providing access points for the JSON/HTTPS API, with each controller using other components to access data from the Main User Database, and by using Raspberry Pi which needs a scanner to start making API calls to the UPC Database. Also, Security Component that provides functionality with signing in uses User ID Component form The Main User Database which stores all user IDs and information related to each user ID and uses User's Name Component which stores all user names, User's Shopping List Components which stores the Current Shopping list of the user, User's Password Component that stores passwords of each user, and User's Items Component which stores information about the items user added/deleted from his shopping list.
 
-![Component Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/Level%203_%20Component%20Diagram(new).png)
+![Component Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/Level%203%20new.png?raw=true)
 
 |     class     | Block | User Story  |     UUID      |
 | ------------- | ----- |-------------| ------------- |
@@ -42,7 +42,6 @@ Then we have 3 Controllers providing access points for the JSON/HTTPS API, with 
 | Web, Help | Web Application | As a user, I want to be able to contact the developers, so that I can get help with issues | U014 |
 | Web, List/inventory, Database | API Application | As a member in a large family household, I'd like to be able to separate shopping lists for different users in the household | U015 |
 
-
 # Code Design
 ![Class Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/Class%20Diagrams-descriptions.png?raw=true)
 
@@ -60,7 +59,7 @@ I added one of the User stories for reference, and all of the UUIDs assosciated.
 
 # Data Design
 
-![Entity Relationship Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/Entity%20Relationship%20Diagram.jpg?raw=true)
+![Entity Relationship Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/ERD.png?raw=true)
 
 # Business Rules
 
@@ -107,11 +106,11 @@ The resources needed are well within the capabilities of the intended implementa
 
 # Security
 
-We know that coding guidelines should be developed with security implications in mind. Therefore, we value the privacy of our users and plan to keep their sensitive information encrypted in our servers. For instance, most of the people prefer to use the same password across their different accounts. If we choose to store their passwords in an unencrypted format, we might risk their other accounts too. In order for such cases not to occur, our first priority is to use trusted encryption libraries to safely store sensitive information in our servers.
+We value the security of our users, and take their data safety seriously. Due to this we chose to use google sign-in as our account management system to uphold the highest level of security. On top of this sign-in IDs will be encrypted and stored in the database to avoid account access by those who are unauthorized. We intend to keep all sensitive user data separate from the data commonly accessed by the site to prevent unwanted access during runtime.
 
 # Performance
 
-Performance is not a concern for this project. We are not targeting to have a massive number of users. Our service (PaaS) provider cuts down on the resources we are getting if our app does not get any requests for a preiod of time. This may cause same delays druing the loading process; however, we don’t see it as a big concern for this project.
+Performance is not a concern for this project. We are not targeting to have a massive number of users. Our service (PaaS) provider cuts down on the resources we are getting if our app does not get any requests for a period of time which may cause delays during the loading process; however, we don’t see it as a concern for this project.
 
 # Scalability
 
@@ -123,7 +122,7 @@ The system is not expected to share data with other software. However, IoT devic
 
 # Internationalization/Localization
 
-Internationalization will not be needed for our system. The system will only be available in the United States, and all resources used will be effective for this locale. Any times shown on the site will be shown in standard EST time for the purposes of the project. Since the UPC database contains items that are recognizable to those in the US no processing will need to be done to those items.
+Internationalization will not be needed for our system. The system will only be available in the United States, and all resources used will be effective for this locale. All text will be Unicode so translation is available and possible for users with the need. Any times shown on the site will be shown in standard EST time for the purposes of the project. Since the UPC database contains items that are recognizable to those in the US no processing will need to be done to those items.
 
 # Input/Output
 

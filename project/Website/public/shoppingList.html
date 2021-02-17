@@ -21,7 +21,7 @@
     <!-- GOOGLE MATERIAL ICONS-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <title>Simple List Scanner</title>
+    <title>Your Shopping List</title>
 </head>
 
 <body>
@@ -35,11 +35,27 @@
         </div>
     </nav>
 
-    <div class="row justify-content-center text-center" style="margin:20px">
-        <div class="col-lg-6" id="home">
+    <div class="jumbotron text-center">
+        <h1>Shopping List</h1>
+      </div>
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-4">
+            <h3>Your list:</h3>
+            <li>
+                <li><script>document.write(name)</script> </li>
+                <!-- <li><script>document.write(count)</script> </li> -->
 
+
+            </li>
+          </div>
+          <div class="col-sm-4">
+            <h3>Column 2</h3>
+            <p>List continued:</p>
+          </div>
         </div>
-    </div>
+      </div>
 
 
 
@@ -54,10 +70,40 @@
 
     <!-- js file links -->
     <script src="js/FBdata.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/ShoppingList.js"></script>
+    <script src="js/Product.js"></script>
+    <script src="js/List.js"></script>
+    <script src="js/Inventory.js"></script>
 
     <script>
+        window.onload = function()
+        {
+            // firebase.database().ref("/ProductList/123456789/123456789").on("value", function(snapshot){
+            //     lists = snapshot.val();
+            //     lists = JSON.stringify(lists).split(/[{,},",":]/);
+            //     $("#product").html("");
+            //     for (var i = 0; i < lists.length; i++)
+            //         if (lists[i] != "")
+            //             $("#product").append(lists[i] + "<br>");
+            // });
+            
+            //console.log(Product.product1)
+        }
     </script>
+
+    <script>
+        //var productTest = document.getElementById("name");
+        var name = product1.name;
+        var count = product1.count;
+        console.log(name);
+        console.log(count);
+        console.log(product1);
+        // var productTest = document.getElementsByClassName("Product");
+        // for(let item of productTest){
+        //     console.log(productTest.name);
+        // }
+    </script>
+    
 </body>
 
 </html>
