@@ -1,0 +1,26 @@
+
+/* shopping list class */
+.shoppingListProduct{
+    color: #598BC4;
+    font-family: "Lucida Bright", Georgia, serif;
+    font-style: normal;
+    font-size: 40px;
+    font-weight: Demibold;
+    list-style: none;
+}
+
+/* Margin top class  */
+.mt-0{
+    margin-top: 0 !important;
+}
+/* Margin left class  */
+.mx-4{
+    margin-left: 2 !important;
+    margin-right: 2 !important;
+    /* margin-left: ($spacer * .25) !important; */
+}
+.mx-5{
+    margin-left: 3 !important;
+    margin-right: 3 !important;
+    /* margin-left: ($spacer * .25) !important; */
+}
