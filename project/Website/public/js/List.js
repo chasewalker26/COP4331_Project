@@ -1,36 +1,49 @@
-//Abstract Class list.
+var testing = true;
 
-const initializeFirebaseListener = require("./main");
+if (testing == true)
+{
+  module.exports = buildList;
 
-//@class Animal
+  function buildList(listID)
+  {
+    var list = new List(listID);
+
+    return list;
+  }
+}
+
 class List
 {
 
   constructor(listID)
   {
-    this.products = [];
+    this.products =
+    {
+        "Barcode0" :
+        {
+            "count" : 47,
+            "idealCount": 1,
+            "name" : "name",
+            "timeScanned": 0,
+            "warningCount": -1,
+            "warningDay":  -1
+        },
+        "Barcode1" : 
+        {
+            "count" : 7,
+            "idealCount": 1,
+            "name" : "name",
+            "timeScanned": 0,
+            "warningCount": -1,
+            "warningDay":  -1
+        }
+    };
 
-    
+    this.listID = listID;
   }
 
-  List()
+  async updateDatabase(products)
   {
-
-  }
-
-  getProducts(barcode)
-  {
-
-  }
-
-  updateDatabase(products)
-  {
-
-  }
-
-  nameProduct(barcode)
-  {
-
+    await saveToFirebase("ProductList/" + this.listID, products);
   }
 }
-
