@@ -39,3 +39,13 @@ pullFromFirebase = (datapath) =>
         });
     })
 }
+
+// function that enables asynchronous saving of data to databse
+saveToFirebase = (datapath, data) =>
+{
+    return new Promise((resolve) => 
+    {
+        firebase.database().ref(datapath).update(data);
+        resolve();
+    })
+}
