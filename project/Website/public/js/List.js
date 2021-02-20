@@ -17,29 +17,15 @@ class List
 
   constructor(listID)
   {
-    this.products =
-    {
-        "Barcode0" :
-        {
-            "count" : 47,
-            "idealCount": 1,
-            "name" : "name",
-            "timeScanned": 0,
-            "warningCount": -1,
-            "warningDay":  -1
-        },
-        "Barcode1" : 
-        {
-            "count" : 7,
-            "idealCount": 1,
-            "name" : "name",
-            "timeScanned": 0,
-            "warningCount": -1,
-            "warningDay":  -1
-        }
-    };
-
+    this.products;
     this.listID = listID;
+  }
+
+  async getProducts()
+  {
+    var listProducts = await pullFromFirebase("ProductList/" +this.listID);
+
+    this.products = listProducts;
   }
 
   async updateDatabase(products)
