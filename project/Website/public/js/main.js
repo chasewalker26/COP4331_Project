@@ -26,3 +26,16 @@ if (testing == true)
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
 }
+
+// function that enables asynchronous fethcing of database data
+pullFromFirebase = (datapath) => 
+{
+    return new Promise((resolve) => 
+    {
+        firebase.database().ref(datapath).once('value').then(function(snapshot) 
+        {
+            const products = snapshot.val();
+            resolve(products);
+        });
+    })
+}
