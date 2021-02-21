@@ -48,11 +48,22 @@ All team members worked together in this sprint to create the user stories in th
 - Alisher Sultangazin - C4 models (context, container, and component)
 
 # Sprint 3
-
+- [Trello Board](https://trello.com/b/Af6rjxIc/cop4331)
+- [Burndown Chart](https://docs.google.com/spreadsheets/d/183Dg6Bm59MUCFB1R2GCbdrus6IbwDEImLzfAo2zPLKg/edit#gid=0)
+- [Velocity Chart](https://docs.google.com/spreadsheets/d/1IDBxwgaPQL3OXrfwmEl2Y9RwI4CI29koruPL0Dz6inc/edit?usp=sharing)
+- [System Architecture](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/architecture.md)
+- [Source Code](https://github.com/chasewalker26/COP4331_Project/tree/main/project/Website)
+- [Product Demonstration](https://www.youtube.com/watch?v=jdqj_ON-W2c&feature=youtu.be)
+ 
 
 
 ## Task Allocation
-
+- Chase Walker - User Interface diagrams, class diagram
+- Anjali Ramsahai - Remaining system architecture document sections
+- Christopher Gray - I completed the user story "As a user, I want the ability to view my shopping list online, so that I can have access wherever I go" U001.
+- Omer Gul - Entity Relationship Diagram, system architecture document
+- Alisher Sultangazin - C4 models (context, container, and component)
+- Everyone worked on cleaning up sprint 2's errors!
 
 
 # Sprint 4
