@@ -1,17 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Login Form</title>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <script src="https://apis.google.com/js/platform.js" asynf defer></script>
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="css/global.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- RESET DEFAULT CSS -->
+    <link rel="stylesheet" href="css/styles.css?asdf">
+    <!-- BOOTSTRAP CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <!-- GOOGLE MATERIAL ICONS-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <meta name="google-signin-client_id" content = "922520131880-fcs21m082d7aisjb8q9288f9skp7j5co.apps.googleusercontent.com">
+    <title>Login to SimpleList</title>
+
+    <meta name="google-signin-client_id" content = "620770546311-80ve0rg4ovhnovspmvtucbbqvom6mlau.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" asynf defer></script>
 </head>
-<body>
-    
+<body class="bg-light-blue">
     <!--nav bar-->
     <nav class="navbar navbar-dark bg-dark" style = "height: 60px;">
         <!-- Navbar content -->
@@ -27,28 +32,14 @@
         <span class="material-icons md-36 navlines " style = "color: #ffffff; cursor:pointer " onclick="openNav()">menu</span>
     </nav>
 
-    <section class="container-fluid">
-        <section class="row justify-content-center">
-            <section class="col-12 col-sm-6 col-md-3">
-                <form class="form-container">
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
-                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                    </div>
-                    <div class="mb-3">
-                      <label for="exampleInputPassword1" class="form-label">Password</label>
-                      <input type="password" class="form-control" id="password">
-                    </div>
+    <div class="row bg-light-blue justify-content-center" style="top:50%">
+        <div class="card info-card col-5 text-center m-5 p-5">
+            <div class="h1 my-5 dark-blue">Welcome to the<br> SimpleList Scanner site!<br> Sign in or Sign up!</div>
+            <div class="g-signin2 align-self-center" data-onsuccess="onSignIn" -theme="light" data-width="300" data-height="50" data-longtitle="true">button</div>
+        </div>
+    </div>
 
-                    <div class="g-signin2" data-onsuccess="onSignIn"-theme="light" data-width="300" data-height="50" data-longtitle="true">button</div>
 
-                    <button type="submit" onclick="getInfo(); return false" class="btn btn-primary col-12">Submit</button>
-                  </form>
-            </section>
-        </section>
-
-    </section>
 
     <script>
         function onSignIn(googleUser) {
@@ -58,18 +49,28 @@
         console.log('ID: ' + profile.getId());
         var auth2 = gapi.auth2.getAuthInstance();
 
+        
+
 
         // The ID token you need to pass to your backend:
         var id_token = googleUser.getAuthResponse().id_token;
         console.log("ID Token: " + id_token);
+        // Build Firebase credential with the Google ID token.
+        var credential = firebase.auth.GoogleAuthProvider.credential(id_token);
 
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'https://yourbackend.example.com/tokensignin');
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-        xhr.onload = function() {
-        console.log('Signed in as: ' + xhr.responseText);
-};
-    xhr.send('idtoken=' + id_token);
+        // Sign in with credential from the Google user.
+        firebase.auth().signInWithCredential(credential).catch((error) => {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+        // ...
+        });
+
+        
 
 
         auth2.disconnect();
@@ -94,10 +95,10 @@
     <!-- js file links -->
     <script src="js/main.js"></script>
     <script src="js/User.js"></script>
+    <!-- <script src="google-signin.js"></script> -->
     <script src="js/Product.js"></script>
     <script src="js/List.js"></script>
     <script src="js/Inventory.js"></script>
     <script src="js/ShoppingList.js"></script>
-
 </body>
 </html>

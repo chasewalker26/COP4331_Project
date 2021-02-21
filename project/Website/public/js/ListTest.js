@@ -12,6 +12,9 @@ function runTests()
     updateDatabaseTest();
 }
 
+
+// WRITE LIST TEST
+
 async function getProductsTest()
 {
     let list = new List("ListID");

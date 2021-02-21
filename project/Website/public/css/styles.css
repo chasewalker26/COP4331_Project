@@ -1,3 +1,23 @@
+html, body {
+	max-width: 100%;
+	overflow-x: hidden;
+}
+
+body {
+	background-color: #ffffff;
+	margin: 0;
+	padding: 0;
+}
+
+/* form container class */
+.form-container {
+  position: absolute;
+  top: 15vh;
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px #000;
+}
 
 /* shopping list class */
 .shoppingListProduct{
@@ -17,6 +37,22 @@
     font-size: 30px;
     font-weight: Demibold;
     list-style: none;
+}
+
+.light-blue {
+  color: #598BC4;
+}
+
+.dark-blue {
+  color:#006579;
+}
+
+.bg-light-blue {
+  background-color: #598BC4;
+}
+
+.bg-dark-blue {
+  background-color:#006579;
 }
 
 /* Margin top class  */
@@ -51,6 +87,14 @@
     top: 12px;
     /* padding-top: 60px; */
 }
+
+.navbar-brand {
+  font-family: "Lucida Bright", Georgia, serif;
+  font-style: normal;
+  font-size: 40px;
+  font-weight: Demibold;
+}
+
 /* The side navigation menu */
 .sidenav {
   height: 100%; /* 100% Full-height */
