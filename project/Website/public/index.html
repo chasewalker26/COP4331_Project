@@ -16,14 +16,19 @@
 </head>
 
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-dark bg-dark">
+    <!--nav bar-->
+    <nav class="navbar navbar-dark bg-dark" style = "height: 60px;">
         <!-- Navbar content -->
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">SimpleList</a>
-            <a class="navbar-brand" href="inventory.html">Inventory List</a>
-            <a class="navbar-brand" href="shoppingList.html">Shopping List</a>
+        <a class="navbar-brand" href="LoginForm.html">SimpleList</a>
         </div>
+
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a class="navbar-brand navlink" href="inventory.html">Inventory List</a>
+            <a class="navbar-brand navlink" href="shoppingList.html">Shopping List</a>
+        </div>
+        <span class="material-icons md-36 navlines " style = "color: #ffffff; cursor:pointer " onclick="openNav()">menu</span>
     </nav>
 
     <div class="row justify-content-center text-center" style="margin:20px">

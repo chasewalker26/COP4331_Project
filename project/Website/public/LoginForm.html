@@ -11,16 +11,30 @@
     <meta name="google-signin-client_id" content = "922520131880-fcs21m082d7aisjb8q9288f9skp7j5co.apps.googleusercontent.com">
 </head>
 <body>
-    </div>
+    
+    <!--nav bar-->
+    <nav class="navbar navbar-dark bg-dark" style = "height: 60px;">
+        <!-- Navbar content -->
+        <div class="container-fluid">
+        <a class="navbar-brand" href="LoginForm.html">SimpleList</a>
+        </div>
+
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <a class="navbar-brand navlink" href="inventory.html">Inventory List</a>
+            <a class="navbar-brand navlink" href="shoppingList.html">Shopping List</a>
+        </div>
+        <span class="material-icons md-36 navlines " style = "color: #ffffff; cursor:pointer " onclick="openNav()">menu</span>
+    </nav>
 
     <section class="container-fluid">
         <section class="row justify-content-center">
             <section class="col-12 col-sm-6 col-md-3">
                 <form class="form-container">
                     <div class="mb-3">
-                      <label for="exampleInputEmail1" class="form-label">Email address</label>
-                      <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
-                      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                        <label for="exampleInputEmail1" class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                     </div>
                     <div class="mb-3">
                       <label for="exampleInputPassword1" class="form-label">Password</label>
@@ -84,5 +98,6 @@
     <script src="js/List.js"></script>
     <script src="js/Inventory.js"></script>
     <script src="js/ShoppingList.js"></script>
+
 </body>
 </html>
