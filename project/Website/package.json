@@ -4,7 +4,7 @@
   "description": "Website files goes in this directory.",
   "main": "index.js",
   "dependencies": {
-    "firebase": "^8.2.8",
+    "firebase": "^8.2.9",
     "firebase-admin": "^9.5.0"
   },
   "devDependencies": {
