@@ -58,12 +58,12 @@ All team members worked together in this sprint to create the user stories in th
 
 
 ## Task Allocation
-- Chase Walker - User Interface diagrams, class diagram
-- Anjali Ramsahai - Remaining system architecture document sections
+- Chase Walker - I completed the user story "As a shopper, I want the shopping list to contain all items that I have scanned that I have not removed from the list, so that I do not buy what I already have" U003
+- Anjali Ramsahai - I completed the user story "As a user, I want the ability to view my inventory online, so that I can have access wherever I go" U017
 - Christopher Gray - I completed the user story "As a user, I want the ability to view my shopping list online, so that I can have access wherever I go" U001.
-- Omer Gul - Entity Relationship Diagram, system architecture document
-- Alisher Sultangazin - C4 models (context, container, and component)
-- Everyone worked on cleaning up sprint 2's errors!
+- Omer Gul - I completed the user story "As a busy person, I want to be able to scan the items I throw away, so they can be added to my list" U002.
+- Alisher Sultangazin - I completed the user story "As a user, I want my list and inventory to be private so that nobody else can view it" u004.
+- Everyone worked on cleaning up sprint 2's errors.
 
 
 # Sprint 4
