@@ -1,53 +1,24 @@
-//Abstract Class list.
-//@class Animal
-class List{
-
-    constructor(){
-      
-    }
-  
-    List(){
-    }
-  
-    getProduct(){
-      
-    }
-    updateDatabase(Product){
-
-    }
-}
-var testing = true;
-
-if (testing == true)
-{
-  module.exports = buildList;
-
-  function buildList(listID)
-  {
-    var list = new List(listID);
-
-    return list;
-  }
-}
-
 class List
 {
-
   constructor(listID)
   {
-    this.products;
     this.listID = listID;
+    this.products = [];
   }
-
+  
   async getProducts()
   {
-    var listProducts = await pullFromFirebase("ProductList/" +this.listID);
+    var dbProducts = await pullFromFirebase("ProductList/" + this.listID + "/");
+    var barcodes = Object.keys(dbProducts);
 
-    this.products = listProducts;
+    for (var i = 0; i < barcodes.length; i++)
+    {
+       this.products.push(new Product(barcodes[i], dbProducts[barcodes[i]]));
+    }
   }
 
   async updateDatabase(products)
   {
-    await saveToFirebase("ProductList/" + this.listID, products);
+    await saveToFirebase("ProductList/" + this.listID + "/", products);
   }
 }
