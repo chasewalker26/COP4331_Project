@@ -9,6 +9,16 @@
     list-style: none;
 }
 
+/* inventory class */
+.InventoryProducts{
+    color: #598BC4;
+    font-family: "Lucida Bright", Georgia, serif;
+    font-style: normal;
+    font-size: 40px;
+    font-weight: Demibold;
+    list-style: none;
+}
+
 /* Margin top class  */
 .mt-0{
     margin-top: 0 !important;
