@@ -48,11 +48,27 @@ All team members worked together in this sprint to create the user stories in th
 - Alisher Sultangazin - C4 models (context, container, and component)
 
 # Sprint 3
-
+- [Trello Board](https://trello.com/b/Af6rjxIc/cop4331)
+- [Burndown Chart](https://docs.google.com/spreadsheets/d/183Dg6Bm59MUCFB1R2GCbdrus6IbwDEImLzfAo2zPLKg/edit#gid=0)
+- [Velocity Chart](https://docs.google.com/spreadsheets/d/1IDBxwgaPQL3OXrfwmEl2Y9RwI4CI29koruPL0Dz6inc/edit?usp=sharing)
+- [System Architecture](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/architecture.md)
+- [Source Code](https://github.com/chasewalker26/COP4331_Project/tree/main/project/Website)
+- [Product Demonstration](https://www.youtube.com/watch?v=jdqj_ON-W2c&feature=youtu.be)
+ 
 
 
 ## Task Allocation
+- Chase Walker - I completed the user story "As a shopper, I want the shopping list to contain all items that I have scanned that I have not removed from the list, so that I do not buy what I already have" U003
 
+- Anjali Ramsahai - I completed the user story "As a user, I want the ability to view my inventory online, so that I can have access wherever I go" U017
+
+- Christopher Gray - I completed the user story "As a user, I want the ability to view my shopping list online, so that I can have access wherever I go" U001.
+
+- Omer Gul - I completed the user story "As a busy person, I want to be able to scan the items I throw away, so they can be added to my list" U002.
+
+- Alisher Sultangazin - I completed the user story "As a user, I want my list and inventory to be private so that nobody else can view it" U004.
+
+- Everyone worked on cleaning up sprint 2's errors.
 
 
 # Sprint 4
