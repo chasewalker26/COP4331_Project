@@ -1,4 +1,14 @@
 
+/* form container class */
+.form-container {
+  position: absolute;
+  top: 15vh;
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px #000;
+}
+
 /* shopping list class */
 .shoppingListProduct{
     color: #598BC4;
