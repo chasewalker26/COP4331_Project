@@ -1,17 +1,3 @@
-var testing = false;
-
-if (testing == true)
-{
-  module.exports = buildList;
-
-  function buildList(listID)
-  {
-    var list = new List(listID);
-
-    return list;
-  }
-}
-
 class List
 {
   constructor(listID)
