@@ -17,18 +17,20 @@ async function formatListTest()
 
     await shoppingList.getProducts();
 
-    shoppingList.formatList();
+    var html = shoppingList.formatList();
+    document.getElementById("shoppingList").innerHTML = html;
 
-    var expectedElements = '<li class="shoppingListProduct" id="Barcode0">name: 1</li>' + 
-                            '<li class="shoppingListProduct" id="Barcode1">name: 1</li>';
+    var expectedElements = '<li class="listProduct" id="Barcode0">name: 5</li>' + 
+                            '<li class="listProduct" id="Barcode1">name: 2</li>';
 
     var siteShoppingListElements = document.getElementById("shoppingList").children;
-    var actualElements;
+    var actualElements = "";
 
     for (var i = 0; i < siteShoppingListElements.length; i++)
         actualElements += siteShoppingListElements[i].outerHTML;
 
-    console.assert(expectedElements == actualElements, "formatListTest() FAILED")
+    console.log(actualElements);
+    console.log(expectedElements);
+
+    console.assert(expectedElements == actualElements, "formatListTest() FAILED");
 }
-
-
