@@ -1,18 +1,14 @@
-//shopping list 
-
-
-
-class ShoppingList{
-  constructor(name,count){
-
+class ShoppingList extends List
+{
+  constructor(listID)
+  {
+    super(listID);
   }
 
-    clearList(name,count){
+  formatList()
+  {
 
-    }
-    addItem(name,count){
-    }
-
+  }
 }
 
 
