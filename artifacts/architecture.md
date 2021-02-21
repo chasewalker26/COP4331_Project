@@ -106,7 +106,7 @@ The resources needed are well within the capabilities of the intended implementa
 
 # Security
 
-We value the security of our users, and take their data safety seriously. Due to this we chose to use google sign-in as our account management system to uphold the highest level of security. On top of this sign-in IDs provided by google will be given random keys and stored in the database to avoid account access by those who are unauthorized. We intend to keep all sensitive user data separate from the data commonly accessed by the site to prevent unwanted access during runtime.
+We value the security of our users, and take their data safety seriously. Due to this we chose to use google sign-in as our account management system to uphold the highest level of security. On top of this sign-in IDs provided by google will be given random keys and stored in the database to avoid account access by those who are unauthorized. A user's list will be account restricted so that they must sign in to view it.
 
 # Performance
 
