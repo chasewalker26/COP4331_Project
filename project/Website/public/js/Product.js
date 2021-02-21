@@ -9,6 +9,7 @@ class Product{
         this.warningDay = product.warningDay;
     }
 
+    /*
     getProduct(barcode){
 
         //converts 
@@ -36,7 +37,7 @@ class Product{
                 "warningDay":  -1
             }
         }
-    }
+    }*/
 }
 
 
