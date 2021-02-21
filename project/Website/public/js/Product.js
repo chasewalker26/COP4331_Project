@@ -1,5 +1,3 @@
-
-
 class Product{
     constructor(barcode, product){
         this.barcode = barcode;
@@ -13,6 +11,31 @@ class Product{
 
     getProduct(barcode){
 
+        //converts 
+        var product = 
+        {  
+            "barcode" : "Barcode0",
+            "count" : 5,
+            "idealCount": 1,
+            "name" : "name",
+            "timeScanned": 0,
+            "warningCount": -1,
+            "warningDay":  -1
+        }
+
+        // to 
+        var product = 
+        {
+            "Barcode0" :
+            {
+                "count" : 5,
+                "idealCount": 1,
+                "name" : "name",
+                "timeScanned": 0,
+                "warningCount": -1,
+                "warningDay":  -1
+            }
+        }
     }
 }
 
