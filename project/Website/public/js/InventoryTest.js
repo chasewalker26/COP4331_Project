@@ -25,8 +25,8 @@ async function formatListTest()
     document.getElementById("inventory").innerHTML = html;
 
     // change expectedElements
-    var expectedElements = '<li class="listProduct" id="Barcode0">name: 5</li>' + 
-                            '<li class="listProduct" id="Barcode1">name: 2</li>';
+    var expectedElements = '<li class="listProduct" id="Barcode0"><span class="material-icons mx-2">edit</span>name: 5</li>' + 
+                            '<li class="listProduct" id="Barcode1"><span class="material-icons mx-2">edit</span>name: 2</li>';
 
     var siteInventoryElements = document.getElementById("inventory").children;
     var actualElements = "";
