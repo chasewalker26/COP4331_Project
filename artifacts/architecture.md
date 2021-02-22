@@ -11,7 +11,7 @@ This is a Container Diagram that shows that the SimpleList's Website is made up 
 
 Sigle-Page Application uses JSON/HTTPS API, which is provided by API application running on the server. The API Application gets user information from the Main User Database and from UPC Database by using Raspberry Pi. User could use a Scanner to modify the database.
 
-![Container Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/classDiagram.png)
+![Container Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/Level%202_%20Container%20Diagram.png)
 
 **Level 3: System Component Diagram**
 
@@ -43,19 +43,17 @@ Then we have 3 Controllers providing access points for the JSON/HTTPS API, with 
 | Web, List/inventory, Database | API Application | As a member in a large family household, I'd like to be able to separate shopping lists for different users in the household | U015 |
 
 # Code Design
-![Class Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/classDiagram.png?raw=true)
+![Class Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/ClassDiagram1.png?raw=true)
 
 |    class      |       UUID    |
 | ------------- | ------------- |
-| ShoppingList  | U001, U003, U007, U016|
+| ShoppingList  | U001, U003, U007, U015, U016, U020 |
 | Inventory     | U008, U009  U006, U010, U017, U019 |
-| Contact       |     U014     |
+| Contact       | U014 |
 | List          | U003, U017 |
-|  User         | U004, U005 |
-|  Product      | U001, U002, U003, U006, U017, U018|
-|  Scanner      | U002, U018 |
-
-I added one of the User stories for reference, and all of the UUIDs assosciated. 
+|  User         | U004, U005, U021 |
+|  Product      | U001, U002, U003, U006, U017, U018 |
+|  Scanner      | U002, U011, U018 |
 
 # Data Design
 
@@ -67,16 +65,16 @@ The only business rule that defines architectural processes is the requirement t
 
 # User Interface Design
 
-![Class Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/UI%20relationship%20diagram.png?raw=true)
+![UI Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/UIs.png?raw=true)
 
 |    UI diagram      |    User Interaction    |     UUID(s)    |
 | ------------------ | ---------------------- | -------------- |
 | 1 | This screen shows what the user will see after submitting the clear crossed-out items dialogue box, the items will no longer be on the screen. | U003, U021 |
 | 2 | This box appears when the user presses clear with specific items crossed out, saving removes them, and cancel leaves the items crossed-out on the list. | U003, U021 |
-| 3 | When clicking on a red barcode displayed on the list the user will be prompted to give the item a name. This red item appears when an item is unrecognized by the barcode API. | U003 |
+| 3 | When clicking on a red barcode displayed on the list the user will be prompted to give the item a name. This red item appears when an item is unrecognized by the barcode API. | U003, U020 |
 | 4 | This shows that when a user clicks on shopping list items they can cross/uncross them to mark them for clearing. | U003, U021 |
 | 5 | This is the sign in/sign up screen using Google’s login API for security and efficiency. | U004, U005 |
-| 6 | This is the shopping list screen that the user will be sent to after login and interact with. | U003 |
+| 6 | This is the shopping list screen that the user will be sent to after login and interact with. | U003, U021 |
 | 7 | This is what is shown when the user presses clear without any items crossed out. This will clear the whole list at once. | U003, U021 |
 | 8 | This is what the user is shown when they want to add an item to their shopping list. | U007 |
 | 9 | This is what is shown after the user clears the shopping list by using the dialogue box in 7. | U003, U021 |
@@ -85,7 +83,7 @@ The only business rule that defines architectural processes is the requirement t
 | 12 | This is the navigation menu. Shown by clicking the hamburger, closed by clicking the X. | U001 |
 | 13 | This is the contact form, it is navigated to using the nav menu. Submitting a message emails the developers. | U014 |
 | 14 | This screen allows users to set custom warnings, and preferred inventory amounts for items in their inventory. This is done by clicking on an inventory item. | U008, U009, U010 |
-| 15 | This is the user’s inventory screen, it is navigated to using the nav menu. | U017 |
+| 15 | This is the user’s inventory screen, it is navigated to using the nav menu. | U017, U021 |
 | 16 | This is the add an item to the inventory screen opened by pressing the add button. It allows users to add items to the inventory manually. | U019 |
 
 # Resource Management
