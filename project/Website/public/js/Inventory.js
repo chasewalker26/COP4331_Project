@@ -16,10 +16,7 @@ class Inventory extends List
       var name = products[i].name;
       var count = products[i].count;
 
-      // add <span class="material-icons mx-2">edit</span>
-      // so that it is before the name!
-
-      html += '<li class="listProduct" id="' + barcode + '">' + name + ': ' + count + '</li>'
+      html += '<li class="listProduct" id="' + barcode + '">' + <span class="material-icons mx-2">edit</span> + name + ': ' + count + '</li>'
     }
 
     return html;
