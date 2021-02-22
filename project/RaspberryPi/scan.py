@@ -81,6 +81,8 @@ def UPC_lookup(api_key,upc):
     print(json.dumps(response.json(), indent=2))
     print("-----" * 5 + "\n")
 
+    return url
+
 if __name__ == '__main__':
     try:
         while True:
