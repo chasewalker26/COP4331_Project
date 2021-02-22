@@ -49,11 +49,13 @@ All team members worked together in this sprint to create the user stories in th
 
 # Sprint 3
 - [Trello Board](https://trello.com/b/Af6rjxIc/cop4331)
-- [Burndown Chart](https://docs.google.com/spreadsheets/d/183Dg6Bm59MUCFB1R2GCbdrus6IbwDEImLzfAo2zPLKg/edit#gid=0)
+- [Burndown Chart](https://docs.google.com/spreadsheets/d/183Dg6Bm59MUCFB1R2GCbdrus6IbwDEImLzfAo2zPLKg/edit#gid=1764933158)
 - [Velocity Chart](https://docs.google.com/spreadsheets/d/1IDBxwgaPQL3OXrfwmEl2Y9RwI4CI29koruPL0Dz6inc/edit?usp=sharing)
 - [System Architecture](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/architecture.md)
-- [Source Code](https://github.com/chasewalker26/COP4331_Project/tree/main/project/Website)
-- [Product Demonstration](https://www.youtube.com/watch?v=jdqj_ON-W2c&feature=youtu.be)
+- [Source Code](https://github.com/chasewalker26/COP4331_Project/tree/main/project/)
+- [Test Code (Site)](https://github.com/chasewalker26/COP4331_Project/tree/main/project/Website/public/js)
+- [Test Code (Scanner)](https://github.com/chasewalker26/COP4331_Project/tree/main/project/RaspberryPi)
+- [Product Demonstration]()
  
 
 
