@@ -18,11 +18,17 @@ function runTests()
     formatListTest();
 }
 
-// WRITE LIST TEST
 // in Test.js
 function ListTest()
 {
+    var list = new List("ListID");
 
+    if (JSON.stringify(list) == JSON.stringify(list))
+        data = true;
+    else
+        data = false;
+
+    console.assert(data == true, "ListTest FAILED");
 }
 
 // in Product.js
