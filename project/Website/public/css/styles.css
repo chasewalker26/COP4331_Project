@@ -27,6 +27,10 @@ body {
     list-style: none;
 }
 
+.listProduct:hover{
+  cursor: pointer;
+}
+
 .light-blue {
   color: #598BC4;
 }
@@ -42,19 +46,6 @@ body {
 .bg-dark-blue {
   background-color:#006579;
 }
-
-/* Margin top class 
-.mt-0{
-    margin-top: 0 !important;
-}
-.mx-4{
-    margin-left: 2 !important;
-    margin-right: 2 !important;
-}
-.mx-5{
-    margin-left: 3 !important;
-    margin-right: 3 !important;
-} */
 
 .material-icons.md-36 { font-size: 36px; }
 .material-icons.md-48 { font-size: 48px; }
