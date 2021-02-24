@@ -21,20 +21,25 @@ function runTests()
 // in Test.js
 function ListTest()
 {
-    var list = new List("ListID");
+    var data = false;
+    var actualList = new List("ListID");
 
-    if (JSON.stringify(list) == JSON.stringify(list))
+    var expectedList =
+    {
+        "listID" : "ListID",
+        "products" : []
+    }
+
+    if (JSON.stringify(actualList) == JSON.stringify(expectedList))
         data = true;
-    else
-        data = false;
 
     console.assert(data == true, "ListTest FAILED");
 }
 
 // in Product.js
 function ProductTest(){
-    var data;
-    var product0 = new Product("Barcode0", {
+    var data = false;
+    var builtProduct = new Product("Barcode0", {
         "count" : 5,
         "idealCount": 1,
         "name" : "name",
@@ -43,7 +48,7 @@ function ProductTest(){
         "warningDay":  -1 
     });
 
-    var product1 =
+    var expectedProduct =
     {
         "barcode" : "Barcode0",
         "count" : 5,
@@ -53,10 +58,8 @@ function ProductTest(){
         "warningCount": -1,
         "warningDay":  -1
     }
-    if (JSON.stringify(product1) == JSON.stringify(product0))
+    if (JSON.stringify(builtProduct) == JSON.stringify(expectedProduct))
         data = true;
-    else
-        data = false;
 
     console.assert(data == true, "ProductTest FAILED");
 }
@@ -65,7 +68,8 @@ function ProductTest(){
 async function getProductsTest()
 {
     let list = new List("ListID");
-    var data;
+    var data = false;
+
     var products = [
         {
             "barcode" : "Barcode0",
@@ -91,8 +95,6 @@ async function getProductsTest()
 
     if (JSON.stringify(list.products) == JSON.stringify(products))
         data = true;
-    else
-        data = false;
 
     console.assert(data == true, "getProductsTest FAILED");
 }
@@ -101,29 +103,9 @@ async function getProductsTest()
 async function updateDatabaseTest()
 {
     var list = new List('ListID');
-    var data;
+    var data = false;
 
-    list.products =
-    {
-        "Barcode0" :
-        {
-            "count" : 5,
-            "idealCount": 1,
-            "name" : "name",
-            "timeScanned": 0,
-            "warningCount": -1,
-            "warningDay":  -1
-        },
-        "Barcode1" :
-        {
-            "count" : 2,
-            "idealCount": 1,
-            "name" : "name",
-            "timeScanned": 0,
-            "warningCount": -1,
-            "warningDay":  -1
-        }
-    }
+    list.products = await pullFromFirebase("ProductList/ListID/");
 
     await list.updateDatabase(list.products);
 
@@ -131,8 +113,6 @@ async function updateDatabaseTest()
 
     if (JSON.stringify(list.products) == JSON.stringify(dbProducts))
         data = true;
-    else
-        data = false;
 
     console.assert(data == true, "updateDatabaseTest FAILED");
 }
@@ -147,8 +127,8 @@ async function formatListTest()
     var html = shoppingList.formatList();
     document.getElementById("shoppingList").innerHTML = html;
 
-    var expectedElements = '<li class="listProduct" id="Barcode0">name: 5</li>' + 
-                            '<li class="listProduct" id="Barcode1">name: 2</li>';
+    var expectedElements = '<li class="listProduct" id="Barcode0" name="shoppingListItem">name: 5</li>' + 
+                            '<li class="listProduct" id="Barcode1" name="shoppingListItem">name: 2</li>';
 
     var siteShoppingListElements = document.getElementById("shoppingList").children;
     var actualElements = "";
