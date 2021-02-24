@@ -44,7 +44,6 @@ function ProductTest(){
         "idealCount": 1,
         "name" : "name",
         "timeScanned": 0,
-        "warningCount": -1,
         "warningDay":  -1 
     });
 
@@ -55,7 +54,6 @@ function ProductTest(){
         "idealCount": 1,
         "name" : "name",
         "timeScanned": 0,
-        "warningCount": -1,
         "warningDay":  -1
     }
     if (JSON.stringify(builtProduct) == JSON.stringify(expectedProduct))
@@ -70,30 +68,19 @@ async function getProductsTest()
     let list = new List("ListID");
     var data = false;
 
-    var products = [
-        {
-            "barcode" : "Barcode0",
-            "count" : 5,
-            "idealCount": 1,
-            "name" : "name",
-            "timeScanned": 0,
-            "warningCount": -1,
-            "warningDay":  -1
-        },
-        {
-            "barcode" : "Barcode1",
-            "count" : 2,
-            "idealCount": 1,
-            "name" : "name",
-            "timeScanned": 0,
-            "warningCount": -1,
-            "warningDay":  -1
-        }
-    ]
+    var expectedProducts = [];
+    var products = await pullFromFirebase("ProductList/ListID/");
+    var barcodes = Object.keys(products);
+
+    for (var i = 0; i < barcodes.length; i++)
+    {
+        var barcode = barcodes[i];
+        expectedProducts.push(new Product(barcode, products[barcode]));
+    }
 
     await list.getProducts();
 
-    if (JSON.stringify(list.products) == JSON.stringify(products))
+    if (JSON.stringify(list.products) == JSON.stringify(expectedProducts))
         data = true;
 
     console.assert(data == true, "getProductsTest FAILED");
