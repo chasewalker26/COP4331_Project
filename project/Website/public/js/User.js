@@ -19,6 +19,32 @@ class User {
     getInfo() {
         console.log(username + " " + userID + " " + email)
     }
+    async signOut(){
+        var user = firebase.auth().currentUser;
+        if (user) {
+        // User is signed in.
+        console.log("singed in");
+        //rederict to shopping list
+        } 
+        else {
+        // No user is signed in.
+        console.log("not signed in");
+        //redirect to sign in page
+        }
+        
+        await firebase.auth().signOut();
+        //console.log(user);
+        
+        var user = firebase.auth().currentUser;
+        if (user) {
+        // User is signed in.
+        console.log("singed in");
+        } 
+        else {
+        // No user is signed in.
+        console.log("not signed in");
+        }
+    }
 }
 
 var user =[
