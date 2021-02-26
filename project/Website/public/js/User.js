@@ -1,69 +1,17 @@
-
-// import firebase from "firebase/app";
-// import "firebase/analytics";
-// import "firebase/auth";
-// import "firebase/firestore";
-
-// const firebaseConfig = {
-//     // ...
-//   };
-
 class User {
-    constructor(username, userID, email)
+    constructor(username, email, listID)
     {
         this.username = username;
-        this.userID = userID;
         this.email = email;
+        this.listID = listID;
     }
 
-    getInfo() {
-        console.log(username + " " + userID + " " + email)
-    }
     async signOut(){
-        var user = firebase.auth().currentUser;
-        if (user) {
-        // User is signed in.
-        console.log("singed in");
-        //rederict to shopping list
-        } 
-        else {
-        // No user is signed in.
-        console.log("not signed in");
-        //redirect to sign in page
-        }
-        
-        await firebase.auth().signOut();
-        //console.log(user);
-        
-        var user = firebase.auth().currentUser;
-        if (user) {
-        // User is signed in.
-        console.log("singed in");
-        } 
-        else {
-        // No user is signed in.
-        console.log("not signed in");
-        }
+        await firebase.auth().signOut().then(() => {
+            window.location.replace("LoginForm.html");
+        }).catch((error) => {
+            console.log(error);
+            console.log("sign out unsucessful");
+        });
     }
-}
-
-var user =[
-    {
-        email: "alish@mail.ru",
-        password: "admin"
-    }
-]
-
-function getInfo() {
-
-    var email = document.getElementById("email").value
-    var password = document.getElementById("password").value
-
-    for(i = 0; i < user.length; i++) {
-        if (email == user[i].email && password == user[i].password) {
-            console.log(email + "is logged in!")
-            return
-        }
-    }
-    console.log("Incorrect!")
 }
