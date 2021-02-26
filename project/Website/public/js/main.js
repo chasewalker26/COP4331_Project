@@ -33,5 +33,8 @@ function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 }
 function signOutClick(){
-    $(document).on("click", "#test-element",signOut());
+    $("#signOutClick").on( "click",function(){
+        User.signOut();
+    });
+    // $(document).on("click", "#test-element",signOut());
 }
