@@ -23,13 +23,6 @@
         <div class="container-fluid">
         <a class="navbar-brand" href="LoginForm.html">SimpleList</a>
         </div>
-
-        <!-- <div id="mySidenav" class="sidenav">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <a class="navbar-brand navlink" href="inventory.html">Inventory List</a>
-            <a class="navbar-brand navlink" href="shoppingList.html">Shopping List</a>
-        </div>
-        <span class="material-icons md-36 navlines " style = "color: #ffffff; cursor:pointer " onclick="openNav()">menu</span> -->
     </nav>
 
     <div class="row bg-light-blue justify-content-center" style="top:50%">
@@ -42,33 +35,33 @@
 
 
     <script>
-        
-        var profile;
         async function onSignIn(googleUser) {
-        profile = googleUser.getBasicProfile();
-        console.log('username: ' + profile.getName());
-        console.log('email: ' + profile.getEmail());
-        console.log('ID: ' + profile.getId());       
+            console.log(googleUser);
+            var profile;
+            profile = googleUser.getBasicProfile();
+            var username = profile.getName();
+            var email = profile.getEmail();
 
+            // The ID token you need to pass to your backend:
+            var id_token = googleUser.getAuthResponse().id_token;
 
-        // The ID token you need to pass to your backend:
-        var id_token = googleUser.getAuthResponse().id_token;
-        console.log("ID Token: " + id_token);
-        // Build Firebase credential with the Google ID token.
-        var credential = firebase.auth.GoogleAuthProvider.credential(id_token);
+            // Build Firebase credential with the Google ID token.
+            var credential = firebase.auth.GoogleAuthProvider.credential(id_token);
 
-        // Sign in with credential from the Google user.
-        await firebase.auth().signInWithCredential(credential).catch((error) => {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // The email of the user's account used.
-        var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        var credential = error.credential;
-        // ...
-        });
-    }
+            // Sign in with credential from the Google user.
+            await firebase.auth().signInWithCredential(credential).then(() => {
+                window.location.replace("shoppingList.html");
+            }).catch((error) => {
+                console.log(error);
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                // The email of the user's account used.
+                var email = error.email;
+                // The firebase.auth.AuthCredential type that was used.
+                var credential = error.credential;
+            });
+        }
     </script>
 
     <!-- JQUERY -->
