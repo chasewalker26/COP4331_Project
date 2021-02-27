@@ -43,7 +43,7 @@ function ProductTest(){
         "count" : 5,
         "idealCount": 1,
         "name" : "name",
-        "timeScanned": 0,
+        "dayRemoved": -1,
         "warningDay":  -1 
     });
 
@@ -53,7 +53,7 @@ function ProductTest(){
         "count" : 5,
         "idealCount": 1,
         "name" : "name",
-        "timeScanned": 0,
+        "dayRemoved": -1,
         "warningDay":  -1
     }
     if (JSON.stringify(builtProduct) == JSON.stringify(expectedProduct))
@@ -86,6 +86,11 @@ async function getProductsTest()
     console.assert(data == true, "getProductsTest FAILED");
 }
 
+// 
+// WRITE FAILING getProducts test
+// 
+
+
 // in Test.js
 async function updateDatabaseTest()
 {
@@ -114,8 +119,9 @@ async function formatListTest()
     var html = shoppingList.formatList();
     document.getElementById("shoppingList").innerHTML = html;
 
-    var expectedElements = '<li class="listProduct" id="Barcode0" name="shoppingListItem">name: 5</li>' + 
-                            '<li class="listProduct" id="Barcode1" name="shoppingListItem">name: 2</li>';
+
+
+    var expectedElements = '<li class="listProduct" id="Barcode3" name="shoppingListItem">name: 3</li>';
 
     var siteShoppingListElements = document.getElementById("shoppingList").children;
     var actualElements = "";

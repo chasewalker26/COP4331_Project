@@ -15,8 +15,11 @@ class ShoppingList extends List
       var barcode = products[i].barcode;
       var name = products[i].name;
       var count = products[i].count;
+      var idealCount = products[i].idealCount;
+      var countToBuy = idealCount - count;
 
-      html += '<li class="listProduct" id="' + barcode + '" name="shoppingListItem">' + name + ': ' + count + '</li>'
+      if (count < idealCount)
+        html += '<li class="listProduct" id="' + barcode + '" name="shoppingListItem">' + name + ': ' + countToBuy + '</li>'
     }
 
     return html;

@@ -4,7 +4,7 @@ class Product{
         this.count = product.count;
         this.idealCount = product.idealCount;
         this.name = product.name;
-        this.timeScanned = product.timeScanned;
+        this.dayRemoved = product.dayRemoved;
         this.warningDay = product.warningDay;
     }
 }
