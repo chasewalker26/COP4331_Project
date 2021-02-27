@@ -21,10 +21,4 @@ class Inventory extends List
 
     return html;
   }
-
-  editItem()
-  {
-    console.log("hello");
-  }
-
 }
