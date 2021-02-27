@@ -34,18 +34,20 @@
 
     <br>
     <!--inventory title-->
-    <div class="jumbotron text-left">
-        <h1 style = "color:#006579;font-family:'Lucida Bright', 'Georgia', 'serif'"> 
-            &nbsp; 
-            My Inventory</h1>
+    <div class="text-left">
+      <h1 class="title mx-3">Names Inventory</h1>
+    </div>
+  
+    <div class="text-left">
+      <h5 class="title mx-5 redWarning" id="errorMessage"></h5>
+    </div>
+  
+    <div class="row">
+      <div class="col-6">
+          <ul id="inventory" class="mx-4">
+          </ul>
       </div>
-      
-      <div class="row">
-        <div class="col-6">
-            <ul id="inventory" class="mx-4">
-            </ul>
-        </div>
-      </div>
+    </div>
 
     <!-- JQUERY -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
