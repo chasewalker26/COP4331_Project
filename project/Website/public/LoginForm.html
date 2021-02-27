@@ -32,38 +32,6 @@
         </div>
     </div>
 
-
-
-    <script>
-        async function onSignIn(googleUser) {
-            console.log(googleUser);
-            var profile;
-            profile = googleUser.getBasicProfile();
-            var username = profile.getName();
-            var email = profile.getEmail();
-
-            // The ID token you need to pass to your backend:
-            var id_token = googleUser.getAuthResponse().id_token;
-
-            // Build Firebase credential with the Google ID token.
-            var credential = firebase.auth.GoogleAuthProvider.credential(id_token);
-
-            // Sign in with credential from the Google user.
-            await firebase.auth().signInWithCredential(credential).then(() => {
-                window.location.replace("shoppingList.html");
-            }).catch((error) => {
-                console.log(error);
-                // Handle Errors here.
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                // The email of the user's account used.
-                var email = error.email;
-                // The firebase.auth.AuthCredential type that was used.
-                var credential = error.credential;
-            });
-        }
-    </script>
-
     <!-- JQUERY -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <!-- BOOTSTRAP JS CDN -->
@@ -86,6 +54,55 @@
     <script src="js/List.js"></script>
     <script src="js/LoginFormTest.js"></script>
 
+    <script>
+        //
+        // All code provided below and inside of this script tag was provided by google.
+        // The code was taken from their documentation on how to use google sign in with Firebase.
+        //
+        function onSignIn(googleUser) {
+            console.log('Google Auth Response', googleUser);
+            // We need to register an Observer on Firebase Auth to make sure auth is initialized.
+            var unsubscribe = firebase.auth().onAuthStateChanged((firebaseUser) =>
+            {
+                unsubscribe();
+                // Check if user is already signed-in to Firebase
+                if (!isUserEqual(googleUser, firebaseUser))
+                {
+                    // Build Firebase credential with the Google ID token.
+                    var id_token = googleUser.getAuthResponse().id_token;
+                    var credential = firebase.auth.GoogleAuthProvider.credential(id_token);
+
+                    firebase.auth().signInWithCredential(credential).then(() =>
+                    {
+                        console.log("done");
+                        window.location.replace("ShoppingList.html");
+                    }).catch((error) =>
+                    {
+                        console.log(error);
+                    });
+                }
+                else
+                {
+                    initializeAppUser();
+                    console.log('User already signed-in to Firebase.');
+                    window.location.replace("ShoppingList.html");
+                }
+            });
+        }
+
+        function isUserEqual(googleUser, firebaseUser)
+        {
+            if (firebaseUser) {
+                var providerData = firebaseUser.providerData;
+                for (var i = 0; i < providerData.length; i++) {
+                    var data = providerData[i];
+                    if (data.providerId === firebase.auth.GoogleAuthProvider.PROVIDER_ID && data.uid === googleUser.getBasicProfile().getId())
+                        return true;
+                }
+            }
+            return false;
+        }
+    </script>
 
 </body>
 </html>
