@@ -8,16 +8,12 @@ if (isTesting == true)
 }
 async function signOutTest(){
     var newUserTest = new User();
-    var user1 = firebase.auth().currentUser;
+    var user = await firebase.auth().currentUser;
 
     await newUserTest.signOut();
     
-    if (user1) {
-    // User is signed in.
-    console.log("singed in");
-    } 
-    else {
-    // No user is signed in.
-    console.log("not signed in");
-    }
+    if (user)
+        console.log("singed in");
+    else
+        console.log("not signed in");
 }
