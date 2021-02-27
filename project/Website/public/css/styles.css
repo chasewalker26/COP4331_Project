@@ -19,16 +19,25 @@ body {
 }
 
 .listProduct{
-    color: #598BC4;
-    font-family: "Lucida Bright", Georgia, serif;
-    font-style: normal;
-    font-size: 30px;
-    font-weight: Demibold;
-    list-style: none;
+  color: #598BC4;
+  font-family: "Lucida Bright", Georgia, serif;
+  font-style: normal;
+  font-size: 30px;
+  font-weight: Demibold;
+  list-style: none;
+}
+
+.title {
+  color:#006579;
+  font-family:'Lucida Bright', 'Georgia', 'serif';
 }
 
 .listProduct:hover{
   cursor: pointer;
+}
+
+.redWarning {
+  color: #900000;
 }
 
 .light-blue {
