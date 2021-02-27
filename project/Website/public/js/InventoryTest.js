@@ -26,16 +26,14 @@ async function formatListTest()
 
     // change expectedElements
     var expectedElements = '<li class="listProduct" id="Barcode0" name="inventoryItem" onclick="inventory.editItem()"><span class="material-icons mx-2">edit</span>name: 5</li>' + 
-                            '<li class="listProduct" id="Barcode1" name="inventoryItem" onclick="inventory.editItem()"><span class="material-icons mx-2">edit</span>name: 2</li>';
+                           '<li class="listProduct" id="Barcode1" name="inventoryItem" onclick="inventory.editItem()"><span class="material-icons mx-2">edit</span>name: 2</li>' +
+                           '<li class="listProduct" id="Barcode3" name="inventoryItem" onclick="inventory.editItem()"><span class="material-icons mx-2">edit</span>name: 3</li>';
 
     var siteInventoryElements = document.getElementById("inventory").children;
     var actualElements = "";
 
     for (var i = 0; i < siteInventoryElements.length; i++)
         actualElements += siteInventoryElements[i].outerHTML;
-
-    console.log(expectedElements);
-    console.log(actualElements);
 
     console.assert(expectedElements == actualElements, "Inventory.formatListTest() FAILED");
 }
