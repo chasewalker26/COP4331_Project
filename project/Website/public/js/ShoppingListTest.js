@@ -13,7 +13,8 @@ function runTests()
 {
     ListTest();
     ProductTest();
-    getProductsTest();
+    getProductsWithExistingListID();
+    getProductsWithBadListID();
     updateDatabaseTest();
     formatListTest();
 }
@@ -63,13 +64,13 @@ function ProductTest(){
 }
 
 // in Test.js
-async function getProductsTest()
+async function getProductsWithExistingListID()
 {
     let list = new List("ListID");
     var data = false;
 
     var expectedProducts = [];
-    var products = await pullFromFirebase("ProductList/ListID/");
+    var products = await pullFromFirebase("ProductList/ListID");
     var barcodes = Object.keys(products);
 
     for (var i = 0; i < barcodes.length; i++)
@@ -86,10 +87,19 @@ async function getProductsTest()
     console.assert(data == true, "getProductsTest FAILED");
 }
 
-// 
-// WRITE FAILING getProducts test
-// 
+// in Test.js
+async function getProductsWithBadListID()
+{
+    let list = new List("listylisty");
+    var data = false;
 
+    list.getProducts();
+
+    if ($("#errorMessage").innerHTML = "There is no list associated with this account. Have you scanned any items?")
+        data = true;
+
+    console.assert(data == true, "getProductsTest FAILED");
+}
 
 // in Test.js
 async function updateDatabaseTest()
@@ -118,8 +128,6 @@ async function formatListTest()
 
     var html = shoppingList.formatList();
     document.getElementById("shoppingList").innerHTML = html;
-
-
 
     var expectedElements = '<li class="listProduct" id="Barcode3" name="shoppingListItem">name: 3</li>';
 

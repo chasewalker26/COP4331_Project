@@ -8,10 +8,14 @@ class List
   
   async getProducts()
   {
-    var dbProducts = await pullFromFirebase("ProductList/" + this.listID + "/").catch((error) => {
-      console.log(error);
-      alert("There is no list associated with this account. Have you scanned any items?");
-    });
+    var dbProducts = await pullFromFirebase("ProductList/" + this.listID);
+
+    if (dbProducts == null)
+    {
+      $("#errorMessage").append("There is no list associated with this account. Have you scanned any items?");
+      return;
+    }
+
     var barcodes = Object.keys(dbProducts);
 
     for (var i = 0; i < barcodes.length; i++)
