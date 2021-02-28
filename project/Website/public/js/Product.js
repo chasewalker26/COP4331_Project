@@ -7,4 +7,17 @@ class Product{
         this.dayRemoved = product.dayRemoved;
         this.warningDay = product.warningDay;
     }
+
+    formatProductJSON()
+    {
+        var formattedProduct = {
+            "count": this.count,
+            "dayRemoved": this.dayRemoved,
+            "idealCount": this.idealCount,
+            "name": this.name,
+            "warningDay": this.warningDay
+        }
+
+        return formattedProduct;
+    }
 }

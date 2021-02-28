@@ -40,6 +40,8 @@ function runTests()
     updateDatabaseTest();
     formatListFunctionalTest();
     formatListVisualTest();
+    clearListTest();
+    formatProductsJSONTest();
 }
 
 async function sidenavTest()
@@ -149,6 +151,8 @@ async function updateDatabaseTest()
 
     list.products = await pullFromFirebase("ProductList/ListID/");
 
+    console.log(list.products);
+
     await list.updateDatabase(list.products);
 
     var dbProducts = await pullFromFirebase("ProductList/ListID/");
@@ -176,7 +180,7 @@ async function formatListFunctionalTest()
     for (var i = 0; i < siteShoppingListElements.length; i++)
         actualElements += siteShoppingListElements[i].outerHTML;
 
-    console.assert(expectedElements == actualElements, "ShoppingList.formatListTest() FAILED");
+    console.assert(expectedElements == actualElements, "ShoppingList.formatListFunctionalTest() FAILED");
 }
 
 // in Inventory.js
@@ -203,4 +207,33 @@ async function formatListVisualTest()
         console.assert(FStyle == "normal", "formatListVisualTest FAILED");
         console.assert(FW == "700", "formatListVisualTest FAILED");
     }
+}
+
+
+// in Inventory.js
+async function clearListTest()
+{
+    let shoppingList = new ShoppingList("ListID");
+    await shoppingList.getProducts();
+    shoppingList.clearList();
+}
+
+async function formatProductsJSONTest()
+{
+    let shoppingList = new ShoppingList("ListID");
+    await shoppingList.getProducts();
+
+    var data = false;
+
+    var products = await shoppingList.formatProductsJSON();
+    var dbProducts = await pullFromFirebase("ProductList/ListID/");
+
+    console.log(JSON.stringify(products));
+    console.log(JSON.stringify(dbProducts));
+
+
+    if (JSON.stringify(products) == JSON.stringify(dbProducts))
+        data == true;
+    
+    console.assert(data == true, "formatProductsJSONTest FAILED");
 }

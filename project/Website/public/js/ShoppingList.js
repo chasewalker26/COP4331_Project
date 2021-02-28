@@ -40,8 +40,10 @@ class ShoppingList extends List
       {
         var newCount = countToBuy + count;
         products[i].count = newCount; 
-        updateDatabase(products);
       }
     }
+    var JSONProducts = this.formatProductsJSON();
+    this.updateDatabase(JSONProducts);
+
   }
 }

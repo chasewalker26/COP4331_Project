@@ -28,4 +28,20 @@ class List
   {
     await saveToFirebase("ProductList/" + this.listID + "/", products);
   }
+
+  async formatProductsJSON()
+  {
+    var currProducts = this.products;
+    var formattedProducts = {};
+
+    for (var i = 0; i < currProducts.length; i++)
+    {
+      var currProduct = currProducts[i];
+      var barcode = currProduct.barcode;
+
+      formattedProducts[barcode] = currProduct.formatProductJSON();
+    }
+
+    return formattedProducts;
+  }
 }
