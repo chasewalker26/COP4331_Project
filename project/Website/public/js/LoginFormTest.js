@@ -1,10 +1,10 @@
 
 if (isTesting == true)
 {
-    // window.onload = function()
-    // {
-    //     signOutTest();
-    // }
+    window.onload = function()
+    {
+        signOutTest();
+    }
 }
 async function signOutTest(){
     var newUserTest = new User();
