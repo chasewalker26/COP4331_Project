@@ -98,7 +98,6 @@ class ShoppingList extends List {
     var JSONProducts = this.formatProductsJSON();
 
     console.log(JSONProducts);
-    return;
 
     this.updateDatabase(JSONProducts);
 
@@ -110,8 +109,6 @@ class ShoppingList extends List {
 
     cell1.innerHTML = prodName;
     cell2.innerHTML = prodQuantity;
-
-    // this.products.push(new Product(0, ));
 
     document.getElementById("add-form").reset();
 

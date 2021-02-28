@@ -32,16 +32,16 @@ function initializeAppUser()
 
 function runTests()
 {
-    sidenavTest();
-    ListTest();
-    ProductTest();
-    getProductsWithExistingListID();
-    getProductsWithBadListID();
-    updateDatabaseTest();
-    formatListFunctionalTest();
-    formatListVisualTest();
-    clearListTest();
-    formatProductsJSONTest();
+    // sidenavTest();
+    // ListTest();
+    // ProductTest();
+    // getProductsWithExistingListID();
+    // getProductsWithBadListID();
+    // updateDatabaseTest();
+    // formatListFunctionalTest();
+    // formatListVisualTest();
+    // clearListTest();
+    // formatProductsJSONTest();
 }
 
 async function sidenavTest()
@@ -214,6 +214,7 @@ async function formatListVisualTest()
 async function clearListTest()
 {
     let shoppingList = new ShoppingList("ListID");
+    
     await shoppingList.getProducts();
     shoppingList.clearList();
 }

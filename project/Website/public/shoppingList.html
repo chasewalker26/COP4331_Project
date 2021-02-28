@@ -117,8 +117,11 @@
       return shoppingList.addItem()
     });
 
-  function confirmClearAlert()
+  async function confirmClearAlert()
   {
+    var shoppingList = new ShoppingList("ListID");
+    await shoppingList.getProducts();
+
     if (confirm ("You are about to clear the entire list, do you want to continue?"))
     {
      shoppingList.clearList(); 
