@@ -11,29 +11,71 @@ if (isTesting == true)
 
 function runTests()
 {
-    formatListTest();
+    // formatListFunctionalTest();
+    sidenavTest();
+    formatListVisualTest();
 }
+
+async function sidenavTest()
+{
+    document.getElementById("navOpen").click();
+    var sidenav = document.getElementById("sidenav");
+    console.assert(sidenav.style.width == "250px", "sidenavTest FAILED");
+
+    document.getElementById("navClose").click();
+    console.assert(sidenav.style.width == "0px", "sidenavTest FAILED");
+}
+
+
+// // in Inventory.js
+// async function formatListFunctionalTest()
+// {
+//     let inventory = new Inventory("ListID");
+
+//     await inventory.getProducts();
+
+//     inventory.formatList();
+
+//     // change expectedElements
+//     var expectedElements = '<li class="listProduct" id="Barcode0" name="inventoryItem" onclick="inventory.editItem()"><span class="material-icons mx-2">edit</span>name: 5</li>' + 
+//                            '<li class="listProduct" id="Barcode1" name="inventoryItem" onclick="inventory.editItem()"><span class="material-icons mx-2">edit</span>name: 2</li>' +
+//                            '<li class="listProduct" id="Barcode3" name="inventoryItem" onclick="inventory.editItem()"><span class="material-icons mx-2">edit</span>name: 3</li>';
+
+//     var siteInventoryElements = document.getElementById("inventory").children;
+//     var actualElements = "";
+
+//     for (var i = 0; i < siteInventoryElements.length; i++)
+//         actualElements += siteInventoryElements[i].outerHTML;
+
+//     console.assert(expectedElements == actualElements, "Inventory.formatListTest() FAILED");
+
+
+// }
 
 // in Inventory.js
-async function formatListTest()
+async function formatListVisualTest()
 {
     let inventory = new Inventory("ListID");
-
     await inventory.getProducts();
+    inventory.formatList();
 
-    var html = inventory.formatList();
-    document.getElementById("inventory").innerHTML = html;
-
-    // change expectedElements
-    var expectedElements = '<li class="listProduct" id="Barcode0" name="inventoryItem" onclick="inventory.editItem()"><span class="material-icons mx-2">edit</span>name: 5</li>' + 
-                           '<li class="listProduct" id="Barcode1" name="inventoryItem" onclick="inventory.editItem()"><span class="material-icons mx-2">edit</span>name: 2</li>' +
-                           '<li class="listProduct" id="Barcode3" name="inventoryItem" onclick="inventory.editItem()"><span class="material-icons mx-2">edit</span>name: 3</li>';
-
-    var siteInventoryElements = document.getElementById("inventory").children;
-    var actualElements = "";
+    var siteInventoryElements = document.getElementsByClassName("listProduct");
 
     for (var i = 0; i < siteInventoryElements.length; i++)
-        actualElements += siteInventoryElements[i].outerHTML;
+    {
+        var style = getComputedStyle(siteInventoryElements[i]);
+        var color = style.color;
+        var FF = style.fontFamily;
+        var FSize = style.fontSize;
+        var FStyle = style.fontStyle;
+        var FW = style.fontWeight;
 
-    console.assert(expectedElements == actualElements, "Inventory.formatListTest() FAILED");
+        console.assert(color == "rgba(89, 139, 196, 0.81)", "formatListVisualTest FAILED");
+        console.assert(FF == '"Lucida Bright", Georgia, serif', "formatListVisualTest FAILED");
+        console.assert(FSize == "30px", "formatListVisualTest FAILED");
+        console.assert(FStyle == "normal", "formatListVisualTest FAILED");
+        console.assert(FW == "700", "formatListVisualTest FAILED");
+    }
 }
+
+

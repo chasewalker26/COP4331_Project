@@ -22,6 +22,6 @@ class ShoppingList extends List
         html += '<li class="listProduct" id="' + barcode + '" name="shoppingListItem">' + name + ': ' + countToBuy + '</li>'
     }
 
-    return html;
+    document.getElementById("shoppingList").innerHTML = html;
   }
 }

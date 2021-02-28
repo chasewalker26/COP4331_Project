@@ -11,12 +11,25 @@ if (isTesting == true)
 
 function runTests()
 {
+    sidenavTest();
     ListTest();
     ProductTest();
     getProductsWithExistingListID();
     getProductsWithBadListID();
     updateDatabaseTest();
-    formatListTest();
+    formatListFunctionalTest();
+    formatListVisualTest();
+}
+
+
+async function sidenavTest()
+{
+    document.getElementById("navOpen").click();
+    var sidenav = document.getElementById("sidenav");
+    console.assert(sidenav.style.width == "250px", "sidenavTest FAILED");
+
+    document.getElementById("navClose").click();
+    console.assert(sidenav.style.width == "0px", "sidenavTest FAILED");
 }
 
 // in Test.js
@@ -120,14 +133,13 @@ async function updateDatabaseTest()
 }
 
 // in ShoppingList.js
-async function formatListTest()
+async function formatListFunctionalTest()
 {
     let shoppingList = new ShoppingList("ListID");
 
     await shoppingList.getProducts();
 
-    var html = shoppingList.formatList();
-    document.getElementById("shoppingList").innerHTML = html;
+    shoppingList.formatList();
 
     var expectedElements = '<li class="listProduct" id="Barcode3" name="shoppingListItem">name: 3</li>';
 
@@ -138,4 +150,30 @@ async function formatListTest()
         actualElements += siteShoppingListElements[i].outerHTML;
 
     console.assert(expectedElements == actualElements, "ShoppingList.formatListTest() FAILED");
+}
+
+// in Inventory.js
+async function formatListVisualTest()
+{
+    let shoppingList = new ShoppingList("ListID");
+    await shoppingList.getProducts();
+    shoppingList.formatList();
+
+    var siteListElements = document.getElementsByClassName("listProduct");
+
+    for (var i = 0; i < siteListElements.length; i++)
+    {
+        var style = getComputedStyle(siteListElements[i]);
+        var color = style.color;
+        var FF = style.fontFamily;
+        var FSize = style.fontSize;
+        var FStyle = style.fontStyle;
+        var FW = style.fontWeight;
+
+        console.assert(color == "rgba(89, 139, 196, 0.81)", "formatListVisualTest FAILED");
+        console.assert(FF == '"Lucida Bright", Georgia, serif', "formatListVisualTest FAILED");
+        console.assert(FSize == "30px", "formatListVisualTest FAILED");
+        console.assert(FStyle == "normal", "formatListVisualTest FAILED");
+        console.assert(FW == "700", "formatListVisualTest FAILED");
+    }
 }
