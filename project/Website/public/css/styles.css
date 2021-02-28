@@ -71,6 +71,10 @@ body {
     top: 12px;
 }
 
+.navbar {
+  height: 60px;
+}
+
 .navbar-brand {
   font-family: "Lucida Bright", Georgia, serif;
   font-style: normal;
