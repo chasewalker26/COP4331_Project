@@ -21,7 +21,7 @@ class List
   }
 
   async updateDatabase(products)
-  {
+  { 
     await saveToFirebase("ProductList/" + this.listID + "/", products);
   }
 }

@@ -33,16 +33,50 @@
   <div class="jumbotron text-left">
     <h1 style = "color:#006579;font-family:'Lucida Bright', 'Georgia', 'serif'"> 
         &nbsp; 
-        Names Shopping List</h1>
+        Shopping List</h1>
   </div>
     
-    <div class="row">
+    <!-- <div class="row">
       <div class="col-6">
           <ul id="shoppingList" class="mx-4">
           </ul>
       </div>
+    </div> -->
+
+    <div class="container">
+      <div class="row">
+        <table border="1">
+          <tr>
+            <th>Name</th>
+            <th>Quantity</th>
+          </tr>
+        </table>
+
+        <!-- Add item -->
+        <button class="btn btn-success" onclick="return togglePopup()">Add item</button>
+      </div>
     </div>
 
+
+
+    <!-- Popup window -->
+    <div class="popup" id="popup-1">
+      <div class="overlay"></div>
+      <div class="content">
+        <div class="close-btn" onclick="return togglePopup()">&times;</div>
+        <h1>New item</h1>
+        <form id="add-form">
+          <div id="data">
+            Name:<input type="text" id="prodName" class="u-full-width" placeholder="Enter name">
+            Item Quantity:<input type="number" id="prodQuantity" class="u-full-width" placeholder="Enter quantity">
+            
+            <!-- <button onclick="return addItem1()">Add item</button> -->
+
+            <button id="addItem-button">Add Item</button>
+          </div>
+        </form>
+      </div>
+    </div>
 
 
   <!-- JQUERY -->
@@ -53,6 +87,7 @@
 
   <!-- update the version number as needed -->
   <script defer src="/__/firebase/8.2.5/firebase-app.js"></script>
+
   <!-- include only the Firebase features as you need -->
   <script defer src="/__/firebase/8.2.5/firebase-auth.js"></script>
   <script defer src="/__/firebase/8.2.5/firebase-database.js"></script>
@@ -66,11 +101,17 @@
   <script src="js/Product.js"></script>
   <script src="js/List.js"></script>
   <script src="js/ShoppingList.js"></script>
-  <script src="js/ShoppingListTest.js"></script>
-
+  <!-- <script src="js/ShoppingListTest.js"></script> -->
+  
   <script>
+    $("#addItem-button").on("click", async function(e){
+      e.preventDefault()
+      let shoppingList = new ShoppingList("ListID");
+    await shoppingList.getProducts();
+      return shoppingList.addItem()
+    });
   </script>
-    
+
 </body>
 
 </html>
