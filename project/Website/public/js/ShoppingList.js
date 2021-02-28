@@ -56,34 +56,34 @@ class ShoppingList extends List {
   }
 
 
-  static getListFromFirebase = async () => 
-  {
-    let products = pullFromFirebase("ProductList/ListID/");
+  // static getListFromFirebase = async () => 
+  // {
+  //   let products = pullFromFirebase("ProductList/ListID/");
 
-    products.then(data => {
-      let table = document.getElementsByTagName('table')[0]
-      Object.entries(data).forEach(([key, value]) => {
-        let newRow = table.insertRow(table.rows.length)
+  //   products.then(data => {
+  //     let table = document.getElementsByTagName('table')[0]
+  //     Object.entries(data).forEach(([key, value]) => {
+  //       let newRow = table.insertRow(table.rows.length)
 
-        let cell1 = newRow.insertCell(0)
-        let cell2 = newRow.insertCell(1)
+  //       let cell1 = newRow.insertCell(0)
+  //       let cell2 = newRow.insertCell(1)
 
 
-        cell1.innerHTML = value.name;
-        cell2.innerHTML = value.count;
-      });
+  //       cell1.innerHTML = value.name;
+  //       cell2.innerHTML = value.count;
+  //     });
 
-    }).catch(err => {
-      console.log(err)
-    })
+  //   }).catch(err => {
+  //     console.log(err)
+  //   })
 
-  }
+  // }
 
   addItem() 
   {
-    console.log("lol")
-    let prodName = document.getElementById('prodName').value
-    let prodQuantity = document.getElementById('prodQuantity').value
+    console.log("lol");
+    let prodName = document.getElementById('prodName').value;
+    let prodQuantity = document.getElementById('prodQuantity').value;
 
     let product = new Product("Barcode777", {
       "count" : prodQuantity,
@@ -91,29 +91,32 @@ class ShoppingList extends List {
       "name" : prodName,
       "timeScanned": 0,
       "warningDay":  -1 
-    })
+    });
 
-    this.products.push(product)
+    this.products.push(product);
 
-    
+    var JSONProducts = this.formatProductsJSON();
 
-    this.updateDatabase(this.products)
+    console.log(JSONProducts);
+    return;
 
-    let table = document.getElementsByTagName('table')[0]
-    let newRow = table.insertRow(table.rows.length)
+    this.updateDatabase(JSONProducts);
 
-    let cell1 = newRow.insertCell(0)
-    let cell2 = newRow.insertCell(1)
+    let table = document.getElementsByTagName('table')[0];
+    let newRow = table.insertRow(table.rows.length);
 
-    cell1.innerHTML = prodName
-    cell2.innerHTML = prodQuantity
+    let cell1 = newRow.insertCell(0);
+    let cell2 = newRow.insertCell(1);
 
-    // this.products.push(new Product(0, ))
+    cell1.innerHTML = prodName;
+    cell2.innerHTML = prodQuantity;
 
-    document.getElementById("add-form").reset()
+    // this.products.push(new Product(0, ));
+
+    document.getElementById("add-form").reset();
 
     // Close popup 
-    return togglePopup()
+    return togglePopup();
   }
 }
 

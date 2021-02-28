@@ -29,7 +29,7 @@ class List
     await saveToFirebase("ProductList/" + this.listID + "/", products);
   }
 
-  async formatProductsJSON()
+  formatProductsJSON()
   {
     var currProducts = this.products;
     var formattedProducts = {};

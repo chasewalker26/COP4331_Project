@@ -225,7 +225,7 @@ async function formatProductsJSONTest()
 
     var data = false;
 
-    var products = await shoppingList.formatProductsJSON();
+    var products = shoppingList.formatProductsJSON();
     var dbProducts = await pullFromFirebase("ProductList/ListID/");
 
     console.log(JSON.stringify(products));
