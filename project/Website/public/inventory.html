@@ -16,26 +16,22 @@
 </head>
 
 <body>
-  <!--nav bar-->
-  <nav class="navbar navbar-dark">
-    <!-- Navbar content -->
-    <div class="container-fluid">
-      <a class="navbar-brand" href="LoginForm.html">SimpleList</a>
-    </div>
-
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a class="navbar-brand navlink" href="inventory.html">Inventory List</a>
-        <a class="navbar-brand navlink" href="shoppingList.html">Shopping List</a>
-        <a class="navbar-brand navlink redWarning" id="signOut">Signout</a>
-    </div>
-    <span class="material-icons md-36 navlines " style = "color: #ffffff; cursor:pointer " onclick="openNav()">menu</span>
-  </nav>
-
-    <br>
+    <!--nav bar-->
+    <nav class="navbar navbar-dark">
+      <!-- Navbar content -->
+      <a class="navbar-brand mx-3" href="LoginForm.html">SimpleList</a>
+      
+      <div id="sidenav" class="sidenav">
+          <span class="material-icons md-36 closebtn m-3" onclick="closeNav()" id="navClose">close</span>
+          <a class="navbar-brand navlink" href="inventory.html" id="inventoryLink">Inventory List</a>
+          <a class="navbar-brand navlink" href="shoppingList.html" id="shoppingListLink">Shopping List</a>
+          <a class="navbar-brand navlink redWarning" id="signOut">Signout</a>
+      </div>
+      <span class="material-icons md-36 navlines mx-3" style="color: #ffffff; cursor:pointer" id="navOpen" onclick="openNav()">menu</span>
+    </nav>
     <!--inventory title-->
     <div class="text-left">
-      <h1 class="title mx-3">Names Inventory</h1>
+      <h1 class="title mt-3 mx-3">Name's Inventory</h1>
     </div>
   
     <div class="text-left">
@@ -44,7 +40,7 @@
   
     <div class="row">
       <div class="col-6">
-          <ul id="inventory" class="mx-4">
+          <ul id="inventory">
           </ul>
       </div>
     </div>
