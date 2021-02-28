@@ -33,11 +33,13 @@
 
   <div class="text-left">
     <h1 class="title mx-3">Names Shopping List</h1>
+    <div class= "clearbutton" onclick="confirmClearAlert()">CLEAR</div>
   </div>
 
   <div class="text-left">
     <h5 class="title mx-5 redWarning" id="errorMessage"></h5>
   </div>
+
 
   <div class="row">
     <div class="col-6">
@@ -75,6 +77,17 @@
 
 
   <script>
+  function confirmClearAlert()
+  {
+    if (confirm ("You are about to clear the entire list, do you want to continue?"))
+    {
+     shoppingList.clearList(); 
+    } 
+    else
+    {
+      return;
+    }
+  }
   </script>
     
 </body>

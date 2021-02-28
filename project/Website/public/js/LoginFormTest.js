@@ -3,7 +3,7 @@ if (isTesting == true)
 {
     window.onload = function()
     {
-        signOutTest();
+       // signOutTest();
     }
 }
 async function signOutTest(){

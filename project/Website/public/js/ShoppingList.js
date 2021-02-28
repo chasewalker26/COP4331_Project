@@ -24,4 +24,24 @@ class ShoppingList extends List
 
     return html;
   }
+
+  
+  clearList()
+  {
+    var products = this.products;
+
+    for (var i = 0; i < products.length; i++)
+    {
+      var count = products[i].count;
+      var idealCount = products[i].idealCount;
+      var countToBuy = idealCount - count;
+
+      if (count < idealCount)
+      {
+        var newCount = countToBuy + count;
+        products[i].count = newCount; 
+        updateDatabase(products);
+      }
+    }
+  }
 }
