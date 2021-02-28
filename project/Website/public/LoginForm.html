@@ -26,7 +26,7 @@
     <div class="row bg-light-blue justify-content-center" style="top:50%">
         <div class="card info-card col-5 text-center m-5 p-5">
             <div class="h1 my-5 dark-blue title">Welcome to the<br> SimpleList Scanner site!<br> Sign in or Sign up!</div>
-            <button class="gsigninbtn col-7 align-self-center p-2" id="submit"><img src="google.jpg" width="30px"> Sign In with Google</button>
+            <button class="gsigninbtn col-7 align-self-center p-2" id="submit"><img src="img/google.jpg" width="30px"> Sign In with Google</button>
         </div>
     </div>
 
@@ -47,62 +47,22 @@
 
     <!-- js file links -->
     <script src="js/main.js"></script>
+    <script src="js/Account.js"></script>
     <script src="js/User.js"></script>
     <script src="js/Product.js"></script>
     <script src="js/List.js"></script>
     <script src="js/LoginFormTest.js"></script>
 
     <script>
-			$("#submit").click(function(){
-				signIn();
-			});
-
-            // Log the user in
-			// This code was provided by google Firebase
-			function signIn() {
-                var provider = new firebase.auth.GoogleAuthProvider;
-                provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
-                firebase.auth().signInWithPopup(provider).then((result) => 
-                {
-                    var credential = result.credential;
-                    // This gives you a Google Access Token. You can use it to access the Google API.
-                    var token = credential.accessToken;
-                    // The signed-in user info.
-                    var user = result.user;
-                    window.location.replace("shoppingList.html");
-                }).catch((error) =>
-                {
-                    // Handle Errors here.
-                    var errorCode = error.code;
-                    var errorMessage = error.message;
-                    // The email of the user's account used.
-                    var email = error.email;
-                    // The firebase.auth.AuthCredential type that was used.
-                    var credential = error.credential;
-                    console.log(error);
-                });
-			}
-
-			
-			// Check if the user is logged in
-			// This code was provided by google Firebase
-			function initApp() {
-				firebase.auth().onAuthStateChanged(function(user) {
-                    console.log(user);
-					if (user) {
-						var displayName = user.displayName;
-						var email = user.email;
-						var emailVerified = user.emailVerified;
-						console.log(emailVerified);
-						console.log(email);
-                        window.location.replace("shoppingList.html");
-					} 
-				});
-			}
-
-			window.onload = function() {
-				initApp();
+            var account;
+            window.onload = function() {
+                account = new Account();
+				account.authorizeAccount();
 			};
+
+			$("#submit").click(function(){
+				account.signIn();
+			});
     </script>
 
 </body>
