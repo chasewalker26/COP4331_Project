@@ -142,6 +142,7 @@ body {
   text-transform: uppercase;
 }
 
+<<<<<<< HEAD
 .gsigninbtn {
 	box-shadow: 0px 1px 5px rgba(20,20,20,0.5);
 	border-radius: 5px;
@@ -149,4 +150,23 @@ body {
 	background-color: white;
 	color: rgb(109, 109, 109);
 	cursor: pointer;
+=======
+.clearbutton {
+  background-color: #ff0000; /* Red */
+  border: 1px;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  position: fixed;
+  right: 64px;
+  transition-duration: 0.4s;
+}
+
+.clearbutton:hover {
+  background-color: #d80000; /* Red */
+  color: white;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+>>>>>>> 30a49ee2b9c35db6d329ff16fc9f59d9fa03189a
 }
