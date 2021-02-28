@@ -3,10 +3,31 @@
 // 
 if (isTesting == true)
 {
-    window.onload = function()
+    window.onload = async function()
     {
+        await redirectIfNotFirebaseUser(); // runtime function to ensure a user is signed in
         runTests();
     }
+}
+
+// Uses firebase function to verify firebase user status
+async function redirectIfNotFirebaseUser()
+{
+    await firebase.auth().onAuthStateChanged(function(user)
+    {
+        if (user)
+            initializeAppUser();
+        else
+            window.location.replace("LoginForm.html");
+    });
+}
+
+// Uses data from firebase function to create a User
+function initializeAppUser()
+{
+    var user = firebase.auth().currentUser;
+    appUser = new User(user.displayName, user.email, user.uid);
+    console.log(appUser);
 }
 
 function runTests()
@@ -20,7 +41,6 @@ function runTests()
     formatListFunctionalTest();
     formatListVisualTest();
 }
-
 
 async function sidenavTest()
 {
@@ -110,6 +130,13 @@ async function getProductsWithBadListID()
 
     if ($("#errorMessage").innerHTML = "There is no list associated with this account. Have you scanned any items?")
         data = true;
+
+    // clean up
+    setTimeout(() =>
+    {
+        $("#errorMessage").hide();
+
+    }, 1000);
 
     console.assert(data == true, "getProductsTest FAILED");
 }

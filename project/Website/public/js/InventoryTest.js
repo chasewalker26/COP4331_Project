@@ -3,15 +3,36 @@
 // 
 if (isTesting == true)
 {
-    window.onload = function()
+    window.onload = async function()
     {
+        await redirectIfNotFirebaseUser(); // runtime function to ensure a user is signed in
         runTests();
     }
 }
 
+// Uses firebase function to verify firebase user status
+async function redirectIfNotFirebaseUser()
+{
+    await firebase.auth().onAuthStateChanged(function(user)
+    {
+        if (user)
+            initializeAppUser();
+        else
+            window.location.replace("LoginForm.html");
+    });
+}
+
+// Uses data from firebase function to create a User
+function initializeAppUser()
+{
+    var user = firebase.auth().currentUser;
+    appUser = new User(user.displayName, user.email, user.uid);
+    console.log(appUser);
+}
+
 function runTests()
 {
-    // formatListFunctionalTest();
+    formatListFunctionalTest();
     sidenavTest();
     formatListVisualTest();
 }
@@ -27,30 +48,30 @@ async function sidenavTest()
 }
 
 
-// // in Inventory.js
-// async function formatListFunctionalTest()
-// {
-//     let inventory = new Inventory("ListID");
+// in Inventory.js
+async function formatListFunctionalTest()
+{
+    let inventory = new Inventory("ListID");
 
-//     await inventory.getProducts();
+    await inventory.getProducts();
 
-//     inventory.formatList();
+    inventory.formatList();
 
-//     // change expectedElements
-//     var expectedElements = '<li class="listProduct" id="Barcode0" name="inventoryItem" onclick="inventory.editItem()"><span class="material-icons mx-2">edit</span>name: 5</li>' + 
-//                            '<li class="listProduct" id="Barcode1" name="inventoryItem" onclick="inventory.editItem()"><span class="material-icons mx-2">edit</span>name: 2</li>' +
-//                            '<li class="listProduct" id="Barcode3" name="inventoryItem" onclick="inventory.editItem()"><span class="material-icons mx-2">edit</span>name: 3</li>';
+    // change expectedElements
+    var expectedElements = '<li class="listProduct" id="Barcode0" name="inventoryItem" onclick="inventory.editItem()"><span class="material-icons mx-2">edit</span>name: 5</li>' + 
+                           '<li class="listProduct" id="Barcode1" name="inventoryItem" onclick="inventory.editItem()"><span class="material-icons mx-2">edit</span>name: 2</li>' +
+                           '<li class="listProduct" id="Barcode3" name="inventoryItem" onclick="inventory.editItem()"><span class="material-icons mx-2">edit</span>name: 3</li>';
 
-//     var siteInventoryElements = document.getElementById("inventory").children;
-//     var actualElements = "";
+    var siteInventoryElements = document.getElementById("inventory").children;
+    var actualElements = "";
 
-//     for (var i = 0; i < siteInventoryElements.length; i++)
-//         actualElements += siteInventoryElements[i].outerHTML;
+    for (var i = 0; i < siteInventoryElements.length; i++)
+        actualElements += siteInventoryElements[i].outerHTML;
 
-//     console.assert(expectedElements == actualElements, "Inventory.formatListTest() FAILED");
+    console.assert(expectedElements == actualElements, "Inventory.formatListTest() FAILED");
 
 
-// }
+}
 
 // in Inventory.js
 async function formatListVisualTest()

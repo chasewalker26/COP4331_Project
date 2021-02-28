@@ -3,12 +3,14 @@ var isTesting = true;
 
 var appUser;
 
-function initializeAppUser()
-{
-    var user = firebase.auth().currentUser;
-    appUser = new User(user.displayName, user.email, user.uid);
-    console.log(appUser);
-}
+// window.onload = async function()
+// {  
+//     var page = window.location.pathname;
+//     if (page == "/shoppingList.html" || page == "/inventory.html")
+//     {
+//         await redirectIfNotFirebaseUser();
+//     }
+// }
 
 // function that enables asynchronous fethcing of database data
 pullFromFirebase = (datapath) => 
@@ -34,15 +36,13 @@ saveToFirebase = (datapath, data) =>
 }
 
 function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("sidenav").style.width = "250px";
 }
 
 function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("sidenav").style.width = "0";
 }
 
-function signOutClick(){
-    $("#signOutClick").on("click", function(){
-        appUser.signOut();
-    });
-}
+$(document).on("click", "#signOut", async function(){
+    await appUser.signOut();
+});
