@@ -7,9 +7,9 @@ class User {
     }
 
     async signOut(){
-        await firebase.auth().signOut().then(() => 
+        await firebase.auth().signOut().catch((error) => 
         {
-            window.location.replace("signedOut.html");
+            console.log(error);
         });
     }
 }
