@@ -1,17 +1,15 @@
 class User {
-    constructor(username, email, listID)
+    constructor(username, email, uid)
     {
         this.username = username;
         this.email = email;
-        this.listID = listID;
+        this.uid = uid;
     }
 
     async signOut(){
-        await firebase.auth().signOut().then(() => {
-            window.location.replace("LoginForm.html");
-        }).catch((error) => {
+        await firebase.auth().signOut().catch((error) => 
+        {
             console.log(error);
-            console.log("sign out unsucessful");
         });
     }
 }

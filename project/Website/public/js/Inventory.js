@@ -19,12 +19,6 @@ class Inventory extends List
       html += '<li class="listProduct" id="' + barcode + '" name="inventoryItem" onClick="inventory.editItem()"><span class="material-icons mx-2">edit</span>' + name + ': ' + count + '</li>';
     }
 
-    return html;
+    document.getElementById("inventory").innerHTML = html;
   }
-
-  editItem()
-  {
-    console.log("hello");
-  }
-
 }

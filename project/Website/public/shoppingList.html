@@ -15,34 +15,19 @@
 </head>
 <body>
   <!--nav bar-->
-  <nav class="navbar navbar-dark bg-dark" style = "height: 60px;">
+  <nav class="navbar navbar-dark">
     <!-- Navbar content -->
-    <div class="container-fluid">
-      <a class="navbar-brand" href="LoginForm.html">SimpleList</a>
-    </div>
-
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a class="navbar-brand navlink" href="inventory.html">Inventory List</a>
-        <a class="navbar-brand navlink" href="shoppingList.html">Shopping List</a>
-        <a class="navbar-brand navlink" id="signOutClick" style="color:#ff5D5D" onclick="signOutClick()" href="LoginForm.html">Signout</a>
-    </div>
-    <span class="material-icons md-36 navlines " style = "color: #ffffff; cursor:pointer " onclick="openNav()">menu</span>
-  </nav>
-  <br>
-  <div class="jumbotron text-left">
-    <h1 style = "color:#006579;font-family:'Lucida Bright', 'Georgia', 'serif'"> 
-        &nbsp; 
-        Shopping List</h1>
-  </div>
+    <a class="navbar-brand mx-3" href="LoginForm.html">SimpleList</a>
     
-    <!-- <div class="row">
-      <div class="col-6">
-          <ul id="shoppingList" class="mx-4">
-          </ul>
-      </div>
-    </div> -->
-
+    <div id="sidenav" class="sidenav">
+        <span class="material-icons md-36 closebtn m-3" onclick="closeNav()" id="navClose">close</span>
+        <a class="navbar-brand navlink" href="inventory.html" id="inventoryLink">Inventory List</a>
+        <a class="navbar-brand navlink" href="shoppingList.html" id="shoppingListLink">Shopping List</a>
+        <a class="navbar-brand navlink redWarning" id="signOut">Signout</a>
+    </div>
+    <span class="material-icons md-36 navlines mx-3" style="color: #ffffff; cursor:pointer" id="navOpen" onclick="openNav()">menu</span>
+  </nav>
+  
     <div class="container">
       <div class="row">
         <table border="1">
@@ -55,7 +40,23 @@
         <!-- Add item -->
         <button class="btn btn-success" onclick="return togglePopup()">Add item</button>
       </div>
+  
+  <div class="text-left">
+    <h1 class="title mt-3 mx-3">Name's Shopping List</h1>
+    <div class= "clearbutton" onclick="confirmClearAlert()">CLEAR</div>
+  </div>
+
+  <div class="text-left">
+    <h5 class="title mx-5 redWarning" id="errorMessage"></h5>
+  </div>
+
+
+  <div class="row">
+    <div class="col-6">
+        <ul id="shoppingList">
+        </ul>
     </div>
+  </div>
 
 
 
@@ -102,7 +103,12 @@
   <script src="js/List.js"></script>
   <script src="js/ShoppingList.js"></script>
   <!-- <script src="js/ShoppingListTest.js"></script> -->
-  
+
+  <script src="js/ShoppingListTest.js"></script>
+  <script src="js/LoginFormTest.js"></script>
+
+
+
   <script>
     $("#addItem-button").on("click", async function(e){
       e.preventDefault()
@@ -110,6 +116,18 @@
     await shoppingList.getProducts();
       return shoppingList.addItem()
     });
+
+  function confirmClearAlert()
+  {
+    if (confirm ("You are about to clear the entire list, do you want to continue?"))
+    {
+     shoppingList.clearList(); 
+    } 
+    else
+    {
+      return;
+    }
+  }
   </script>
 
 </body>

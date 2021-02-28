@@ -1,6 +1,17 @@
 // ALWAYS set false when not testing
 var isTesting = true;
 
+var appUser;
+
+// window.onload = async function()
+// {  
+//     var page = window.location.pathname;
+//     if (page == "/shoppingList.html" || page == "/inventory.html")
+//     {
+//         await redirectIfNotFirebaseUser();
+//     }
+// }
+
 // function that enables asynchronous fethcing of database data
 pullFromFirebase = (datapath) => 
 {
@@ -9,8 +20,7 @@ pullFromFirebase = (datapath) =>
         firebase.database().ref(datapath).on('value', function(snapshot) 
         {
             const products = snapshot.val();
-            if (products != undefined)
-                resolve(products);
+            resolve(products);
         });
     })
 }
@@ -26,15 +36,13 @@ saveToFirebase = (datapath, data) =>
 }
 
 function openNav() {
-    document.getElementById("mySidenav").style.width = "250px";
+    document.getElementById("sidenav").style.width = "250px";
 }
 
 function closeNav() {
-    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("sidenav").style.width = "0";
 }
-function signOutClick(){
-    $("#signOutClick").on( "click",function(){
-        User.signOut();
-    });
-    // $(document).on("click", "#test-element",signOut());
-}
+
+$(document).on("click", "#signOut", async function(){
+    await appUser.signOut();
+});

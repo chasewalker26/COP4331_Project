@@ -17,19 +17,17 @@
 
 <body>
     <!--nav bar-->
-    <nav class="navbar navbar-dark bg-dark" style = "height: 60px;">
+    <nav class="navbar navbar-dark">
         <!-- Navbar content -->
-        <div class="container-fluid">
-        <a class="navbar-brand" href="LoginForm.html">SimpleList</a>
+        <a class="navbar-brand mx-3" href="LoginForm.html">SimpleList</a>
+        
+        <div id="sidenav" class="sidenav">
+            <span class="material-icons md-36 closebtn m-3" onclick="closeNav()" id="navClose">close</span>
+            <a class="navbar-brand navlink" href="inventory.html" id="inventoryLink">Inventory List</a>
+            <a class="navbar-brand navlink" href="shoppingList.html" id="shoppingListLink">Shopping List</a>
+            <a class="navbar-brand navlink redWarning" id="signOut">Signout</a>
         </div>
-
-        <div id="mySidenav" class="sidenav">
-            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <a class="navbar-brand navlink" href="inventory.html">Inventory List</a>
-            <a class="navbar-brand navlink" href="shoppingList.html">Shopping List</a>
-            <a class="navbar-brand navlink" style="color:#ff5D5D" onclick="signOutClick()" href="LoginForm.html">Signout</a>
-        </div>
-        <span class="material-icons md-36 navlines " style = "color: #ffffff; cursor:pointer " onclick="openNav()">menu</span>
+        <span class="material-icons md-36 navlines mx-3" style="color: #ffffff; cursor:pointer" id="navOpen" onclick="openNav()">menu</span>
     </nav>
 
     <div class="row justify-content-center text-center" style="margin:20px">

@@ -1,3 +1,4 @@
+/* body default styling */
 html, body {
 	max-width: 100%;
 	overflow-x: hidden;
@@ -88,12 +89,25 @@ body {
   cursor: pointer;
 }
 
+/* colors */
+.redWarning {
+  color: #FF5D5D !important;
+}
+
 .light-blue {
   color: #598BC4;
 }
 
 .dark-blue {
   color:#006579;
+}
+
+.black {
+  color: black;
+}
+
+.white {
+  color: white;
 }
 
 .bg-light-blue {
@@ -104,26 +118,67 @@ body {
   background-color:#006579;
 }
 
-.material-icons.md-36 { font-size: 36px; }
-.material-icons.md-48 { font-size: 48px; }
-.material-icons.md-100 { font-size: 100px; }
+/* material icons */
+.material-icons.md-36 { font-size: 36px !important; }
+.material-icons.md-48 { font-size: 48px !important; }
+.material-icons.md-100 { font-size: 100px !important; }
 
-
-.navlink{
-    border-bottom: 1px solid white;
+.form-container {
+  position: absolute;
+  top: 15vh;
+  background: #fff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0px #000;
 }
-.navlines{
-    height: 100%;
-    position: absolute;
-    right:3px;
-    top: 12px;
+
+/* list and title styling */
+.listProduct{
+  color: rgba(89, 139, 196, .81);
+  font-family: "Lucida Bright", Georgia, serif;
+  font-style: normal;
+  font-size: 30px;
+  font-weight: bold;
+  list-style: none;
+}
+
+.listProduct:hover{
+  cursor: pointer;
+}
+
+.title {
+  color:#006579;
+  /* font-size: 40px !important; */
+  font-family:'Lucida Bright', 'Georgia', 'serif';
+  font-weight: bold;
+}
+
+/* navbar and sidenav */
+.navbar {
+  height: 60px;
+  background-color: #444444;
 }
 
 .navbar-brand {
   font-family: "Lucida Bright", Georgia, serif;
   font-style: normal;
-  font-size: 40px;
-  font-weight: Demibold;
+  font-size: 80px;
+  font-weight: normal;
+}
+
+.navlink{
+  border-bottom: 1px solid #707070;
+  margin: 0 !important;
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: white;
+  display: block;
+  transition: 0.3s;
+}
+
+.navlink:hover {
+  cursor: pointer;
 }
 
 .sidenav {
@@ -133,34 +188,63 @@ body {
   z-index: 1; 
   top: 0; 
   right:0;
-  background-color: #111;
+  background-color: #444444;
   overflow-x: hidden; 
   padding-top: 60px; 
   transition: 0.5s; 
 }
 
-.sidenav a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-  transition: 0.3s;
+.navlines{
+  height: 100%;
+  position: absolute;
+  right:3px;
+  top: 12px;
 }
 
-.sidenav a:hover {
-  color: #f1f1f1;
-}
-
-.sidenav .closebtn {
+.closebtn {
   position: absolute;
   top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
+  right: 0;
+  color:rgba(255, 255, 255, 0.692);
 }
 
-@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
+.closebtn:hover {
+  cursor: pointer;
+  color: white;
+}
+
+/* buttons */
+
+.btn {
+  font-size: 40px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.gsigninbtn {
+	box-shadow: 0px 1px 5px rgba(20,20,20,0.5);
+	border-radius: 5px;
+	border: white;
+	background-color: white;
+	color: rgb(109, 109, 109);
+	cursor: pointer;
+}
+
+.clearbutton {
+  background-color: #ff0000; /* Red */
+  border: 1px;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  position: fixed;
+  right: 64px;
+  transition-duration: 0.4s;
+}
+
+.clearbutton:hover {
+  background-color: #d80000; /* Red */
+  color: white;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }

@@ -13,56 +13,22 @@
 
     <title>Login to SimpleList</title>
 
-    <meta name="google-signin-client_id" content = "620770546311-80ve0rg4ovhnovspmvtucbbqvom6mlau.apps.googleusercontent.com">
+    <!-- <meta name="google-signin-client_id" content = "620770546311-80ve0rg4ovhnovspmvtucbbqvom6mlau.apps.googleusercontent.com"> -->
     <script src="https://apis.google.com/js/platform.js" asynf defer></script>
 </head>
 <body class="bg-light-blue">
     <!--nav bar-->
-    <nav class="navbar navbar-dark bg-dark" style = "height: 60px;">
+    <nav class="navbar navbar-dark">
         <!-- Navbar content -->
-        <div class="container-fluid">
-        <a class="navbar-brand" href="LoginForm.html">SimpleList</a>
-        </div>
+        <a class="navbar-brand mx-3" href="LoginForm.html">SimpleList</a>
     </nav>
 
     <div class="row bg-light-blue justify-content-center" style="top:50%">
         <div class="card info-card col-5 text-center m-5 p-5">
-            <div class="h1 my-5 dark-blue">Welcome to the<br> SimpleList Scanner site!<br> Sign in or Sign up!</div>
-            <div class="g-signin2 align-self-center" data-onsuccess="onSignIn" -theme="light" data-width="300" data-height="50" data-longtitle="true">button</div>
+            <div class="h1 my-5 dark-blue title">Welcome to the<br> SimpleList Scanner site!<br> Sign in or Sign up!</div>
+            <button class="gsigninbtn col-7 align-self-center p-2" id="submit"><img src="img/google.jpg" width="30px"> Sign In with Google</button>
         </div>
     </div>
-
-
-
-    <script>
-        async function onSignIn(googleUser) {
-            console.log(googleUser);
-            var profile;
-            profile = googleUser.getBasicProfile();
-            var username = profile.getName();
-            var email = profile.getEmail();
-
-            // The ID token you need to pass to your backend:
-            var id_token = googleUser.getAuthResponse().id_token;
-
-            // Build Firebase credential with the Google ID token.
-            var credential = firebase.auth.GoogleAuthProvider.credential(id_token);
-
-            // Sign in with credential from the Google user.
-            await firebase.auth().signInWithCredential(credential).then(() => {
-                window.location.replace("shoppingList.html");
-            }).catch((error) => {
-                console.log(error);
-                // Handle Errors here.
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                // The email of the user's account used.
-                var email = error.email;
-                // The firebase.auth.AuthCredential type that was used.
-                var credential = error.credential;
-            });
-        }
-    </script>
 
     <!-- JQUERY -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -81,11 +47,23 @@
 
     <!-- js file links -->
     <script src="js/main.js"></script>
+    <script src="js/Account.js"></script>
     <script src="js/User.js"></script>
     <script src="js/Product.js"></script>
     <script src="js/List.js"></script>
     <script src="js/LoginFormTest.js"></script>
 
+    <script>
+            var account;
+            window.onload = function() {
+                account = new Account();
+				account.authorizeAccount();
+			};
+
+			$("#submit").click(function(){
+				account.signIn();
+			});
+    </script>
 
 </body>
 </html>
