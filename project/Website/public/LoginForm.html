@@ -13,7 +13,7 @@
 
     <title>Login to SimpleList</title>
 
-    <meta name="google-signin-client_id" content = "620770546311-80ve0rg4ovhnovspmvtucbbqvom6mlau.apps.googleusercontent.com">
+    <!-- <meta name="google-signin-client_id" content = "620770546311-80ve0rg4ovhnovspmvtucbbqvom6mlau.apps.googleusercontent.com"> -->
     <script src="https://apis.google.com/js/platform.js" asynf defer></script>
 </head>
 <body class="bg-light-blue">
@@ -26,7 +26,7 @@
     <div class="row bg-light-blue justify-content-center" style="top:50%">
         <div class="card info-card col-5 text-center m-5 p-5">
             <div class="h1 my-5 dark-blue title">Welcome to the<br> SimpleList Scanner site!<br> Sign in or Sign up!</div>
-            <div class="g-signin2 align-self-center" data-onsuccess="onSignIn" -theme="light" data-width="300" data-height="50" data-longtitle="true">button</div>
+            <button class="gsigninbtn col-7 align-self-center p-2" id="submit"><img src="google.jpg" width="30px"> Sign In with Google</button>
         </div>
     </div>
 
@@ -53,57 +53,56 @@
     <script src="js/LoginFormTest.js"></script>
 
     <script>
-        //
-        // All code provided below and inside of this script tag was provided by google.
-        // The code was taken from their documentation on how to use google sign in with Firebase.
-        //
-        function onSignIn(googleUser) {
-            console.log('Google Auth Response', googleUser);
-            // We need to register an Observer on Firebase Auth to make sure auth is initialized.
-            var unsubscribe = firebase.auth().onAuthStateChanged((firebaseUser) =>
-            {
-                unsubscribe();
-                // Check if user is already signed-in to Firebase
-                if (!isUserEqual(googleUser, firebaseUser))
+			$("#submit").click(function(){
+				signIn();
+			});
+
+            // Log the user in
+			// This code was provided by google Firebase
+			function signIn() {
+                var provider = new firebase.auth.GoogleAuthProvider;
+                provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+                firebase.auth().signInWithPopup(provider).then((result) => 
                 {
-                    // Build Firebase credential with the Google ID token.
-                    var id_token = googleUser.getAuthResponse().id_token;
-
-                    var provider = new firebase.auth.GoogleAuthProvider;
-                    provider.setCustomParameters({ prompt: 'select_account' });
-                    
-                    var credential = provider.credential(id_token);
-
-                    firebase.auth().signInWithCredential(credential).then(() =>
-                    {
-                        console.log("done");
-                        window.location.replace("ShoppingList.html");
-                    }).catch((error) =>
-                    {
-                        console.log(error);
-                    });
-                }
-                else
+                    var credential = result.credential;
+                    // This gives you a Google Access Token. You can use it to access the Google API.
+                    var token = credential.accessToken;
+                    // The signed-in user info.
+                    var user = result.user;
+                    window.location.replace("shoppingList.html");
+                }).catch((error) =>
                 {
-                    initializeAppUser();
-                    console.log('User already signed-in to Firebase.');
-                    window.location.replace("ShoppingList.html");
-                }
-            });
-        }
+                    // Handle Errors here.
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    // The email of the user's account used.
+                    var email = error.email;
+                    // The firebase.auth.AuthCredential type that was used.
+                    var credential = error.credential;
+                    console.log(error);
+                });
+			}
 
-        function isUserEqual(googleUser, firebaseUser)
-        {
-            if (firebaseUser) {
-                var providerData = firebaseUser.providerData;
-                for (var i = 0; i < providerData.length; i++) {
-                    var data = providerData[i];
-                    if (data.providerId === firebase.auth.GoogleAuthProvider.PROVIDER_ID && data.uid === googleUser.getBasicProfile().getId())
-                        return true;
-                }
-            }
-            return false;
-        }
+			
+			// Check if the user is logged in
+			// This code was provided by google Firebase
+			function initApp() {
+				firebase.auth().onAuthStateChanged(function(user) {
+                    console.log(user);
+					if (user) {
+						var displayName = user.displayName;
+						var email = user.email;
+						var emailVerified = user.emailVerified;
+						console.log(emailVerified);
+						console.log(email);
+                        window.location.replace("shoppingList.html");
+					} 
+				});
+			}
+
+			window.onload = function() {
+				initApp();
+			};
     </script>
 
 </body>
