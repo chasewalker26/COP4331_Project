@@ -69,7 +69,7 @@ body {
 
 .title {
   color:#006579;
-  font-size: 40px !important;
+  /* font-size: 40px !important; */
   font-family:'Lucida Bright', 'Georgia', 'serif';
   font-weight: bold;
 }
@@ -96,6 +96,10 @@ body {
   color: white;
   display: block;
   transition: 0.3s;
+}
+
+.navlink:hover {
+  cursor: pointer;
 }
 
 .sidenav {
@@ -136,4 +140,13 @@ body {
   font-size: 40px;
   font-weight: bold;
   text-transform: uppercase;
+}
+
+.gsigninbtn {
+	box-shadow: 0px 1px 5px rgba(20,20,20,0.5);
+	border-radius: 5px;
+	border: white;
+	background-color: white;
+	color: rgb(109, 109, 109);
+	cursor: pointer;
 }
