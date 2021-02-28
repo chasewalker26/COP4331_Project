@@ -13,19 +13,19 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <title>Your Shopping List</title>
 </head>
-<body id="body">
+<body>
   <!--nav bar-->
-  <nav class="navbar navbar-dark bg-dark">
+  <nav class="navbar navbar-dark">
     <!-- Navbar content -->
     <div class="container-fluid">
       <a class="navbar-brand" href="LoginForm.html">SimpleList</a>
     </div>
 
     <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div class="closebtn" onclick="closeNav()">&times;</div>
         <a class="navbar-brand navlink" href="inventory.html">Inventory List</a>
         <a class="navbar-brand navlink" href="shoppingList.html">Shopping List</a>
-        <a class="navbar-brand navlink" id="signOutClick" style="color:#ff5D5D" onclick="signOutClick()" href="LoginForm.html">Signout</a>
+        <a class="navbar-brand navlink redWarning" id="signOut">Signout</a>
     </div>
     <span class="material-icons md-36 navlines " style = "color: #ffffff; cursor:pointer " onclick="openNav()">menu</span>
   </nav>

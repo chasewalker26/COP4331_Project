@@ -18,7 +18,7 @@
 </head>
 <body class="bg-light-blue">
     <!--nav bar-->
-    <nav class="navbar navbar-dark bg-dark">
+    <nav class="navbar navbar-dark">
         <!-- Navbar content -->
         <div class="container-fluid">
         <a class="navbar-brand" href="LoginForm.html">SimpleList</a>
@@ -27,7 +27,7 @@
 
     <div class="row bg-light-blue justify-content-center" style="top:50%">
         <div class="card info-card col-5 text-center m-5 p-5">
-            <div class="h1 my-5 dark-blue">Welcome to the<br> SimpleList Scanner site!<br> Sign in or Sign up!</div>
+            <div class="h1 my-5 dark-blue title">Welcome to the<br> SimpleList Scanner site!<br> Sign in or Sign up!</div>
             <div class="g-signin2 align-self-center" data-onsuccess="onSignIn" -theme="light" data-width="300" data-height="50" data-longtitle="true">button</div>
         </div>
     </div>
@@ -70,7 +70,11 @@
                 {
                     // Build Firebase credential with the Google ID token.
                     var id_token = googleUser.getAuthResponse().id_token;
-                    var credential = firebase.auth.GoogleAuthProvider.credential(id_token);
+
+                    var provider = new firebase.auth.GoogleAuthProvider;
+                    provider.setCustomParameters({ prompt: 'select_account' });
+                    
+                    var credential = provider.credential(id_token);
 
                     firebase.auth().signInWithCredential(credential).then(() =>
                     {
