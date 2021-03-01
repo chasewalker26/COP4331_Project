@@ -40,10 +40,15 @@
         <!-- Add item -->
         <button class="btn btn-success" onclick="return togglePopup()">Add item</button>
       </div>
-  
+
+  <!--shopping list header-->
   <div class="text-left">
     <h1 class="title mt-3 mx-3">Name's Shopping List</h1>
-    <div class= "clearbutton" onclick="confirmClearAlert()">CLEAR</div>
+
+    <!-- Trigger the modal with a button -->
+    <button type="button" class="clearbutton" data-toggle="modal" data-target="#myModal">CLEAR</button>
+
+   <!-- <button class="clearbutton" onclick="return togglePopup()">CLEAR</button> -->
   </div>
 
   <div class="text-left">
@@ -78,6 +83,42 @@
         </form>
       </div>
     </div>
+
+    <!--Modal for clearing verification-->
+
+  <!--  <div class="popup">
+     <div class="overlay"></div>
+     <div class="content">
+       <h1 class = "clearPopupText">You are about to clear the entire list, do you want to continue?</h1>
+       <div class ="clearpopupButtons" onclick = "return clearListAlert()">CONTINUE</div>
+       <div class = "cancelpopupButtons" onclick="return togglePopup()">CANCEL</div>
+     </div>
+   </div> -->
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="clearPopupText">You are about to clear the entire list, do you want to continue?</h4>
+      </div>
+      <div class="modal-footer">
+
+        <p class = "tpbutton btn-toolbar text-center">
+          <a class ="clearpopupButtons" onclick= "return clearListAlert()" data-dismiss="modal">CONTINUE</a>
+          &nbsp;
+          <a class="cancelpopupButtons" data-dismiss="modal">CANCEL</a>
+        </p>
+      </div>
+    </div>
+
+  </div>
+</div>
+  
+
 
 
   <!-- JQUERY -->
@@ -117,19 +158,11 @@
       return shoppingList.addItem()
     });
 
-  async function confirmClearAlert()
+  async function clearListAlert()
   {
     var shoppingList = new ShoppingList("ListID");
     await shoppingList.getProducts();
-
-    if (confirm ("You are about to clear the entire list, do you want to continue?"))
-    {
-     shoppingList.clearList(); 
-    } 
-    else
-    {
-      return;
-    }
+    shoppingList.clearList(); 
   }
   </script>
 

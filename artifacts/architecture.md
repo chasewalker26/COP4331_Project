@@ -43,21 +43,24 @@ Then we have 3 Controllers providing access points for the JSON/HTTPS API, with 
 | Web, List/inventory, Database | API Application | As a member in a large family household, I'd like to be able to separate shopping lists for different users in the household | U015 |
 
 # Code Design
-![Class Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/ClassDiagram1.png?raw=true)
+![Class Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/class_diagram.png?raw=true)
 
 |    class      |       UUID    |
 | ------------- | ------------- |
-| ShoppingList  | U001, U003, U007, U015, U016, U020 |
-| Inventory     | U008, U009  U006, U010, U017, U019 |
+| ShoppingList  | U001, U003, U009, U016, U019, U020 |
+| Inventory     | U006, U007, U008, U017 |
 | Contact       | U014 |
-| List          | U003, U017 |
-|  User         | U004, U005, U021 |
-|  Product      | U001, U002, U003, U006, U017, U018 |
+| List          | U001, U003, U006, U017 |
+|  User         | U005 |
+|  Product      | U002, U003, U006, U008, U009, U010, U018, U019, U020 |
 |  Scanner      | U002, U011, U018 |
+|  Account      | U004, U022 |
 
 # Data Design
 
-![Entity Relationship Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/ERD.png?raw=true)
+![Entity Relationship Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/ER_diagram.png?raw=true)
+
+All data storage is done in a firebase database connected to the app at runtime. The database holds users with user IDs that must be signed in to use the app. Their sign in status is managed implicitly by firebase and can be accessed by the app. A list is defined as an array of products belonging to a userID which allows the app to find which list to display to the current user. The userID key is therefore shared among all three structures. Barcodes define each item as they are not commonly repeatable in the way a product name is.
 
 # Business Rules
 
@@ -65,26 +68,25 @@ The only business rule that defines architectural processes is the requirement t
 
 # User Interface Design
 
-![UI Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/UIs.png?raw=true)
+![UI Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/UI_layout.png?raw=true)
 
 |    UI diagram      |    User Interaction    |     UUID(s)    |
 | ------------------ | ---------------------- | -------------- |
-| 1 | This screen shows what the user will see after submitting the clear crossed-out items dialogue box, the items will no longer be on the screen. | U003, U021 |
-| 2 | This box appears when the user presses clear with specific items crossed out, saving removes them, and cancel leaves the items crossed-out on the list. | U003, U021 |
-| 3 | When clicking on a red barcode displayed on the list the user will be prompted to give the item a name. This red item appears when an item is unrecognized by the barcode API. | U003, U020 |
-| 4 | This shows that when a user clicks on shopping list items they can cross/uncross them to mark them for clearing. | U003, U021 |
-| 5 | This is the sign in/sign up screen using Google’s login API for security and efficiency. | U004, U005 |
-| 6 | This is the shopping list screen that the user will be sent to after login and interact with. | U003, U021 |
-| 7 | This is what is shown when the user presses clear without any items crossed out. This will clear the whole list at once. | U003, U021 |
-| 8 | This is what the user is shown when they want to add an item to their shopping list. | U007 |
-| 9 | This is what is shown after the user clears the shopping list by using the dialogue box in 7. | U003, U021 |
-| 10 | This is the shopping list template on mobile screens. | U001 |
-| 11 | This is the navigation on mobile screens. | U001 |
-| 12 | This is the navigation menu. Shown by clicking the hamburger, closed by clicking the X. | U001 |
-| 13 | This is the contact form, it is navigated to using the nav menu. Submitting a message emails the developers. | U014 |
-| 14 | This screen allows users to set custom warnings, and preferred inventory amounts for items in their inventory. This is done by clicking on an inventory item. | U008, U009, U010 |
-| 15 | This is the user’s inventory screen, it is navigated to using the nav menu. | U017, U021 |
-| 16 | This is the add an item to the inventory screen opened by pressing the add button. It allows users to add items to the inventory manually. | U019 |
+| 1 | This screen shows what the user will see after submitting the clear crossed-out items dialogue box, the items will no longer be on the screen. | U020 |
+| 2 | This is the sign in/sign up screen using Google’s login API for security and efficiency. | U004 |
+| 3 | When clicking on a red barcode displayed on the list the user will be prompted to give the item a name. This red item appears when an item is unrecognized by the barcode API. This screen also demonstrates what the shopping list wil look like | U001, U003, U020 |
+| 4 | This shows when the user presses clear on the shgopping list. If they confirm, the whole shopping list will be clear and the counts shown will be added to the inventory items | U016 |
+| 5 | This is the add item dialogue box. It is designed for produce so a user can create an item with a time-based reminder system. | U009, U019 |
+| 6 | This is the shopping list after the clear operation has been done, or when the list is empty. | U016 |
+| 7 | This is the shopping list template on mobile screens.| U023 |
+| 8 | This is the sidenav template on mobile screens. | U023 |
+| 9 | This is the sidenav for the site. | general requirement for a site |
+| 10 | This is the contact form, it is navigated to using the nav menu. Submitting a message emails the developers. | U014 |
+| 11 | This screen allows users to set preferred inventory amounts for items in their inventory, and edit current amounts. This is done by clicking on the pencil next to an inventory item. | U008, U010 |
+| 12 | This is the inventory screen layout | U006, U017 |
+| 13 | This is what it looks like when an inventory item is clicked on. They are crossed out and marked for removal | U007 |
+| 14 | This box appears when the user presses clear with specific items crossed out, saving removes them, and cancel leaves the items crossed-out on the list. | U007 |
+| 15 | This is the user’s inventory screen, after they have cleared an item. | U007 |
 
 # Resource Management
 

@@ -75,6 +75,9 @@ All team members worked together in this sprint to create the user stories in th
 
 # Sprint 4
 
+- Omer Gul - I completed the user story "As a busy person, I want to see what I scanned on the website within a minute of scanning it, so that it can be there in a reasonable amount of time" U018.
+
+- Everyone worked on cleaning up sprint 2's errors.
 
 
 ## Task Allocation
