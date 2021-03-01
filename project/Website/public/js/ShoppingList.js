@@ -54,6 +54,7 @@ class ShoppingList extends List {
 
   addItem() 
   {
+    console.log("lol");
     let prodName = document.getElementById('prodName').value;
     let prodQuantity = document.getElementById('prodQuantity').value;
 
@@ -73,10 +74,8 @@ class ShoppingList extends List {
 
     document.getElementById("add-form").reset();
     // return togglePopup();
-  }
-}
+    console.log(JSONProducts);
 
-window.onload = async function () 
-{
-  await ShoppingList.getListFromFirebase();
+    this.updateDatabase(JSONProducts);
+  }
 }
