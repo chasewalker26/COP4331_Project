@@ -52,7 +52,7 @@ class ShoppingList extends List {
 
   }
 
-  addItem() 
+  async addItem() 
   {
     console.log("lol");
     let prodName = document.getElementById('prodName').value;
@@ -70,11 +70,11 @@ class ShoppingList extends List {
 
     var JSONProducts = this.formatProductsJSON();
 
-    this.updateDatabase(JSONProducts);
+    // this.updateDatabase(JSONProducts);
 
     document.getElementById("add-form").reset();
     // return togglePopup();
-    console.log(JSONProducts);
+    // console.log(JSONProducts);
 
     this.updateDatabase(JSONProducts);
   }

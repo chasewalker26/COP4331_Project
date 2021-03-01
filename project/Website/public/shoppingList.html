@@ -29,22 +29,11 @@
   </nav>
  
   
-  <!--shopping list header-->
   <div class="text-left">
     <h1 class="title mt-3 mx-3">Name's Shopping List</h1>
-
-    <!--Add item-->
-    <button class="addbutton" onclick="return togglePopup()">ADD</button>
-
-    <!-- Trigger the modal with a button -->
-    <button type="button" class="clearbutton" data-toggle="modal" data-target="#myModal">CLEAR</button>
-    
+    <button class="btn btn-success" id="popup-button" onclick="return togglePopup()">Add item</button>
+    <div class= "clearbutton" onclick="confirmClearAlert()">CLEAR</div>
   </div>
-
-  <div class="text-left">
-    <h5 class="title mx-5 redWarning" id="errorMessage"></h5>
-  </div>
-
 
   <div class="row">
     <div class="col-6">
@@ -52,6 +41,10 @@
         </ul>
     </div>
   </div>
+
+  <!-- <div class="text-left">
+    <h5 class="title mx-5 redWarning" id="errorMessage"></h5>
+  </div> -->
 
 
 
