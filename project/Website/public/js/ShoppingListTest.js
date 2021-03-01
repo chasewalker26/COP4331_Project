@@ -30,21 +30,21 @@ function initializeAppUser()
     console.log(appUser);
 }
 
-function runTests()
+async function runTests()
 {
-    // sidenavTest();
-    // ListTest();
-    // ProductTest();
-    // getProductsWithExistingListID();
-    // getProductsWithBadListID();
-    // updateDatabaseTest();
-    // formatListFunctionalTest();
-    // formatListVisualTest();
-    // clearListTest();
-    // formatProductsJSONTest();
+    sidenavTest();
+    ListTest();
+    ProductTest();
+    await getProductsWithExistingListID_TEST();
+    await getProductsWithBadListID_TEST();
+    await updateDatabaseTest();
+    await formatListFunctionalTest();
+    await formatListVisualTest();
+    await clearListTest();
+    await formatProductsJSONTest();
 }
 
-async function sidenavTest()
+function sidenavTest()
 {
     document.getElementById("navOpen").click();
     var sidenav = document.getElementById("sidenav");
@@ -58,11 +58,11 @@ async function sidenavTest()
 function ListTest()
 {
     var data = false;
-    var actualList = new List("ListID");
+    var actualList = new List("ListID_TEST");
 
     var expectedList =
     {
-        "listID" : "ListID",
+        "listID" : "ListID_TEST",
         "products" : []
     }
 
@@ -99,13 +99,13 @@ function ProductTest(){
 }
 
 // in Test.js
-async function getProductsWithExistingListID()
+async function getProductsWithExistingListID_TEST()
 {
-    let list = new List("ListID");
+    let list = new List("ListID_TEST");
     var data = false;
 
     var expectedProducts = [];
-    var products = await pullFromFirebase("ProductList/ListID");
+    var products = await pullFromFirebase("ProductList/ListID_TEST");
     var barcodes = Object.keys(products);
 
     for (var i = 0; i < barcodes.length; i++)
@@ -123,12 +123,12 @@ async function getProductsWithExistingListID()
 }
 
 // in Test.js
-async function getProductsWithBadListID()
+async function getProductsWithBadListID_TEST()
 {
     let list = new List("listylisty");
     var data = false;
 
-    list.getProducts();
+    await list.getProducts();
 
     if ($("#errorMessage").innerHTML = "There is no list associated with this account. Have you scanned any items?")
         data = true;
@@ -146,27 +146,30 @@ async function getProductsWithBadListID()
 // in Test.js
 async function updateDatabaseTest()
 {
-    var list = new List('ListID');
+    var list = new List('ListID_TEST');
     var data = false;
 
-    list.products = await pullFromFirebase("ProductList/ListID/");
-
-    console.log(list.products);
+    list.products = await pullFromFirebase("ProductList/ListID_TEST/");
+    
+    list.products["Barcode3"].count = 10; // data to change
 
     await list.updateDatabase(list.products);
 
-    var dbProducts = await pullFromFirebase("ProductList/ListID/");
+    var dbProducts = await pullFromFirebase("ProductList/ListID_TEST/");
 
     if (JSON.stringify(list.products) == JSON.stringify(dbProducts))
         data = true;
 
     console.assert(data == true, "updateDatabaseTest FAILED");
+
+    // repair the test data
+    await saveToFirebase("ProductList/ListID_TEST/Barcode3/", {count:3});
 }
 
 // in ShoppingList.js
 async function formatListFunctionalTest()
 {
-    let shoppingList = new ShoppingList("ListID");
+    let shoppingList = new ShoppingList("ListID_TEST");
 
     await shoppingList.getProducts();
 
@@ -186,7 +189,7 @@ async function formatListFunctionalTest()
 // in Inventory.js
 async function formatListVisualTest()
 {
-    let shoppingList = new ShoppingList("ListID");
+    let shoppingList = new ShoppingList("ListID_TEST");
     await shoppingList.getProducts();
     shoppingList.formatList();
 
@@ -209,32 +212,38 @@ async function formatListVisualTest()
     }
 }
 
-
 // in Inventory.js
 async function clearListTest()
 {
-    let shoppingList = new ShoppingList("ListID");
-    
+    var data = false;
+    let shoppingList = new ShoppingList("ListID_TEST");
+
     await shoppingList.getProducts();
     shoppingList.clearList();
+
+    var product = await pullFromFirebase("ProductList/ListID_TEST/Barcode3/")
+
+    if (product.count == 6)
+        data = true;
+
+    console.assert(data == true, "clearListTest FAILED");
+
+    // repair the clear operation
+    await saveToFirebase("ProductList/ListID_TEST/Barcode3/", {count:3});
 }
 
 async function formatProductsJSONTest()
 {
-    let shoppingList = new ShoppingList("ListID");
+    let shoppingList = new ShoppingList("ListID_TEST");
     await shoppingList.getProducts();
 
     var data = false;
 
-    var products = shoppingList.formatProductsJSON();
-    var dbProducts = await pullFromFirebase("ProductList/ListID/");
+    var JSONproducts = shoppingList.formatProductsJSON();
+    var dbProducts = await pullFromFirebase("ProductList/ListID_TEST/");
 
-    console.log(JSON.stringify(products));
-    console.log(JSON.stringify(dbProducts));
-
-
-    if (JSON.stringify(products) == JSON.stringify(dbProducts))
-        data == true;
+    if (JSON.stringify(JSONproducts) == JSON.stringify(dbProducts))
+        data = true;
     
     console.assert(data == true, "formatProductsJSONTest FAILED");
 }

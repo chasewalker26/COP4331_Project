@@ -55,30 +55,6 @@ class ShoppingList extends List {
 
   }
 
-
-  // static getListFromFirebase = async () => 
-  // {
-  //   let products = pullFromFirebase("ProductList/ListID/");
-
-  //   products.then(data => {
-  //     let table = document.getElementsByTagName('table')[0]
-  //     Object.entries(data).forEach(([key, value]) => {
-  //       let newRow = table.insertRow(table.rows.length)
-
-  //       let cell1 = newRow.insertCell(0)
-  //       let cell2 = newRow.insertCell(1)
-
-
-  //       cell1.innerHTML = value.name;
-  //       cell2.innerHTML = value.count;
-  //     });
-
-  //   }).catch(err => {
-  //     console.log(err)
-  //   })
-
-  // }
-
   addItem() 
   {
     console.log("lol");
@@ -100,24 +76,5 @@ class ShoppingList extends List {
     console.log(JSONProducts);
 
     this.updateDatabase(JSONProducts);
-
-    let table = document.getElementsByTagName('table')[0];
-    let newRow = table.insertRow(table.rows.length);
-
-    let cell1 = newRow.insertCell(0);
-    let cell2 = newRow.insertCell(1);
-
-    cell1.innerHTML = prodName;
-    cell2.innerHTML = prodQuantity;
-
-    document.getElementById("add-form").reset();
-
-    // Close popup 
-    return togglePopup();
   }
-}
-
-window.onload = async function () 
-{
-  await ShoppingList.getListFromFirebase();
 }
