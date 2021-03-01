@@ -30,30 +30,31 @@
 
   
   <!--shopping list header-->
-  <div class="text-left">
-    <h1 class="title mt-3 mx-3">Name's Shopping List</h1>
-
-    <!--Add item-->
-    <button class="addbutton" id="popup-button" onclick="return togglePopup()">ADD</button>
-
-    <!-- Trigger the modal with a button -->
-    <button type="button" class="clearbutton" data-toggle="modal" data-target="#myModal">CLEAR</button>
-    
+  <div class="row text-left">
+    <div class="col-lg-10 col-8">
+      <h1 class="title mt-3 mx-3">Name's Shopping List</h1>
+    </div>
+    <div class="col-lg-2 col-4">
+      <!-- Trigger the modal with a button -->
+      <button class="clearbutton m-3" type="button" data-toggle="modal" data-target="#myModal">CLEAR</button>
+      <!--Add item-->
+      <button class="addbutton m-3" id="popup-button" onclick="return togglePopup()">ADD</button>
+    </div>
+    </div>
   </div>
 
-  <div class="text-left">
-    <h5 class="title mx-5 redWarning" id="errorMessage"></h5>
+  <div class="row text-left">
+    <div class="col-12">
+      <h5 class="title mx-5 redWarning" id="errorMessage"></h5>
+    </div>
   </div>
-
 
   <div class="row">
-    <div class="col-6">
+    <div class="col-12">
         <ul id="shoppingList">
         </ul>
     </div>
   </div>
-
-
 
     <!-- Popup window -->
     <div class="popup" id="popup-1">
@@ -64,10 +65,8 @@
         <form id="add-form">
           <div id="data">
             Name:<input type="text" id="prodName" class="u-full-width" placeholder="Enter name">
-            Item Quantity:<input type="number" id="prodQuantity" class="u-full-width" placeholder="Enter quantity">
-            
-            <!-- <button onclick="return addItem1()">Add item</button> -->
-
+            <br>
+            Item Quantity:<input type="text" id="prodQuantity" class="u-full-width" placeholder="Enter quantity">
             <button id="addItem-button">Add Item</button>
           </div>
         </form>
@@ -117,12 +116,11 @@
 
   <!-- js file links -->
   <script src="js/main.js"></script>
+  <script src="js/Account.js"></script>
   <script src="js/User.js"></script>
   <script src="js/Product.js"></script>
   <script src="js/List.js"></script>
   <script src="js/ShoppingList.js"></script>
-  <!-- <script src="js/ShoppingListTest.js"></script> -->
-
   <script src="js/ShoppingListTest.js"></script>
   <script src="js/LoginFormTest.js"></script>
 
@@ -130,7 +128,7 @@
 
   <script>
     $("#addItem-button").on("click", async function(e){
-      e.preventDefault()
+      e.preventDefault();
       let shoppingList = new ShoppingList("ListID");
       await shoppingList.getProducts();
 
@@ -149,12 +147,18 @@
       shoppingList.formatList();
     });
 
+    // Open-close popup
+    function togglePopup() {
+      document.getElementById("popup-1").classList.toggle("active");
+      document.getElementById("add-form").reset();
+    }
+
     function checkAddItemInput()
     {
       let prodName = document.getElementById('prodName').value;
       let prodQuantity = document.getElementById('prodQuantity').value;
 
-      if (prodName.length == 0)
+      if (prodName.length == 0 || prodQuantity == "")
       {
         // If invalid name
         return false;
@@ -166,17 +170,6 @@
       }
     }
 
-    function confirmClearAlert()
-    {
-      if (confirm ("You are about to clear the entire list, do you want to continue?"))
-      {
-        shoppingList.clearList(); 
-      } 
-      else
-      {
-        return;
-      }
-    }
   async function clearListAlert()
   {
     var shoppingList = new ShoppingList("ListID");
