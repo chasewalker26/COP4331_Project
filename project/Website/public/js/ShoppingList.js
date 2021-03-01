@@ -2,12 +2,9 @@
 // Open-close popup
 function togglePopup() {
   document.getElementById("popup-1").classList.toggle("active");
+  document.getElementById("add-form").reset();
   console.log("popup open/close")
-  return false
 }
-
-let list1 = new List("ListID");
-
 
 class ShoppingList extends List {
   constructor(listID) {
@@ -55,65 +52,27 @@ class ShoppingList extends List {
 
   }
 
-
-  static getListFromFirebase = async () => 
-  {
-    let products = pullFromFirebase("ProductList/ListID/");
-
-    products.then(data => {
-      let table = document.getElementsByTagName('table')[0]
-      Object.entries(data).forEach(([key, value]) => {
-        let newRow = table.insertRow(table.rows.length)
-
-        let cell1 = newRow.insertCell(0)
-        let cell2 = newRow.insertCell(1)
-
-
-        cell1.innerHTML = value.name;
-        cell2.innerHTML = value.count;
-      });
-
-    }).catch(err => {
-      console.log(err)
-    })
-
-  }
-
   addItem() 
   {
-    console.log("lol")
-    let prodName = document.getElementById('prodName').value
-    let prodQuantity = document.getElementById('prodQuantity').value
+    let prodName = document.getElementById('prodName').value;
+    let prodQuantity = document.getElementById('prodQuantity').value;
 
-    let product = new Product("Barcode777", {
+    let product = new Product(prodName, {
       "count" : prodQuantity,
-      "idealCount": 1,
+      "idealCount": 10,
       "name" : prodName,
-      "timeScanned": 0,
+      "dayRemoved": -1,
       "warningDay":  -1 
-    })
+    });
 
-    this.products.push(product)
+    this.products.push(product);
 
-    
+    var JSONProducts = this.formatProductsJSON();
 
-    this.updateDatabase(this.products)
+    this.updateDatabase(JSONProducts);
 
-    let table = document.getElementsByTagName('table')[0]
-    let newRow = table.insertRow(table.rows.length)
-
-    let cell1 = newRow.insertCell(0)
-    let cell2 = newRow.insertCell(1)
-
-    cell1.innerHTML = prodName
-    cell2.innerHTML = prodQuantity
-
-    // this.products.push(new Product(0, ))
-
-    document.getElementById("add-form").reset()
-
-    // Close popup 
-    return togglePopup()
+    document.getElementById("add-form").reset();
+    // return togglePopup();
   }
 }
 
