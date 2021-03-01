@@ -2,12 +2,9 @@
 // Open-close popup
 function togglePopup() {
   document.getElementById("popup-1").classList.toggle("active");
+  document.getElementById("add-form").reset();
   console.log("popup open/close")
-  return false
 }
-
-let list1 = new List("ListID");
-
 
 class ShoppingList extends List {
   constructor(listID) {
@@ -61,11 +58,11 @@ class ShoppingList extends List {
     let prodName = document.getElementById('prodName').value;
     let prodQuantity = document.getElementById('prodQuantity').value;
 
-    let product = new Product("Barcode777", {
+    let product = new Product(prodName, {
       "count" : prodQuantity,
-      "idealCount": 1,
+      "idealCount": 10,
       "name" : prodName,
-      "timeScanned": 0,
+      "dayRemoved": -1,
       "warningDay":  -1 
     });
 
@@ -73,6 +70,10 @@ class ShoppingList extends List {
 
     var JSONProducts = this.formatProductsJSON();
 
+    this.updateDatabase(JSONProducts);
+
+    document.getElementById("add-form").reset();
+    // return togglePopup();
     console.log(JSONProducts);
 
     this.updateDatabase(JSONProducts);

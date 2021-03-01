@@ -27,6 +27,12 @@
     </div>
     <span class="material-icons md-36 navlines mx-3" style="color: #ffffff; cursor:pointer" id="navOpen" onclick="openNav()">menu</span>
   </nav>
+
+  
+  <div class="text-left">
+    <h1 class="title mt-3 mx-3">Name's Shopping List</h1>
+    <button class="btn btn-success" onclick="return togglePopup()">Add item</button>
+    <div class= "clearbutton" onclick="confirmClearAlert()">CLEAR</div>
   
     <div class="container">
       <div class="row">
@@ -141,10 +147,51 @@
     $("#addItem-button").on("click", async function(e){
       e.preventDefault()
       let shoppingList = new ShoppingList("ListID");
-    await shoppingList.getProducts();
-      return shoppingList.addItem()
+      await shoppingList.getProducts();
+
+      if (checkAddItemInput() == false)
+      {
+        alert("Enter the valid name");
+        return;
+      }
+
+      shoppingList.addItem();
+
+      document.getElementById("add-form").reset();
+
+      togglePopup();
+
+      shoppingList.formatList();
     });
 
+    function checkAddItemInput()
+    {
+      let prodName = document.getElementById('prodName').value;
+      let prodQuantity = document.getElementById('prodQuantity').value;
+
+      if (prodName.length == 0)
+      {
+        // If invalid name
+        return false;
+      }
+      else
+      {
+        // If valid
+        return true;
+      }
+    }
+
+    function confirmClearAlert()
+    {
+      if (confirm ("You are about to clear the entire list, do you want to continue?"))
+      {
+        shoppingList.clearList(); 
+      } 
+      else
+      {
+        return;
+      }
+    }
   async function clearListAlert()
   {
     var shoppingList = new ShoppingList("ListID");

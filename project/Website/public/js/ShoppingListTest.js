@@ -32,6 +32,7 @@ function initializeAppUser()
 
 async function runTests()
 {
+    // addProductTest();
     sidenavTest();
     ListTest();
     ProductTest();
@@ -52,6 +53,21 @@ function sidenavTest()
 
     document.getElementById("navClose").click();
     console.assert(sidenav.style.width == "0px", "sidenavTest FAILED");
+}
+
+// In ShoppingList.js
+async function addProductTest()
+{
+    let shoppingList = new ShoppingList("ListID");
+      await shoppingList.getProducts();
+    
+    shoppingList.addItem();
+
+    var list = new List("ListID");
+    let prodName = document.getElementById('prodName').value;
+    let prodQuantity = document.getElementById('prodQuantity').value;
+
+
 }
 
 // in Test.js
@@ -175,7 +191,7 @@ async function formatListFunctionalTest()
 
     shoppingList.formatList();
 
-    var expectedElements = '<li class="listProduct" id="Barcode3" name="shoppingListItem">name: 3</li>';
+    var expectedElements = '<li class="listProduct" id="Barcode3" name="shoppingListItem">name: 1</li>';
 
     var siteShoppingListElements = document.getElementById("shoppingList").children;
     var actualElements = "";
@@ -183,6 +199,9 @@ async function formatListFunctionalTest()
     for (var i = 0; i < siteShoppingListElements.length; i++)
         actualElements += siteShoppingListElements[i].outerHTML;
 
+    console.log("TEST:")
+    console.log(expectedElements)
+    console.log(actualElements)
     console.assert(expectedElements == actualElements, "ShoppingList.formatListFunctionalTest() FAILED");
 }
 
