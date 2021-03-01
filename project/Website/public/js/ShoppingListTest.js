@@ -183,10 +183,7 @@ async function formatListFunctionalTest()
 
     for (var i = 0; i < siteShoppingListElements.length; i++)
         actualElements += siteShoppingListElements[i].outerHTML;
-
-    console.log("TEST:")
-    console.log(expectedElements)
-    console.log(actualElements)
+        
     console.assert(expectedElements == actualElements, "ShoppingList.formatListFunctionalTest() FAILED");
 }
 

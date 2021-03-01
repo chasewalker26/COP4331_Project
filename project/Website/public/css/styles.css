@@ -230,8 +230,28 @@ body {
 	cursor: pointer;
 }
 
+/* Shopping List Buttons */
+.addbutton {
+  background-color: rgba(40, 223, 255, 0.81);
+  border: 1px;
+  color: white;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  position: fixed;
+  right: 130px;
+  transition-duration: 0.4s;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.addbutton:hover {
+  background-color: rgba(29, 155, 177, 0.81);
+  color: white;
+}
+
 .clearbutton {
-  background-color: #ff0000; /* Red */
+  background-color: rgba(251, 87, 87, .81); /* Red */
   border: 1px;
   color: white;
   padding: 10px 20px;
@@ -239,14 +259,14 @@ body {
   text-decoration: none;
   font-size: 16px;
   position: fixed;
-  right: 64px;
+  right: 240px;
   transition-duration: 0.4s;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
 .clearbutton:hover {
   background-color: #d80000; /* Red */
   color: white;
-  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
 .clearPopupText {
@@ -260,7 +280,7 @@ body {
 }
 
 .clearpopupButtons {
-  background-color: #ff0000; /* Red */
+  background-color:rgba(31, 133, 0, .81); /* Green */
   border: 1px;
   color: white;
   padding: 10px 20px;
@@ -268,16 +288,16 @@ body {
   text-decoration: none;
   font-size: 16px;
   transition-duration: 0.4s;
-}
-
-.clearpopupButtons:hover {
-  background-color: #d80000; /* Red */
-  color: white;
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
+.clearpopupButtons:hover {
+  background-color: rgba(15, 66, 0, 0.81); /* Darker Green */
+  color: white;
+}
+
 .cancelpopupButtons {
-  background-color: #000000; /* Black */
+  background-color: rgba(251, 87, 87, .81); /* Red */
   border: 1px;
   color: white;
   padding: 10px 20px;
@@ -286,9 +306,9 @@ body {
   font-size: 16px;
   transition-duration: 0.4s;
   margin-left: 15px;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 .cancelpopupButtons:hover {
-  background-color: #272727; /* Red */
+  background-color: rgba(151, 54, 54, 0.81); /* Darker Red */
   color: white;
-  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
