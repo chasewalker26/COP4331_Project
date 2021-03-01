@@ -2,8 +2,23 @@
 import sys
 import requests
 import json
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import db
 
-api_key = "1B187D1406FF56216D9D01B71C6B40B7" #https://upcdatabase.org/
+#https://upcdatabase.org/
+api_key = "1B187D1406FF56216D9D01B71C6B40B7" 
+
+# Fetch the service account key JSON file contents
+cred = credentials.Certificate('cop4331-project-firebase-adminsdk-2948i-5a2926eb2e.json')
+
+# Initialize the app with a service account, granting admin privileges
+firebase_admin.initialize_app(cred, {
+    'databaseURL': 'https://cop4331-project-default-rtdb.firebaseio.com/'
+})
+
+# As an admin, the app has access to read and write all data, regradless of Security Rules
+# ref = db.reference('/ProductList/ListID/')
 
 def barcode_reader():
     """Barcode code obtained from 'brechmos' 
@@ -66,25 +81,41 @@ def barcode_reader():
     return ss
 
 def UPC_lookup(api_key,upc):
-    '''V3 API'''
 
     url = "https://api.upcdatabase.org/product/%s?apikey=%s" % (upc, api_key)
-    print(url)
     headers = {
         'cache-control': "no-cache",
     }
 
     response = requests.request("GET", url, headers=headers)
 
-    print("-----" * 5)
-    print(upc)
-    print(json.dumps(response.json(), indent=2))
-    print("-----" * 5 + "\n")
+    responseJson = response.json()
 
-    return url
+    if(responseJson['success'] == True):
+        link = "/ProductList/ListID/%s" % (upc)
+        ref = db.reference(link)
+        json = ref.get()
+        if(json == None):
+            ref.update({
+                "count" : 0,
+                "dayRemoved" : -1,
+                "idealCount" : 0,
+                "name" : responseJson['title'],
+                "warningDay" : -1
+            })
+        else:
+            tempCount = json['count'] - 1
+            ref.update({
+                "count" : tempCount,
+                "dayRemoved" : -1,
+                "idealCount" : 6,
+                "name" : responseJson['title'],
+                "warningDay" : -1
+            })
 
 if __name__ == '__main__':
     try:
+        #UPC_lookup(api_key,"619659161347")
         while True:
             UPC_lookup(api_key,barcode_reader())
     except KeyboardInterrupt:
