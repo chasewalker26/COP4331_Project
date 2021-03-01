@@ -297,6 +297,7 @@ body {
 .clearpopupButtons:hover {
   background-color: rgba(15, 66, 0, 0.81); /* Darker Green */
   color: white;
+  cursor: pointer;
 }
 
 .cancelpopupButtons {
@@ -315,4 +316,5 @@ body {
 .cancelpopupButtons:hover {
   background-color: rgba(151, 54, 54, 0.81); /* Darker Red */
   color: white;
+  cursor: pointer;
 }

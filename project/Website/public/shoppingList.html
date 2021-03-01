@@ -27,13 +27,24 @@
     </div>
     <span class="material-icons md-36 navlines mx-3" style="color: #ffffff; cursor:pointer" id="navOpen" onclick="openNav()">menu</span>
   </nav>
- 
+
   
+  <!--shopping list header-->
   <div class="text-left">
     <h1 class="title mt-3 mx-3">Name's Shopping List</h1>
-    <button class="btn btn-success" id="popup-button" onclick="return togglePopup()">Add item</button>
-    <div class= "clearbutton" onclick="confirmClearAlert()">CLEAR</div>
+
+    <!--Add item-->
+    <button class="addbutton" id="popup-button" onclick="return togglePopup()">ADD</button>
+
+    <!-- Trigger the modal with a button -->
+    <button type="button" class="clearbutton" data-toggle="modal" data-target="#myModal">CLEAR</button>
+    
   </div>
+
+  <div class="text-left">
+    <h5 class="title mx-5 redWarning" id="errorMessage"></h5>
+  </div>
+
 
   <div class="row">
     <div class="col-6">
@@ -41,10 +52,6 @@
         </ul>
     </div>
   </div>
-
-  <!-- <div class="text-left">
-    <h5 class="title mx-5 redWarning" id="errorMessage"></h5>
-  </div> -->
 
 
 
@@ -114,23 +121,14 @@
   <script src="js/Product.js"></script>
   <script src="js/List.js"></script>
   <script src="js/ShoppingList.js"></script>
-  <script src="js/ShoppingListTest.js"></script>
-
   <!-- <script src="js/ShoppingListTest.js"></script> -->
+
+  <script src="js/ShoppingListTest.js"></script>
   <script src="js/LoginFormTest.js"></script>
 
 
 
   <script>
-    // window.onload = async function()
-    // {
-    //   let shoppingList = new ShoppingList("ListID");
-    //   await shoppingList.getProducts();
-
-    //   shoppingList.formatList();
-    // }
-    // shoppingList.formatList();
-
     $("#addItem-button").on("click", async function(e){
       e.preventDefault()
       let shoppingList = new ShoppingList("ListID");
@@ -147,6 +145,8 @@
       document.getElementById("add-form").reset();
 
       togglePopup();
+
+      shoppingList.formatList();
     });
 
     function checkAddItemInput()

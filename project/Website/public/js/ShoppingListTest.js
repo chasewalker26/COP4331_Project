@@ -39,11 +39,11 @@ async function runTests()
     await getProductsWithExistingListID_TEST();
     await getProductsWithBadListID_TEST();
     await updateDatabaseTest();
-    await addProductTest();
     await formatListFunctionalTest();
     await formatListVisualTest();
     await clearListTest();
     await formatProductsJSONTest();
+    // await addProductTest();
 }
 
 function sidenavTest()
