@@ -260,7 +260,7 @@ body {
 }
 
 .clearpopupButtons {
-  background-color: #ff0000; /* Red */
+  background-color:rgba(31, 133, 0, .81); /* Green */
   border: 1px;
   color: white;
   padding: 10px 20px;
@@ -271,13 +271,13 @@ body {
 }
 
 .clearpopupButtons:hover {
-  background-color: #d80000; /* Red */
+  background-color: rgba(15, 66, 0, 0.81); /* Darker Green */
   color: white;
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
 .cancelpopupButtons {
-  background-color: #000000; /* Black */
+  background-color: rgba(251, 87, 87, .81); /* Red */
   border: 1px;
   color: white;
   padding: 10px 20px;
@@ -288,7 +288,7 @@ body {
   margin-left: 15px;
 }
 .cancelpopupButtons:hover {
-  background-color: #272727; /* Red */
+  background-color: rgba(151, 54, 54, 0.81); /* Darker Red */
   color: white;
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
