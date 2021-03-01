@@ -114,14 +114,23 @@
   <script src="js/Product.js"></script>
   <script src="js/List.js"></script>
   <script src="js/ShoppingList.js"></script>
-  <!-- <script src="js/ShoppingListTest.js"></script> -->
-
   <script src="js/ShoppingListTest.js"></script>
+
+  <!-- <script src="js/ShoppingListTest.js"></script> -->
   <script src="js/LoginFormTest.js"></script>
 
 
 
   <script>
+    // window.onload = async function()
+    // {
+    //   let shoppingList = new ShoppingList("ListID");
+    //   await shoppingList.getProducts();
+
+    //   shoppingList.formatList();
+    // }
+    // shoppingList.formatList();
+
     $("#addItem-button").on("click", async function(e){
       e.preventDefault()
       let shoppingList = new ShoppingList("ListID");
@@ -138,8 +147,6 @@
       document.getElementById("add-form").reset();
 
       togglePopup();
-
-      shoppingList.formatList();
     });
 
     function checkAddItemInput()
