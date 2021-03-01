@@ -74,14 +74,20 @@ All team members worked together in this sprint to create the user stories in th
 
 
 # Sprint 4
-
-- Omer Gul - I completed the user story "As a busy person, I want to see what I scanned on the website within a minute of scanning it, so that it can be there in a reasonable amount of time" U018.
-
-- Everyone worked on cleaning up sprint 2's errors.
-
+- [Trello Board](https://trello.com/b/Af6rjxIc/cop4331)
+- [Burndown Chart](https://docs.google.com/spreadsheets/d/183Dg6Bm59MUCFB1R2GCbdrus6IbwDEImLzfAo2zPLKg/edit#gid=966599862)
+- [Velocity Chart](https://docs.google.com/spreadsheets/d/1IDBxwgaPQL3OXrfwmEl2Y9RwI4CI29koruPL0Dz6inc/edit?usp=sharing)
+- [System Architecture](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/architecture.md)
+- [Source Code](https://github.com/chasewalker26/COP4331_Project/tree/main/project/)
+- [Test Code (Site)](https://github.com/chasewalker26/COP4331_Project/tree/main/project/Website/public/js)
+- [Test Code (Scanner)](https://github.com/chasewalker26/COP4331_Project/tree/main/project/RaspberryPi)
+- [Product Demonstration]()
+ 
 
 ## Task Allocation
+- Chase Walker - I completed the user story "As a shopper, I would like my inventory of items to hold all items that have been removed from my shopping list or manually added, so that I can choose to get something that I wish I had more of at the store" U006
 
+- Omer Gul - I completed the user story "As a busy person, I want to see what I scanned on the website within a minute of scanning it, so that it can be there in a reasonable amount of time" U018.
 
 
 # Sprint 5
