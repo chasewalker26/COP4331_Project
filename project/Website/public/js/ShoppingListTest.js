@@ -32,7 +32,6 @@ function initializeAppUser()
 
 async function runTests()
 {
-    // addProductTest();
     sidenavTest();
     ListTest();
     ProductTest();
@@ -43,6 +42,7 @@ async function runTests()
     await formatListVisualTest();
     await clearListTest();
     await formatProductsJSONTest();
+    addProductTest();
 }
 
 function sidenavTest()
@@ -53,21 +53,6 @@ function sidenavTest()
 
     document.getElementById("navClose").click();
     console.assert(sidenav.style.width == "0px", "sidenavTest FAILED");
-}
-
-// In ShoppingList.js
-async function addProductTest()
-{
-    let shoppingList = new ShoppingList("ListID");
-      await shoppingList.getProducts();
-    
-    shoppingList.addItem();
-
-    var list = new List("ListID");
-    let prodName = document.getElementById('prodName').value;
-    let prodQuantity = document.getElementById('prodQuantity').value;
-
-
 }
 
 // in Test.js
@@ -191,7 +176,7 @@ async function formatListFunctionalTest()
 
     shoppingList.formatList();
 
-    var expectedElements = '<li class="listProduct" id="Barcode3" name="shoppingListItem">name: 1</li>';
+    var expectedElements = '<li class="listProduct" id="Barcode3" name="shoppingListItem">name: 3</li>';
 
     var siteShoppingListElements = document.getElementById("shoppingList").children;
     var actualElements = "";
@@ -265,4 +250,35 @@ async function formatProductsJSONTest()
         data = true;
     
     console.assert(data == true, "formatProductsJSONTest FAILED");
+}
+
+// In ShoppingList.js
+async function addProductTest()
+{
+    var data = false;
+    let shoppingList = new ShoppingList("ListID_TEST");
+
+    await shoppingList.getProducts();
+
+    document.getElementById("prodName").value = "Banana Ice Cream";
+    document.getElementById("prodQuantity").value = 2;
+    document.getElementById("addItem-button").click();
+
+    var expectedProduct =
+    {
+        "barcode" : "Banana Ice Cream",
+        "count" : 2,
+        "idealCount": 10,
+        "name" : "Banana Ice Cream",
+        "dayRemoved": -1,
+        "warningDay":  -1 
+    }
+
+    var actualProduct = await pullFromFirebase("ProductList/ListID/Banana Ice Cream");
+    
+    console.assert(JSON.stringify(expectedProduct.count) == actualProduct.count, "addProductTest FAILED");
+    console.assert(JSON.stringify(expectedProduct.idealCount) == actualProduct.idealCount, "addProductTest FAILED");
+    console.assert(JSON.stringify(expectedProduct.name) == JSON.stringify(actualProduct.name), "addProductTest FAILED");
+    console.assert(JSON.stringify(expectedProduct.dayRemoved) == actualProduct.dayRemoved, "addProductTest FAILED");
+    console.assert(JSON.stringify(expectedProduct.warningDay) == actualProduct.warningDay, "addProductTest FAILED");
 }

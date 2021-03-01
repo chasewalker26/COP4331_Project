@@ -74,7 +74,7 @@ class ShoppingList extends List {
 
     document.getElementById("add-form").reset();
     // return togglePopup();
-    console.log(JSONProducts);
+    // console.log(JSONProducts);
 
     this.updateDatabase(JSONProducts);
   }
