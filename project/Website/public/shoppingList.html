@@ -69,20 +69,20 @@
 
 <!-- Modal for clearing-->
 <div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-centered">
 
     <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="clearPopupText">You are about to clear the entire list, do you want to continue?</h4>
-      </div>
-      <div class="modal-footer">
-
-        <p class = "tpbutton btn-toolbar text-center">
-          <a class="cancelpopupButtons" data-dismiss="modal">CANCEL</a>
-          &nbsp;
-          <a class ="clearpopupButtons" onclick= "return clearListAlert()" data-dismiss="modal">CONTINUE</a>
-        </p>
+    <div class="modal-content p-5">
+        <div class="row mb-5">
+          <h3 class="col-12 title text-center">You are about to clear the entire list, do you want to continue?</h3>
+        </div>
+        <div class="row mt-5">
+          <div class="col-6 text-center">
+            <a class="cancelpopupButtons" data-dismiss="modal">CANCEL</a>
+          </div>
+          <div class="col-6 text-center">
+            <a class="clearpopupButtons" onclick= "return clearListAlert()" data-dismiss="modal">CONTINUE</a>
+          </div>
       </div>
     </div>
 
