@@ -10,26 +10,6 @@ if (isTesting == true)
     }
 }
 
-// Uses firebase function to verify firebase user status
-async function redirectIfNotFirebaseUser()
-{
-    await firebase.auth().onAuthStateChanged(function(user)
-    {
-        if (user)
-            initializeAppUser();
-        else
-            window.location.replace("LoginForm.html");
-    });
-}
-
-// Uses data from firebase function to create a User
-function initializeAppUser()
-{
-    var user = firebase.auth().currentUser;
-    appUser = new User(user.displayName, user.email, user.uid);
-    console.log(appUser);
-}
-
 async function runTests()
 {
     sidenavTest();
@@ -42,7 +22,7 @@ async function runTests()
     await formatListVisualTest();
     await clearListTest();
     await formatProductsJSONTest();
-    // await addProductTest();
+    await addProductTest();
 }
 
 function sidenavTest()
@@ -224,13 +204,18 @@ async function clearListTest()
 
     var product = await pullFromFirebase("ProductList/ListID_TEST/Barcode3/")
 
-    if (product.count == 6)
+    var siteListElements = document.getElementsByClassName("listProduct");
+    var listEmpty = (siteListElements[0] == undefined);
+
+    if (product.count == 6 && listEmpty)
         data = true;
 
     console.assert(data == true, "clearListTest FAILED");
 
-    // repair the clear operation
+    // repair the clear operation (fix data, get fixed data, display data)
     await saveToFirebase("ProductList/ListID_TEST/Barcode3/", {count:3});
+    await shoppingList.getProducts();
+    shoppingList.formatList();
 }
 
 async function formatProductsJSONTest()
@@ -252,14 +237,10 @@ async function formatProductsJSONTest()
 // In ShoppingList.js
 async function addProductTest()
 {
-    console.log("addProdTest");
-    var data = false;
-    let shoppingList = new ShoppingList("ListID_TEST");
-
+    let shoppingList = new ShoppingList("ListID");
     await shoppingList.getProducts();
 
     document.getElementById("popup-button").click();
-
     document.getElementById("prodName").value = "Banana Ice Cream";
     document.getElementById("prodQuantity").value = 2;
     document.getElementById("addItem-button").click();

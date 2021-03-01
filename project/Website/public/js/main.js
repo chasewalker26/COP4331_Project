@@ -1,13 +1,13 @@
 // ALWAYS set false when not testing
 var isTesting = true;
-
 var appUser;
 
 if (isTesting == false)
 {
     window.onload = async function()
-    {  
+    {
         var page = window.location.pathname;
+
         if (page == "/shoppingList.html" || page == "/inventory.html")
         {
             await redirectIfNotFirebaseUser();
@@ -18,19 +18,19 @@ if (isTesting == false)
 // Uses firebase function to verify firebase user status
 async function redirectIfNotFirebaseUser()
 {
-    await firebase.auth().onAuthStateChanged(function(user)
+    await firebase.auth().onAuthStateChanged(async function(user)
     {
         if (user)
-            initializeAppUser();
+            await initializeAppUser();
         else
             window.location.replace("LoginForm.html");
     });
 }
 
 // Uses data from firebase function to create a User
-function initializeAppUser()
+async function initializeAppUser()
 {
-    var user = firebase.auth().currentUser;
+    var user = await firebase.auth().currentUser;
     appUser = new User(user.displayName, user.email, user.uid);
     console.log(appUser);
 }

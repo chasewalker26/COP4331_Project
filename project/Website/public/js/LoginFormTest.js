@@ -3,7 +3,7 @@ if (isTesting == true)
 {
     // window.onload = function()
     // {
-        // signOutTest();
+    //     signOutTest();
     // }
 }
 
@@ -16,6 +16,6 @@ async function signOutTest(){
     if (user)
         console.log("singed in");
     else
-        console.log("not signed in");        
+        console.log("not signed in");
 
 }

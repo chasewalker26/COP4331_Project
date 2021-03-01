@@ -1,11 +1,3 @@
-
-// Open-close popup
-function togglePopup() {
-  document.getElementById("popup-1").classList.toggle("active");
-  document.getElementById("add-form").reset();
-  console.log("popup open/close")
-}
-
 class ShoppingList extends List {
   constructor(listID) {
     super(listID);
@@ -50,16 +42,17 @@ class ShoppingList extends List {
     var JSONProducts = this.formatProductsJSON();
     this.updateDatabase(JSONProducts);
 
+    $("#shoppingList").html("");
+
   }
 
   async addItem() 
   {
-    console.log("lol");
     let prodName = document.getElementById('prodName').value;
     let prodQuantity = document.getElementById('prodQuantity').value;
 
     let product = new Product(prodName, {
-      "count" : prodQuantity,
+      "count" : parseInt(prodQuantity),
       "idealCount": 10,
       "name" : prodName,
       "dayRemoved": -1,
@@ -69,12 +62,6 @@ class ShoppingList extends List {
     this.products.push(product);
 
     var JSONProducts = this.formatProductsJSON();
-
-    // this.updateDatabase(JSONProducts);
-
-    // document.getElementById("add-form").reset();
-    // return togglePopup();
-    // console.log(JSONProducts);
 
     this.updateDatabase(JSONProducts);
   }

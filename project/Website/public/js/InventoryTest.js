@@ -10,26 +10,6 @@ if (isTesting == true)
     }
 }
 
-// Uses firebase function to verify firebase user status
-async function redirectIfNotFirebaseUser()
-{
-    await firebase.auth().onAuthStateChanged(function(user)
-    {
-        if (user)
-            initializeAppUser();
-        else
-            window.location.replace("LoginForm.html");
-    });
-}
-
-// Uses data from firebase function to create a User
-function initializeAppUser()
-{
-    var user = firebase.auth().currentUser;
-    appUser = new User(user.displayName, user.email, user.uid);
-    console.log(appUser);
-}
-
 function runTests()
 {
     formatListFunctionalTest();
