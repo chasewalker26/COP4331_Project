@@ -89,6 +89,8 @@ All team members worked together in this sprint to create the user stories in th
 
 - Omer Gul - I completed the user story "As a busy person, I want to see what I scanned on the website within a minute of scanning it, so that it can be there in a reasonable amount of time" U018.
 
+- Anjali Ramsahai - I completed the user story "As a shopper I want to be able to clear all the items from my shopping list and have those items added to my inventory, so that I can know what I have left to purchase, and what I have after I have finished" U016
+
 
 # Sprint 5
 
