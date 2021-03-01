@@ -5,7 +5,6 @@ if (isTesting == true)
 {
     window.onload = async function()
     {
-        console.log("LOL");
         await redirectIfNotFirebaseUser(); // runtime function to ensure a user is signed in
         runTests();
     }
@@ -36,8 +35,8 @@ async function runTests()
     sidenavTest();
     ListTest();
     ProductTest();
-    await getProductsWithExistingListID_TEST();
-    await getProductsWithBadListID_TEST();
+    await getProductsWithExistingListIDTest();
+    await getProductsWithBadListIDTest();
     await updateDatabaseTest();
     await formatListFunctionalTest();
     await formatListVisualTest();
@@ -101,7 +100,7 @@ function ProductTest(){
 }
 
 // in Test.js
-async function getProductsWithExistingListID_TEST()
+async function getProductsWithExistingListIDTest()
 {
     let list = new List("ListID_TEST");
     var data = false;
@@ -125,7 +124,7 @@ async function getProductsWithExistingListID_TEST()
 }
 
 // in Test.js
-async function getProductsWithBadListID_TEST()
+async function getProductsWithBadListIDTest()
 {
     let list = new List("listylisty");
     var data = false;
