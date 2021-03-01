@@ -29,7 +29,7 @@ class ShoppingList extends List {
 
     document.getElementById("shoppingList").innerHTML = html;
   }
-
+ 
   
   clearList()
   {
