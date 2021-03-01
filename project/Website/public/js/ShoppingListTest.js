@@ -191,17 +191,14 @@ async function formatListFunctionalTest()
 
     shoppingList.formatList();
 
-    var expectedElements = '<li class="listProduct" id="Barcode3" name="shoppingListItem">name: 1</li>';
+    var expectedElements = '<li class="listProduct" id="Barcode3" name="shoppingListItem">name: 3</li>';
 
     var siteShoppingListElements = document.getElementById("shoppingList").children;
     var actualElements = "";
 
     for (var i = 0; i < siteShoppingListElements.length; i++)
         actualElements += siteShoppingListElements[i].outerHTML;
-
-    console.log("TEST:")
-    console.log(expectedElements)
-    console.log(actualElements)
+        
     console.assert(expectedElements == actualElements, "ShoppingList.formatListFunctionalTest() FAILED");
 }
 
