@@ -38,11 +38,11 @@ async function runTests()
     await getProductsWithExistingListID_TEST();
     await getProductsWithBadListID_TEST();
     await updateDatabaseTest();
+    addProductTest();
     await formatListFunctionalTest();
     await formatListVisualTest();
     await clearListTest();
     await formatProductsJSONTest();
-    addProductTest();
 }
 
 function sidenavTest()
@@ -256,6 +256,8 @@ async function addProductTest()
     let shoppingList = new ShoppingList("ListID_TEST");
 
     await shoppingList.getProducts();
+
+    document.getElementById("popup-button").click();
 
     document.getElementById("prodName").value = "Banana Ice Cream";
     document.getElementById("prodQuantity").value = 2;
