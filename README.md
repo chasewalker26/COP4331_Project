@@ -81,13 +81,19 @@ All team members worked together in this sprint to create the user stories in th
 - [Source Code](https://github.com/chasewalker26/COP4331_Project/tree/main/project/)
 - [Test Code (Site)](https://github.com/chasewalker26/COP4331_Project/tree/main/project/Website/public/js)
 - [Test Code (Scanner)](https://github.com/chasewalker26/COP4331_Project/tree/main/project/RaspberryPi)
-- [Product Demonstration]()
+- [Product Demonstration](https://www.youtube.com/watch?v=iGXcgTO90sk)
  
 
 ## Task Allocation
 - Chase Walker - I completed the user story "As a shopper, I would like my inventory of items to hold all items that have been removed from my shopping list or manually added, so that I can choose to get something that I wish I had more of at the store" U006
 
 - Omer Gul - I completed the user story "As a busy person, I want to see what I scanned on the website within a minute of scanning it, so that it can be there in a reasonable amount of time" U018.
+
+- Anjali Ramsahai - I completed the user story "As a shopper I want to be able to clear all the items from my shopping list and have those items added to my inventory, so that I can know what I have left to purchase, and what I have after I have finished" U016
+
+- Christopher Gray - I completed the user story "As a user, I want to be able to sign out of my private list and inventory, so that nobody but me can access it" U005.
+
+- Alisher Sultangazin - I attemted but did not finish the user story "As a shopper, I would like to be able to add an item to my shopping list with a count and name" U009.
 
 
 # Sprint 5
