@@ -1,6 +1,8 @@
 // ALWAYS set false when not testing
 var isTesting = true;
 var appUser;
+var account;
+
 
 if (isTesting == false)
 {
