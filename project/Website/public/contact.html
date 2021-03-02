@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- RESET DEFAULT CSS -->
+    <link rel="stylesheet" href="css/styles.css?asdf">
+    <!-- BOOTSTRAP CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <!-- GOOGLE MATERIAL ICONS-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <title>Simple List Scanner</title>
+</head>
+
+<body>
+    <!--nav bar-->
+    <nav class="navbar navbar-dark">
+        <!-- Navbar content -->
+        <a class="navbar-brand mx-3" href="LoginForm.html">SimpleList</a>
+        
+        <div id="sidenav" class="sidenav">
+            <span class="material-icons md-36 closebtn m-3" onclick="closeNav()" id="navClose">close</span>
+            <a class="navbar-brand navlink" href="inventory.html" id="inventoryLink">Inventory List</a>
+            <a class="navbar-brand navlink" href="shoppingList.html" id="shoppingListLink">Shopping List</a>
+            <a class="navbar-brand navlink" href="Contact.html" id="contactLink">Contact</a>
+            <a class="navbar-brand navlink redWarning" id="signOut">Signout</a>
+        </div>
+        <span class="material-icons md-36 navlines mx-3" style="color: #ffffff; cursor:pointer" id="navOpen" onclick="openNav()">menu</span>
+    </nav>
+
+    <div class="row justify-content-center text-center" style="margin:20px">
+        <div class="col-lg-6" id="home">
+            
+        </div>
+    </div>
+    <div class="text-left">
+        <!-- <h1 class="title mt-3 mx-3" style="color:#781919">Contact Page</h1> -->
+        <section class="contact-us">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-8">
+                  <h3>Send us a message</h3>
+                  <hr>
+                  <p>Our friendly customer service representatives are committed to answering all of your questions and meeting any requirement that you may have. We are excited to hear from you! Please fill out the form below so that we may assist you with additional information.</p>
+                  <br />
+                  <p id="feedback"></p>
+                  <form role="form" id="contact-form" name="contact-form" method="post" action="" class="contact-form">
+                    <div class="form-group col-md-6">
+                      <label class="sr-only" for="exampleInputEmail1">Your Name: *</label>
+                      <input required type="text" class="form-control" id="name" name="name" placeholder="Your Name: *">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label class="sr-only" for="exampleInputEmail1">Email: *</label>
+                      <input required type="email" class="form-control" id="email" name="email" placeholder="Email: *">
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group">
+                      <label class="sr-only" for="exampleInputEmail1">Subject:</label>
+                      <input type="text" class="form-control" id="subject" name="subject" placeholder="Subject:">
+                    </div>
+                    <div class="form-group">
+                      <textarea required class="form-control" id="message" name="message" rows="5" placeholder="Message: *"></textarea>
+                    </div>
+                    <input id="submit-button" type="submit" class="btn btn-lg btn-info" value="Submit">
+                  </form>
+                </div>
+              </div>
+            </div>
+          </section>
+        </section>
+      </div>
+
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <!-- BOOTSTRAP JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/8.2.5/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/8.2.5/firebase-auth.js"></script>
+    <script defer src="/__/firebase/8.2.5/firebase-database.js"></script>
+    <script defer src="/__/firebase/8.2.5/firebase-storage.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+
+    <!-- js file links -->
+    <script src="js/main.js"></script>
+    <script src="js/User.js"></script>
+    <script src="js/Product.js"></script>
+    <script src="js/List.js"></script>
+    <script src="js/Inventory.js"></script>
+    <script src="js/ShoppingList.js"></script>
+    
+    <script>
+    </script>
+</body>
+
+</html>
