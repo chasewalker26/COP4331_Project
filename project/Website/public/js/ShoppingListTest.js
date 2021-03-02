@@ -3,11 +3,11 @@
 // 
 if (isTesting == true)
 {
-    window.onload = async function()
-    {
-        await redirectIfNotFirebaseUser(); // runtime function to ensure a user is signed in
-        runTests();
-    }
+    // window.onload = async function()
+    // {
+    //     await redirectIfNotFirebaseUser(); // runtime function to ensure a user is signed in
+    //     runTests();
+    // }
 }
 
 async function runTests()
@@ -15,6 +15,7 @@ async function runTests()
     sidenavTest();
     ListTest();
     ProductTest();
+    UserTest();
     await getProductsWithExistingListIDTest();
     await getProductsWithBadListIDTest();
     await updateDatabaseTest();
@@ -77,6 +78,25 @@ function ProductTest(){
         data = true;
 
     console.assert(data == true, "ProductTest FAILED");
+}
+
+// in User.js
+function UserTest()
+{
+    var data = false;
+    var expectedUser = 
+    {
+        "username": "someName",
+        "email": "name@email.com",
+        "uid" : "1234asdf"
+    }
+
+    var user = new User("someName", "name@email.com", "1234asdf");
+
+    if (JSON.stringify(user) == JSON.stringify(expectedUser))
+        data = true;
+
+    console.assert(data == true, "UserTest FAILED");
 }
 
 // in Test.js
@@ -167,7 +187,7 @@ async function formatListFunctionalTest()
     console.assert(expectedElements == actualElements, "ShoppingList.formatListFunctionalTest() FAILED");
 }
 
-// in Inventory.js
+// in ShoppingList.js
 async function formatListVisualTest()
 {
     let shoppingList = new ShoppingList("ListID_TEST");
@@ -193,7 +213,7 @@ async function formatListVisualTest()
     }
 }
 
-// in Inventory.js
+// in ShoppingList.js
 async function clearListTest()
 {
     var data = false;
@@ -218,6 +238,7 @@ async function clearListTest()
     shoppingList.formatList();
 }
 
+// in ShoppingList.js
 async function formatProductsJSONTest()
 {
     let shoppingList = new ShoppingList("ListID_TEST");
