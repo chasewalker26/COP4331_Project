@@ -1,7 +1,7 @@
 class Account
 {
-    // Allows the user into site if they have an account
-    // This code was provided by google Firebase
+    // Allows the user into site if they are signed in
+    // (not tested since third-party function from Google)
     authorizeAccount()
     {
         firebase.auth().onAuthStateChanged(function(user)
@@ -11,12 +11,14 @@ class Account
         });
     }
 
-    // Sign the user in, or create an account
-    // This code was provided by google Firebase
+    // Signs in existing user, or creates thrir firebase account
+    // (not tested since third-party function from Google)
     signIn()
     {
         var provider = new firebase.auth.GoogleAuthProvider;
+
         provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+
         firebase.auth().signInWithPopup(provider).then((result) => 
         {
             console.log(result);
