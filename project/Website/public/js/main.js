@@ -15,7 +15,9 @@ if (isTesting == false)
     }
 }
 
-// Uses firebase function to verify firebase user status
+// Uses firebase function to verify firebase user status allows
+// signed in user to enter and creates a local user object, or 
+// sends them to login (not tested since third-party function from Google)
 async function redirectIfNotFirebaseUser()
 {
     await firebase.auth().onAuthStateChanged(async function(user)
@@ -27,7 +29,9 @@ async function redirectIfNotFirebaseUser()
     });
 }
 
-// Uses data from firebase function to create a User
+// Uses data from firebase function to create a User object
+// (not explicitly tested as User() is tested and other function
+// is a third-party function from Google)
 async function initializeAppUser()
 {
     var user = await firebase.auth().currentUser;
@@ -36,6 +40,7 @@ async function initializeAppUser()
 }
 
 // function that enables asynchronous fethcing of database data
+// (not tested since this is a third-party function from Google)
 pullFromFirebase = (datapath) => 
 {
     return new Promise((resolve) => 
@@ -49,6 +54,7 @@ pullFromFirebase = (datapath) =>
 }
 
 // function that enables asynchronous saving of data to databse
+// (not tested since this is a third-party function from Google)
 saveToFirebase = (datapath, data) =>
 {
     return new Promise((resolve) => 
