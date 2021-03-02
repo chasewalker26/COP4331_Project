@@ -320,3 +320,10 @@ body {
   color: white;
   cursor: pointer;
 }
+
+.contact label{
+  display:block;
+}
+.subBtn{
+  background-color: #049DAE;
+}
