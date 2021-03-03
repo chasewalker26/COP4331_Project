@@ -235,13 +235,14 @@ body {
   background-color: #00A8F9;
   border: 1px;
   color: white;
+  width: 80px;
   padding: 5px 10px;
   text-align: center;
   text-decoration: none;
   font-size: 20px;
   font-weight: bold;
-  position: fixed;
-  right: 130px;
+  /* position: fixed; */
+  /* right: 130px; */
   transition-duration: 0.4s;
   box-shadow: 0 3px 3px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 } 
@@ -255,13 +256,14 @@ body {
   background-color: rgba(251, 87, 87, .81); /* Red */
   border: 1px;
   color: white;
+  width: 80px;
   padding: 5px 10px;
   text-align: center;
   text-decoration: none;
   font-size: 20px;
   font-weight: bold;
-  position: fixed;
-  right: 240px;
+  /* position: fixed; */
+  /* right: 240px; */
   transition-duration: 0.4s;
   box-shadow: 0 3px 3px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
@@ -297,6 +299,7 @@ body {
 .clearpopupButtons:hover {
   background-color: rgba(15, 66, 0, 0.81); /* Darker Green */
   color: white;
+  cursor: pointer;
 }
 
 .cancelpopupButtons {
@@ -315,4 +318,15 @@ body {
 .cancelpopupButtons:hover {
   background-color: rgba(151, 54, 54, 0.81); /* Darker Red */
   color: white;
+  cursor: pointer;
+}
+
+/* submission alert */
+.sub-alert{
+  text-align: center;
+  padding: 10px;
+  background-color:#444444;
+  color:#fff;
+  margin-bottom: 10px;
+  display: none;
 }

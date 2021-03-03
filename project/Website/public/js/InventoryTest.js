@@ -10,26 +10,6 @@ if (isTesting == true)
     }
 }
 
-// Uses firebase function to verify firebase user status
-async function redirectIfNotFirebaseUser()
-{
-    await firebase.auth().onAuthStateChanged(function(user)
-    {
-        if (user)
-            initializeAppUser();
-        else
-            window.location.replace("LoginForm.html");
-    });
-}
-
-// Uses data from firebase function to create a User
-function initializeAppUser()
-{
-    var user = firebase.auth().currentUser;
-    appUser = new User(user.displayName, user.email, user.uid);
-    console.log(appUser);
-}
-
 function runTests()
 {
     formatListFunctionalTest();
@@ -51,15 +31,15 @@ async function sidenavTest()
 // in Inventory.js
 async function formatListFunctionalTest()
 {
-    let inventory = new Inventory("ListID");
+    let inventory = new Inventory("ListID_TEST");
 
     await inventory.getProducts();
 
     inventory.formatList();
 
     // change expectedElements
-    var expectedElements = '<li class="listProduct" id="Barcode0" name="inventoryItem" onclick="inventory.editItem()"><span class="material-icons mx-2">edit</span>name: 5</li>' + 
-                           '<li class="listProduct" id="Barcode1" name="inventoryItem" onclick="inventory.editItem()"><span class="material-icons mx-2">edit</span>name: 2</li>' +
+    var expectedElements = '<li class="listProduct" id="Barcode0" name="inventoryItem" onclick="inventory.editItem()"><span class="material-icons mx-2">edit</span>name: 6</li>' + 
+                           '<li class="listProduct" id="Barcode1" name="inventoryItem" onclick="inventory.editItem()"><span class="material-icons mx-2">edit</span>name: 8</li>' +
                            '<li class="listProduct" id="Barcode3" name="inventoryItem" onclick="inventory.editItem()"><span class="material-icons mx-2">edit</span>name: 3</li>';
 
     var siteInventoryElements = document.getElementById("inventory").children;
@@ -76,7 +56,7 @@ async function formatListFunctionalTest()
 // in Inventory.js
 async function formatListVisualTest()
 {
-    let inventory = new Inventory("ListID");
+    let inventory = new Inventory("ListID_TEST");
     await inventory.getProducts();
     inventory.formatList();
 

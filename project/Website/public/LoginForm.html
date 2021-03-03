@@ -54,15 +54,15 @@
     <script src="js/LoginFormTest.js"></script>
 
     <script>
-            var account;
-            window.onload = function() {
-                account = new Account();
-				account.authorizeAccount();
-			};
+        
+        window.onload = function() {
+            account = new Account();
+            account.authorizeAccount();
+        };
 
-			$("#submit").click(function(){
-				account.signIn();
-			});
+        $("#submit").click(function(){
+            account.signIn();
+        });
     </script>
 
 </body>

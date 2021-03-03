@@ -3,32 +3,11 @@
 // 
 if (isTesting == true)
 {
-    window.onload = async function()
-    {
-        console.log("LOL");
-        await redirectIfNotFirebaseUser(); // runtime function to ensure a user is signed in
-        runTests();
-    }
-}
-
-// Uses firebase function to verify firebase user status
-async function redirectIfNotFirebaseUser()
-{
-    await firebase.auth().onAuthStateChanged(function(user)
-    {
-        if (user)
-            initializeAppUser();
-        else
-            window.location.replace("LoginForm.html");
-    });
-}
-
-// Uses data from firebase function to create a User
-function initializeAppUser()
-{
-    var user = firebase.auth().currentUser;
-    appUser = new User(user.displayName, user.email, user.uid);
-    console.log(appUser);
+    // window.onload = async function()
+    // {
+    //     await redirectIfNotFirebaseUser(); // runtime function to ensure a user is signed in
+    //     runTests();
+    // }
 }
 
 async function runTests()
@@ -36,14 +15,15 @@ async function runTests()
     sidenavTest();
     ListTest();
     ProductTest();
-    await getProductsWithExistingListID_TEST();
-    await getProductsWithBadListID_TEST();
+    UserTest();
+    await getProductsWithExistingListIDTest();
+    await getProductsWithBadListIDTest();
     await updateDatabaseTest();
-    await addProductTest();
     await formatListFunctionalTest();
-    // await formatListVisualTest();
-    // await clearListTest();
-    // await formatProductsJSONTest();
+    await formatListVisualTest();
+    await clearListTest();
+    await formatProductsJSONTest();
+    await addProductTest();
 }
 
 function sidenavTest()
@@ -100,8 +80,27 @@ function ProductTest(){
     console.assert(data == true, "ProductTest FAILED");
 }
 
+// in User.js
+function UserTest()
+{
+    var data = false;
+    var expectedUser = 
+    {
+        "username": "someName",
+        "email": "name@email.com",
+        "uid" : "1234asdf"
+    }
+
+    var user = new User("someName", "name@email.com", "1234asdf");
+
+    if (JSON.stringify(user) == JSON.stringify(expectedUser))
+        data = true;
+
+    console.assert(data == true, "UserTest FAILED");
+}
+
 // in Test.js
-async function getProductsWithExistingListID_TEST()
+async function getProductsWithExistingListIDTest()
 {
     let list = new List("ListID_TEST");
     var data = false;
@@ -125,7 +124,7 @@ async function getProductsWithExistingListID_TEST()
 }
 
 // in Test.js
-async function getProductsWithBadListID_TEST()
+async function getProductsWithBadListIDTest()
 {
     let list = new List("listylisty");
     var data = false;
@@ -188,7 +187,7 @@ async function formatListFunctionalTest()
     console.assert(expectedElements == actualElements, "ShoppingList.formatListFunctionalTest() FAILED");
 }
 
-// in Inventory.js
+// in ShoppingList.js
 async function formatListVisualTest()
 {
     let shoppingList = new ShoppingList("ListID_TEST");
@@ -214,7 +213,7 @@ async function formatListVisualTest()
     }
 }
 
-// in Inventory.js
+// in ShoppingList.js
 async function clearListTest()
 {
     var data = false;
@@ -225,15 +224,21 @@ async function clearListTest()
 
     var product = await pullFromFirebase("ProductList/ListID_TEST/Barcode3/")
 
-    if (product.count == 6)
+    var siteListElements = document.getElementsByClassName("listProduct");
+    var listEmpty = (siteListElements[0] == undefined);
+
+    if (product.count == 6 && listEmpty)
         data = true;
 
     console.assert(data == true, "clearListTest FAILED");
 
-    // repair the clear operation
+    // repair the clear operation (fix data, get fixed data, display data)
     await saveToFirebase("ProductList/ListID_TEST/Barcode3/", {count:3});
+    await shoppingList.getProducts();
+    shoppingList.formatList();
 }
 
+// in ShoppingList.js
 async function formatProductsJSONTest()
 {
     let shoppingList = new ShoppingList("ListID_TEST");
@@ -260,7 +265,6 @@ async function addProductTest()
     await shoppingList.getProducts();
 
     document.getElementById("popup-button").click();
-
     document.getElementById("prodName").value = "Banana Ice Cream";
     document.getElementById("prodQuantity").value = 2;
     document.getElementById("addItem-button").click();

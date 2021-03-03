@@ -1,11 +1,3 @@
-
-// Open-close popup
-function togglePopup() {
-  document.getElementById("popup-1").classList.toggle("active");
-  document.getElementById("add-form").reset();
-  console.log("popup open/close")
-}
-
 class ShoppingList extends List {
   constructor(listID) {
     super(listID);
@@ -50,11 +42,12 @@ class ShoppingList extends List {
     var JSONProducts = this.formatProductsJSON();
     this.updateDatabase(JSONProducts);
 
+    $("#shoppingList").html("");
+
   }
 
   async addItem() 
   {
-    console.log("lol");
     let prodName = document.getElementById('prodName').value;
     let prodQuantity = document.getElementById('prodQuantity').value;
 

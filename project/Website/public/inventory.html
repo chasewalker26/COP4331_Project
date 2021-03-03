@@ -25,21 +25,27 @@
           <span class="material-icons md-36 closebtn m-3" onclick="closeNav()" id="navClose">close</span>
           <a class="navbar-brand navlink" href="inventory.html" id="inventoryLink">Inventory List</a>
           <a class="navbar-brand navlink" href="shoppingList.html" id="shoppingListLink">Shopping List</a>
+          <a class="navbar-brand navlink" href="Contact.html" id="contactLink">Contact</a>
           <a class="navbar-brand navlink redWarning" id="signOut">Signout</a>
       </div>
       <span class="material-icons md-36 navlines mx-3" style="color: #ffffff; cursor:pointer" id="navOpen" onclick="openNav()">menu</span>
     </nav>
-    <!--inventory title-->
-    <div class="text-left">
-      <h1 class="title mt-3 mx-3">Name's Inventory</h1>
+
+    <!--inventory header-->
+    <div class="row text-left">
+      <div class="col-lg-10 col-8">
+        <h1 class="title mt-3 mx-3">Name's Inventory</h1>
+      </div>
     </div>
   
-    <div class="text-left">
-      <h5 class="title mx-5 redWarning" id="errorMessage"></h5>
+    <div class="row text-left">
+      <div class="col-12">
+        <h5 class="title mx-5 redWarning" id="errorMessage"></h5>
+      </div>
     </div>
   
     <div class="row">
-      <div class="col-6">
+      <div class="col-12">
           <ul id="inventory">
           </ul>
       </div>
@@ -62,13 +68,13 @@
 
     <!-- js file links -->
     <script src="js/main.js"></script>
+    <script src="js/Account.js"></script>
     <script src="js/User.js"></script>
     <script src="js/Product.js"></script>
     <script src="js/List.js"></script>
     <script src="js/Inventory.js"></script>
     <script src="js/InventoryTest.js"></script>
 
-       
     <script>
     </script>
     
