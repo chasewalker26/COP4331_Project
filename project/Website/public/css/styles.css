@@ -321,9 +321,12 @@ body {
   cursor: pointer;
 }
 
-.contact label{
-  display:block;
-}
-.subBtn{
-  background-color: #049DAE;
+/* submission alert */
+.sub-alert{
+  text-align: center;
+  padding: 10px;
+  background-color:#444444;
+  color:#fff;
+  margin-bottom: 10px;
+  display: none;
 }
