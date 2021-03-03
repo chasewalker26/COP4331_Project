@@ -115,8 +115,6 @@
   <script src="js/List.js"></script>
   <script src="js/ShoppingList.js"></script>
   <script src="js/ShoppingListTest.js"></script>
-
-  <!-- <script src="js/ShoppingListTest.js"></script> -->
   <script src="js/LoginFormTest.js"></script>
 
 
@@ -130,7 +128,6 @@
     //   shoppingList.formatList();
     // }
     // shoppingList.formatList();
-
     $("#addItem-button").on("click", async function(e){
       e.preventDefault()
       let shoppingList = new ShoppingList("ListID");
@@ -145,6 +142,8 @@
       shoppingList.addItem();
 
       document.getElementById("add-form").reset();
+
+      shoppingList.formatList();
 
       togglePopup();
     });

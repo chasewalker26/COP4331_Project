@@ -58,24 +58,47 @@ class ShoppingList extends List {
     let prodName = document.getElementById('prodName').value;
     let prodQuantity = document.getElementById('prodQuantity').value;
 
-    let product = new Product(prodName, {
-      "count" : prodQuantity,
-      "idealCount": 10,
-      "name" : prodName,
-      "dayRemoved": -1,
-      "warningDay":  -1 
-    });
+    // If product doesn't exist
+    if ((this.isProductExists(prodName)) == false)
+    {
+      let product = new Product(prodName, {
+        "count" : prodQuantity,
+        "idealCount": 10,
+        "name" : prodName,
+        "dayRemoved": -1,
+        "warningDay":  -1 
+      });
+  
+      this.products.push(product);
+  
+      var JSONProducts = this.formatProductsJSON();
+  
+      // this.updateDatabase(JSONProducts);
+  
+      // document.getElementById("add-form").reset();
+      // return togglePopup();
+      // console.log(JSONProducts);
+  
+      this.updateDatabase(JSONProducts);
+    }
+    // If product exists
+    else
+    {
+      alert(prodName + " already exists in the database");
+    }
+  }
 
-    this.products.push(product);
-
-    var JSONProducts = this.formatProductsJSON();
-
-    // this.updateDatabase(JSONProducts);
-
-    // document.getElementById("add-form").reset();
-    // return togglePopup();
-    // console.log(JSONProducts);
-
-    this.updateDatabase(JSONProducts);
+  isProductExists(prodName)
+  {
+    var products = this.products;
+    for (var i = 0; i < products.length; i++)
+    {
+      if (products[i].name.toLowerCase().replace(/\s+/g, "") == prodName.toLowerCase().replace(/\s+/g, ""))
+      {
+        console.log("SUKA: " + prodName + " " + products[i].name);
+        return true;
+      }
+    }
+    return false;
   }
 }

@@ -41,9 +41,9 @@ async function runTests()
     await updateDatabaseTest();
     await addProductTest();
     await formatListFunctionalTest();
-    await formatListVisualTest();
-    await clearListTest();
-    await formatProductsJSONTest();
+    // await formatListVisualTest();
+    // await clearListTest();
+    // await formatProductsJSONTest();
 }
 
 function sidenavTest()
@@ -255,7 +255,7 @@ async function addProductTest()
 {
     console.log("addProdTest");
     var data = false;
-    let shoppingList = new ShoppingList("ListID_TEST");
+    let shoppingList = new ShoppingList("ListID");
 
     await shoppingList.getProducts();
 
@@ -277,6 +277,8 @@ async function addProductTest()
 
     var actualProduct = await pullFromFirebase("ProductList/ListID/Banana Ice Cream");
     
+    console.log("SUKAB: " + actualProduct.count);
+
     console.assert(JSON.stringify(expectedProduct.count) == actualProduct.count, "addProductTest FAILED");
     console.assert(JSON.stringify(expectedProduct.idealCount) == actualProduct.idealCount, "addProductTest FAILED");
     console.assert(JSON.stringify(expectedProduct.name) == JSON.stringify(actualProduct.name), "addProductTest FAILED");
