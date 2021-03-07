@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- RESET DEFAULT CSS -->
@@ -12,28 +11,22 @@
     <!-- GOOGLE MATERIAL ICONS-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <title>Simple List Scanner</title>
-</head>
+    <title>Login to SimpleList</title>
 
-<body>
+    <!-- <meta name="google-signin-client_id" content = "620770546311-80ve0rg4ovhnovspmvtucbbqvom6mlau.apps.googleusercontent.com"> -->
+    <script src="https://apis.google.com/js/platform.js" asynf defer></script>
+</head>
+<body class="bg-light-blue">
     <!--nav bar-->
     <nav class="navbar navbar-dark">
         <!-- Navbar content -->
-        <a class="navbar-brand mx-3" href="LoginForm.html">SimpleList</a>
-        
-        <div id="sidenav" class="sidenav">
-            <span class="material-icons md-36 closebtn m-3" onclick="closeNav()" id="navClose">close</span>
-            <a class="navbar-brand navlink" href="inventory.html" id="inventoryLink">Inventory List</a>
-            <a class="navbar-brand navlink" href="shoppingList.html" id="shoppingListLink">Shopping List</a>
-            <a class="navbar-brand navlink" href="Contact.html" id="contactLink">Contact</a>
-            <a class="navbar-brand navlink redWarning" id="signOut">Signout</a>
-        </div>
-        <span class="material-icons md-36 navlines mx-3" style="color: #ffffff; cursor:pointer" id="navOpen" onclick="openNav()">menu</span>
+        <a class="navbar-brand mx-3" href="index.html">SimpleList</a>
     </nav>
 
-    <div class="row justify-content-center text-center" style="margin:20px">
-        <div class="col-lg-6" id="home">
-            
+    <div class="row bg-light-blue justify-content-center" style="top:50%">
+        <div class="card info-card col-5 text-center m-5 p-5">
+            <div class="h1 my-5 dark-blue title">Welcome to the<br> SimpleList Scanner site!<br> Sign in or Sign up!</div>
+            <button class="col-5 gsigninbtn align-self-center p-3" id="submit"><img class="mx-2" src="img/google.jpg" width="30px"> Sign In with Google</button>
         </div>
     </div>
 
@@ -54,15 +47,22 @@
 
     <!-- js file links -->
     <script src="js/main.js"></script>
+    <script src="js/Account.js"></script>
     <script src="js/User.js"></script>
     <script src="js/Product.js"></script>
     <script src="js/List.js"></script>
-    <script src="js/Inventory.js"></script>
-    <script src="js/ShoppingList.js"></script>
-    <script src="js/Contact.js"></script>
-    
-    <script>
-    </script>
-</body>
 
+    <script>
+        
+        window.onload = function() {
+            account = new Account();
+            account.authorizeAccount();
+        };
+
+        $("#submit").click(function(){
+            account.signIn();
+        });
+    </script>
+
+</body>
 </html>

@@ -19,7 +19,7 @@
     <!--nav bar-->
     <nav class="navbar navbar-dark">
         <!-- Navbar content -->
-        <a class="navbar-brand mx-3" href="LoginForm.html">SimpleList</a>
+        <a class="navbar-brand mx-3" href="index.html">SimpleList</a>
         
         <div id="sidenav" class="sidenav">
             <span class="material-icons md-36 closebtn m-3" onclick="closeNav()" id="navClose">close</span>
@@ -31,28 +31,19 @@
         <span class="material-icons md-36 navlines mx-3" style="color: #ffffff; cursor:pointer" id="navOpen" onclick="openNav()">menu</span>
     </nav>
 
-    <div class="row justify-content-center text-center" style="margin:20px">
-        <div class="col-lg-6" id="home">
-            
+    <div class="row justify-content-center align-self-center">
+        <div class="card info-card col-7 m-5 p-5" style="box-shadow: 3px 3px 10px 5px rgba(0,0,0,0.24)">
+            <div class="h1 dark-blue title text-center">Have Questions?<br>Contact Us!</div>
+            <form id="contact-form" method="post">
+                <div class="form-group">
+                    <div class="sub-alert"> Your message has been sent </div>
+                    <label class="mx-2">Name</label>
+                    <textarea class="form-control" id="message" name="message" rows="10"></textarea>
+                  </div>
+            </form>
+            <input class="btn btn-lg btn-info my-3 col-3 align-self-center" id="submit" type="submit" style="background-color:#049DAE; color:#ffffff"  value="Submit">
         </div>
     </div>
-        <div class="text-left">
-            <h1 class="title mt-3 mx-3" style="color:#781919">Contact Page</h1>
-        </div>
-
-        <div class="row justify-content-center" style="top:50%">
-            <div class="card info-card col-5 text-center m-5 p-5" style="box-shadow: 0px 0px 10px 0px #000">
-                <p class = dark-blue style= font-size:35px >Have Questions? <br> Contact Us!</p> 
-                <form role="form" id="contact-form" name="contact-form" method="post" action="" class="contact-form">
-                    <div class="form-group contact-label">
-                        <div class="sub-alert"> Your message has been sent </div>
-                        <p style="text-align:left" >Message</p>
-                        <textarea required class="form-control" id="message" name="message" rows="5"></textarea>
-                    </div>
-                    <input id="submit" type="submit" style = "background-color:#049DAE; color:#ffffff" class="btn btn-lg btn-info" value="Submit">
-                  </form>
-            </div>
-        </div>
 
     <!-- JQUERY -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
