@@ -48,16 +48,18 @@ class ShoppingList extends List {
 
   async addItem() 
   {
-    let prodName = document.getElementById('prodName').value;
-    let prodQuantity = document.getElementById('prodQuantity').value;
+    var name = document.getElementById('addItemName').value;
+    var count = document.getElementById('addItemCount').value;
+    
+    if (this.validAddItemInput(name, count) == false)
+      return false;
 
-    // If product doesn't exist
-    if ((this.isProductExists(prodName)) == false)
+    if ((this.productExistsError(name)) == false)
     {
-      let product = new Product(prodName, {
-        "count" : prodQuantity,
-        "idealCount": 10,
-        "name" : prodName,
+      let product = new Product(name, {
+        "count" : 0,
+        "idealCount": parseInt(count),
+        "name" : name,
         "dayRemoved": -1,
         "warningDay":  -1 
       });
@@ -66,32 +68,53 @@ class ShoppingList extends List {
   
       var JSONProducts = this.formatProductsJSON();
   
-      // this.updateDatabase(JSONProducts);
-  
-      // document.getElementById("add-form").reset();
-      // return togglePopup();
-      // console.log(JSONProducts);
-  
-      this.updateDatabase(JSONProducts);
+      await this.updateDatabase(JSONProducts);
+
+      return true;
     }
-    // If product exists
+
+    return false;
+  }
+
+  validAddItemInput(name, count)
+  {
+    if (name.length == 0 || count == "")
+    {
+      $("#addItemAlert").html("Please check your input, empty name or count detected");
+
+      setTimeout(() =>
+      {
+        $("#addItemAlert").html("");
+      }, 2000);
+
+      return false;
+    }
     else
     {
-      alert(prodName + " already exists in the database");
+      return true;
     }
   }
 
-  isProductExists(prodName)
+  productExistsError(name)
   {
     var products = this.products;
+
     for (var i = 0; i < products.length; i++)
     {
-      if (products[i].name.toLowerCase().replace(/\s+/g, "") == prodName.toLowerCase().replace(/\s+/g, ""))
+      if (products[i].name.toLowerCase().replace(/\s+/g, "") == name.toLowerCase().replace(/\s+/g, ""))
       {
-        console.log("SUKA: " + prodName + " " + products[i].name);
+        $("#addItemAlert").html("This item already exists");
+
+        setTimeout(() =>
+        {
+          $("#addItemAlert").html("");
+        }, 2000);
+
         return true;
       }
     }
+
     return false;
   }
+
 }

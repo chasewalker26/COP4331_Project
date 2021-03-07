@@ -36,10 +36,10 @@
       <h1 class="title mt-3 mx-3">Name's Shopping List</h1>
     </div>
     <div class="col-lg-2 col-4">
-      <!-- Trigger the modal with a button -->
-      <button class="clearbutton m-3" type="button" data-toggle="modal" data-target="#myModal">CLEAR</button>
+      <!-- Clear list -->
+      <button class="clearbutton m-3" type="button" data-toggle="modal" data-target="#clearListModal">CLEAR</button>
       <!--Add item-->
-      <button class="addbutton m-3" id="popup-button" onclick="return togglePopup()">ADD</button>
+      <button class="addbutton m-3" type="button" data-toggle="modal" data-target="#addItemModal">ADD</button>
     </div>
     </div>
   </div>
@@ -57,47 +57,62 @@
     </div>
   </div>
 
-    <!-- Popup window -->
-    <div class="popup" id="popup-1">
-      <div class="overlay"></div>
-      <div class="content">
-        <div class="close-btn" onclick="return togglePopup()">&times;</div>
-        <h1>New item</h1>
-        <form id="add-form">
-          <div id="data">
-            Name:<input type="text" id="prodName" class="u-full-width" placeholder="Enter name">
-            <br>
-            Item Quantity:<input type="text" id="prodQuantity" class="u-full-width" placeholder="Enter quantity">
-            <button id="addItem-button">Add Item</button>
+  <!-- Modal for adding items-->
+  <div id="addItemModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+
+      <!-- Modal content-->
+      <div class="modal-content p-5">
+          <div class="row">
+            <h3 class="col-12 title text-center">Add an Item</h3>
           </div>
-        </form>
-      </div>
-    </div>
-
-<!-- Modal for clearing-->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-dialog-centered">
-
-    <!-- Modal content-->
-    <div class="modal-content p-5">
-        <div class="row mb-5">
-          <h3 class="col-12 title text-center">You are about to clear the entire list, do you want to continue?</h3>
+          <div class="row text-center">
+            <div class="redWarning" id="addItemAlert"></div>
+          </div>
+          <form class="row mt-3 mb-5" id="addItemForm">
+            <div class="form-group mb-3">
+              <label>Name</label>
+              <input class="form-control" id="addItemName">
+            </div>
+            <div class="form-group">
+              <label>Count</label>
+              <input class="form-control" id="addItemCount">
+            </div>
+          </form>
+          <div class="row">
+            <div class="col-6 text-center">
+              <a class="cancelpopupButtons" data-dismiss="modal">CANCEL</a>
+            </div>
+            <div class="col-6 text-center">
+              <a class="clearpopupButtons" onclick="return executeAddItem()">SAVE</a>
+            </div>
         </div>
-        <div class="row mt-5">
-          <div class="col-6 text-center">
-            <a class="cancelpopupButtons" data-dismiss="modal">CANCEL</a>
-          </div>
-          <div class="col-6 text-center">
-            <a class="clearpopupButtons" onclick= "return clearListAlert()" data-dismiss="modal">CONTINUE</a>
-          </div>
       </div>
+
     </div>
-
   </div>
-</div>
-  
 
+  <!-- Modal for clearing shopping list-->
+  <div id="clearListModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
 
+      <!-- Modal content-->
+      <div class="modal-content p-5">
+          <div class="row mb-5">
+            <h3 class="col-12 title text-center">You are about to clear the entire list, do you want to continue?</h3>
+          </div>
+          <div class="row mt-5">
+            <div class="col-6 text-center">
+              <a class="cancelpopupButtons" data-dismiss="modal">CANCEL</a>
+            </div>
+            <div class="col-6 text-center">
+              <a class="clearpopupButtons" onclick= "return executeClearList()" data-dismiss="modal">CONTINUE</a>
+            </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 
   <!-- JQUERY -->
   <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -123,60 +138,30 @@
   <script src="js/List.js"></script>
   <script src="js/ShoppingList.js"></script>
   <script src="js/ShoppingListTest.js"></script>
-  <script src="js/LoginFormTest.js"></script>
-
-
 
   <script>
-    $("#addItem-button").on("click", async function(e){
-      e.preventDefault();
-      let shoppingList = new ShoppingList("ListID");
-      await shoppingList.getProducts();
-
-      if (checkAddItemInput() == false)
-      {
-        alert("Enter the valid name");
-        return;
-      }
-
-      shoppingList.addItem();
-
-      document.getElementById("add-form").reset();
-
-      shoppingList.formatList();
-
-      togglePopup();
-
-      shoppingList.formatList();
-    });
-
-    // Open-close popup
-    function togglePopup() {
-      document.getElementById("popup-1").classList.toggle("active");
-      document.getElementById("add-form").reset();
-    }
-
-    function checkAddItemInput()
-    {
-      let prodName = document.getElementById('prodName').value;
-      let prodQuantity = document.getElementById('prodQuantity').value;
-
-      if (prodName.length == 0 || prodQuantity == "")
-      {
-        // If invalid name
-        return false;
-      }
-      else
-      {
-        // If valid
-        return true;
-      }
-    }
-
-    async function clearListAlert()
+    async function executeAddItem()
     {
       var shoppingList = new ShoppingList("ListID");
+      
       await shoppingList.getProducts();
+
+      if (await shoppingList.addItem())
+      {
+        document.getElementById("addItemForm").reset();
+
+        shoppingList.formatList();
+
+        $('#addItemModal').modal('hide');
+      }
+    }
+
+    async function executeClearList()
+    {
+      var shoppingList = new ShoppingList("ListID");
+      
+      await shoppingList.getProducts();
+
       shoppingList.clearList(); 
     }
   </script>

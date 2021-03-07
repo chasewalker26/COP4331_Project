@@ -23,9 +23,12 @@ async function runTests()
     await formatListVisualTest();
     await clearListTest();
     await formatProductsJSONTest();
-    await addProductTest();
+    await addItemSuccessTest();
+    await addItemItemExistsFailureTest();
+    await addItemBadInputFailureTest();
 }
 
+// sidenav resizes as expected when used
 function sidenavTest()
 {
     document.getElementById("navOpen").click();
@@ -36,7 +39,7 @@ function sidenavTest()
     console.assert(sidenav.style.width == "0px", "sidenavTest FAILED");
 }
 
-// in Test.js
+// // creating a List returns expected object
 function ListTest()
 {
     var data = false;
@@ -54,7 +57,7 @@ function ListTest()
     console.assert(data == true, "ListTest FAILED");
 }
 
-// in Product.js
+// // creating a Product returns expected object
 function ProductTest(){
     var data = false;
     var builtProduct = new Product("Barcode0", {
@@ -80,7 +83,7 @@ function ProductTest(){
     console.assert(data == true, "ProductTest FAILED");
 }
 
-// in User.js
+// creating a User returns expected object
 function UserTest()
 {
     var data = false;
@@ -99,7 +102,7 @@ function UserTest()
     console.assert(data == true, "UserTest FAILED");
 }
 
-// in Test.js
+// getProducts returns what is known to be in database
 async function getProductsWithExistingListIDTest()
 {
     let list = new List("ListID_TEST");
@@ -123,12 +126,11 @@ async function getProductsWithExistingListIDTest()
     console.assert(data == true, "getProductsTest FAILED");
 }
 
-// in Test.js
+// error message displayed from bad getProducts input should match the expected message
 async function getProductsWithBadListIDTest()
 {
-    let list = new List("listylisty");
     var data = false;
-
+    let list = new List("listylisty");
     await list.getProducts();
 
     if ($("#errorMessage").innerHTML = "There is no list associated with this account. Have you scanned any items?")
@@ -144,15 +146,15 @@ async function getProductsWithBadListIDTest()
     console.assert(data == true, "getProductsTest FAILED");
 }
 
-// in Test.js
+// updateDatabase causes change in database that is verified to be what was
+// expected
 async function updateDatabaseTest()
 {
-    var list = new List('ListID_TEST');
     var data = false;
-
+    var list = new List('ListID_TEST');
     list.products = await pullFromFirebase("ProductList/ListID_TEST/");
     
-    list.products["Barcode3"].count = 10; // data to change
+    list.products["Barcode3"].count = 10; // data to change in DB
 
     await list.updateDatabase(list.products);
 
@@ -167,13 +169,12 @@ async function updateDatabaseTest()
     await saveToFirebase("ProductList/ListID_TEST/Barcode3/", {count:3});
 }
 
-// in ShoppingList.js
+// shopping list items html elements and data should match as expected from UI
+// and known test data in DB;
 async function formatListFunctionalTest()
 {
     let shoppingList = new ShoppingList("ListID_TEST");
-
     await shoppingList.getProducts();
-
     shoppingList.formatList();
 
     var expectedElements = '<li class="listProduct" id="Barcode3" name="shoppingListItem">name: 3</li>';
@@ -187,7 +188,7 @@ async function formatListFunctionalTest()
     console.assert(expectedElements == actualElements, "ShoppingList.formatListFunctionalTest() FAILED");
 }
 
-// in ShoppingList.js
+// shopping list items should have correct styling as per UI diagrams
 async function formatListVisualTest()
 {
     let shoppingList = new ShoppingList("ListID_TEST");
@@ -213,13 +214,13 @@ async function formatListVisualTest()
     }
 }
 
-// in ShoppingList.js
+// clear list should leave the shopping list empty and correctly update databse
 async function clearListTest()
 {
     var data = false;
     let shoppingList = new ShoppingList("ListID_TEST");
-
     await shoppingList.getProducts();
+
     shoppingList.clearList();
 
     var product = await pullFromFirebase("ProductList/ListID_TEST/Barcode3/")
@@ -238,13 +239,12 @@ async function clearListTest()
     shoppingList.formatList();
 }
 
-// in ShoppingList.js
+// formatProducts... should create the correct format from the list's products array
 async function formatProductsJSONTest()
 {
+    var data = false;
     let shoppingList = new ShoppingList("ListID_TEST");
     await shoppingList.getProducts();
-
-    var data = false;
 
     var JSONproducts = shoppingList.formatProductsJSON();
     var dbProducts = await pullFromFirebase("ProductList/ListID_TEST/");
@@ -255,37 +255,74 @@ async function formatProductsJSONTest()
     console.assert(data == true, "formatProductsJSONTest FAILED");
 }
 
-// In ShoppingList.js
-async function addProductTest()
+// Successfully add a mango to the database
+async function addItemSuccessTest()
 {
-    console.log("addProdTest");
+    var data = false;
+    let shoppingList = new ShoppingList("ListID");
+    await shoppingList.getProducts();
+
+    document.getElementById("addItemName").value = "mango";
+    document.getElementById("addItemCount").value = 2;
+
+    await shoppingList.addItem();
+
+    var expectedProduct =
+    {
+        "count" : 0,
+        "dayRemoved": -1,
+        "idealCount": 2,
+        "name" : "mango",
+        "warningDay":  -1 
+    }
+
+    var actualProduct = await pullFromFirebase("ProductList/ListID/mango");
+    
+    if (JSON.stringify(actualProduct) == JSON.stringify(expectedProduct))
+        data = true;
+
+    console.assert(data == true, "addItemSuccessTest() FAILED");
+}
+
+// correct error message appears when item being added already exists
+async function addItemItemExistsFailureTest()
+{
     var data = false;
     let shoppingList = new ShoppingList("ListID");
 
     await shoppingList.getProducts();
 
-    document.getElementById("popup-button").click();
-    document.getElementById("prodName").value = "Banana Ice Cream";
-    document.getElementById("prodQuantity").value = 2;
-    document.getElementById("addItem-button").click();
+    document.getElementById("addItemName").value = "mango";
+    document.getElementById("addItemCount").value = "3";
 
-    var expectedProduct =
-    {
-        "barcode" : "Banana Ice Cream",
-        "count" : 2,
-        "idealCount": 10,
-        "name" : "Banana Ice Cream",
-        "dayRemoved": -1,
-        "warningDay":  -1 
-    }
+    await shoppingList.addItem();
 
-    var actualProduct = await pullFromFirebase("ProductList/ListID/Banana Ice Cream");
+    if ($("#addItemAlert")[0].innerHTML == "This item already exists")
+        data = true;
     
-    console.log("SUKAB: " + actualProduct.count);
+    console.assert(data == true, "addItemItemExistsFailureTest() FAILED");
+}
 
-    console.assert(JSON.stringify(expectedProduct.count) == actualProduct.count, "addProductTest FAILED");
-    console.assert(JSON.stringify(expectedProduct.idealCount) == actualProduct.idealCount, "addProductTest FAILED");
-    console.assert(JSON.stringify(expectedProduct.name) == JSON.stringify(actualProduct.name), "addProductTest FAILED");
-    console.assert(JSON.stringify(expectedProduct.dayRemoved) == actualProduct.dayRemoved, "addProductTest FAILED");
-    console.assert(JSON.stringify(expectedProduct.warningDay) == actualProduct.warningDay, "addProductTest FAILED");
+// correct error message appears when addItem has bad input
+async function addItemBadInputFailureTest()
+{
+    var data = false;
+    let shoppingList = new ShoppingList("ListID");
+
+    await shoppingList.getProducts();
+
+    document.getElementById("addItemName").value = "";
+    document.getElementById("addItemCount").value = "3";
+
+    await shoppingList.addItem();
+
+    if ($("#addItemAlert")[0].innerHTML == "Please check your input, empty name or count detected")
+        data = true;
+    
+    console.assert(data == true, "addItemItemExistsFailureTest() FAILED");
+
+    // remove mango from DB to clean up after addItem tests
+    var products = await pullFromFirebase("ProductList/ListID/");
+    products["mango"] = null; // data to change in DB
+    shoppingList.updateDatabase(products);
 }
