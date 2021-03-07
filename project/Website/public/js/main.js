@@ -27,7 +27,7 @@ async function redirectIfNotFirebaseUser()
         if (user)
             await initializeAppUser();
         else
-            window.location.replace("LoginForm.html");
+            window.location.replace("index.html");
     });
 }
 

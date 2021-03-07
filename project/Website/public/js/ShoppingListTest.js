@@ -282,6 +282,9 @@ async function addItemSuccessTest()
         data = true;
 
     console.assert(data == true, "addItemSuccessTest() FAILED");
+
+    // clean up
+    document.getElementById("addItemForm").reset();
 }
 
 // correct error message appears when item being added already exists
@@ -301,6 +304,9 @@ async function addItemItemExistsFailureTest()
         data = true;
     
     console.assert(data == true, "addItemItemExistsFailureTest() FAILED");
+
+    // clean up
+    document.getElementById("addItemForm").reset();
 }
 
 // correct error message appears when addItem has bad input
@@ -321,8 +327,10 @@ async function addItemBadInputFailureTest()
     
     console.assert(data == true, "addItemItemExistsFailureTest() FAILED");
 
-    // remove mango from DB to clean up after addItem tests
+    // clean up: remove mango from DB to clean up after addItem tests and reset form
     var products = await pullFromFirebase("ProductList/ListID/");
     products["mango"] = null; // data to change in DB
     shoppingList.updateDatabase(products);
+
+    document.getElementById("addItemForm").reset();
 }
