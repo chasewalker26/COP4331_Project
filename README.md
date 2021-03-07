@@ -97,10 +97,18 @@ All team members worked together in this sprint to create the user stories in th
 
 
 # Sprint 5
-
-
+- [Trello Board](https://trello.com/b/Af6rjxIc/cop4331)
+- [Burndown Chart](https://docs.google.com/spreadsheets/d/183Dg6Bm59MUCFB1R2GCbdrus6IbwDEImLzfAo2zPLKg/edit#gid=19689891)
+- [Velocity Chart](https://docs.google.com/spreadsheets/d/1IDBxwgaPQL3OXrfwmEl2Y9RwI4CI29koruPL0Dz6inc/edit?usp=sharing)
+- [System Architecture](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/architecture.md)
+- [Source Code](https://github.com/chasewalker26/COP4331_Project/tree/main/project/)
+- [Test Code (Site)](https://github.com/chasewalker26/COP4331_Project/tree/main/project/Website/public/js)
+- [Test Code (Scanner)](https://github.com/chasewalker26/COP4331_Project/tree/main/project/RaspberryPi)
+- [Product Demonstration]()
+ 
 
 ## Task Allocation
+- Chase Walker - I completed the user story "As a busy digital age shopper, I want to be auto-signed in if I am not signed out, to save time when accessing the site" U022
 
 
 
