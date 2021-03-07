@@ -109,6 +109,7 @@ All team members worked together in this sprint to create the user stories in th
 
 ## Task Allocation
 - Chase Walker - I completed the user story "As a busy digital age shopper, I want to be auto-signed in if I am not signed out, to save time when accessing the site" U022
+- Christopher Gray - "I completed the user story As a user, I want to be able to navigate to a contact page so I can contact the Dev." Team U024.
 
 
 
