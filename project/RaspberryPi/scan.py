@@ -82,15 +82,20 @@ def barcode_reader():
 
 def UPC_lookup(api_key,upc):
 
+	# get the details of the product from the API
     url = "https://api.upcdatabase.org/product/%s?apikey=%s" % (upc, api_key)
+
     headers = {
         'cache-control': "no-cache",
     }
 
+    # store the details of the product in response
     response = requests.request("GET", url, headers=headers)
 
+    # convert response to json
     responseJson = response.json()
 
+    # if the item is found in API
     if(responseJson['success'] == True):
         link = "/ProductList/ListID/%s" % (upc)
         ref = db.reference(link)
@@ -104,19 +109,52 @@ def UPC_lookup(api_key,upc):
                 "warningDay" : -1
             })
         else:
-            tempCount = json['count'] - 1
+            if (json['count'] > 0):
+                tempCount = json['count'] - 1
+                ref.update({
+                    "count" : tempCount,
+                    "name" : responseJson['title'],
+     	           })
+
+    # if the item is not found in API
+    else:
+    	# move down to the item's details
+        link = "/ProductList/ListID/%s" % (upc)
+        ref = db.reference(link)
+        json = ref.get()
+
+        # if item is never initialized before
+        if(json == None):
             ref.update({
-                "count" : tempCount,
+                "count" : 0,
                 "dayRemoved" : -1,
-                "idealCount" : 6,
-                "name" : responseJson['title'],
+                "idealCount" : 0,
+                "name" : "Product Not Found",
                 "warningDay" : -1
             })
+
+        # if item is initialized before
+        else:
+
+        	# if the name of the product is changed by the user,
+        	# do not initialize it to "Product Not Found"
+        	if (json['name'] == "Product Not Found"):
+	            if (json['count'] > 0):
+	                tempCount = json['count'] - 1
+	                ref.update({
+	                    "count" : tempCount,
+	                })
+	        else:
+	        	if (json['count'] > 0):
+	                tempCount = json['count'] - 1
+	                ref.update({
+	                    "count" : tempCount,
+	                })
 
 if __name__ == '__main__':
     try:
         #UPC_lookup(api_key,"619659161347")
         while True:
-            UPC_lookup(api_key,barcode_reader())
+            UPC_lookup(api_key, barcode_reader())
     except KeyboardInterrupt:
         pass
