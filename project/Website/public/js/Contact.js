@@ -1,5 +1,5 @@
 //event listener from submit
-class contact {
+class Contact {
     constructor(userEmail,message,devEmail) {
         this.userEmail = userEmail;
         this.message = message;
