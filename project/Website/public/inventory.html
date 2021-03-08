@@ -54,7 +54,6 @@
       <!-- Modal for adding name-->
   <div id="addNameModal" class="modal fade" role="dialog">
     <div class="modal-dialog modal-dialog-centered">
-
       <!-- Modal content-->
       <div class="modal-content p-5">
           <div class="row">
@@ -85,7 +84,50 @@
             </div>
         </div>
       </div>
+    </div>
+  </div>
+  
 
+  <!-- Modal for editing items-->
+  <div id="editItemModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered col-12">
+      <!-- Modal content-->
+      <div class="modal-content p-5">
+        <div class="row">
+          <h3 class="col-12 title text-left">Editing: <span class="light-blue" id="currentProduct"></span></h3>
+        </div>
+        <div class="row text-center">
+          <div class="redWarning" id="editItemAlert"></div>
+        </div>
+        <div class="row text-center">
+          <div>
+            <b>Current Count:</b> The amount of this item currently in your posession. Set this number if you want an
+            immediately up-to-date statistic of your current inventory.
+          </div>
+          <div>
+            <b>Preferred Count:</b> The minimum count of this item you prefer to have after shopping. The shopping
+            list will tell you how many to buy to reach this count.
+          </div>
+        </div>
+        <form class="row mt-3 mb-5" id="editItemForm">
+          <div class="form-group col-6">
+            <label class="mx-2">Current Count</label>
+            <input class="form-control" id="editItemCurrentCount">
+          </div>
+          <div class="form-group col-6">
+            <label class="mx-2">Preferred Count</label>
+            <input class="form-control" id="editItemPreferredCount">
+          </div>
+        </form>
+        <div class="row">
+          <div class="col-6 text-center">
+            <a class="cancelpopupButtons" data-dismiss="modal">CANCEL</a>
+          </div>
+          <div class="col-6 text-center">
+            <a class="clearpopupButtons" onclick="return executeEditItem()">SAVE</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -117,11 +159,13 @@
     <script src="js/InventoryTest.js"></script>
 
     <script>
-    async function saveName()
-    {
-      var products = new products("ListID");
-      await inventory.getProducts();
-    }
+
+
+      async function saveName()
+      {
+        var products = new products("ListID");
+        await inventory.getProducts();
+      }
     </script>
     
 </body>
