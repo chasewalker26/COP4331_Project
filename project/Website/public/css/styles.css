@@ -95,27 +95,27 @@ body {
 }
 
 .light-blue {
-  color: #598BC4;
+  color: #598BC4 !important;
 }
 
 .dark-blue {
-  color:#006579;
+  color:#006579 !important;
 }
 
 .black {
-  color: black;
+  color: black !important;
 }
 
 .white {
-  color: white;
+  color: white !important;
 }
 
 .bg-light-blue {
-  background-color: #598BC4;
+  background-color: #598BC4 !important;
 }
 
 .bg-dark-blue {
-  background-color:#006579;
+  background-color:#006579 !important;
 }
 
 /* material icons */
