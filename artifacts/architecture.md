@@ -68,7 +68,7 @@ The only business rule that defines architectural processes is the requirement t
 
 # User Interface Design
 
-![UI Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/UI_layout.png?raw=true)
+![UI Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/UI2.png?raw=true)
 
 |    UI diagram      |    User Interaction    |     UUID(s)    |
 | ------------------ | ---------------------- | -------------- |
