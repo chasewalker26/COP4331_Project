@@ -18,7 +18,7 @@ class Inventory extends List
 
       if (name)
       {
-        html += '<li class="listProduct" id="' + barcode + '" name="inventoryItem" onClick="inventory.editItem()"><span class="material-icons mx-2">edit</span>' + name + ': ' + count + '</li>';
+        html += '<li class="listProduct" id="' + barcode + '" name="inventoryItem"><span class="material-icons mx-2" data-toggle="modal" data-target="#editItemModal" data-backdrop="false">edit</span>' + name + ': ' + count + '</li>';
       }
       else
       {
