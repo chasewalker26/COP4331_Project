@@ -259,7 +259,7 @@ async function formatProductsJSONTest()
 async function addItemSuccessTest()
 {
     var data = false;
-    let shoppingList = new ShoppingList("ListID");
+    let shoppingList = new ShoppingList("ListID_TEST");
     await shoppingList.getProducts();
 
     document.getElementById("addItemName").value = "mango";
@@ -276,7 +276,7 @@ async function addItemSuccessTest()
         "warningDay":  -1 
     }
 
-    var actualProduct = await pullFromFirebase("ProductList/ListID/mango");
+    var actualProduct = await pullFromFirebase("ProductList/ListID_TEST/mango");
     
     if (JSON.stringify(actualProduct) == JSON.stringify(expectedProduct))
         data = true;
@@ -291,7 +291,7 @@ async function addItemSuccessTest()
 async function addItemItemExistsFailureTest()
 {
     var data = false;
-    let shoppingList = new ShoppingList("ListID");
+    let shoppingList = new ShoppingList("ListID_TEST");
 
     await shoppingList.getProducts();
 
@@ -313,7 +313,7 @@ async function addItemItemExistsFailureTest()
 async function addItemBadInputFailureTest()
 {
     var data = false;
-    let shoppingList = new ShoppingList("ListID");
+    let shoppingList = new ShoppingList("ListID_TEST");
 
     await shoppingList.getProducts();
 
