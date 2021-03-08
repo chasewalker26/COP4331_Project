@@ -22,7 +22,7 @@ class Inventory extends List
       }
       else
       {
-        html += '<li class="notFound"><div class="notFound" data-toggle = "modal" data-target = #myModal>' + barcode + ' </div> </li>';
+        html += '<li class="notFound"><div class="notFound" data-toggle = "modal" data-target = #addNameModal>' + barcode + ' </div> </li>';
       }
     }
 
