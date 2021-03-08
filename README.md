@@ -93,7 +93,7 @@ All team members worked together in this sprint to create the user stories in th
 
 - Christopher Gray - I completed the user story "As a user, I want to be able to sign out of my private list and inventory, so that nobody but me can access it" U005.
 
-- Alisher Sultangazin - I attemted but did not finish the user story "As a shopper, I would like to be able to add an item to my shopping list with a count and name" U009.
+- Alisher Sultangazin - I attemted but did not finish the user story "As a shopper, I would like to be able to add an item to my shopping list with a count and name" U009. The user story is not completed because there was a bag when after adding the same item that was in the database, the page shown two instances of this item.
 
 
 # Sprint 5
