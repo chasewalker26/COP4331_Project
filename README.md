@@ -109,9 +109,14 @@ All team members worked together in this sprint to create the user stories in th
 
 ## Task Allocation
 - Chase Walker - I completed the user story "As a busy digital age shopper, I want to be auto-signed in if I am not signed out, to save time when accessing the site" U022
-- Christopher Gray - "I completed the user story As a user, I want to be able to navigate to a contact page so I can contact the Dev." Team U024.
-- Omer Gul - I workek on the user story "As a user, I want to add new items to my list using the IoT device, so that I save time and it is convenient for me." U025. The user story could not completed because of the obstacles about installing firebase packages to the Raspberry Pi. However, the written code is working fine when the scanner is connected to my personal computer. 
+
+- Christopher Gray - I completed the user story "As a user, I want to be able to navigate to a contact page so I can contact the Dev." Team U024.
+
+- Omer Gul - I worked on the user story "As a user, I want to add new items to my list using the IoT device, so that I save time and it is convenient for me." U025. The user story could not completed because of the obstacles about installing firebase packages to the Raspberry Pi. However, the written code is working fine when the scanner is connected to my personal computer. 
+
 - Anjali Ramsahai - I completed the user story "As a international shopper, I would like to be given the option to add a name to items that cannot be recognized by the scanner" U020
+
+- Alisher Sultangazin - I completed the user story "As a shopper, I would like to be able to add an item to my shopping list with a count and name" U009
 
 
 # Sprint 6
