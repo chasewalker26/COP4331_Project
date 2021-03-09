@@ -17,7 +17,7 @@ function sendMail() {
     document.getElementById('contact-form').addEventListener('submit', function (event) {
         event.preventDefault();
         // these IDs from the previous steps
-        emailjs.sendForm('service_7igsl3v', 'template_q3vcveq', this)
+        emailjs.sendForm('service_7igsl3v', 'template_q3vcveq', 'contact-form')
             .then(function () {
                 console.log('SUCCESS!');
             }, function (error) {
