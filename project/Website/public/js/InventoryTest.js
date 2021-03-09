@@ -15,6 +15,7 @@ async function runTests()
     await formatListFunctionalTest();
     await formatListVisualTest();
     await getProductTest();
+    await replaceProductTest();
 }
 
 // in Inventory.js
@@ -77,8 +78,6 @@ async function getProductTest()
     
     var product = inventory.getProduct("Barcode0");
 
-    console.log(product);
-
     var expectedProduct = 
     {
         "barcode" : "Barcode0",
@@ -90,6 +89,36 @@ async function getProductTest()
     }
 
     if (JSON.stringify(product) == JSON.stringify(expectedProduct))
+        data = true;
+
+    console.assert(data == true, "getProductTest() FAILED");
+}
+
+
+async function replaceProductTest()
+{
+    var data = false;
+    let testInventory = new Inventory("ListID_TEST");
+    await testInventory.getProducts();
+
+    var newProduct = 
+    {
+        "barcode" : "Barcode4",
+        "count" : 12,
+        "idealCount": 10,
+        "name" : "name",
+        "dayRemoved": -1,
+        "warningDay":  -1 
+    }
+    
+    testInventory.replaceProduct("Barcode1", newProduct);
+    
+    let expectedInventory = new Inventory("ListID_TEST");
+    await expectedInventory.getProducts();
+
+    expectedInventory.products[1] = newProduct; // replacement at known location of Barcode1
+
+    if (JSON.stringify(testInventory.products) == JSON.stringify(expectedInventory.products))
         data = true;
 
     console.assert(data == true, "getProductTest() FAILED");

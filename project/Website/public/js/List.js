@@ -33,6 +33,14 @@ class List
     }
   }
 
+  replaceProduct(newProductBarcode, newProduct)
+  {
+    for (var i = 0; i < this.products.length; i++)
+    {
+      if (this.products[i].barcode == newProductBarcode)
+        this.products[i] = newProduct;
+    }
+  }
 
   async updateDatabase(products)
   { 
