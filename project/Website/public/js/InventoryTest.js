@@ -10,23 +10,12 @@ if (isTesting == true)
     }
 }
 
-function runTests()
+async function runTests()
 {
-    formatListFunctionalTest();
-    sidenavTest();
-    formatListVisualTest();
+    await formatListFunctionalTest();
+    await formatListVisualTest();
+    await getProductTest();
 }
-
-async function sidenavTest()
-{
-    document.getElementById("navOpen").click();
-    var sidenav = document.getElementById("sidenav");
-    console.assert(sidenav.style.width == "250px", "sidenavTest FAILED");
-
-    document.getElementById("navClose").click();
-    console.assert(sidenav.style.width == "0px", "sidenavTest FAILED");
-}
-
 
 // in Inventory.js
 async function formatListFunctionalTest()
@@ -80,3 +69,28 @@ async function formatListVisualTest()
 }
 
 
+async function getProductTest()
+{
+    var data = false;
+    let inventory = new Inventory("ListID_TEST");
+    await inventory.getProducts();
+    
+    var product = inventory.getProduct("Barcode0");
+
+    console.log(product);
+
+    var expectedProduct = 
+    {
+        "barcode" : "Barcode0",
+        "count" : 6,
+        "idealCount": 1,
+        "name" : "name",
+        "dayRemoved": -1,
+        "warningDay":  -1 
+    }
+
+    if (JSON.stringify(product) == JSON.stringify(expectedProduct))
+        data = true;
+
+    console.assert(data == true, "getProductTest() FAILED");
+}

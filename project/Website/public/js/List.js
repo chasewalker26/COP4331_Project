@@ -24,6 +24,16 @@ class List
     }
   }
 
+  getProduct(barcode)
+  {
+    for (var i = 0; i < this.products.length; i++)
+    {
+      if (this.products[i].barcode == barcode)
+        return this.products[i];
+    }
+  }
+
+
   async updateDatabase(products)
   { 
     await saveToFirebase("ProductList/" + this.listID + "/", products);
