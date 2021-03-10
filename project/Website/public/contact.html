@@ -41,7 +41,7 @@
                     <textarea class="form-control" id="message" name="message" rows="10"></textarea>
                   </div>
                   <div class="form-group text-center">
-                    <input class="btn btn-lg btn-info my-3 col-3 align-self-center" id="submit" type="submit" style="background-color:#049DAE; color:#ffffff"  value="Submit">
+                    <input class="btn btn-lg btn-info my-3 col-3 align-self-center" id="submitContact" type="submit" style="background-color:#049DAE; color:#ffffff"  value="Submit">
                   </div>
             </form>
         </div>
@@ -75,6 +75,10 @@
     
     
     <script>
+        $(document).on("click", "[id='submitContact']", function()
+        {
+            sendMail();
+        })
     </script>
 </body>
 

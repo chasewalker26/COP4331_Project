@@ -10,7 +10,7 @@ if (isTesting == false)
     {
         var page = window.location.pathname;
 
-        if (page == "/shoppingList.html" || page == "/inventory.html")
+        if (page == "/shoppingList.html" || page == "/inventory.html" || page == "/Contact.html")
         {
             await redirectIfNotFirebaseUser();
         }
