@@ -22,6 +22,7 @@ async function runTests()
     validEditItemInputZeroTest();
     validEditItemInputNegativeTest();
     validEditItemInputPositiveTest();
+    await editIdealCountTest();
 }
 
 // in Inventory.js
@@ -197,4 +198,32 @@ function validEditItemInputPositiveTest()
 {
     let inventory = new Inventory("ListID_TEST");
     console.assert(inventory.validEditItemInput("10") == true, "validEditItemInputPositiveTest() FAILED");
+}
+
+async function editIdealCountTest()
+{
+    var data = false;
+    let inventory = new Inventory("ListID_TEST");
+    await inventory.getProducts();
+
+    inventory.editIdealCount("Barcode1", 25);
+
+    var expectedProduct = 
+    {
+        "count" : 8,
+        "dayRemoved": -1,
+        "idealCount": 25,
+        "name" : "name",
+        "warningDay":  -1 
+    }
+
+    var updatedProduct = await pullFromFirebase("ProductList/ListID_TEST/Barcode1/");
+
+    if (JSON.stringify(expectedProduct) == JSON.stringify(updatedProduct))
+        data = true;
+
+    console.assert(data == true, "editIdealCountTest() FAILED");
+
+    // clean up
+    await saveToFirebase("ProductList/ListID_TEST/Barcode1/", {idealCount: 1});
 }

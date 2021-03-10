@@ -29,6 +29,23 @@ class Inventory extends List
     document.getElementById("inventory").innerHTML = html;
   }
 
+  async editIdealCount(barcode, idealCount)
+  {
+    if (this.validEditItemInput(idealCount) == false)
+      return false;
+
+    idealCount = parseInt(idealCount);
+
+    var currentProduct = this.getProduct(barcode);
+    currentProduct.idealCount = idealCount;
+
+    this.replaceProduct(barcode, currentProduct);
+        
+    var JSONProducts = this.formatProductsJSON();
+    await this.updateDatabase(JSONProducts);
+
+    return true;
+  }
 
 
   validEditItemInput(input)
