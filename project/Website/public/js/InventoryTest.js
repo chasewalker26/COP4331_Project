@@ -16,6 +16,8 @@ async function runTests()
     await formatListVisualTest();
     await getProductTest();
     await replaceProductTest();
+    editItemAlertUserTest();
+
 }
 
 // in Inventory.js
@@ -69,7 +71,6 @@ async function formatListVisualTest()
     }
 }
 
-
 async function getProductTest()
 {
     var data = false;
@@ -93,7 +94,6 @@ async function getProductTest()
 
     console.assert(data == true, "getProductTest() FAILED");
 }
-
 
 async function replaceProductTest()
 {
@@ -122,4 +122,17 @@ async function replaceProductTest()
         data = true;
 
     console.assert(data == true, "getProductTest() FAILED");
+}
+
+function editItemAlertUserTest()
+{
+    var data = false;
+    let inventory = new Inventory("ListID_TEST");
+
+    inventory.editItemAlertUser("Hello There!");
+
+    if ($("#editItemAlert")[0].innerHTML == "Hello There!")
+        data = true;
+
+    console.assert(data == true, "editItemAlertUserTest() FAILED");
 }

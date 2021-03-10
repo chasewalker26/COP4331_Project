@@ -29,6 +29,18 @@ class Inventory extends List
     document.getElementById("inventory").innerHTML = html;
   }
 
+
+
+  editItemAlertUser(alert)
+  {
+    $("#editItemAlert").html(alert);
+
+    setTimeout(() =>
+    {
+      $("#editItemAlert").html("");
+    }, 2000);
+  }
+
   nameItem()
   {
     var name; 
