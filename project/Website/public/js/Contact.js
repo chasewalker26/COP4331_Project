@@ -6,14 +6,14 @@ class Contact {
         this.devEmail = devEmail;     
     }
 }
-sendMail();
+
 
 function sendMail() {
+    //await initializeAppUser();
     (function () {
         // https://dashboard.emailjs.com/admin/integration
         emailjs.init('user_qBNYciotCBLgcKwufO8iz');
     })();
-
     document.getElementById('contact-form').addEventListener('submit', function (event) {
         event.preventDefault();
         // these IDs from the previous steps
