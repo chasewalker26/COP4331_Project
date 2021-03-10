@@ -4,6 +4,7 @@
   "description": "Website files goes in this directory.",
   "main": "index.js",
   "dependencies": {
+    "emailjs-com": "^2.6.4",
     "firebase": "^8.2.9",
     "firebase-admin": "^9.5.0"
   },
