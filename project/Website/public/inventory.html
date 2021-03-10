@@ -105,18 +105,18 @@
             immediately up-to-date statistic of your current inventory.
           </div>
           <div>
-            <b>Preferred Count:</b> The minimum count of this item you prefer to have after shopping. The shopping
+            <b>Ideal Count:</b> The minimum count of this item you prefer to have after shopping. The shopping
             list will tell you how many to buy to reach this count.
           </div>
         </div>
         <form class="row mt-3 mb-5" id="editItemForm">
           <div class="form-group col-6">
             <label class="mx-2">Current Count</label>
-            <input class="form-control" id="editItemCurrentCount">
+            <input class="form-control" id="editItemCount">
           </div>
           <div class="form-group col-6">
-            <label class="mx-2">Preferred Count</label>
-            <input class="form-control" id="editItemPreferredCount">
+            <label class="mx-2">Ideal Count</label>
+            <input class="form-control" id="editItemIdealCount">
           </div>
         </form>
         <div class="row">
@@ -159,7 +159,46 @@
     <script src="js/InventoryTest.js"></script>
 
     <script>
+      var currentBarcode;
+      var inventory;
 
+      // no test since it combines built in js functions and tested functions
+      $(document).on("click", "[name='inventoryItem']", async function()
+      {
+        inventory = new Inventory("ListID_TEST");
+        await inventory.getProducts();
+
+        currentBarcode = this.id;
+
+        fillEditFields();
+      })
+
+      // no test since it combines built in js functions and tested functions
+      function fillEditFields()
+      {
+        var product = inventory.getProduct(currentBarcode);
+
+        $("#editItemCount").val(product.count);
+        $("#editItemIdealCount").val(product.idealCount);
+        $("#currentProduct").html(product.name);
+      }
+
+      // no test since it combines built in js functions and tested functions
+      async function executeEditItem()
+      {
+        var count = document.getElementById("editItemCount").value;
+        var idealCount = document.getElementById("editItemIdealCount").value;
+
+        // ALISHER inside the if add && await inventory.editCount(currentBarcode, count) after the first function call
+        if (await inventory.editIdealCount(currentBarcode, idealCount))
+        {
+          document.getElementById("editItemForm").reset();
+
+          inventory.formatList();
+
+          $('#editItemModal').modal('hide');
+        }
+      }
 
       async function saveName()
       {

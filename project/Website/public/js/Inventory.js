@@ -47,6 +47,11 @@ class Inventory extends List
     return true;
   }
 
+  async editCount(barcode, count)
+  {
+    // alisher fill in here like above ^^
+    // make correct changes for variable names
+  }
 
   validEditItemInput(input)
   {
