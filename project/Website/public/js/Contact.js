@@ -8,16 +8,26 @@ class Contact {
 }
 
 
-function sendMail() {
+function sendMail(from_name) {
     //await initializeAppUser();
     (function () {
         // https://dashboard.emailjs.com/admin/integration
         emailjs.init('user_qBNYciotCBLgcKwufO8iz');
     })();
+    from_name = appUser.username;
+    from_email = appUser.email;
+    from_uid = appUser.uid;
+    var from_message = document.getElementById('message').value;
+    console.log(from_message);
     document.getElementById('contact-form').addEventListener('submit', function (event) {
         event.preventDefault();
         // these IDs from the previous steps
-        emailjs.sendForm('service_7igsl3v', 'template_q3vcveq', 'contact-form')
+        emailjs.send('service_7igsl3v', 'template_q3vcveq',{
+            name: from_name,
+            message: from_message,
+            email: from_email,
+            uid: from_uid
+        })
             .then(function () {
                 console.log('SUCCESS!');
             }, function (error) {
