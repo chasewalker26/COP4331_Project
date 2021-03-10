@@ -31,6 +31,30 @@ class Inventory extends List
 
 
 
+  validEditItemInput(input)
+  {
+    if (input == "")
+    {
+      this.editItemAlertUser("All inputs must be filled!")
+      return false;
+    }
+    
+    input = parseInt(input);
+
+    if (isNaN(input))
+    {
+      this.editItemAlertUser("Your input must be a number!")
+      return false;
+    }
+    else if (input <= 0)
+    {
+      this.editItemAlertUser("Your input must be greater than 0!")
+      return false;
+    }
+    else
+      return true;
+  }
+
   editItemAlertUser(alert)
   {
     $("#editItemAlert").html(alert);

@@ -17,7 +17,11 @@ async function runTests()
     await getProductTest();
     await replaceProductTest();
     editItemAlertUserTest();
-
+    validEditItemInputEmptyStringTest();
+    validEditItemInputStringTest();
+    validEditItemInputZeroTest();
+    validEditItemInputNegativeTest();
+    validEditItemInputPositiveTest();
 }
 
 // in Inventory.js
@@ -135,4 +139,62 @@ function editItemAlertUserTest()
         data = true;
 
     console.assert(data == true, "editItemAlertUserTest() FAILED");
+}
+
+function validEditItemInputEmptyStringTest()
+{
+    var data = false;
+    let inventory = new Inventory("ListID_TEST");
+
+    console.assert(inventory.validEditItemInput("") == false, "validEditItemInputEmptyStringTest() FAILED");
+
+    if ($("#editItemAlert")[0].innerHTML == "All inputs must be filled!")
+        data = true;
+
+    console.assert(data == true, "validEditItemInputEmptyStringTest() FAILED");
+}
+
+function validEditItemInputStringTest()
+{
+    var data = false;
+    let inventory = new Inventory("ListID_TEST");
+
+    console.assert(inventory.validEditItemInput("hi") == false, "validEditItemInputStringTest() FAILED");
+
+    if ($("#editItemAlert")[0].innerHTML == "Your input must be a number!")
+        data = true;
+
+    console.assert(data == true, "validEditItemInputStringTest() FAILED");
+}
+
+function validEditItemInputZeroTest()
+{
+    var data = false;
+    let inventory = new Inventory("ListID_TEST");
+
+    console.assert(inventory.validEditItemInput("0") == false, "validEditItemInputZeroTest() FAILED");
+
+    if ($("#editItemAlert")[0].innerHTML == "Your input must be greater than 0!")
+        data = true;
+
+    console.assert(data == true, "validEditItemInputZeroTest() FAILED");
+}
+
+function validEditItemInputNegativeTest()
+{
+    var data = false;
+    let inventory = new Inventory("ListID_TEST");
+
+    console.assert(inventory.validEditItemInput("-5") == false, "validEditItemInputNegativeTest() FAILED");
+
+    if ($("#editItemAlert")[0].innerHTML == "Your input must be greater than 0!")
+        data = true;
+
+    console.assert(data == true, "validEditItemInputNegativeTest() FAILED");
+}
+
+function validEditItemInputPositiveTest()
+{
+    let inventory = new Inventory("ListID_TEST");
+    console.assert(inventory.validEditItemInput("10") == true, "validEditItemInputPositiveTest() FAILED");
 }
