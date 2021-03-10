@@ -10,7 +10,10 @@ if (isTesting == true)
 function runTests()
 {
   contactTest();
+  sendMail();
 }
+
+
 
 function contactTest()
 {
