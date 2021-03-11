@@ -124,7 +124,15 @@ All team members worked together in this sprint to create the user stories in th
 
 
 ## Task Allocation
+- Chase Walker - 
 
+- Christopher Gray - I completed the user story "As a user, I want to be able to contact the developers, so that I can get help with issues" U014
+
+- Omer Gul -  
+
+- Anjali Ramsahai -
+
+- Alisher Sultangazin -
 
 
 # Sprint 7
