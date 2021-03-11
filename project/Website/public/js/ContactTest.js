@@ -7,16 +7,15 @@ if (isTesting == true)
   }
 }
 
-function runTests()
-{
+function runTests(){
   contactTest();
-  sendMail();
+  // sendMail();
+  $("#submitContact").click()
 }
 
 
 
-function contactTest()
-{
+function contactTest(){
   var data = false;
   var contact = new Contact("sender@email.com", "Hello there", "receiver@email.com");
 
@@ -32,3 +31,4 @@ function contactTest()
 
   console.assert(data == true, "contactTest() FAILED");
 }
+
