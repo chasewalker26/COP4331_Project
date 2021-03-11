@@ -18,7 +18,6 @@ function sendMail(from_name) {
     from_email = appUser.email;
     from_uid = appUser.uid;
     var from_message = document.getElementById('message').value;
-    console.log(from_message);
     document.getElementById('contact-form').addEventListener('submit', function (event) {
         event.preventDefault();
         // these IDs from the previous steps
