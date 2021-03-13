@@ -23,6 +23,7 @@ async function runTests()
     validEditItemInputNegativeTest();
     validEditItemInputPositiveTest();
     await editIdealCountTest();
+    await editCountTest();
 }
 
 // in Inventory.js
@@ -46,7 +47,6 @@ async function formatListFunctionalTest()
         actualElements += siteInventoryElements[i].outerHTML;
 
     console.assert(expectedElements == actualElements, "Inventory.formatListTest() FAILED");
-
 
 }
 
@@ -126,7 +126,7 @@ async function replaceProductTest()
     if (JSON.stringify(testInventory.products) == JSON.stringify(expectedInventory.products))
         data = true;
 
-    console.assert(data == true, "getProductTest() FAILED");
+    console.assert(data == true, "replaceProductTest() FAILED");
 }
 
 function editItemAlertUserTest()
@@ -226,4 +226,32 @@ async function editIdealCountTest()
 
     // clean up
     await saveToFirebase("ProductList/ListID_TEST/Barcode1/", {idealCount: 1});
+}
+
+async function editCountTest()
+{
+    var data = false;
+    let inventory = new Inventory("ListID_TEST");
+    await inventory.getProducts()
+
+    inventory.editCount("Barcode1", 11);
+
+    var expectedProduct =
+    {
+        "count" : 11,
+        "dayRemoved" : -1,
+        "idealCount" : 1,
+        "name" : "name",
+        "warningDay" : -1
+    }
+
+    var updatedProduct = await pullFromFirebase("ProductList/ListID_TEST/Barcode1/");
+
+    if (JSON.stringify(expectedProduct) == JSON.stringify(updatedProduct))
+        data = true;
+    
+    console.assert(data == true, "editCountTest() FAILED");
+
+    // clean up
+    await saveToFirebase("ProductList/ListID_TEST/Barcode1/", {count: 8})
 }

@@ -189,8 +189,7 @@
         var count = document.getElementById("editItemCount").value;
         var idealCount = document.getElementById("editItemIdealCount").value;
 
-        // ALISHER inside the if add && await inventory.editCount(currentBarcode, count) after the first function call
-        if (await inventory.editIdealCount(currentBarcode, idealCount))
+        if (await inventory.editIdealCount(currentBarcode, idealCount) && await inventory.editCount(currentBarcode, count))
         {
           document.getElementById("editItemForm").reset();
 

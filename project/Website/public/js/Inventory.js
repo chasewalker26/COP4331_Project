@@ -49,8 +49,20 @@ class Inventory extends List
 
   async editCount(barcode, count)
   {
-    // alisher fill in here like above ^^
-    // make correct changes for variable names
+    if (this.validEditItemInput(count) == false)
+      return false;
+
+    count = parseInt(count);
+
+    var currentProduct = this.getProduct(barcode);
+    currentProduct.count = count;
+
+    this.replaceProduct(barcode, currentProduct);
+        
+    var JSONProducts = this.formatProductsJSON();
+    await this.updateDatabase(JSONProducts);
+
+    return true;
   }
 
   validEditItemInput(input)
