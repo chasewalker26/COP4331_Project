@@ -328,7 +328,7 @@ async function addItemBadInputFailureTest()
     console.assert(data == true, "addItemItemExistsFailureTest() FAILED");
 
     // clean up: remove mango from DB to clean up after addItem tests and reset form
-    var products = await pullFromFirebase("ProductList/ListID/");
+    var products = await pullFromFirebase("ProductList/ListID_TEST/");
     products["mango"] = null; // data to change in DB
     shoppingList.updateDatabase(products);
 
