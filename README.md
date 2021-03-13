@@ -132,7 +132,7 @@ All team members worked together in this sprint to create the user stories in th
 
 - Anjali Ramsahai -
 
-- Alisher Sultangazin -
+- Alisher Sultangazin - I completed the user story "As a shopper, I would like to be able to change the current count of items in my inventory to account for extra things I purchased or forgot to scan" U010
 
 
 # Sprint 7
