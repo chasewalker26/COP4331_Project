@@ -128,7 +128,7 @@ All team members worked together in this sprint to create the user stories in th
 
 - Christopher Gray - I completed the user story "As a user, I want to be able to contact the developers, so that I can get help with issues" U014
 
-- Omer Gul - I ompleted the user story "As a user, I want to add new items to my list using the IoT device, so that I save time and it is convenient for me" U025.
+- Omer Gul - I completed the user story "As a user, I want to add new items to my list using the IoT device, so that I save time and it is convenient for me" U025.
 
 - Anjali Ramsahai -
 
