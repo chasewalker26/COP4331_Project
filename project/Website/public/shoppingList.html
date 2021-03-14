@@ -114,6 +114,41 @@
     </div>
   </div>
 
+  <!-- Modal for adding name-->
+  <div id="addNameModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+      <!-- Modal content-->
+      <div class="modal-content p-5">
+          <div class="row">
+            <h3 class="col-12 title text-center">Name Unrecognized Item</h3>
+            <div class="notFoundBarcode text-center">barcode # =
+            </div>
+            </div>
+          <div class="row text-center">
+            <div class="redWarning" id="addNameAlert"></div>
+          </div>
+          <form class="row mt-3 mb-5" id="addNameForm">
+            <div class="form-group mb-3">
+              <label class="mx-2">Name</label>
+              <input class="form-control" id="addName">
+            </div>
+            <div class="form-group">
+              <label class="mx-2">Count</label>
+              <input class="form-control" id="addCount">
+            </div>
+          </form>
+          <div class="row">
+            <div class="col-6 text-center">
+              <a class="cancelpopupButtons" data-dismiss="modal">CANCEL</a>
+            </div>
+            <div class="col-6 text-center">
+              <a class="clearpopupButtons" onclick="return addName()">SAVE</a>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- JQUERY -->
   <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <!-- BOOTSTRAP JS CDN -->
@@ -164,6 +199,29 @@
 
       shoppingList.clearList(); 
     }
+
+    $(document).on("click", '.addNameModal', async function()
+      {
+        inventory = new Inventory("ListID_TEST");
+        await inventory.getProducts();
+
+        currentBarcode = this.id;
+
+      })
+    async function addName()
+      {
+        var name = document.getElementById("addName").value;
+        var addCount = document.getElementById("addCount").value;
+        console.log(currentBarcode);
+        if (await inventory.nameItem(currentBarcode, name) && await inventory.editCount(currentBarcode, addCount))
+        {
+          document.getElementById("addNameForm").reset();
+
+          inventory.formatList();
+
+          $('#addNameModal').modal('hide');
+        }
+      }
   </script>
 
 </body>

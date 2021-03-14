@@ -16,14 +16,7 @@ class Inventory extends List
       var name = products[i].name;
       var count = products[i].count;
 
-      if (name)
-      {
-        html += '<li class="listProduct" id="' + barcode + '" name="inventoryItem"><span class="material-icons mx-2" data-toggle="modal" data-target="#editItemModal" data-backdrop="false">edit</span>' + name + ': ' + count + '</li>';
-      }
-      else
-      {
-        html += '<li class="notFound"><div class="notFound" data-toggle = "modal" data-target = #addNameModal>' + barcode + ' </div> </li>';
-      }
+      html += '<li class="listProduct" id="' + barcode + '" name="inventoryItem"><span class="material-icons mx-2" data-toggle="modal" data-target="#editItemModal" data-backdrop="false">edit</span>' + name + ': ' + count + '</li>';
     }
 
     document.getElementById("inventory").innerHTML = html;
@@ -98,12 +91,5 @@ class Inventory extends List
       $("#editItemAlert").html("");
     }, 2000);
   }
-
-  nameItem()
-  {
-    var name; 
-    var count; 
-    this.products.name = name;
-    this.products.count = count;
-  }
+ 
 }

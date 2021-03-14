@@ -15,8 +15,17 @@ class ShoppingList extends List {
       var idealCount = products[i].idealCount;
       var countToBuy = idealCount - count;
 
-      if (count < idealCount)
-        html += '<li class="listProduct" id="' + barcode + '" name="shoppingListItem">' + name + ': ' + countToBuy + '</li>'
+      if (name)
+      {
+        if (count < idealCount)
+        {
+          html += '<li class="listProduct" id="' + barcode + '" name="shoppingListItem">' + name + ': ' + countToBuy + '</li>';
+        }
+      }
+      else
+      {
+         html += '<li class="notFound"><div class="notFound" data-toggle = "modal" data-target = #addNameModal>' + barcode + ' </div> </li>';
+      }
     }
 
     document.getElementById("shoppingList").innerHTML = html;
@@ -93,6 +102,36 @@ class ShoppingList extends List {
     {
       return true;
     }
+  }
+  
+  async nameItem() 
+  {
+    var name = document.getElementById('addName').value;
+    var count = document.getElementById('addCount').value;
+    
+    if (this.validAddItemInput(name, count) == false)
+      return false;
+
+    if ((this.productExistsError(name)) == false)
+    {
+      let product = new Product(name, {
+        "count" : 0,
+        "idealCount": parseInt(count),
+        "name" : name,
+        "dayRemoved": -1,
+        "warningDay":  -1 
+      });
+  
+      this.products.push(product);
+  
+      var JSONProducts = this.formatProductsJSON();
+  
+      await this.updateDatabase(JSONProducts);
+
+      return true;
+    }
+
+    return false;
   }
 
   productExistsError(name)
