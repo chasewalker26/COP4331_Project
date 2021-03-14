@@ -1,4 +1,3 @@
-#!/usr/bin/python3
 import sys
 import requests
 import json
@@ -6,8 +5,7 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
 
-#https://upcdatabase.org/
-api_key = "1B187D1406FF56216D9D01B71C6B40B7" 
+api_key = "1B187D1406FF56216D9D01B71C6B40B7" #https://upcdatabase.org/
 
 # Fetch the service account key JSON file contents
 cred = credentials.Certificate('cop4331-project-firebase-adminsdk-2948i-5a2926eb2e.json')
@@ -45,11 +43,10 @@ def barcode_reader():
         ## Get the character from the HID
         buffer = fp.read(8)
         for c in buffer:
-            if ord(c) > 0:
-
+            if ord(chr(c)) > 0:
                 ##  40 is carriage return which signifies
                 ##  we are done looking for characters
-                if int(ord(c)) == 40:
+                if int(ord(chr(c))) == 40:
                     done = True
                     break;
 
@@ -58,12 +55,12 @@ def barcode_reader():
                 if shift:
 
                     ## If it is a '2' then it is the shift key
-                    if int(ord(c)) == 2:
+                    if int(ord(chr(c))) == 2:
                         shift = True
 
                     ## if not a 2 then lookup the mapping
                     else:
-                        ss += hid2[int(ord(c))]
+                        ss += hid2[int(ord(chr(c)))]
                         shift = False
 
                 ##  If we are not shifted then use
@@ -72,30 +69,29 @@ def barcode_reader():
                 else:
 
                     ## If it is a '2' then it is the shift key
-                    if int(ord(c)) == 2:
+                    if int(ord(chr(c))) == 2:
                         shift = True
 
                     ## if not a 2 then lookup the mapping
                     else:
-                        ss += hid[int(ord(c))]
+                        ss += hid[int(ord(chr(c)))]
     return ss
 
 def UPC_lookup(api_key,upc):
+    print(upc)
+    '''V3 API'''
 
-	# get the details of the product from the API
     url = "https://api.upcdatabase.org/product/%s?apikey=%s" % (upc, api_key)
-
+    #print(url)
     headers = {
         'cache-control': "no-cache",
     }
 
-    # store the details of the product in response
     response = requests.request("GET", url, headers=headers)
 
     # convert response to json
     responseJson = response.json()
 
-    # if the item is found in API
     if(responseJson['success'] == True):
         link = "/ProductList/ListID/%s" % (upc)
         ref = db.reference(link)
@@ -114,47 +110,34 @@ def UPC_lookup(api_key,upc):
                 ref.update({
                     "count" : tempCount,
                     "name" : responseJson['title'],
-     	           })
-
+                   })
     # if the item is not found in API
     else:
-    	# move down to the item's details
         link = "/ProductList/ListID/%s" % (upc)
         ref = db.reference(link)
         json = ref.get()
-
         # if item is never initialized before
         if(json == None):
             ref.update({
                 "count" : 0,
                 "dayRemoved" : -1,
                 "idealCount" : 0,
-                "name" : "Product Not Found",
+                "name" : "",
                 "warningDay" : -1
             })
-
         # if item is initialized before
         else:
+            if (json['count'] > 0):
+                    tempCount = json['count'] - 1
+                    ref.update({
+                        "count" : tempCount,
+                    })
 
-        	# if the name of the product is changed by the user,
-        	# do not initialize it to "Product Not Found"
-        	if (json['name'] == "Product Not Found"):
-	            if (json['count'] > 0):
-	                tempCount = json['count'] - 1
-	                ref.update({
-	                    "count" : tempCount,
-	                })
-	        else:
-	        	if (json['count'] > 0):
-	                tempCount = json['count'] - 1
-	                ref.update({
-	                    "count" : tempCount,
-	                })
 
 if __name__ == '__main__':
     try:
-        #UPC_lookup(api_key,"619659161347")
         while True:
-            UPC_lookup(api_key, barcode_reader())
+            code = barcode_reader()
+            UPC_lookup(api_key,code)
     except KeyboardInterrupt:
-        pass
+        pass 
