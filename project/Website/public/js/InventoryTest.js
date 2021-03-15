@@ -24,6 +24,7 @@ async function runTests()
     validEditItemInputPositiveTest();
     await editIdealCountTest();
     await editCountTest();
+    editItemUITest();
 }
 
 // in Inventory.js
@@ -36,7 +37,7 @@ async function formatListFunctionalTest()
     inventory.formatList();
 
     // change expectedElements
-    var expectedElements = '<li class="listProduct" id="Barcode0" name="inventoryItem"><span class="material-icons mx-2" data-toggle="modal" data-target="#editItemModal" data-backdrop="false">edit</span>name: 6</li>' + 
+    var expectedElements = '<li class="listProduct" id="Barcode0" name="inventoryItem"><span class="material-icons mx-2" data-toggle="modal" data-target="#editItemModal" data-backdrop="false">edit</span>water: 6</li>' + 
                            '<li class="listProduct" id="Barcode1" name="inventoryItem"><span class="material-icons mx-2" data-toggle="modal" data-target="#editItemModal" data-backdrop="false">edit</span>name: 8</li>' +
                            '<li class="listProduct" id="Barcode3" name="inventoryItem"><span class="material-icons mx-2" data-toggle="modal" data-target="#editItemModal" data-backdrop="false">edit</span>name: 3</li>';
 
@@ -89,7 +90,7 @@ async function getProductTest()
         "barcode" : "Barcode0",
         "count" : 6,
         "idealCount": 1,
-        "name" : "name",
+        "name" : "water",
         "dayRemoved": -1,
         "warningDay":  -1 
     }
@@ -254,4 +255,17 @@ async function editCountTest()
 
     // clean up
     await saveToFirebase("ProductList/ListID_TEST/Barcode1/", {count: 8})
+}
+
+function editItemUITest()
+{
+    var data = false;
+    var editInventoryItemButton = document.getElementsByName("inventoryItem")[0].children[0];
+
+    editInventoryItemButton.click();
+
+    // modal visible
+    console.assert($('#editItemModal').is(':visible') == true, 'editItemUITest() FAILED');
+
+    console.assert($('#currentProduct').innerHTML == "water",  'editItemUITest() FAILED');
 }

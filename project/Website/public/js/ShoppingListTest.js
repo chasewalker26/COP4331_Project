@@ -177,7 +177,8 @@ async function formatListFunctionalTest()
     await shoppingList.getProducts();
     shoppingList.formatList();
 
-    var expectedElements = '<li class="listProduct" id="Barcode3" name="shoppingListItem">name: 3</li>';
+    var expectedElements = '<li class="listProduct" id="Barcode3" name="shoppingListItem">name: 3</li>' + 
+                           '<li class="listProduct notFound" id="unrecognized" name="unrecognizedItem" data-toggle="modal" data-target="#addNameModal" data-backdrop="false">unrecognized</li>';
 
     var siteShoppingListElements = document.getElementById("shoppingList").children;
     var actualElements = "";
@@ -197,21 +198,25 @@ async function formatListVisualTest()
 
     var siteListElements = document.getElementsByClassName("listProduct");
 
-    for (var i = 0; i < siteListElements.length; i++)
-    {
-        var style = getComputedStyle(siteListElements[i]);
-        var color = style.color;
-        var FF = style.fontFamily;
-        var FSize = style.fontSize;
-        var FStyle = style.fontStyle;
-        var FW = style.fontWeight;
+    // check if the name: count formatting is right
+    var style = getComputedStyle(siteListElements[0]);
+    var color = style.color;
+    var FF = style.fontFamily;
+    var FSize = style.fontSize;
+    var FStyle = style.fontStyle;
+    var FW = style.fontWeight;
 
-        console.assert(color == "rgba(89, 139, 196, 0.81)", "formatListVisualTest FAILED");
-        console.assert(FF == '"Lucida Bright", Georgia, serif', "formatListVisualTest FAILED");
-        console.assert(FSize == "30px", "formatListVisualTest FAILED");
-        console.assert(FStyle == "normal", "formatListVisualTest FAILED");
-        console.assert(FW == "700", "formatListVisualTest FAILED");
-    }
+    console.assert(color == "rgba(89, 139, 196, 0.81)", "formatListVisualTest FAILED");
+    console.assert(FF == '"Lucida Bright", Georgia, serif', "formatListVisualTest FAILED");
+    console.assert(FSize == "30px", "formatListVisualTest FAILED");
+    console.assert(FStyle == "normal", "formatListVisualTest FAILED");
+    console.assert(FW == "700", "formatListVisualTest FAILED");
+
+    // check if the unrecognized item formatting is right
+    var style = getComputedStyle(siteListElements[1]);
+    var color = style.color;
+
+    console.assert(color == "rgba(251, 87, 87, 0.81)", "formatListVisualTest FAILED");
 }
 
 // clear list should leave the shopping list empty and correctly update databse
@@ -235,11 +240,12 @@ async function clearListTest()
 
     // repair the clear operation (fix data, get fixed data, display data)
     await saveToFirebase("ProductList/ListID_TEST/Barcode3/", {count:3});
+    await saveToFirebase("ProductList/ListID_TEST/unrecognized/", {count:0});
     await shoppingList.getProducts();
     shoppingList.formatList();
 }
 
-// formatProducts... should create the correct format from the list's products array
+// formatProducts... should create the correct database JSON format from the list's products array
 async function formatProductsJSONTest()
 {
     var data = false;
