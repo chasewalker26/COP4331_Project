@@ -136,7 +136,7 @@ All team members worked together in this sprint to create the user stories in th
 
 - Omer Gul - I completed the user story "As a user, I want to add new items to my list using the IoT device, so that I save time and it is convenient for me" U025.
 
-- Anjali Ramsahai -
+- Anjali Ramsahai - I completed the user story "As an international shopper, I would like to save names to the database for unrecognized items, so that I can keep track of my products that are not available in the USA" U027.
 
 - Alisher Sultangazin - I completed the user story "As a shopper, I would like to be able to change the current count of items in my inventory to account for extra things I purchased or forgot to scan" U010.
 
