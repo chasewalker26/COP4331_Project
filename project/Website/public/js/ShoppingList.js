@@ -15,20 +15,17 @@ class ShoppingList extends List {
       var idealCount = products[i].idealCount;
       var countToBuy = idealCount - count;
 
-      if (name)
+      if (name == "")
       {
-        if (count < idealCount)
-        {
-          html += '<li class="listProduct" id="' + barcode + '" name="shoppingListItem">' + name + ': ' + countToBuy + '</li>';
-        }
+        html += '<li class="listProduct notFound" id="' + barcode + '" name="unrecognizedItem" data-toggle="modal" data-target="#addNameModal" data-backdrop="false">' + barcode + '</li>';
       }
-      else
+      else if (count < idealCount)
       {
-         html += '<li class="notFound"><div class="notFound" data-toggle = "modal" data-target = #addNameModal>' + barcode + ' </div> </li>';
+        html += '<li class="listProduct" id="' + barcode + '" name="shoppingListItem">' + name + ': ' + countToBuy + '</li>';
       }
     }
 
-    document.getElementById("shoppingList").innerHTML = html;
+    $("#shoppingList").html(html);
   }
  
   
@@ -48,11 +45,12 @@ class ShoppingList extends List {
         products[i].count = newCount; 
       }
     }
+
     var JSONProducts = this.formatProductsJSON();
+
     this.updateDatabase(JSONProducts);
 
     $("#shoppingList").html("");
-
   }
 
   async addItem() 
@@ -60,7 +58,7 @@ class ShoppingList extends List {
     var name = document.getElementById('addItemName').value;
     var count = document.getElementById('addItemCount').value;
     
-    if (this.validAddItemInput(name, count) == false)
+    if (this.validAddItemInput(name, count, "#addItemAlert") == false)
       return false;
 
     if ((this.productExistsError(name)) == false)
@@ -85,53 +83,41 @@ class ShoppingList extends List {
     return false;
   }
 
-  validAddItemInput(name, count)
+  validAddItemInput(name, count, location)
   {
     if (name.length == 0 || count == "")
     {
-      $("#addItemAlert").html("Please check your input, empty name or count detected");
-
-      setTimeout(() =>
-      {
-        $("#addItemAlert").html("");
-      }, 2000);
-
+      this.alertUser(location, "Please check your input, empty name or count detected");
+      
       return false;
     }
     else
-    {
-      return true;
-    }
+     return true;
   }
   
-  async nameItem() 
+  async nameItem(barcode) 
   {
     var name = document.getElementById('addName').value;
     var count = document.getElementById('addCount').value;
     
-    if (this.validAddItemInput(name, count) == false)
+    if (this.validAddItemInput(name, count, "#addNameAlert") == false)
       return false;
 
-    if ((this.productExistsError(name)) == false)
-    {
-      let product = new Product(name, {
-        "count" : 0,
-        "idealCount": parseInt(count),
-        "name" : name,
-        "dayRemoved": -1,
-        "warningDay":  -1 
-      });
+    let product = new Product(barcode, {
+      "count" : 0,
+      "idealCount": parseInt(count),
+      "name" : name,
+      "dayRemoved": -1,
+      "warningDay":  -1 
+    });
   
-      this.products.push(product);
+    this.replaceProduct(barcode, product);
   
-      var JSONProducts = this.formatProductsJSON();
+    var JSONProducts = this.formatProductsJSON();
   
-      await this.updateDatabase(JSONProducts);
+    await this.updateDatabase(JSONProducts);
 
-      return true;
-    }
-
-    return false;
+    return true;
   }
 
   productExistsError(name)
@@ -142,12 +128,7 @@ class ShoppingList extends List {
     {
       if (products[i].name.toLowerCase().replace(/\s+/g, "") == name.toLowerCase().replace(/\s+/g, ""))
       {
-        $("#addItemAlert").html("This item already exists");
-
-        setTimeout(() =>
-        {
-          $("#addItemAlert").html("");
-        }, 2000);
+        this.alertUser("#addItemAlert", "This item already exists");
 
         return true;
       }

@@ -120,19 +120,25 @@ All team members worked together in this sprint to create the user stories in th
 
 
 # Sprint 6
-
-
+- [Trello Board](https://trello.com/b/Af6rjxIc/cop4331)
+- [Burndown Chart](https://docs.google.com/spreadsheets/d/183Dg6Bm59MUCFB1R2GCbdrus6IbwDEImLzfAo2zPLKg/edit#gid=262393966)
+- [Velocity Chart](https://docs.google.com/spreadsheets/d/1IDBxwgaPQL3OXrfwmEl2Y9RwI4CI29koruPL0Dz6inc/edit?usp=sharing)
+- [System Architecture](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/architecture.md)
+- [Source Code](https://github.com/chasewalker26/COP4331_Project/tree/main/project/)
+- [Test Code (Site)](https://github.com/chasewalker26/COP4331_Project/tree/main/project/Website/public/js)
+- [Test Code (Scanner)](https://github.com/chasewalker26/COP4331_Project/tree/main/project/RaspberryPi)
+- [Product Demonstration]()
 
 ## Task Allocation
-- Chase Walker - 
+- Chase Walker - I completed the user story "As a parent with a large family, I would like to be able to set preferred inventory count for each item, so that an item is added to my shopping list before I have none left" U008.
 
-- Christopher Gray - I completed the user story "As a user, I want to be able to contact the developers, so that I can get help with issues" U014
+- Christopher Gray - I completed the user story "As a user, I want to be able to contact the developers, so that I can get help with issues" U014.
 
 - Omer Gul - I completed the user story "As a user, I want to add new items to my list using the IoT device, so that I save time and it is convenient for me" U025.
 
 - Anjali Ramsahai -
 
-- Alisher Sultangazin - I completed the user story "As a shopper, I would like to be able to change the current count of items in my inventory to account for extra things I purchased or forgot to scan" U010
+- Alisher Sultangazin - I completed the user story "As a shopper, I would like to be able to change the current count of items in my inventory to account for extra things I purchased or forgot to scan" U010.
 
 
 # Sprint 7

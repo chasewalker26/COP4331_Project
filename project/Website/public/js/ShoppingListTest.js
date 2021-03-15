@@ -26,6 +26,7 @@ async function runTests()
     await addItemSuccessTest();
     await addItemItemExistsFailureTest();
     await addItemBadInputFailureTest();
+    await addNameTest();
 }
 
 // sidenav resizes as expected when used
@@ -339,4 +340,37 @@ async function addItemBadInputFailureTest()
     shoppingList.updateDatabase(products);
 
     document.getElementById("addItemForm").reset();
+}
+
+async function addNameTest()
+{
+    var data = false;
+    let shoppingList = new ShoppingList("ListID_TEST");
+    await shoppingList.getProducts();
+
+    document.getElementById("addName").value = "water";
+    document.getElementById("addCount").value = 2;
+
+    await shoppingList.nameItem("unrecognized");
+
+    var expectedProduct =
+    {
+        "count" : 0,
+        "dayRemoved": -1,
+        "idealCount": 2,
+        "name" : "water",
+        "warningDay":  -1 
+    }
+
+    var actualProduct = await pullFromFirebase("ProductList/ListID_TEST/unrecognized");
+    
+    if (JSON.stringify(actualProduct) == JSON.stringify(expectedProduct))
+        data = true;
+
+    console.assert(data == true, "addNameTest() FAILED");
+
+    await saveToFirebase("ProductList/ListID_TEST/unrecognized/", {name:""});
+    await saveToFirebase("ProductList/ListID_TEST/unrecognized/", {idealCount:1});
+    await shoppingList.getProducts();
+    shoppingList.formatList();
 }
