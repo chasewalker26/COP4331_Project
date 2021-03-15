@@ -133,6 +133,7 @@
         inventory = new Inventory("ListID_TEST");
         await inventory.getProducts();
 
+        // clicked product id holds the products barode
         currentBarcode = this.id;
 
         fillEditFields();
@@ -154,6 +155,7 @@
         var count = document.getElementById("editItemCount").value;
         var idealCount = document.getElementById("editItemIdealCount").value;
 
+        // if both functions are successful allow the modal to close and the list to repopulate
         if (await inventory.editIdealCount(currentBarcode, idealCount) && await inventory.editCount(currentBarcode, count))
         {
           document.getElementById("editItemForm").reset();

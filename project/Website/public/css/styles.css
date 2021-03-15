@@ -91,7 +91,7 @@ body {
 
 /* colors */
 .redWarning {
-  color: #FF5D5D !important;
+  color: rgba(251, 87, 87, .81) !important;
 }
 
 .light-blue {
@@ -334,22 +334,13 @@ body {
 /* barcode not found list style */
 .notFound{
   color: rgba(251, 87, 87, .81);
-  font-family: "Lucida Bright", Georgia, serif;
-  font-style: normal;
-  font-size: 30px;
-  font-weight: bold;
-  list-style: none;
 }
 
 .notFound:hover{
   cursor: pointer;
 }
 
-.notFoundBarcode{
-  color: rgba(251, 87, 87, .81);
-  font-family: "Lucida Bright", Georgia, serif;
-  font-style: normal;
-  font-size: 10px;
-  font-weight: bold;
-  list-style: none;
+.modal-content
+{
+  box-shadow: 10px 10px 10px 1px rgba(0,0,0,0.24);
 }
