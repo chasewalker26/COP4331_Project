@@ -29,16 +29,18 @@ function sendMail(from_name) {
         })
             .then(function () {
                 console.log('SUCCESS!');
+                //show alert
+                document.querySelector('.sub-alert').style.display = "block";
+                //hide alert after 3 seconds
+                setTimeout(function(){
+                    document.querySelector('.sub-alert').style.display = "none";
+                },3000)
+                //reset form after send
+                document.getElementById('contact-form').reset();
             }, function (error) {
                 console.log('FAILED...', error);
             });
     });
-    //show alert
-    document.querySelector('.sub-alert').style.display = "block";
-    //hide alert after 3 seconds
-    setTimeout(function(){
-        document.querySelector('.sub-alert').style.display = "none";
-    },3000)
 
 }
 
