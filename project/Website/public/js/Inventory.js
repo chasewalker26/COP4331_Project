@@ -19,12 +19,12 @@ class Inventory extends List
       html += '<li class="listProduct" id="' + barcode + '" name="inventoryItem"><span class="material-icons mx-2" data-toggle="modal" data-target="#editItemModal" data-backdrop="false">edit</span>' + name + ': ' + count + '</li>';
     }
 
-    document.getElementById("inventory").innerHTML = html;
+    $("#inventory").html(html);
   }
 
   async editIdealCount(barcode, idealCount)
   {
-    if (this.validEditItemInput(idealCount) == false)
+    if (this.validInput(idealCount) == false)
       return false;
 
     idealCount = parseInt(idealCount);
@@ -42,7 +42,7 @@ class Inventory extends List
 
   async editCount(barcode, count)
   {
-    if (this.validEditItemInput(count) == false)
+    if (this.validInput(count) == false)
       return false;
 
     count = parseInt(count);
@@ -58,11 +58,11 @@ class Inventory extends List
     return true;
   }
 
-  validEditItemInput(input)
+  validInput(input)
   {
     if (input == "")
     {
-      this.editItemAlertUser("All inputs must be filled!")
+      this.alertUser("#editItemAlert", "All inputs must be filled!");
       return false;
     }
     
@@ -70,26 +70,15 @@ class Inventory extends List
 
     if (isNaN(input))
     {
-      this.editItemAlertUser("Your input must be a number!")
+      this.alertUser("#editItemAlert", "Your input must be a number!");
       return false;
     }
     else if (input <= 0)
     {
-      this.editItemAlertUser("Your input must be greater than 0!")
+      this.alertUser("#editItemAlert", "Your input must be greater than 0!");
       return false;
     }
     else
       return true;
   }
-
-  editItemAlertUser(alert)
-  {
-    $("#editItemAlert").html(alert);
-
-    setTimeout(() =>
-    {
-      $("#editItemAlert").html("");
-    }, 2000);
-  }
- 
 }

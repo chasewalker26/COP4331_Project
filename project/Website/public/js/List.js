@@ -18,6 +18,8 @@ class List
 
     var barcodes = Object.keys(dbProducts);
 
+    this.products = [];
+
     for (var i = 0; i < barcodes.length; i++)
     {
        this.products.push(new Product(barcodes[i], dbProducts[barcodes[i]]));
@@ -61,5 +63,15 @@ class List
     }
 
     return formattedProducts;
+  }
+
+  alertUser(location, alert)
+  {
+    $(location).html(alert);
+
+    setTimeout(() =>
+    {
+      $(location).html("");
+    }, 2000);
   }
 }
