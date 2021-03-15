@@ -33,5 +33,12 @@ function sendMail(from_name) {
                 console.log('FAILED...', error);
             });
     });
+    //show alert
+    document.querySelector('.sub-alert').style.display = "block";
+    //hide alert after 3 seconds
+    setTimeout(function(){
+        document.querySelector('.sub-alert').style.display = "none";
+    },3000)
+
 }
 
