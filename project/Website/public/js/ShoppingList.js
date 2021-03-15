@@ -31,18 +31,33 @@ class ShoppingList extends List {
   
   clearList()
   {
+    var now = new Date();
+    var start = new Date(now.getFullYear(), 0, 0);
+    var diff = now - start;
+    var year = now.getFullYear().toString().substr(-2);
+    var oneDay = 1000 * 60 * 60 * 24;
+    var day = Math.floor(diff / oneDay);
+    var date = day.toString() + '/' + year;
+    console.log(date);
     var products = this.products;
 
     for (var i = 0; i < products.length; i++)
     {
+      var warning = products[i].warningDay;
       var count = products[i].count;
       var idealCount = products[i].idealCount;
       var countToBuy = idealCount - count;
+      var dayRemoved = products[i].dayRemoved;
 
       if (count < idealCount)
       {
         var newCount = countToBuy + count;
         products[i].count = newCount; 
+      }
+      if(warning != -1){
+        dayRemoved = date;
+        products[i].dayRemoved = dayRemoved;
+        console.log(dayRemoved);
       }
     }
 
