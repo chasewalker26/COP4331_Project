@@ -271,4 +271,6 @@ function editItemUITest()
     var currentProduct = document.getElementById("currentProduct");
     currentProduct = getComputedStyle(currentProduct);
     console.assert(currentProduct.color == "rgb(89, 139, 196)",  'editItemUITest() FAILED');
+
+    $('#editItemModal').hide();
 }
