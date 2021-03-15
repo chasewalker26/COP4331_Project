@@ -57,6 +57,7 @@ class ShoppingList extends List {
   {
     var name = document.getElementById('addItemName').value;
     var count = document.getElementById('addItemCount').value;
+    var warning = document.getElementById('addWarningDay').value;
     
     if (this.validAddItemInput(name, count, "#addItemAlert") == false)
       return false;
@@ -68,7 +69,7 @@ class ShoppingList extends List {
         "idealCount": parseInt(count),
         "name" : name,
         "dayRemoved": -1,
-        "warningDay":  -1 
+        "warningDay":  warning
       });
   
       this.products.push(product);
