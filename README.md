@@ -127,7 +127,7 @@ All team members worked together in this sprint to create the user stories in th
 - [Source Code](https://github.com/chasewalker26/COP4331_Project/tree/main/project/)
 - [Test Code (Site)](https://github.com/chasewalker26/COP4331_Project/tree/main/project/Website/public/js)
 - [Test Code (Scanner)](https://github.com/chasewalker26/COP4331_Project/tree/main/project/RaspberryPi)
-- [Product Demonstration]()
+- [Product Demonstration](https://www.youtube.com/watch?v=6-T4kDlWDqs)
 
 ## Task Allocation
 - Chase Walker - I completed the user story "As a parent with a large family, I would like to be able to set preferred inventory count for each item, so that an item is added to my shopping list before I have none left" U008.
