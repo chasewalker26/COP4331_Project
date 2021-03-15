@@ -325,8 +325,7 @@ body {
 .sub-alert{
   text-align: center;
   padding: 10px;
-  background-color:#444444;
-  color:#fff;
+  color:rgba(31, 133, 0, .81); /* Green */
   margin-bottom: 10px;
   display: none;
 }
