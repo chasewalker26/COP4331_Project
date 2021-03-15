@@ -16,7 +16,10 @@ class Inventory extends List
       var name = products[i].name;
       var count = products[i].count;
 
-      html += '<li class="listProduct" id="' + barcode + '" name="inventoryItem"><span class="material-icons mx-2" data-toggle="modal" data-target="#editItemModal" data-backdrop="false">edit</span>' + name + ': ' + count + '</li>';
+      if (name != "")
+      {
+        html += '<li class="listProduct" id="' + barcode + '" name="inventoryItem"><span class="material-icons mx-2" data-toggle="modal" data-target="#editItemModal" data-backdrop="false">edit</span>' + name + ': ' + count + '</li>';
+      }
     }
 
     $("#inventory").html(html);

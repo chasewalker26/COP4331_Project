@@ -16,12 +16,12 @@ async function runTests()
     await formatListVisualTest();
     await getProductTest();
     await replaceProductTest();
-    editItemAlertUserTest();
-    validEditItemInputEmptyStringTest();
-    validEditItemInputStringTest();
-    validEditItemInputZeroTest();
-    validEditItemInputNegativeTest();
-    validEditItemInputPositiveTest();
+    alertUserTest();
+    validInputEmptyStringTest();
+    validInputStringTest();
+    validInputZeroTest();
+    validInputNegativeTest();
+    validInputPositiveTest();
     await editIdealCountTest();
     await editCountTest();
     editItemUITest();
@@ -130,12 +130,12 @@ async function replaceProductTest()
     console.assert(data == true, "replaceProductTest() FAILED");
 }
 
-function editItemAlertUserTest()
+function alertUserTest()
 {
     var data = false;
     let inventory = new Inventory("ListID_TEST");
 
-    inventory.editItemAlertUser("Hello There!");
+    inventory.alertUser("#editItemAlert", "Hello There!");
 
     if ($("#editItemAlert")[0].innerHTML == "Hello There!")
         data = true;
@@ -143,62 +143,62 @@ function editItemAlertUserTest()
     console.assert(data == true, "editItemAlertUserTest() FAILED");
 }
 
-function validEditItemInputEmptyStringTest()
+function validInputEmptyStringTest()
 {
     var data = false;
     let inventory = new Inventory("ListID_TEST");
 
-    console.assert(inventory.validEditItemInput("") == false, "validEditItemInputEmptyStringTest() FAILED");
+    console.assert(inventory.validInput("") == false, "validInputEmptyStringTest() FAILED");
 
     if ($("#editItemAlert")[0].innerHTML == "All inputs must be filled!")
         data = true;
 
-    console.assert(data == true, "validEditItemInputEmptyStringTest() FAILED");
+    console.assert(data == true, "validInputEmptyStringTest() FAILED");
 }
 
-function validEditItemInputStringTest()
+function validInputStringTest()
 {
     var data = false;
     let inventory = new Inventory("ListID_TEST");
 
-    console.assert(inventory.validEditItemInput("hi") == false, "validEditItemInputStringTest() FAILED");
+    console.assert(inventory.validInput("hi") == false, "validInputStringTest() FAILED");
 
     if ($("#editItemAlert")[0].innerHTML == "Your input must be a number!")
         data = true;
 
-    console.assert(data == true, "validEditItemInputStringTest() FAILED");
+    console.assert(data == true, "validInputStringTest() FAILED");
 }
 
-function validEditItemInputZeroTest()
+function validInputZeroTest()
 {
     var data = false;
     let inventory = new Inventory("ListID_TEST");
 
-    console.assert(inventory.validEditItemInput("0") == false, "validEditItemInputZeroTest() FAILED");
+    console.assert(inventory.validInput("0") == false, "validInputZeroTest() FAILED");
 
     if ($("#editItemAlert")[0].innerHTML == "Your input must be greater than 0!")
         data = true;
 
-    console.assert(data == true, "validEditItemInputZeroTest() FAILED");
+    console.assert(data == true, "validInputZeroTest() FAILED");
 }
 
-function validEditItemInputNegativeTest()
+function validInputNegativeTest()
 {
     var data = false;
     let inventory = new Inventory("ListID_TEST");
 
-    console.assert(inventory.validEditItemInput("-5") == false, "validEditItemInputNegativeTest() FAILED");
+    console.assert(inventory.validInput("-5") == false, "validInputNegativeTest() FAILED");
 
     if ($("#editItemAlert")[0].innerHTML == "Your input must be greater than 0!")
         data = true;
 
-    console.assert(data == true, "validEditItemInputNegativeTest() FAILED");
+    console.assert(data == true, "validInputNegativeTest() FAILED");
 }
 
-function validEditItemInputPositiveTest()
+function validInputPositiveTest()
 {
     let inventory = new Inventory("ListID_TEST");
-    console.assert(inventory.validEditItemInput("10") == true, "validEditItemInputPositiveTest() FAILED");
+    console.assert(inventory.validInput("10") == true, "validInputPositiveTest() FAILED");
 }
 
 async function editIdealCountTest()
@@ -267,5 +267,8 @@ function editItemUITest()
     // modal visible
     console.assert($('#editItemModal').is(':visible') == true, 'editItemUITest() FAILED');
 
-    console.assert($('#currentProduct').innerHTML == "water",  'editItemUITest() FAILED');
+    // shown product color correct
+    var currentProduct = document.getElementById("currentProduct");
+    currentProduct = getComputedStyle(currentProduct);
+    console.assert(currentProduct.color == "rgb(89, 139, 196)",  'editItemUITest() FAILED');
 }
