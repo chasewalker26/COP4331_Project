@@ -30,37 +30,43 @@
   </nav>
 
   
-  <!--shopping list header-->
   <div class="row text-left">
-    <div class="col-lg-10 col-8">
+    <div class="col-lg-9 col-8">
+      <!--shopping list header-->
       <h1 class="title mt-3 mx-3">Name's Shopping List</h1>
+      <!-- shopping list error message -->
+      <div class="row text-left">
+        <div class="col-12">
+          <h5 class="title mx-5 redWarning" id="errorMessage"></h5>
+        </div>
+      </div>
+      <!-- shopping list items -->
+      <div class="row">
+        <div class="col-12">
+            <ul id="shoppingList">
+            </ul>
+            <ul id="printedShoppingList" style="display: none;">
+            </ul>
+        </div>
+      </div>
     </div>
-    <div class="col-lg-2 col-4">
+    <!-- shopping list buttons -->
+    <div class="col-lg-3 col-4 my-3 text-center">
+      <!--Add item-->
+      <button class="addbutton" type="button" data-toggle="modal" data-target="#addItemModal" data-backdrop="false">ADD</button>
       <!-- Clear list -->
       <button class="clearbutton m-3" type="button" data-toggle="modal" data-target="#clearListModal" data-backdrop="false">CLEAR</button>
       <!--Add item-->
-      <button class="addbutton m-3" type="button" data-toggle="modal" data-target="#addItemModal" data-backdrop="false">ADD</button>
+      <button class="exportbutton" type="button" onclick="executeExport()">EXPORT</button>
     </div>
     </div>
   </div>
 
-  <div class="row text-left">
-    <div class="col-12">
-      <h5 class="title mx-5 redWarning" id="errorMessage"></h5>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-12">
-        <ul id="shoppingList">
-        </ul>
-    </div>
-  </div>
+  
 
   <!-- Modal for adding items-->
   <div id="addItemModal" class="modal fade" role="dialog">
     <div class="modal-dialog modal-dialog-centered">
-
       <!-- Modal content-->
       <div class="modal-content p-5">
           <div class="row">
@@ -92,14 +98,12 @@
             </div>
         </div>
       </div>
-
     </div>
   </div>
 
   <!-- Modal for clearing shopping list-->
   <div id="clearListModal" class="modal fade" role="dialog">
     <div class="modal-dialog modal-dialog-centered">
-
       <!-- Modal content-->
       <div class="modal-content p-5">
           <div class="row mb-5">
@@ -114,7 +118,6 @@
             </div>
         </div>
       </div>
-
     </div>
   </div>
 
@@ -178,6 +181,7 @@
   <script src="js/List.js"></script>
   <script src="js/ShoppingList.js"></script>
   <script src="js/ShoppingListTest.js"></script>
+  <script src="jsLibraries/html2pdf.bundle.min.js"></script>
 
   <script>
     var shoppingList;
@@ -233,8 +237,6 @@
       var name = document.getElementById("addName").value;
       var count = document.getElementById("addCount").value;
 
-      console.log(selectedBarcode);
-
       // if both functions are successful allow the modal to close and the list to repopulate
       if (await shoppingList.nameItem(selectedBarcode))
       {
@@ -245,6 +247,36 @@
         $('#addNameModal').hide();
       }
     }
+
+    // uses HTML2PDF library under fair use
+    async function executeExport()
+    {
+      var targetData = document.getElementById("shoppingList");
+      var elementChildren = targetData.children;
+
+      // every 19 items add a page break to prevent cutoff items
+      for (var i = 1; i <= elementChildren.length; i++)
+      {
+        if (i%19 == 0)
+        {
+          var pageBreak = document.createElement('div');
+          targetData.children[i - 1].after(pageBreak);
+          targetData.children[i - 1].classList.add("html2pdf__page-break");
+        }
+      }
+
+      var fileName = "yourShoppingList";
+      var opt = {
+          margin:       [1.0,0.3,1.0,0.3],
+          filename:     fileName,
+          image:        {type: 'jpeg', quality: 1.0},
+          html2canvas:  {scale: 1, useCORS: true},
+          jsPDF:        {unit: 'in', format: 'letter', orientation: 'portrait'},
+          pagebreak:    {mode: 'legacy'},
+      };
+
+      await html2pdf().from(targetData).set(opt).save();
+     }
   </script>
 
 </body>
