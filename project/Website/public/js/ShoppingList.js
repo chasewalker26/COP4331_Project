@@ -14,6 +14,8 @@ class ShoppingList extends List {
       var count = products[i].count;
       var idealCount = products[i].idealCount;
       var countToBuy = idealCount - count;
+      var removeDay = products[i].dayRemoved;
+      var warning = products[i].warningDay;
 
       if (name == "")
       {
@@ -22,6 +24,27 @@ class ShoppingList extends List {
       else if (count < idealCount)
       {
         html += '<li class="listProduct" id="' + barcode + '" name="shoppingListItem">' + name + ': ' + countToBuy + '</li>';
+      }
+      else if (removeDay != -1)
+      {
+        removeDay = removeDay.split("/");
+        var warnDate = parseInt(removeDay[0]) + warning;
+
+        var now = new Date();
+        var start = new Date(now.getFullYear(), 0, 0);
+        var curr = now - start;
+        var oneDay = 1000 * 60 * 60 * 24;
+        var today = Math.floor(curr / oneDay);
+        console.log(today);
+
+        count = 0;
+        countToBuy = idealCount - count;
+        //gonna need to reset the count to 0 in product
+
+        if (today >= warnDate)
+        {
+          html += '<li class="listProduct" id="' + barcode + '" name="shoppingListItem">' + name + ': ' + countToBuy + '</li>';
+        }
       }
     }
 
