@@ -181,6 +181,13 @@ body {
   cursor: pointer;
 }
 
+@media only screen and (max-width: 800px)
+{
+  .navlink{
+    text-align: center !important;
+  }
+}
+
 .sidenav {
   height: 100%; 
   width: 0; 
@@ -235,14 +242,11 @@ body {
   background-color: #00A8F9;
   border: 1px;
   color: white;
-  width: 80px;
   padding: 5px 10px;
   text-align: center;
   text-decoration: none;
   font-size: 20px;
   font-weight: bold;
-  /* position: fixed; */
-  /* right: 130px; */
   transition-duration: 0.4s;
   box-shadow: 0 3px 3px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 } 
@@ -252,18 +256,36 @@ body {
   color: white;
 }
 
-.clearbutton {
-  background-color: rgba(251, 87, 87, .81); /* Red */
+/* Shopping List Buttons */
+.exportbutton {
+  background-color: rgba(31, 133, 0, .81);;
   border: 1px;
   color: white;
-  width: 80px;
   padding: 5px 10px;
   text-align: center;
   text-decoration: none;
   font-size: 20px;
   font-weight: bold;
-  /* position: fixed; */
-  /* right: 240px; */
+
+  transition-duration: 0.4s;
+  box-shadow: 0 3px 3px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+} 
+
+.exportbutton:hover {
+  background-color: rgba(31, 133, 0, .81);;
+  color: white;
+}
+
+
+.clearbutton {
+  background-color: rgba(251, 87, 87, .81); /* Red */
+  border: 1px;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: bold;
   transition-duration: 0.4s;
   box-shadow: 0 3px 3px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
