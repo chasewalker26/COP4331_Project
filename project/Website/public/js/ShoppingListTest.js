@@ -36,7 +36,11 @@ function sidenavTest()
 {
     document.getElementById("navOpen").click();
     var sidenav = document.getElementById("sidenav");
-    console.assert(sidenav.style.width == "250px", "sidenavTest FAILED");
+    
+    if ($(window).width() < 1400)
+        console.assert(sidenav.style.width == "100%", "sidenavTest FAILED");
+    else
+        console.assert(sidenav.style.width == "250px", "sidenavTest FAILED");
 
     document.getElementById("navClose").click();
     console.assert(sidenav.style.width == "0px", "sidenavTest FAILED");

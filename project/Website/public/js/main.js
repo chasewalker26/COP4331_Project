@@ -81,7 +81,10 @@ saveToFirebase = (datapath, data) =>
 }
 
 function openNav() {
-    document.getElementById("sidenav").style.width = "250px";
+    if ($(window).width() < 1400)
+        document.getElementById("sidenav").style.width = "100%";
+    else
+        document.getElementById("sidenav").style.width = "250px";
 }
 
 function closeNav() {
