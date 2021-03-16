@@ -31,14 +31,6 @@ class ShoppingList extends List {
   
   clearList()
   {
-    var now = new Date();
-    var start = new Date(now.getFullYear(), 0, 0);
-    var diff = now - start;
-    var year = now.getFullYear().toString().substr(-2);
-    var oneDay = 1000 * 60 * 60 * 24;
-    var day = Math.floor(diff / oneDay);
-    var date = day.toString() + '/' + year;
-    console.log(date);
     var products = this.products;
 
     for (var i = 0; i < products.length; i++)
@@ -109,13 +101,13 @@ class ShoppingList extends List {
       this.alertUser(location, "Please check your input, empty name, count, and warning period must be filled");
       return false;
     }
-    else if (isNaN(warning) || isNaN(warning))
+    else if (isNaN(count) || isNaN(warning))
     {
       this.alertUser(location, "Please check your input, count and warning period must be numbers");
       return false;
     }
     else
-     return true;
+      return true;
   }
   
   async nameItem(barcode) 
@@ -123,7 +115,7 @@ class ShoppingList extends List {
     var name = document.getElementById('addName').value;
     var count = document.getElementById('addCount').value;
     
-    if (this.validAddItemInput(name, count, "#addNameAlert") == false)
+    if (this.validNametemInput(name, count, "#addNameAlert") == false)
       return false;
 
     let product = new Product(barcode, {
@@ -141,6 +133,24 @@ class ShoppingList extends List {
     await this.updateDatabase(JSONProducts);
 
     return true;
+  }
+
+  validNametemInput(name, count, location)
+  {
+    count = parseInt(count);
+
+    if (name.length == 0)
+    {
+      this.alertUser(location, "Please check your input, empty name, count, and warning period must be filled");
+      return false;
+    }
+    else if (isNaN(count))
+    {
+      this.alertUser(location, "Please check your input, count and warning period must be numbers");
+      return false;
+    }
+    else
+      return true;
   }
 
   productExistsError(name)

@@ -6,6 +6,7 @@ if (isTesting == true)
     window.onload = async function()
     {
         await redirectIfNotFirebaseUser(); // runtime function to ensure a user is signed in
+        getCurrentDate();
         runTests();
     }
 }
@@ -25,7 +26,8 @@ async function runTests()
     await formatProductsJSONTest();
     await addItemSuccessTest();
     await addItemItemExistsFailureTest();
-    await addItemBadInputFailureTest();
+    await addItemEmptyStringInputFailureTest();
+    await addItemStringForNumberFailureTest();
     await nameItemTest();
 }
 
@@ -277,8 +279,8 @@ async function addItemSuccessTest()
 
     var expectedProduct =
     {
-        "count" : 0,
-        "dayRemoved": -1,
+        "count" : 2,
+        "dayRemoved": date,
         "idealCount": 2,
         "name" : "mango",
         "warningDay":  5 
@@ -305,8 +307,7 @@ async function addItemItemExistsFailureTest()
 
     document.getElementById("addItemName").value = "mango";
     document.getElementById("addItemCount").value = "3";
-
-    await shoppingList.addItem();
+    document.getElementById("addWarningDay").value = "5";
 
     if ($("#addItemAlert")[0].innerHTML == "This item already exists")
         data = true;
@@ -318,7 +319,7 @@ async function addItemItemExistsFailureTest()
 }
 
 // correct error message appears when addItem has bad input
-async function addItemBadInputFailureTest()
+async function addItemEmptyStringInputFailureTest()
 {
     var data = false;
     let shoppingList = new ShoppingList("ListID_TEST");
@@ -327,21 +328,39 @@ async function addItemBadInputFailureTest()
 
     document.getElementById("addItemName").value = "";
     document.getElementById("addItemCount").value = "3";
+    document.getElementById("addWarningDay").value = "5";
 
     await shoppingList.addItem();
 
-    if ($("#addItemAlert")[0].innerHTML == "Please check your input, empty name or count detected")
+    if ($("#addItemAlert")[0].innerHTML == "Please check your input, empty name, count, and warning period must be filled")
         data = true;
     
-    console.assert(data == true, "addItemItemExistsFailureTest() FAILED");
-
-    // clean up: remove mango from DB to clean up after addItem tests and reset form
-    var products = await pullFromFirebase("ProductList/ListID_TEST/");
-    products["mango"] = null; // data to change in DB
-    shoppingList.updateDatabase(products);
+    console.assert(data == true, "addItemBadInputFailureTest() FAILED");
 
     document.getElementById("addItemForm").reset();
 }
+
+async function addItemStringForNumberFailureTest()
+{
+    var data = false;
+    let shoppingList = new ShoppingList("ListID_TEST");
+
+    await shoppingList.getProducts();
+
+    document.getElementById("addItemName").value = "mango";
+    document.getElementById("addItemCount").value = "qwe";
+    document.getElementById("addWarningDay").value = "rtwry";
+
+    await shoppingList.addItem();
+
+    if ($("#addItemAlert")[0].innerHTML == "Please check your input, count and warning period must be numbers")
+        data = true;
+    
+    console.assert(data == true, "addItemStringForNumberFailureTest() FAILED");
+
+    document.getElementById("addItemForm").reset();
+}
+
 
 async function nameItemTest()
 {
@@ -362,7 +381,7 @@ async function nameItemTest()
         "name" : "water",
         "warningDay":  -1 
     }
-
+ 
     var actualProduct = await pullFromFirebase("ProductList/ListID_TEST/unrecognized");
     
     if (JSON.stringify(actualProduct) == JSON.stringify(expectedProduct))
