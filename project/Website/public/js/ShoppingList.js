@@ -3,7 +3,7 @@ class ShoppingList extends List {
     super(listID);
   }
 
-  formatList() 
+  async formatList() 
   {
     var products = this.products;
     var html = "";
@@ -30,20 +30,19 @@ class ShoppingList extends List {
         removeDay = removeDay.split("/");
         var warnDate = parseInt(removeDay[0]) + warning;
 
-        var now = new Date();
-        var start = new Date(now.getFullYear(), 0, 0);
-        var curr = now - start;
-        var oneDay = 1000 * 60 * 60 * 24;
-        var today = Math.floor(curr / oneDay);
-        console.log(today);
-
-        count = 0;
-        countToBuy = idealCount - count;
-        //gonna need to reset the count to 0 in product
+        var curr = date.split("/");
+        var today = parseInt(curr[0]);
 
         if (today >= warnDate)
         {
-          html += '<li class="listProduct" id="' + barcode + '" name="shoppingListItem">' + name + ': ' + countToBuy + '</li>';
+          if (count != 0) {
+            products[i].count = 0;
+            var JSONProducts = this.formatProductsJSON();
+
+            this.updateDatabase(JSONProducts);
+
+          }
+          html += '<li class="listProduct" id="' + barcode + '" name="shoppingListItem">' + name + ': ' + idealCount + '</li>';
         }
       }
     }

@@ -73,6 +73,13 @@
             <h3 class="col-12 title text-center">Add an Item</h3>
           </div>
           <div class="row text-center">
+            <div>
+              <b>Reminder Period:</b> Give a number in days that you would like to elapse since the list was cleared until 
+              the item is re-added with the count below. This is useful for produce which cannot be scanned. 
+              Ex: Reminder period of 7 would add this item to the list 7 days after it was cleared.
+            </div>
+          </div>
+          <div class="row text-center">
             <div class="redWarning" id="addItemAlert"></div>
           </div>
           <form class="row mt-3 mb-5" id="addItemForm">
@@ -182,6 +189,7 @@
   <script src="js/ShoppingList.js"></script>
   <script src="js/ShoppingListTest.js"></script>
   <script src="jsLibraries/html2pdf.bundle.min.js"></script>
+  <script src="js/Inventory.js"></script>
 
   <script>
     var shoppingList;
