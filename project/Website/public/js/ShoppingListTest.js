@@ -26,7 +26,7 @@ async function runTests()
     await addItemSuccessTest();
     await addItemItemExistsFailureTest();
     await addItemBadInputFailureTest();
-    await addNameTest();
+    await nameItemTest();
 }
 
 // sidenav resizes as expected when used
@@ -271,6 +271,7 @@ async function addItemSuccessTest()
 
     document.getElementById("addItemName").value = "mango";
     document.getElementById("addItemCount").value = 2;
+    document.getElementById("addWarningDay").value = 5;
 
     await shoppingList.addItem();
 
@@ -280,7 +281,7 @@ async function addItemSuccessTest()
         "dayRemoved": -1,
         "idealCount": 2,
         "name" : "mango",
-        "warningDay":  -1 
+        "warningDay":  5 
     }
 
     var actualProduct = await pullFromFirebase("ProductList/ListID_TEST/mango");
@@ -342,7 +343,7 @@ async function addItemBadInputFailureTest()
     document.getElementById("addItemForm").reset();
 }
 
-async function addNameTest()
+async function nameItemTest()
 {
     var data = false;
     let shoppingList = new ShoppingList("ListID_TEST");
@@ -367,10 +368,11 @@ async function addNameTest()
     if (JSON.stringify(actualProduct) == JSON.stringify(expectedProduct))
         data = true;
 
-    console.assert(data == true, "addNameTest() FAILED");
+    console.assert(data == true, "nameItemTest() FAILED");
 
     await saveToFirebase("ProductList/ListID_TEST/unrecognized/", {name:""});
     await saveToFirebase("ProductList/ListID_TEST/unrecognized/", {idealCount:1});
     await shoppingList.getProducts();
     shoppingList.formatList();
+    document.getElementById("addNameForm").reset();
 }

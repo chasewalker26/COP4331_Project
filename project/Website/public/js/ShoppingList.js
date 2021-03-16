@@ -74,7 +74,7 @@ class ShoppingList extends List {
     var count = document.getElementById('addItemCount').value;
     var warning = document.getElementById('addWarningDay').value;
     
-    if (this.validAddItemInput(name, count, "#addItemAlert") == false)
+    if (this.validAddItemInput(name, count, warning, "#addItemAlert") == false)
       return false;
 
     if ((this.productExistsError(name)) == false)
@@ -84,7 +84,7 @@ class ShoppingList extends List {
         "idealCount": parseInt(count),
         "name" : name,
         "dayRemoved": -1,
-        "warningDay":  warning
+        "warningDay":  parseInt(warning)
       });
   
       this.products.push(product);
@@ -99,12 +99,19 @@ class ShoppingList extends List {
     return false;
   }
 
-  validAddItemInput(name, count, location)
+  validAddItemInput(name, count, warning, location)
   {
-    if (name.length == 0 || count == "")
+    count = parseInt(count);
+    warning = parseInt(warning);
+
+    if (name.length == 0)
     {
-      this.alertUser(location, "Please check your input, empty name or count detected");
-      
+      this.alertUser(location, "Please check your input, empty name, count, and warning period must be filled");
+      return false;
+    }
+    else if (isNaN(warning) || isNaN(warning))
+    {
+      this.alertUser(location, "Please check your input, count and warning period must be numbers");
       return false;
     }
     else
