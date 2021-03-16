@@ -2,7 +2,7 @@
 var isTesting = true;
 var appUser;
 var account;
-
+var date;
 
 if (isTesting == false)
 {
@@ -14,6 +14,8 @@ if (isTesting == false)
         {
             await redirectIfNotFirebaseUser();
         }
+
+        getCurrentDate();
     }
 }
 
@@ -39,6 +41,18 @@ async function initializeAppUser()
     var user = await firebase.auth().currentUser;
     appUser = new User(user.displayName, user.email, user.uid);
     console.log(appUser);
+}
+
+function getCurrentDate()
+{
+    var now = new Date();
+    var start = new Date(now.getFullYear(), 0, 0);
+    var diff = now - start;
+    var year = now.getFullYear().toString().substr(-2);
+    var oneDay = 1000 * 60 * 60 * 24;
+    var day = Math.floor(diff / oneDay);
+    date = day.toString() + '/' + year;
+    console.log(date);
 }
 
 // function that enables asynchronous fethcing of database data
