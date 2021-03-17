@@ -68,10 +68,10 @@ class ShoppingList extends List {
         var newCount = countToBuy + count;
         products[i].count = newCount; 
       }
-      if(warning != -1){
+      
+      if (warning != -1){
         dayRemoved = date;
         products[i].dayRemoved = dayRemoved;
-        console.log(dayRemoved);
       }
     }
 
