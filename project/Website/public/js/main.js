@@ -1,8 +1,11 @@
 // ALWAYS set false when not testing
-var isTesting = true;
+var isTesting = false;
 var appUser;
 var account;
 var date;
+
+var userShoppingList;
+var userInventory;
 
 if (isTesting == false)
 {
@@ -10,17 +13,53 @@ if (isTesting == false)
     {
         var page = window.location.pathname;
 
+        // if user is not on login page
         if (page == "/shoppingList.html" || page == "/inventory.html" || page == "/Contact.html")
-        {
             appUser = await redirectIfNotFirebaseUser();
-        }
 
         getCurrentDate();
+
+        if (await userHasNonEmptyList() == false)
+        {
+            console.log("Non populated list");
+        }
+        else
+        {
+            console.log("List is good");
+
+        }
     }
 }
 
-// Uses firebase function to verify firebase user status allows
-// signed in user to enter and creates a local user object, or 
+
+async function userHasNonEmptyList()
+{
+    // user has no list
+    if (await pullFromFirebase("ProductList/" + appUser.uid) == null)
+    {
+        console.log("No list exists for this user. Initializing empty list.");
+
+        await saveToFirebase("ProductList/", {
+            [appUser.uid]: {
+                "EmptyList": "empty"
+            }
+        });
+
+        return false;
+    }
+    // user's list is empty
+    else if (await pullFromFirebase("ProductList/" + appUser.uid + "/EmptyList") != undefined)
+    {
+        console.log("Empty list for user");
+
+        return false;
+    }
+    else
+        return true;
+}
+
+// Uses firebase function to verify firebase user status allows signed
+// in user to enter and creates a local user object with their info, or 
 // sends them to login (not tested since third-party function from Google)
 redirectIfNotFirebaseUser = () => 
 {
@@ -38,16 +77,6 @@ redirectIfNotFirebaseUser = () =>
                 window.location.replace("index.html");
         });
     })
-}
-
-// Uses data from firebase function to create a User object
-// (not explicitly tested as User() is tested and other function
-// is a third-party function from Google)
-async function initializeAppUser()
-{
-    var user = await firebase.auth().currentUser;
-    appUser = new User(user.displayName, user.email, user.uid);
-    console.log(appUser);
 }
 
 function getCurrentDate()
