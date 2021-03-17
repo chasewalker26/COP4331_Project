@@ -12,7 +12,7 @@ if (isTesting == false)
 
         if (page == "/shoppingList.html" || page == "/inventory.html" || page == "/Contact.html")
         {
-            await redirectIfNotFirebaseUser();
+            appUser = await redirectIfNotFirebaseUser();
         }
 
         getCurrentDate();
@@ -22,15 +22,22 @@ if (isTesting == false)
 // Uses firebase function to verify firebase user status allows
 // signed in user to enter and creates a local user object, or 
 // sends them to login (not tested since third-party function from Google)
-async function redirectIfNotFirebaseUser()
+redirectIfNotFirebaseUser = () => 
 {
-    await firebase.auth().onAuthStateChanged(async function(user)
+    return new Promise((resolve) => 
     {
-        if (user)
-            await initializeAppUser();
-        else
-            window.location.replace("index.html");
-    });
+        firebase.auth().onAuthStateChanged(async function(user)
+        {
+            if (user)
+            {
+                var currUser = new User(user.displayName, user.email, user.uid);
+                console.log(currUser);
+                resolve(currUser);
+            }
+            else
+                window.location.replace("index.html");
+        });
+    })
 }
 
 // Uses data from firebase function to create a User object

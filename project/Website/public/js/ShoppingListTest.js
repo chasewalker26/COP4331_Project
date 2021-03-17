@@ -5,7 +5,7 @@ if (isTesting == true)
 {
     window.onload = async function()
     {
-        await redirectIfNotFirebaseUser(); // runtime function to ensure a user is signed in
+        appUser = await redirectIfNotFirebaseUser(); // runtime function to ensure a user is signed in
         getCurrentDate();
         runTests();
     }
@@ -17,17 +17,24 @@ async function runTests()
     ListTest();
     ProductTest();
     UserTest();
+    
     await getProductsWithExistingListIDTest();
     await getProductsWithBadListIDTest();
+
     await updateDatabaseTest();
+
     await formatListFunctionalTest();
     await formatListVisualTest();
+
     await clearListTest();
+
     await formatProductsJSONTest();
+
     await addItemSuccessTest();
     await addItemItemExistsFailureTest();
     await addItemEmptyStringInputFailureTest();
     await addItemStringForNumberFailureTest();
+
     await nameItemTest();
 }
 
@@ -322,7 +329,7 @@ async function addItemItemExistsFailureTest()
     document.getElementById("addItemForm").reset();
 }
 
-// correct error message appears when addItem has bad input
+// correct error message appears when addItem gets an empty input
 async function addItemEmptyStringInputFailureTest()
 {
     var data = false;
@@ -344,6 +351,7 @@ async function addItemEmptyStringInputFailureTest()
     document.getElementById("addItemForm").reset();
 }
 
+// correct error message appears when addItem gets a string in a number field
 async function addItemStringForNumberFailureTest()
 {
     var data = false;
@@ -365,7 +373,7 @@ async function addItemStringForNumberFailureTest()
     document.getElementById("addItemForm").reset();
 }
 
-
+// nameItem saves renamed products correctly
 async function nameItemTest()
 {
     var data = false;

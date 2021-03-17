@@ -2,18 +2,22 @@ if (isTesting == true)
 {
     window.onload = async function()
     {
-        await redirectIfNotFirebaseUser(); // runtime function to ensure a user is signed in
+        appUser = await redirectIfNotFirebaseUser(); // runtime function to ensure a user is signed in
         runTests();
   }
 }
 
-function runTests(){
+async function runTests(){
   contactTest();
-  // sendMail();
-  $("#submitContact").click()
+  sendMailTest();
 }
 
+function sendMailTest()
+{
+  document.getElementById("message").value = "This is a Hello World for the Contact Test";
 
+  $("#submitContact").click();
+}
 
 function contactTest(){
   var data = false;
