@@ -75,16 +75,12 @@ async function userHasNonEmptyList()
     {
         console.log("No list exists for this user. Initializing empty list.");
 
-        await saveToFirebase("ProductList/", {
-            [appUser.uid]: {
-                "EmptyList": "empty"
-            }
-        });
+        await saveToFirebase("ProductList/", {[appUser.uid]: "EmptyList"});
 
         return false;
     }
     // user's list is empty
-    else if (await pullFromFirebase("ProductList/" + appUser.uid + "/EmptyList") != undefined)
+    else if (await pullFromFirebase("ProductList/" + appUser.uid) == "EmptyList")
     {
         console.log("Empty list for user");
 
