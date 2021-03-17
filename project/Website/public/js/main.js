@@ -26,11 +26,33 @@ if (isTesting == false)
         else
         {
             console.log("List is good");
-
+            if (page == "/shoppingList.html")
+            {
+                await intitializeShoppingList();
+                console.log(userShoppingList.products);
+            }
+            else if (page == "/inventory.html")
+            {
+                await intitializeInventory();
+                console.log(userInventory.products);
+            }
         }
     }
 }
 
+async function intitializeShoppingList()
+{
+    userShoppingList = new ShoppingList(appUser.uid);
+    await userShoppingList.getProducts();
+    userShoppingList.formatList();
+}
+
+async function intitializeInventory()
+{
+    userInventory = new Inventory(appUser.uid);
+    await userInventory.getProducts();
+    userInventory.formatList();
+}
 
 async function userHasNonEmptyList()
 {
