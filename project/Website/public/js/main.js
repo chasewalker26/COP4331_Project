@@ -26,18 +26,32 @@ if (isTesting == false)
         else
         {
             console.log("List is good");
-            if (page == "/shoppingList.html")
-            {
-                await intitializeShoppingList();
-                console.log(userShoppingList.products);
-            }
-            else if (page == "/inventory.html")
-            {
-                await intitializeInventory();
-                console.log(userInventory.products);
-            }
+            
+        if (page == "/shoppingList.html")
+            await shoppingListPageInitialize();
+        else if (page == "/inventory.html")
+            await inventoryPageInitialize();
         }
     }
+}
+
+async function shoppingListPageInitialize()
+{
+    await intitializeShoppingList();
+
+    if ($('#shoppingList').html() != "")
+    {
+        $('#clearShoppingList').show();
+        $('#export').show();
+    }
+}
+
+async function inventoryPageInitialize()
+{
+    await intitializeInventory();
+
+    if ($('#inventory').html() != "")
+        $('#clearInventory').show();
 }
 
 async function intitializeShoppingList()
