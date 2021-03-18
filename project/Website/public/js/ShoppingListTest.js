@@ -36,6 +36,7 @@ async function runTests()
     await addItemStringForNumberFailureTest();
 
     await nameItemTest();
+    await updateDayRemovedTest();
 }
 
 // sidenav resizes as expected when used
@@ -406,4 +407,35 @@ async function nameItemTest()
     await shoppingList.getProducts();
     shoppingList.formatList();
     document.getElementById("addNameForm").reset();
+}
+
+async function updateDayRemovedTest()
+{
+    var data = false;
+    let shoppingList = new ShoppingList("ListID_TEST");
+    await shoppingList.getProducts();
+    
+    await saveToFirebase("ProductList/ListID_TEST/mango/", {dayRemoved:"66/21"});
+   
+    var expectedProduct =
+    {
+        "count" : 0,
+        "dayRemoved": "66/21",
+        "idealCount": 2,
+        "name" : "mango",
+        "warningDay":  5 
+    }
+ 
+    var actualProduct = await pullFromFirebase("ProductList/ListID_TEST/mango");
+    
+    if (JSON.stringify(actualProduct) == JSON.stringify(expectedProduct))
+        data = true;
+
+    console.assert(data == true, "updateDayRemovedTest() FAILED");
+
+    
+    await saveToFirebase("ProductList/ListID_TEST/mango/", {count:2});
+    await saveToFirebase("ProductList/ListID_TEST/mango/", {dayRemoved:date});
+    await shoppingList.getProducts();
+    shoppingList.formatList();
 }
