@@ -18,6 +18,7 @@ if (isTesting == false)
             appUser = await redirectIfNotFirebaseUser();
 
         getCurrentDate();
+        console.log(date);
 
         if (await userHasNonEmptyList() == false)
         {
@@ -120,7 +121,6 @@ function getCurrentDate()
     var oneDay = 1000 * 60 * 60 * 24;
     var day = Math.floor(diff / oneDay);
     date = day.toString() + '/' + year;
-    console.log(date);
 }
 
 // function that enables asynchronous fethcing of database data
