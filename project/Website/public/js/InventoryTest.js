@@ -6,8 +6,12 @@ if (isTesting == true)
     window.onload = async function()
     {
         appUser = await redirectIfNotFirebaseUser(); // runtime function to ensure a user is signed in
+        appUser.uid = "ListID_TEST";
+
         getCurrentDate();
         runTests();
+
+        await inventoryPageInitialize();
     }
 }
 
@@ -40,8 +44,9 @@ async function formatListFunctionalTest()
     // change expectedElements
     var expectedElements = '<li class="listProduct" id="Barcode0" name="inventoryItem"><span class="material-icons mx-2" data-toggle="modal" data-target="#editItemModal" data-backdrop="false">edit</span>water: 6</li>' + 
                            '<li class="listProduct" id="Barcode1" name="inventoryItem"><span class="material-icons mx-2" data-toggle="modal" data-target="#editItemModal" data-backdrop="false">edit</span>name: 8</li>' +
-                           '<li class="listProduct" id="Barcode3" name="inventoryItem"><span class="material-icons mx-2" data-toggle="modal" data-target="#editItemModal" data-backdrop="false">edit</span>name: 3</li>';
-
+                           '<li class="listProduct" id="Barcode3" name="inventoryItem"><span class="material-icons mx-2" data-toggle="modal" data-target="#editItemModal" data-backdrop="false">edit</span>name: 3</li>' + 
+                           '<li class="listProduct" id="banana" name="inventoryItem"><span class="material-icons mx-2" data-toggle="modal" data-target="#editItemModal" data-backdrop="false">edit</span>banana: 4</li>';
+    
     var siteInventoryElements = document.getElementById("inventory").children;
     var actualElements = "";
 
