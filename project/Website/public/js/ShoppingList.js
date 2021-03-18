@@ -35,12 +35,12 @@ class ShoppingList extends List {
 
         if (today >= warnDate)
         {
-          if (count != 0) {
+          if (count != 0)
+          {
             products[i].count = 0;
+
             var JSONProducts = this.formatProductsJSON();
-
             this.updateDatabase(JSONProducts);
-
           }
           html += '<li class="listProduct" id="' + barcode + '" name="shoppingListItem">' + name + ': ' + idealCount + '</li>';
         }

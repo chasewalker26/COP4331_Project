@@ -6,8 +6,12 @@ if (isTesting == true)
     window.onload = async function()
     {
         appUser = await redirectIfNotFirebaseUser(); // runtime function to ensure a user is signed in
+        appUser.uid = "ListID_TEST";
+
         getCurrentDate();
         runTests();
+
+        await shoppingListPageInitialize();
     }
 }
 
@@ -23,7 +27,9 @@ async function runTests()
 
     await updateDatabaseTest();
 
-    await formatListFunctionalTest();
+    await formatListNonWarningDayItemsTest();
+    await formatListWarningDayItemsPastDueTest();
+    await formatListWarningDayItemsPreDueTest();
     await formatListVisualTest();
 
     await clearListTest();
@@ -36,7 +42,6 @@ async function runTests()
     await addItemStringForNumberFailureTest();
 
     await nameItemTest();
-    await updateDayRemovedTest();
 }
 
 // sidenav resizes as expected when used
@@ -186,13 +191,16 @@ async function updateDatabaseTest()
 
 // shopping list items html elements and data should match as expected from UI
 // and known test data in DB;
-async function formatListFunctionalTest()
+// This will check the formatList function capability for items that have
+// warningDay = -1
+async function formatListNonWarningDayItemsTest()
 {
     let shoppingList = new ShoppingList("ListID_TEST");
     await shoppingList.getProducts();
     shoppingList.formatList();
 
     var expectedElements = '<li class="listProduct" id="Barcode3" name="shoppingListItem">name: 3</li>' + 
+                           '<li class="listProduct" id="mango" name="shoppingListItem">mango: 2</li>' +
                            '<li class="listProduct notFound" id="unrecognized" name="unrecognizedItem" data-toggle="modal" data-target="#addNameModal" data-backdrop="false">unrecognized</li>';
 
     var siteShoppingListElements = document.getElementById("shoppingList").children;
@@ -201,7 +209,100 @@ async function formatListFunctionalTest()
     for (var i = 0; i < siteShoppingListElements.length; i++)
         actualElements += siteShoppingListElements[i].outerHTML;
         
-    console.assert(expectedElements == actualElements, "ShoppingList.formatListFunctionalTest() FAILED");
+    console.assert(expectedElements == actualElements, "formatListNonWarningDayItemsTest() FAILED");
+}
+
+async function formatListWarningDayItemsPastDueTest()
+{
+    var data = false;
+
+    await saveToFirebase("ProductList/ListID_TEST/banana/", {dayRemoved:"66/21"});
+
+    let shoppingList = new ShoppingList("ListID_TEST");
+    await shoppingList.getProducts();
+
+    shoppingList.formatList();
+
+    var siteShoppingListElements = document.getElementById("shoppingList").children;
+    var expectedElement = '<li class="listProduct" id="banana" name="shoppingListItem">banana: 4</li>';
+
+    if (siteShoppingListElements[1].outerHTML == expectedElement)
+        data = true;
+
+    console.assert(data == true, "formatListWarningDayItemsPastDueTest() FAILED");
+
+    data = false;
+   
+    var expectedProduct =
+    {
+        "count" : 0,
+        "dayRemoved": "66/21",
+        "idealCount": 4,
+        "name" : "banana",
+        "warningDay": 5
+    }
+ 
+    var actualProduct = await pullFromFirebase("ProductList/ListID_TEST/banana");
+    
+    if (JSON.stringify(actualProduct) == JSON.stringify(expectedProduct))
+        data = true;
+
+    console.assert(data == true, "formatListWarningDayItemsPastDueTest() FAILED");
+
+    
+    await saveToFirebase("ProductList/ListID_TEST/banana/", {count: 4});
+    await saveToFirebase("ProductList/ListID_TEST/banana/", {dayRemoved: -1});
+    await shoppingList.getProducts();
+    shoppingList.formatList();
+}
+
+async function formatListWarningDayItemsPreDueTest()
+{
+    var data = false;
+    await saveToFirebase("ProductList/ListID_TEST/banana/", {dayRemoved: date});
+
+    date = date.split('/');
+    date = (parseInt(date[0]) - 2) + '/' + date[1];
+
+    let shoppingList = new ShoppingList("ListID_TEST");
+    await shoppingList.getProducts();
+
+    shoppingList.formatList();
+
+    var siteShoppingListElements = document.getElementById("shoppingList").children;
+    var expectedElement = '<li class="listProduct" id="mango" name="shoppingListItem">mango: 2</li>';
+
+    if (siteShoppingListElements[1].outerHTML == expectedElement)
+        data = true;
+
+    console.assert(data == true, "formatListWarningDayItemsPreDueTest() FAILED");
+
+    data = false;
+   
+    // return global date variable to real date
+    getCurrentDate();
+
+    var expectedProduct =
+    {
+        "count" : 4,
+        "dayRemoved": date,
+        "idealCount": 4,
+        "name" : "banana",
+        "warningDay": 5
+    }
+ 
+    var actualProduct = await pullFromFirebase("ProductList/ListID_TEST/banana");
+    
+    if (JSON.stringify(actualProduct) == JSON.stringify(expectedProduct))
+        data = true;
+
+    console.assert(data == true, "formatListWarningDayItemsPreDueTest() FAILED");
+
+    
+    await saveToFirebase("ProductList/ListID_TEST/banana/", {count: 4});
+    await saveToFirebase("ProductList/ListID_TEST/banana/", {dayRemoved: -1});
+    await shoppingList.getProducts();
+    shoppingList.formatList();
 }
 
 // shopping list items should have correct styling as per UI diagrams
@@ -228,7 +329,7 @@ async function formatListVisualTest()
     console.assert(FW == "700", "formatListVisualTest FAILED");
 
     // check if the unrecognized item formatting is right
-    var style = getComputedStyle(siteListElements[1]);
+    var style = getComputedStyle(siteListElements[2]);
     var color = style.color;
 
     console.assert(color == "rgba(251, 87, 87, 0.81)", "formatListVisualTest FAILED");
@@ -237,25 +338,28 @@ async function formatListVisualTest()
 // clear list should leave the shopping list empty and correctly update databse
 async function clearListTest()
 {
-    var data = false;
     let shoppingList = new ShoppingList("ListID_TEST");
     await shoppingList.getProducts();
 
     shoppingList.clearList();
 
-    var product = await pullFromFirebase("ProductList/ListID_TEST/Barcode3/")
+    var Barcode3 = await pullFromFirebase("ProductList/ListID_TEST/Barcode3/");
+    var mango = await pullFromFirebase("ProductList/ListID_TEST/mango/");
 
     var siteListElements = document.getElementsByClassName("listProduct");
-    var listEmpty = (siteListElements[0] == undefined);
+    var listEmpty = (siteListElements[0] == undefined); // Barcode3 on list
 
-    if (product.count == 6 && listEmpty)
-        data = true;
+    // check if count is updated to the right value
+    console.assert(Barcode3.count == 6 && listEmpty, "clearListTest FAILED");
 
-    console.assert(data == true, "clearListTest FAILED");
+    // check if dayRemoved is updated to the right value
+    console.assert(mango.dayRemoved == date, "clearListTest FAILED");
 
-    // repair the clear operation (fix data, get fixed data, display data)
+    // repair the clear operation (fix data, get fixed data, display fixed data)
     await saveToFirebase("ProductList/ListID_TEST/Barcode3/", {count:3});
     await saveToFirebase("ProductList/ListID_TEST/unrecognized/", {count:0});
+    await saveToFirebase("ProductList/ListID_TEST/mango/", {count:0});
+    await saveToFirebase("ProductList/ListID_TEST/mango/", {dayRemoved:-1});
     await shoppingList.getProducts();
     shoppingList.formatList();
 }
@@ -291,8 +395,8 @@ async function addItemSuccessTest()
 
     var expectedProduct =
     {
-        "count" : 2,
-        "dayRemoved": date,
+        "count" : 0,
+        "dayRemoved": -1,
         "idealCount": 2,
         "name" : "mango",
         "warningDay":  5 
@@ -407,35 +511,4 @@ async function nameItemTest()
     await shoppingList.getProducts();
     shoppingList.formatList();
     document.getElementById("addNameForm").reset();
-}
-
-async function updateDayRemovedTest()
-{
-    var data = false;
-    let shoppingList = new ShoppingList("ListID_TEST");
-    await shoppingList.getProducts();
-    
-    await saveToFirebase("ProductList/ListID_TEST/mango/", {dayRemoved:"66/21"});
-   
-    var expectedProduct =
-    {
-        "count" : 0,
-        "dayRemoved": "66/21",
-        "idealCount": 2,
-        "name" : "mango",
-        "warningDay":  5 
-    }
- 
-    var actualProduct = await pullFromFirebase("ProductList/ListID_TEST/mango");
-    
-    if (JSON.stringify(actualProduct) == JSON.stringify(expectedProduct))
-        data = true;
-
-    console.assert(data == true, "updateDayRemovedTest() FAILED");
-
-    
-    await saveToFirebase("ProductList/ListID_TEST/mango/", {count:2});
-    await saveToFirebase("ProductList/ListID_TEST/mango/", {dayRemoved:date});
-    await shoppingList.getProducts();
-    shoppingList.formatList();
 }
