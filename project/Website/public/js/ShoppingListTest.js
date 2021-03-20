@@ -42,6 +42,8 @@ async function runTests()
     await addItemStringForNumberFailureTest();
 
     await nameItemTest();
+
+    warningCheckTest();
 }
 
 // sidenav resizes as expected when used
@@ -551,4 +553,21 @@ async function nameItemTest()
     await shoppingList.getProducts();
     shoppingList.formatList();
     document.getElementById("addNameForm").reset();
+}
+
+//tests warning day function 
+async function warningCheckTest() {
+    let shoppingList = new ShoppingList("ListID_TEST");
+    var removeDate = "66/21";
+    var failWarningDays = 100;
+    var passWarningDays = 3;
+
+    var response = shoppingList.warningCheck(removeDate, failWarningDays);
+
+    console.assert(response == false, "warningCheckTest() FAILED");
+
+    response = null;
+
+    response = shoppingList.warningCheck(removeDate, passWarningDays);
+    console.assert(response == true, "warningCheckTest() FAILED");
 }
