@@ -196,7 +196,7 @@
     
     async function executeAddItem()
     {
-      var shoppingList = new ShoppingList("ListID_TEST");
+      var shoppingList = new ShoppingList(appUser.uid);
       
       await shoppingList.getProducts();
 
@@ -212,7 +212,7 @@
 
     async function executeClearList()
     {
-      var shoppingList = new ShoppingList("ListID_TEST");
+      var shoppingList = new ShoppingList(appUser.uid);
       
       await shoppingList.getProducts();
 
@@ -222,7 +222,7 @@
     // no test since it combines built in js functions and tested functions
     $(document).on("click", "[name='unrecognizedItem']", async function()
     {
-      shoppingList = new ShoppingList("ListID_TEST");
+      shoppingList = new ShoppingList(appUser.uid);
       await shoppingList.getProducts();
 
       // clicked product id holds the products barode

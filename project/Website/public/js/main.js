@@ -20,22 +20,19 @@ if (isTesting == false)
         getCurrentDate();
         console.log(date);
 
-        if (await userHasNonEmptyList() == false)
-        {
-            console.log("Non populated list");
-        }
-        else
+        if (await userHasNonEmptyList())
         {
             console.log("List is good");
-            
-        if (page == "/shoppingList.html")
-            await shoppingListPageInitialize();
-        else if (page == "/inventory.html")
-            await inventoryPageInitialize();
+
+            if (page == "/shoppingList.html")
+                await shoppingListPageInitialize();
+            else if (page == "/inventory.html")
+                await inventoryPageInitialize();
         }
     }
 }
 
+// no test because this uitilizes only tested code or built in js code
 async function shoppingListPageInitialize()
 {
     await intitializeShoppingList();
@@ -47,6 +44,7 @@ async function shoppingListPageInitialize()
     }
 }
 
+// no test because this uitilizes only tested code or built in js code
 async function inventoryPageInitialize()
 {
     await intitializeInventory();
@@ -55,6 +53,7 @@ async function inventoryPageInitialize()
         $('#clearInventory').show();
 }
 
+// no test because this uitilizes only tested functions
 async function intitializeShoppingList()
 {
     userShoppingList = new ShoppingList(appUser.uid);
@@ -62,6 +61,7 @@ async function intitializeShoppingList()
     userShoppingList.formatList();
 }
 
+// no test because this uitilizes only tested functions
 async function intitializeInventory()
 {
     userInventory = new Inventory(appUser.uid);
@@ -69,6 +69,7 @@ async function intitializeInventory()
     userInventory.formatList();
 }
 
+// No test because only utilizes tested or API code
 async function userHasNonEmptyList()
 {
     // user has no list

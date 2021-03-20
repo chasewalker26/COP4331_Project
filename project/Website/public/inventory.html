@@ -131,7 +131,7 @@
     // no test since it combines built in js functions and tested functions
     $(document).on("click", "[name='inventoryItem']", async function()
     {
-      inventory = new Inventory("ListID_TEST");
+      inventory = new Inventory(appUser.uid);
       await inventory.getProducts();
 
       // clicked product id holds the products barode
