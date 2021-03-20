@@ -30,9 +30,11 @@ class Inventory extends List
 
     idealCount = parseInt(idealCount);
 
+    // find the targeted product
     var currentProduct = this.getProduct(barcode);
     currentProduct.idealCount = idealCount;
 
+    // replace the target product to update idealCount 
     this.replaceProduct(barcode, currentProduct);
         
     var JSONProducts = this.formatProductsJSON();
@@ -48,9 +50,11 @@ class Inventory extends List
 
     count = parseInt(count);
 
+    // find the targeted product
     var currentProduct = this.getProduct(barcode);
     currentProduct.count = count;
 
+    // replace the target product to update count 
     this.replaceProduct(barcode, currentProduct);
         
     var JSONProducts = this.formatProductsJSON();

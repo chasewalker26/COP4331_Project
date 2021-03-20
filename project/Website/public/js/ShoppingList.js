@@ -47,6 +47,10 @@ class ShoppingList extends List {
       }
     }
 
+    // no items to show
+    if (html == "")
+      html = '<li class="listProduct">Congratulations! Your list is empty!</li>';
+
     $("#shoppingList").html(html);
   }
  
@@ -76,14 +80,14 @@ class ShoppingList extends List {
     }
 
     var JSONProducts = this.formatProductsJSON();
-
     this.updateDatabase(JSONProducts);
 
-    $("#shoppingList").html("");
+    this.formatList();
   }
 
   async addItem() 
   {
+    // get data
     var name = document.getElementById('addItemName').value;
     var count = document.getElementById('addItemCount').value;
     var warning = document.getElementById('addWarningDay').value;
@@ -104,7 +108,6 @@ class ShoppingList extends List {
       this.products.push(product);
   
       var JSONProducts = this.formatProductsJSON();
-  
       await this.updateDatabase(JSONProducts);
 
       return true;
@@ -134,6 +137,7 @@ class ShoppingList extends List {
   
   async nameItem(barcode) 
   {
+    // get data
     var name = document.getElementById('addName').value;
     var count = document.getElementById('addCount').value;
     
@@ -147,11 +151,11 @@ class ShoppingList extends List {
       "dayRemoved": -1,
       "warningDay":  -1 
     });
-  
+
+    // replace product in products
     this.replaceProduct(barcode, product);
   
     var JSONProducts = this.formatProductsJSON();
-  
     await this.updateDatabase(JSONProducts);
 
     return true;

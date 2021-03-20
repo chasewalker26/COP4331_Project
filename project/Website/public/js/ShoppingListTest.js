@@ -50,6 +50,7 @@ function sidenavTest()
     document.getElementById("navOpen").click();
     var sidenav = document.getElementById("sidenav");
     
+    // check that works on mobile and desktop
     if ($(window).width() < 1400)
         console.assert(sidenav.style.width == "100%", "sidenavTest FAILED");
     else
@@ -132,6 +133,7 @@ async function getProductsWithExistingListIDTest()
     var products = await pullFromFirebase("ProductList/ListID_TEST");
     var barcodes = Object.keys(products);
 
+    // create array of expected output
     for (var i = 0; i < barcodes.length; i++)
     {
         var barcode = barcodes[i];
@@ -157,10 +159,8 @@ async function getProductsWithBadListIDTest()
         data = true;
 
     // clean up
-    setTimeout(() =>
-    {
+    setTimeout(() => {
         $("#errorMessage").hide();
-
     }, 1000);
 
     console.assert(data == true, "getProductsTest FAILED");
@@ -174,7 +174,8 @@ async function updateDatabaseTest()
     var list = new List('ListID_TEST');
     list.products = await pullFromFirebase("ProductList/ListID_TEST/");
     
-    list.products["Barcode3"].count = 10; // data to change in DB
+    // explicit data to change in DB
+    list.products["Barcode3"].count = 10;
 
     await list.updateDatabase(list.products);
 
@@ -192,15 +193,15 @@ async function updateDatabaseTest()
 // shopping list items html elements and data should match as expected from UI
 // and known test data in DB;
 // This will check the formatList function capability for items that have
-// warningDay = -1
+// warningDay = -1 and/or dayRemoved = -1
 async function formatListNonWarningDayItemsTest()
 {
+    // build list
     let shoppingList = new ShoppingList("ListID_TEST");
     await shoppingList.getProducts();
     shoppingList.formatList();
 
     var expectedElements = '<li class="listProduct" id="Barcode3" name="shoppingListItem">name: 3</li>' + 
-                           '<li class="listProduct" id="mango" name="shoppingListItem">mango: 2</li>' +
                            '<li class="listProduct notFound" id="unrecognized" name="unrecognizedItem" data-toggle="modal" data-target="#addNameModal" data-backdrop="false">unrecognized</li>';
 
     var siteShoppingListElements = document.getElementById("shoppingList").children;
@@ -212,17 +213,22 @@ async function formatListNonWarningDayItemsTest()
     console.assert(expectedElements == actualElements, "formatListNonWarningDayItemsTest() FAILED");
 }
 
+// This test verifies that items with warningDay != -1 and dayRemoved != -1
+// appear on the list from formatList when dayRemoved is >= warningDay
+// days behind current date
 async function formatListWarningDayItemsPastDueTest()
 {
     var data = false;
 
+    // force date to be more than 5 days behind current date
     await saveToFirebase("ProductList/ListID_TEST/banana/", {dayRemoved:"66/21"});
 
+    // build list
     let shoppingList = new ShoppingList("ListID_TEST");
     await shoppingList.getProducts();
-
     shoppingList.formatList();
 
+    // expect a banana as the 2nd element on page due to known test data
     var siteShoppingListElements = document.getElementById("shoppingList").children;
     var expectedElement = '<li class="listProduct" id="banana" name="shoppingListItem">banana: 4</li>';
 
@@ -232,7 +238,8 @@ async function formatListWarningDayItemsPastDueTest()
     console.assert(data == true, "formatListWarningDayItemsPastDueTest() FAILED");
 
     data = false;
-   
+    
+    // expect banana to have these properties after being added to page
     var expectedProduct =
     {
         "count" : 0,
@@ -249,39 +256,46 @@ async function formatListWarningDayItemsPastDueTest()
 
     console.assert(data == true, "formatListWarningDayItemsPastDueTest() FAILED");
 
-    
+    // clean up all changed data and rebuild list
     await saveToFirebase("ProductList/ListID_TEST/banana/", {count: 4});
     await saveToFirebase("ProductList/ListID_TEST/banana/", {dayRemoved: -1});
     await shoppingList.getProducts();
     shoppingList.formatList();
 }
 
+// This test verifies that items with warningDay != -1 and dayRemoved != -1
+// DO NOT appear on the list from formatList when dayRemoved is < warningDay
+// days behind current date
 async function formatListWarningDayItemsPreDueTest()
 {
     var data = false;
-    await saveToFirebase("ProductList/ListID_TEST/banana/", {dayRemoved: date});
-
+    
+    // edit current day of year to be 2 days less than curren day
+    // to check that the 5 day period is not met and function works
     date = date.split('/');
     date = (parseInt(date[0]) - 2) + '/' + date[1];
 
+    await saveToFirebase("ProductList/ListID_TEST/banana/", {dayRemoved: date});
+
+    // build list
     let shoppingList = new ShoppingList("ListID_TEST");
     await shoppingList.getProducts();
-
     shoppingList.formatList();
 
+    var expectedElements = '<li class="listProduct" id="Barcode3" name="shoppingListItem">name: 3</li>' + 
+                           '<li class="listProduct notFound" id="unrecognized" name="unrecognizedItem" data-toggle="modal" data-target="#addNameModal" data-backdrop="false">unrecognized</li>';
+
     var siteShoppingListElements = document.getElementById("shoppingList").children;
-    var expectedElement = '<li class="listProduct" id="mango" name="shoppingListItem">mango: 2</li>';
+    var actualElements = "";
 
-    if (siteShoppingListElements[1].outerHTML == expectedElement)
-        data = true;
-
-    console.assert(data == true, "formatListWarningDayItemsPreDueTest() FAILED");
+    for (var i = 0; i < siteShoppingListElements.length; i++)
+        actualElements += siteShoppingListElements[i].outerHTML;
+        
+    console.assert(expectedElements == actualElements, "formatListWarningDayItemsPreDueTest() FAILED");
 
     data = false;
    
-    // return global date variable to real date
-    getCurrentDate();
-
+    // verify product has not changed
     var expectedProduct =
     {
         "count" : 4,
@@ -298,7 +312,8 @@ async function formatListWarningDayItemsPreDueTest()
 
     console.assert(data == true, "formatListWarningDayItemsPreDueTest() FAILED");
 
-    
+    // clean up all changed data and rebuild list
+    getCurrentDate();
     await saveToFirebase("ProductList/ListID_TEST/banana/", {count: 4});
     await saveToFirebase("ProductList/ListID_TEST/banana/", {dayRemoved: -1});
     await shoppingList.getProducts();
@@ -308,6 +323,7 @@ async function formatListWarningDayItemsPreDueTest()
 // shopping list items should have correct styling as per UI diagrams
 async function formatListVisualTest()
 {
+    // build list
     let shoppingList = new ShoppingList("ListID_TEST");
     await shoppingList.getProducts();
     shoppingList.formatList();
@@ -329,7 +345,7 @@ async function formatListVisualTest()
     console.assert(FW == "700", "formatListVisualTest FAILED");
 
     // check if the unrecognized item formatting is right
-    var style = getComputedStyle(siteListElements[2]);
+    var style = getComputedStyle(siteListElements[1]);
     var color = style.color;
 
     console.assert(color == "rgba(251, 87, 87, 0.81)", "formatListVisualTest FAILED");
@@ -338,40 +354,47 @@ async function formatListVisualTest()
 // clear list should leave the shopping list empty and correctly update databse
 async function clearListTest()
 {
+    // build list
     let shoppingList = new ShoppingList("ListID_TEST");
     await shoppingList.getProducts();
 
+    // name unamed item since it will only not reappear when named
+    document.getElementById("addName").value = "water";
+    document.getElementById("addCount").value = 2;
+    await shoppingList.nameItem("unrecognized");
+
     shoppingList.clearList();
 
+    // expected resulting data
     var Barcode3 = await pullFromFirebase("ProductList/ListID_TEST/Barcode3/");
-    var mango = await pullFromFirebase("ProductList/ListID_TEST/mango/");
-
+    var banana = await pullFromFirebase("ProductList/ListID_TEST/banana/");
     var siteListElements = document.getElementsByClassName("listProduct");
-    var listEmpty = (siteListElements[0] == undefined); // Barcode3 on list
+    var htmlCorrect = (siteListElements[0].outerHTML == '<li class="listProduct">Congratulations! Your list is empty!</li>');
 
-    // check if count is updated to the right value
-    console.assert(Barcode3.count == 6 && listEmpty, "clearListTest FAILED");
+    console.assert(Barcode3.count == 6, "clearListTest() FAILED");
+    console.assert(banana.dayRemoved == date, "clearListTest() FAILED");
+    console.assert(htmlCorrect, "clearListTest() FAILED");
 
-    // check if dayRemoved is updated to the right value
-    console.assert(mango.dayRemoved == date, "clearListTest FAILED");
-
-    // repair the clear operation (fix data, get fixed data, display fixed data)
-    await saveToFirebase("ProductList/ListID_TEST/Barcode3/", {count:3});
-    await saveToFirebase("ProductList/ListID_TEST/unrecognized/", {count:0});
-    await saveToFirebase("ProductList/ListID_TEST/mango/", {count:0});
-    await saveToFirebase("ProductList/ListID_TEST/mango/", {dayRemoved:-1});
+    // clean up all changed data and rebuild list
+    await saveToFirebase("ProductList/ListID_TEST/Barcode3/", {count: 3});
+    await saveToFirebase("ProductList/ListID_TEST/unrecognized/", {count: 0});
+    await saveToFirebase("ProductList/ListID_TEST/banana/", {dayRemoved: -1});
+    await saveToFirebase("ProductList/ListID_TEST/unrecognized/", {name:""});
+    await saveToFirebase("ProductList/ListID_TEST/unrecognized/", {idealCount:1});
     await shoppingList.getProducts();
     shoppingList.formatList();
 }
 
-// formatProducts... should create the correct database JSON format from the list's products array
+// formatProductsJSON should create the correct database JSON format from the list's products array
 async function formatProductsJSONTest()
 {
     var data = false;
+    // build list
     let shoppingList = new ShoppingList("ListID_TEST");
     await shoppingList.getProducts();
 
     var JSONproducts = shoppingList.formatProductsJSON();
+
     var dbProducts = await pullFromFirebase("ProductList/ListID_TEST/");
 
     if (JSON.stringify(JSONproducts) == JSON.stringify(dbProducts))
@@ -384,22 +407,25 @@ async function formatProductsJSONTest()
 async function addItemSuccessTest()
 {
     var data = false;
+    // build list
     let shoppingList = new ShoppingList("ListID_TEST");
     await shoppingList.getProducts();
 
+    // addItem data
     document.getElementById("addItemName").value = "mango";
     document.getElementById("addItemCount").value = 2;
     document.getElementById("addWarningDay").value = 5;
 
     await shoppingList.addItem();
 
+    // what should be in DB
     var expectedProduct =
     {
         "count" : 0,
         "dayRemoved": -1,
         "idealCount": 2,
         "name" : "mango",
-        "warningDay":  5 
+        "warningDay":  5
     }
 
     var actualProduct = await pullFromFirebase("ProductList/ListID_TEST/mango");
@@ -414,23 +440,29 @@ async function addItemSuccessTest()
 }
 
 // correct error message appears when item being added already exists
+// mango left in DB after last test, so should not be allowed
 async function addItemItemExistsFailureTest()
 {
     var data = false;
+    // build list
     let shoppingList = new ShoppingList("ListID_TEST");
-
     await shoppingList.getProducts();
 
+    // addItem data
     document.getElementById("addItemName").value = "mango";
-    document.getElementById("addItemCount").value = "3";
-    document.getElementById("addWarningDay").value = "5";
+    document.getElementById("addItemCount").value = 3;
+    document.getElementById("addWarningDay").value = 5;
 
+    await shoppingList.addItem();
+
+    // ensure error appears
     if ($("#addItemAlert")[0].innerHTML == "This item already exists")
         data = true;
     
     console.assert(data == true, "addItemItemExistsFailureTest() FAILED");
 
-    // clean up
+    // clean up all changed datat
+    await saveToFirebase("ProductList/ListID_TEST/", {mango: null});
     document.getElementById("addItemForm").reset();
 }
 
@@ -438,16 +470,18 @@ async function addItemItemExistsFailureTest()
 async function addItemEmptyStringInputFailureTest()
 {
     var data = false;
+    // build list
     let shoppingList = new ShoppingList("ListID_TEST");
-
     await shoppingList.getProducts();
 
+    // addItem data
     document.getElementById("addItemName").value = "";
-    document.getElementById("addItemCount").value = "3";
-    document.getElementById("addWarningDay").value = "5";
+    document.getElementById("addItemCount").value = 3;
+    document.getElementById("addWarningDay").value = 5;
 
     await shoppingList.addItem();
 
+    // alert for name = ""
     if ($("#addItemAlert")[0].innerHTML == "Please check your input, empty name, count, and warning period must be filled")
         data = true;
     
@@ -460,16 +494,18 @@ async function addItemEmptyStringInputFailureTest()
 async function addItemStringForNumberFailureTest()
 {
     var data = false;
+    // build list
     let shoppingList = new ShoppingList("ListID_TEST");
-
     await shoppingList.getProducts();
 
+    // addItem data
     document.getElementById("addItemName").value = "mango";
     document.getElementById("addItemCount").value = "qwe";
     document.getElementById("addWarningDay").value = "rtwry";
 
     await shoppingList.addItem();
 
+    // alert for string for warning or count
     if ($("#addItemAlert")[0].innerHTML == "Please check your input, count and warning period must be numbers")
         data = true;
     
@@ -482,14 +518,17 @@ async function addItemStringForNumberFailureTest()
 async function nameItemTest()
 {
     var data = false;
+    // build list
     let shoppingList = new ShoppingList("ListID_TEST");
     await shoppingList.getProducts();
 
+    // nameItem data
     document.getElementById("addName").value = "water";
     document.getElementById("addCount").value = 2;
 
     await shoppingList.nameItem("unrecognized");
 
+    // expected result
     var expectedProduct =
     {
         "count" : 0,
@@ -506,6 +545,7 @@ async function nameItemTest()
 
     console.assert(data == true, "nameItemTest() FAILED");
 
+    // clean up all changed data and rebuild list
     await saveToFirebase("ProductList/ListID_TEST/unrecognized/", {name:""});
     await saveToFirebase("ProductList/ListID_TEST/unrecognized/", {idealCount:1});
     await shoppingList.getProducts();
