@@ -68,13 +68,13 @@ The only business rule that defines architectural processes is the requirement t
 
 # User Interface Design
 
-![UI Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/UI3.png?raw=true)
+![UI Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/UI4.png?raw=true)
 
 |    UI diagram      |    User Interaction    |     UUID(s)    |
 | ------------------ | ---------------------- | -------------- |
 | 1 | This screen shows what the user will see after submitting the clear crossed-out items dialogue box, the items will no longer be on the screen. | U020 |
 | 2 | This is the sign in/sign up screen using Google’s login API for security and efficiency. | U004 |
-| 3 | When clicking on a red barcode displayed on the list the user will be prompted to give the item a name. This red item appears when an item is unrecognized by the barcode API. This screen also demonstrates what the shopping list wil look like | U001, U003, U020 |
+| 3 | When clicking on a red barcode displayed on the list the user will be prompted to give the item a name. This red item appears when an item is unrecognized by the barcode API. Pressing the export button will download a pdf of all the items on the page. This screen also demonstrates what the shopping list wil look like.| U001, U003, U011, U020, U021 |
 | 4 | This shows when the user presses clear on the shgopping list. If they confirm, the whole shopping list will be clear and the counts shown will be added to the inventory items | U016 |
 | 5 | This is the add item dialogue box. It is designed for produce so a user can create an item with a time-based reminder system. | U009, U019 |
 | 6 | This is the shopping list after the clear operation has been done, or when the list is empty. | U016 |
@@ -83,10 +83,11 @@ The only business rule that defines architectural processes is the requirement t
 | 9 | This is the sidenav for the site. | general requirement for a site |
 | 10 | This is the contact form, it is navigated to using the nav menu. Submitting a message emails the developers. | U014 |
 | 11 | This screen allows users to set preferred inventory amounts for items in their inventory, and edit current amounts. This is done by clicking on the pencil next to an inventory item. | U008, U010 |
-| 12 | This is the inventory screen layout | U006, U017 |
-| 13 | This is what it looks like when an inventory item is clicked on. They are crossed out and marked for removal | U007 |
-| 14 | This box appears when the user presses clear with specific items crossed out, saving removes them, and cancel leaves the items crossed-out on the list. | U007 |
-| 15 | This is the user’s inventory screen, after they have cleared an item. | U007 |
+| 12 | This is the inventory screen layout | U006, U017, U021 |
+| 13 | This is the help page that holds embedded youtube videos of the tutorials. | U012, U013, U026 |
+| 14 | This is what it looks like when an inventory item is clicked on. They are crossed out and marked for removal | U007 |
+| 15 | This box appears when the user presses clear with specific items crossed out, saving removes them, and cancel leaves the items crossed-out on the list. | U007 |
+| 16 | This is the user’s inventory screen, after they have cleared an item. | U007 |
 
 # Resource Management
 
