@@ -27,16 +27,10 @@ class ShoppingList extends List {
       }
       else if (removeDay != -1)
       {
-        removeDay = removeDay.split("/");
-        var warnDate = parseInt(removeDay[0]) + warning;
-
-        var curr = date.split("/");
-        var today = parseInt(curr[0]);
-
-        if (today >= warnDate)
+        if (this.warningCheck(removeDay, warning))
         {
-          if (count != 0)
-          {
+         if (count != 0)
+         {
             products[i].count = 0;
 
             var JSONProducts = this.formatProductsJSON();
@@ -196,4 +190,20 @@ class ShoppingList extends List {
     return false;
   }
 
+  warningCheck(removeDay, warning)
+  {
+    removeDay = removeDay.split("/");
+    var warnDate = parseInt(removeDay[0]) + warning;
+
+    var curr = date.split("/");
+    var today = parseInt(curr[0]);
+
+    if (today >= warnDate)
+    {
+      return true;
+    }
+    
+    return false;
+  }
+  
 }
