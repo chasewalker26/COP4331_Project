@@ -154,7 +154,7 @@ All team members worked together in this sprint to create the user stories in th
 ## Task Allocation
 - Chase Walker - I completed the user story "As a paper lover, I want to be able to print my shopping list so that I can bring a physical copy to the store" U011.
 
-- Christopher Gray -
+- Christopher Gray - I completed "As a produce consumer, I want to add items to my shopping list that rely on a time-based reminder because produce does not have barcodes" U019 with Anjali.
 
 - Omer Gul - 
 
