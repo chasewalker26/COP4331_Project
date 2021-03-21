@@ -160,7 +160,7 @@ All team members worked together in this sprint to create the user stories in th
 
 - Anjali Ramsahai - 
 
-- Alisher Sultangazin - 
+- Alisher Sultangazin - I attemted but did not finish the user story "As a shopper, I would like to be able to select specific items to permanently remove from my inventory so that they are no longer tracked until I scan them again, so that I am not told to buy things that I don't want" U007.
 
 
 # Sprint 8
