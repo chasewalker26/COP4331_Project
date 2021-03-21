@@ -156,7 +156,7 @@ All team members worked together in this sprint to create the user stories in th
 
 - Christopher Gray - I completed "As a produce consumer, I want to add items to my shopping list that rely on a time-based reminder because produce does not have barcodes" U019 with Anjali.
 
-- Omer Gul - 
+- Omer Gul - I completed the user story "As a technologically novice user, I want to have a tutorial on how to setup the scanner, so I can use it efficiently" U013.
 
 - Anjali Ramsahai - 
 
