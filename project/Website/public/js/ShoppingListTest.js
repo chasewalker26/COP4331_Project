@@ -43,7 +43,9 @@ async function runTests()
 
     await nameItemTest();
 
-    warningPeriodCheckTest();
+    await warningPeriodCheckTest();
+
+    await addPageBreaksForPrintTest();
 }
 
 // sidenav resizes as expected when used
@@ -199,9 +201,7 @@ async function updateDatabaseTest()
 async function formatListNonWarningDayItemsTest()
 {
     // build list
-    let shoppingList = new ShoppingList("ListID_TEST");
-    await shoppingList.getProducts();
-    shoppingList.formatList();
+    userShoppingList.formatList();
 
     var expectedElements = '<li class="listProduct" id="Barcode3" name="shoppingListItem">name: 3</li>' + 
                            '<li class="listProduct notFound" id="unrecognized" name="unrecognizedItem" data-toggle="modal" data-target="#addNameModal" data-backdrop="false">unrecognized</li>';
@@ -226,9 +226,8 @@ async function formatListWarningDayItemsPastDueTest()
     await saveToFirebase("ProductList/ListID_TEST/banana/", {dayRemoved:"66/21"});
 
     // build list
-    let shoppingList = new ShoppingList("ListID_TEST");
-    await shoppingList.getProducts();
-    shoppingList.formatList();
+    await userShoppingList.getProducts();
+    userShoppingList.formatList();
 
     // expect a banana as the 2nd element on page due to known test data
     var siteShoppingListElements = document.getElementById("shoppingList").children;
@@ -261,8 +260,8 @@ async function formatListWarningDayItemsPastDueTest()
     // clean up all changed data and rebuild list
     await saveToFirebase("ProductList/ListID_TEST/banana/", {count: 4});
     await saveToFirebase("ProductList/ListID_TEST/banana/", {dayRemoved: -1});
-    await shoppingList.getProducts();
-    shoppingList.formatList();
+    await userShoppingList.getProducts();
+    userShoppingList.formatList();
 }
 
 // This test verifies that items with warningDay != -1 and dayRemoved != -1
@@ -280,9 +279,8 @@ async function formatListWarningDayItemsPreDueTest()
     await saveToFirebase("ProductList/ListID_TEST/banana/", {dayRemoved: date});
 
     // build list
-    let shoppingList = new ShoppingList("ListID_TEST");
-    await shoppingList.getProducts();
-    shoppingList.formatList();
+    await userShoppingList.getProducts();
+    userShoppingList.formatList();
 
     var expectedElements = '<li class="listProduct" id="Barcode3" name="shoppingListItem">name: 3</li>' + 
                            '<li class="listProduct notFound" id="unrecognized" name="unrecognizedItem" data-toggle="modal" data-target="#addNameModal" data-backdrop="false">unrecognized</li>';
@@ -318,17 +316,15 @@ async function formatListWarningDayItemsPreDueTest()
     getCurrentDate();
     await saveToFirebase("ProductList/ListID_TEST/banana/", {count: 4});
     await saveToFirebase("ProductList/ListID_TEST/banana/", {dayRemoved: -1});
-    await shoppingList.getProducts();
-    shoppingList.formatList();
+    await userShoppingList.getProducts();
+    userShoppingList.formatList();
 }
 
 // shopping list items should have correct styling as per UI diagrams
 async function formatListVisualTest()
 {
     // build list
-    let shoppingList = new ShoppingList("ListID_TEST");
-    await shoppingList.getProducts();
-    shoppingList.formatList();
+    userShoppingList.formatList();
 
     var siteListElements = document.getElementsByClassName("listProduct");
 
@@ -356,16 +352,12 @@ async function formatListVisualTest()
 // clear list should leave the shopping list empty and correctly update databse
 async function clearListTest()
 {
-    // build list
-    let shoppingList = new ShoppingList("ListID_TEST");
-    await shoppingList.getProducts();
-
     // name unamed item since it will only not reappear when named
     document.getElementById("addName").value = "water";
     document.getElementById("addCount").value = 2;
-    await shoppingList.nameItem("unrecognized");
+    await userShoppingList.nameItem("unrecognized");
 
-    shoppingList.clearList();
+    userShoppingList.clearList();
 
     // expected resulting data
     var Barcode3 = await pullFromFirebase("ProductList/ListID_TEST/Barcode3/");
@@ -383,19 +375,16 @@ async function clearListTest()
     await saveToFirebase("ProductList/ListID_TEST/banana/", {dayRemoved: -1});
     await saveToFirebase("ProductList/ListID_TEST/unrecognized/", {name:""});
     await saveToFirebase("ProductList/ListID_TEST/unrecognized/", {idealCount:1});
-    await shoppingList.getProducts();
-    shoppingList.formatList();
+    await userShoppingList.getProducts();
+    userShoppingList.formatList();
 }
 
 // formatProductsJSON should create the correct database JSON format from the list's products array
 async function formatProductsJSONTest()
 {
     var data = false;
-    // build list
-    let shoppingList = new ShoppingList("ListID_TEST");
-    await shoppingList.getProducts();
 
-    var JSONproducts = shoppingList.formatProductsJSON();
+    var JSONproducts = userShoppingList.formatProductsJSON();
 
     var dbProducts = await pullFromFirebase("ProductList/ListID_TEST/");
 
@@ -409,16 +398,13 @@ async function formatProductsJSONTest()
 async function addItemSuccessTest()
 {
     var data = false;
-    // build list
-    let shoppingList = new ShoppingList("ListID_TEST");
-    await shoppingList.getProducts();
 
     // addItem data
     document.getElementById("addItemName").value = "mango";
     document.getElementById("addItemCount").value = 2;
     document.getElementById("addWarningDay").value = 5;
 
-    await shoppingList.addItem();
+    await userShoppingList.addItem();
 
     // what should be in DB
     var expectedProduct =
@@ -446,16 +432,13 @@ async function addItemSuccessTest()
 async function addItemItemExistsFailureTest()
 {
     var data = false;
-    // build list
-    let shoppingList = new ShoppingList("ListID_TEST");
-    await shoppingList.getProducts();
 
     // addItem data
     document.getElementById("addItemName").value = "mango";
     document.getElementById("addItemCount").value = 3;
     document.getElementById("addWarningDay").value = 5;
 
-    await shoppingList.addItem();
+    await userShoppingList.addItem();
 
     // ensure error appears
     if ($("#addItemAlert")[0].innerHTML == "This item already exists")
@@ -463,8 +446,10 @@ async function addItemItemExistsFailureTest()
     
     console.assert(data == true, "addItemItemExistsFailureTest() FAILED");
 
-    // clean up all changed datat
+    // clean up all changed data
     await saveToFirebase("ProductList/ListID_TEST/", {mango: null});
+    await userShoppingList.getProducts();
+    userShoppingList.formatList();
     document.getElementById("addItemForm").reset();
 }
 
@@ -472,16 +457,13 @@ async function addItemItemExistsFailureTest()
 async function addItemEmptyStringInputFailureTest()
 {
     var data = false;
-    // build list
-    let shoppingList = new ShoppingList("ListID_TEST");
-    await shoppingList.getProducts();
 
     // addItem data
     document.getElementById("addItemName").value = "";
     document.getElementById("addItemCount").value = 3;
     document.getElementById("addWarningDay").value = 5;
 
-    await shoppingList.addItem();
+    await userShoppingList.addItem();
 
     // alert for name = ""
     if ($("#addItemAlert")[0].innerHTML == "Please check your input, empty name, count, and warning period must be filled")
@@ -496,16 +478,13 @@ async function addItemEmptyStringInputFailureTest()
 async function addItemStringForNumberFailureTest()
 {
     var data = false;
-    // build list
-    let shoppingList = new ShoppingList("ListID_TEST");
-    await shoppingList.getProducts();
 
     // addItem data
     document.getElementById("addItemName").value = "mango";
     document.getElementById("addItemCount").value = "qwe";
     document.getElementById("addWarningDay").value = "rtwry";
 
-    await shoppingList.addItem();
+    await userShoppingList.addItem();
 
     // alert for string for warning or count
     if ($("#addItemAlert")[0].innerHTML == "Please check your input, count and warning period must be numbers")
@@ -521,14 +500,12 @@ async function nameItemTest()
 {
     var data = false;
     // build list
-    let shoppingList = new ShoppingList("ListID_TEST");
-    await shoppingList.getProducts();
 
     // nameItem data
     document.getElementById("addName").value = "water";
     document.getElementById("addCount").value = 2;
 
-    await shoppingList.nameItem("unrecognized");
+    await userShoppingList.nameItem("unrecognized");
 
     // expected result
     var expectedProduct =
@@ -550,24 +527,46 @@ async function nameItemTest()
     // clean up all changed data and rebuild list
     await saveToFirebase("ProductList/ListID_TEST/unrecognized/", {name:""});
     await saveToFirebase("ProductList/ListID_TEST/unrecognized/", {idealCount:1});
-    await shoppingList.getProducts();
-    shoppingList.formatList();
+    await userShoppingList.getProducts();
+    userShoppingList.formatList();
     document.getElementById("addNameForm").reset();
 }
 
 //tests warning day function 
 async function warningPeriodCheckTest() {
-    let shoppingList = new ShoppingList("ListID_TEST");
     var removeDate = "66/21";
     var failWarningDays = 100;
     var passWarningDays = 3;
 
-    var response = shoppingList.warningPeriodCheck(removeDate, failWarningDays);
+    var response = userShoppingList.warningPeriodCheck(removeDate, failWarningDays);
 
     console.assert(response == false, "warningCheckTest() FAILED");
 
     response = null;
 
-    response = shoppingList.warningPeriodCheck(removeDate, passWarningDays);
+    response = userShoppingList.warningPeriodCheck(removeDate, passWarningDays);
     console.assert(response == true, "warningCheckTest() FAILED");
+}
+
+// checks that page break is added every 19 items
+async function addPageBreaksForPrintTest()
+{
+    $("#shoppingList").html("");
+
+    for (var i = 0; i < 90; i++)
+        $("#shoppingList").append("<li class='listProduct'>Item" + i + "</li>");
+
+    await addPageBreaksForPrint();
+
+    var siteListElements = document.getElementsByClassName("listProduct");
+    
+    // check that every 18 items starting at 18 excluding EoL item (item89)
+    // have page break class
+    for (var i = 17; i < 89; i += 18)
+    {
+        var pageBreakLi = '<li class="listProduct html2pdf__page-break">Item' + i + '</li>';
+        console.assert(siteListElements[i].outerHTML == pageBreakLi, "addPageBreaksForPrintTest() FAILED");
+    }
+
+    userShoppingList.formatList();
 }

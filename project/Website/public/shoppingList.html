@@ -258,21 +258,9 @@
     // uses HTML2PDF library under fair use
     async function executeExport()
     {
-      var targetData = document.getElementById("shoppingList");
-      var elementChildren = targetData.children;
-
-      // every 19 items add a page break to prevent cutoff items
-      for (var i = 1; i <= elementChildren.length; i++)
-      {
-        if (i%19 == 0)
-        {
-          var pageBreak = document.createElement('div');
-          targetData.children[i - 1].after(pageBreak);
-          targetData.children[i - 1].classList.add("html2pdf__page-break");
-        }
-      }
-
+      var targetData = await addPageBreaksForPrint();
       var fileName = "yourShoppingList";
+
       var opt = {
           margin:       [1.0,0.3,1.0,0.3],
           filename:     fileName,
@@ -284,6 +272,19 @@
 
       await html2pdf().from(targetData).set(opt).save();
      }
+
+    async function addPageBreaksForPrint()
+    {
+      var targetData = document.getElementById("shoppingList");
+      var elementChildren = targetData.children;
+
+      // every 18 items add a page break to prevent cutoff items
+      for (var i = 1; i <= elementChildren.length; i++)
+        if (i % 18 == 0 && i != elementChildren.length)
+          targetData.children[i-1].classList.add("html2pdf__page-break");
+
+      return targetData;
+    }
   </script>
 
 </body>
