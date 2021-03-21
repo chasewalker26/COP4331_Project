@@ -25,6 +25,11 @@ raspberry
 curl https://raw.githubusercontent.com/chasewalker26/COP4331_Project/main/project/RaspberryPi/scan.py -o scan.py
 ```
 
+- Link your shopping list (Replace <ListID> with your own ListID):
+```c
+echo “ListID” >> id.txt
+```
+
 - Run the program:
 ```c
 sudo python3 scan.py
