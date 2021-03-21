@@ -43,7 +43,7 @@ async function runTests()
 
     await nameItemTest();
 
-    warningCheckTest();
+    warningPeriodCheckTest();
 }
 
 // sidenav resizes as expected when used
@@ -556,18 +556,18 @@ async function nameItemTest()
 }
 
 //tests warning day function 
-async function warningCheckTest() {
+async function warningPeriodCheckTest() {
     let shoppingList = new ShoppingList("ListID_TEST");
     var removeDate = "66/21";
     var failWarningDays = 100;
     var passWarningDays = 3;
 
-    var response = shoppingList.warningCheck(removeDate, failWarningDays);
+    var response = shoppingList.warningPeriodCheck(removeDate, failWarningDays);
 
     console.assert(response == false, "warningCheckTest() FAILED");
 
     response = null;
 
-    response = shoppingList.warningCheck(removeDate, passWarningDays);
+    response = shoppingList.warningPeriodCheck(removeDate, passWarningDays);
     console.assert(response == true, "warningCheckTest() FAILED");
 }

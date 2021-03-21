@@ -15,7 +15,7 @@ class ShoppingList extends List {
       var idealCount = products[i].idealCount;
       var countToBuy = idealCount - count;
       var removeDay = products[i].dayRemoved;
-      var warning = products[i].warningDay;
+      var warningDay = products[i].warningDay;
 
       if (name == "")
       {
@@ -27,7 +27,7 @@ class ShoppingList extends List {
       }
       else if (removeDay != -1)
       {
-        if (this.warningCheck(removeDay, warning))
+        if (this.warningPeriodCheck(removeDay, warningDay))
         {
          if (count != 0)
          {
@@ -47,7 +47,6 @@ class ShoppingList extends List {
 
     $("#shoppingList").html(html);
   }
- 
   
   clearList()
   {
@@ -55,7 +54,7 @@ class ShoppingList extends List {
 
     for (var i = 0; i < products.length; i++)
     {
-      var warning = products[i].warningDay;
+      var warningDay = products[i].warningDay;
       var count = products[i].count;
       var idealCount = products[i].idealCount;
       var countToBuy = idealCount - count;
@@ -67,7 +66,7 @@ class ShoppingList extends List {
         products[i].count = newCount; 
       }
       
-      if (warning != -1){
+      if (warningDay != -1){
         dayRemoved = date;
         products[i].dayRemoved = dayRemoved;
       }
@@ -84,9 +83,9 @@ class ShoppingList extends List {
     // get data
     var name = document.getElementById('addItemName').value;
     var count = document.getElementById('addItemCount').value;
-    var warning = document.getElementById('addWarningDay').value;
+    var warningDay = document.getElementById('addWarningDay').value;
     
-    if (this.validAddItemInput(name, count, warning, "#addItemAlert") == false)
+    if (this.validAddItemInput(name, count, warningDay, "#addItemAlert") == false)
       return false;
 
     if ((this.productExistsError(name)) == false)
@@ -96,7 +95,7 @@ class ShoppingList extends List {
         "idealCount": parseInt(count),
         "name" : name,
         "dayRemoved": -1,
-        "warningDay":  parseInt(warning)
+        "warningDay":  parseInt(warningDay)
       });
   
       this.products.push(product);
@@ -110,17 +109,17 @@ class ShoppingList extends List {
     return false;
   }
 
-  validAddItemInput(name, count, warning, location)
+  validAddItemInput(name, count, warningDay, location)
   {
     count = parseInt(count);
-    warning = parseInt(warning);
+    warningDay = parseInt(warningDay);
 
     if (name.length == 0)
     {
       this.alertUser(location, "Please check your input, empty name, count, and warning period must be filled");
       return false;
     }
-    else if (isNaN(count) || isNaN(warning))
+    else if (isNaN(count) || isNaN(warningDay))
     {
       this.alertUser(location, "Please check your input, count and warning period must be numbers");
       return false;
@@ -190,18 +189,16 @@ class ShoppingList extends List {
     return false;
   }
 
-  warningCheck(removeDay, warning)
+  warningPeriodCheck(removeDay, warningDay)
   {
     removeDay = removeDay.split("/");
-    var warnDate = parseInt(removeDay[0]) + warning;
+    var warnDate = parseInt(removeDay[0]) + warningDay;
 
     var curr = date.split("/");
     var today = parseInt(curr[0]);
 
     if (today >= warnDate)
-    {
       return true;
-    }
     
     return false;
   }
