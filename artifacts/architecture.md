@@ -43,17 +43,17 @@ Then we have 3 Controllers providing access points for the JSON/HTTPS API, with 
 | Web, List/inventory, Database | API Application | As a member in a large family household, I'd like to be able to separate shopping lists for different users in the household | U015 |
 
 # Code Design
-![Class Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/ClassDiagram3.png?raw=true)
+![Class Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/ClassDiagram4.png?raw=true)
 
 |    class      |       UUID    |
 | ------------- | ------------- |
-| ShoppingList  | U001, U003, U009, U016, U019, U020 |
-| Inventory     | U006, U007, U008, U017 |
-| Contact       | U014 |
+| ShoppingList  | U001, U003, U009, U011, U016, U019, U020, U027 |
+| Inventory     | U006, U007, U008, U010, U017 |
+| Contact       | U014, U024 |
 | List          | U001, U003, U006, U017 |
-|  User         | U005 |
+|  User         | U005, U021|
 |  Product      | U002, U003, U006, U008, U009, U010, U018, U019, U020 |
-|  Scanner      | U002, U011, U018 |
+|  Scanner      | U002, U011, U018, U025 |
 |  Account      | U004, U022 |
 
 # Data Design
