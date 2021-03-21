@@ -1,4 +1,4 @@
-Programs that run on Rasbperry Pi goes in this directory.
+# Programs that run on Rasbperry Pi goes in this directory.
 
 ## Required Hardware:
 
