@@ -11,7 +11,7 @@ Unlike shopping list manager OutofMilk, our system’s IoT device provides the u
 ## Team Members
 
 - Chase Walker - [chasewalker26](https://github.com/chasewalker26)
-- Anjali Ramsahai - [anjalir09](https://github.com/anjalir09)
+- Anjali Ramsahai - [anjalir09](https://github.com/anjalir09) + [aramsahai09](https://github.com/aramsahai09)
 - Christopher Gray - [AKpowder](https://github.com/AKpowder)
 - Omer Gul - [omermelihgul](https://github.com/omermelihgul)
 - Alisher Sultangazin - [sultalish](https://github.com/sultalish)
@@ -142,11 +142,25 @@ All team members worked together in this sprint to create the user stories in th
 
 
 # Sprint 7
-
-
+- [Trello Board](https://trello.com/b/Af6rjxIc/cop4331)
+- [Burndown Chart](https://docs.google.com/spreadsheets/d/183Dg6Bm59MUCFB1R2GCbdrus6IbwDEImLzfAo2zPLKg/edit#gid=1274856586)
+- [Velocity Chart](https://docs.google.com/spreadsheets/d/1IDBxwgaPQL3OXrfwmEl2Y9RwI4CI29koruPL0Dz6inc/edit?usp=sharing)
+- [System Architecture](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/architecture.md)
+- [Source Code](https://github.com/chasewalker26/COP4331_Project/tree/main/project/)
+- [Test Code (Site)](https://github.com/chasewalker26/COP4331_Project/tree/main/project/Website/public/js)
+- [Test Code (Scanner)](https://github.com/chasewalker26/COP4331_Project/tree/main/project/RaspberryPi)
+- [Product Demonstration]()
 
 ## Task Allocation
+- Chase Walker - I completed the user story "As a paper lover, I want to be able to print my shopping list so that I can bring a physical copy to the store" U011.
 
+- Christopher Gray -
+
+- Omer Gul - 
+
+- Anjali Ramsahai - 
+
+- Alisher Sultangazin - 
 
 
 # Sprint 8
