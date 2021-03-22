@@ -160,14 +160,13 @@ All team members worked together in this sprint to create the user stories in th
 
 - Anjali Ramsahai - I completed "As a produce consumer, I want to add items to my shopping list that rely on a time-based reminder because produce does not have barcodes" U019 with Chris.
 
-- Alisher Sultangazin - I attemted to finish the user story "As a shopper, I would like to be able to select specific items to permanently remove from my inventory so that they are no longer tracked until I scan them again, so that I am not told to buy things that I don't want" U007. I finished main features and requirements for this user story but haven't finished the requrement that asks to hide "Clear" button when no items were selected.
+- Alisher Sultangazin - I attemted to finish the user story "As a shopper, I would like to be able to select specific items to permanently remove from my inventory so that they are no longer tracked until I scan them again, so that I am not told to buy things that I don't want" U007. I finished main features and requirements for this user story but haven't finished the requrement that asks to hide "Clear" button.
 
 
 # Sprint 8
 
-
-
 ## Task Allocation
+- Alisher Sultangazin - I completed the user story "As a shopper, I would like to be able to select specific items to permanently remove from my inventory so that they are no longer tracked until I scan them again, so that I am not told to buy things that I don't want" U007.
 
 
 
