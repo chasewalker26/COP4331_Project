@@ -183,7 +183,5 @@ $(document).on("click", "#signOut", async function(){
 
 function getUserName(){
     currUserName = appUser.username;
-    console.log(currUserName);
     $('#addUser').html(currUserName);
-    // document.getElementById("addUser").innerHTML = currUserName;
 }
