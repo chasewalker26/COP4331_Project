@@ -1,5 +1,5 @@
 // ALWAYS set false when not testing
-var isTesting = false;
+var isTesting = true;
 var appUser;
 var account;
 var date;
@@ -14,8 +14,12 @@ if (isTesting == false)
         var page = window.location.pathname;
 
         // if user is not on login page
-        if (page == "/shoppingList.html" || page == "/inventory.html" || page == "/contact.html")
+        if (page == "/shoppingList.html" || page == "/inventory.html" || page == "/contact.html")    
+        {
             appUser = await redirectIfNotFirebaseUser();
+            getUserName();
+        }
+            
 
         getCurrentDate();
         console.log(date);
@@ -36,7 +40,6 @@ if (isTesting == false)
 async function shoppingListPageInitialize()
 {
     await intitializeShoppingList();
-    getUserName();
 
     if ($('#shoppingList').html() != "")
     {
@@ -48,7 +51,6 @@ async function shoppingListPageInitialize()
 // no test because this uitilizes only tested code or built in js code
 async function inventoryPageInitialize()
 {
-    getUserName();
     await intitializeInventory();
 }
 
