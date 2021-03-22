@@ -164,6 +164,12 @@
     {
       this.classList.toggle("selected");
 
+      clearButtonToggle();
+      
+    })
+
+    function clearButtonToggle()
+    {
       // Show Clear Button
       if (document.getElementsByClassName("selected").length != 0)
       {
@@ -175,8 +181,7 @@
       {
         document.getElementById('clearInventory').classList.toggle("visible");
       }
-      
-    })
+    }
 
     // no test since it combines built in js functions and tested functions
     function fillEditFields()
@@ -214,7 +219,7 @@
       if (await inventory.clearSelectedItems())
       {
         await inventory.formatList();
-        console.log(inventory);
+        clearButtonToggle();
       }
     }
 
