@@ -30,6 +30,7 @@ async function runTests()
     await editIdealCountTest();
     await editCountTest();
     editItemUITest();
+    await clearSelectedItemTest();
 }
 
 // in Inventory.js
@@ -42,16 +43,18 @@ async function formatListFunctionalTest()
     inventory.formatList();
 
     // change expectedElements
-    var expectedElements = '<li class="listProduct" id="Barcode0" name="inventoryItem"><span class="material-icons mx-2" data-toggle="modal" data-target="#editItemModal" data-backdrop="false">edit</span>water: 6</li>' + 
-                           '<li class="listProduct" id="Barcode1" name="inventoryItem"><span class="material-icons mx-2" data-toggle="modal" data-target="#editItemModal" data-backdrop="false">edit</span>name: 8</li>' +
-                           '<li class="listProduct" id="Barcode3" name="inventoryItem"><span class="material-icons mx-2" data-toggle="modal" data-target="#editItemModal" data-backdrop="false">edit</span>name: 3</li>' + 
-                           '<li class="listProduct" id="banana" name="inventoryItem"><span class="material-icons mx-2" data-toggle="modal" data-target="#editItemModal" data-backdrop="false">edit</span>banana: 4</li>';
-    
+    var expectedElements = '<li class="listProduct" id="Barcode0" name="inventoryItem"><span class="material-icons mx-2" data-toggle="modal" data-target="#editItemModal" data-backdrop="false">edit</span><span name="crossoutItem">water: 6</span></li>' +
+                                '<li class="listProduct" id="Barcode1" name="inventoryItem"><span class="material-icons mx-2" data-toggle="modal" data-target="#editItemModal" data-backdrop="false">edit</span><span name="crossoutItem">name: 8</span></li>' +
+                                '<li class="listProduct" id="Barcode3" name="inventoryItem"><span class="material-icons mx-2" data-toggle="modal" data-target="#editItemModal" data-backdrop="false">edit</span><span name="crossoutItem">name: 3</span></li>' +
+                                '<li class="listProduct" id="banana" name="inventoryItem"><span class="material-icons mx-2" data-toggle="modal" data-target="#editItemModal" data-backdrop="false">edit</span><span name="crossoutItem">banana: 4</span></li>' +
+                                '<li class="listProduct" id="toDeleteTest" name="inventoryItem"><span class="material-icons mx-2" data-toggle="modal" data-target="#editItemModal" data-backdrop="false">edit</span><span name="crossoutItem">toDeleteTest: 5</span></li>';
+
     var siteInventoryElements = document.getElementById("inventory").children;
     var actualElements = "";
 
     for (var i = 0; i < siteInventoryElements.length; i++)
         actualElements += siteInventoryElements[i].outerHTML;
+
 
     console.assert(expectedElements == actualElements, "Inventory.formatListTest() FAILED");
 
@@ -279,4 +282,39 @@ function editItemUITest()
     console.assert(currentProduct.color == "rgb(89, 139, 196)",  'editItemUITest() FAILED');
 
     $('#editItemModal').hide();
+}
+
+async function clearSelectedItemTest()
+{
+    let testInventory = new Inventory("ListID_TEST");
+    await testInventory.getProducts();
+
+    console.log(testInventory.products);
+    
+    await document.getElementById("toDeleteTest").lastChild.classList.toggle("selected");
+
+    testInventory.clearSelectedItems();
+
+    var products = testInventory.products;
+
+    for (var i = 0; i < products.length; i++)
+    {
+        await console.assert(products[i].barcode != "toDeleteTest", "clearSelectedItemTest() FAILED");
+    }
+
+    
+    // Clean up, return toDeleteTest product
+    let returnProduct = new Product("toDeleteTest", {
+        "count" : 5,
+        "idealCount": 1,
+        "name" : "toDeleteTest",
+        "dayRemoved": -1,
+        "warningDay":  1
+      });
+    
+    products.push(returnProduct);
+    var JSONProducts = testInventory.formatProductsJSON();
+    await testInventory.updateDatabase(JSONProducts); 
+
+    await testInventory.formatList();
 }

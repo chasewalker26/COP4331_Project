@@ -365,3 +365,18 @@ body {
 {
   box-shadow: 10px 10px 10px 1px rgba(0,0,0,0.24);
 }
+
+.selected
+{
+  text-decoration: line-through;
+}
+
+
+/* To hide/show clear button */
+#clearInventory {
+  display: none;
+}
+
+#clearInventory.visible {
+  display: block;
+}

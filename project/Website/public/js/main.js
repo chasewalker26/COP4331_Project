@@ -47,10 +47,13 @@ async function shoppingListPageInitialize()
 // no test because this uitilizes only tested code or built in js code
 async function inventoryPageInitialize()
 {
-    await intitializeInventory();
 
-    if ($('#inventory').html() != "")
-        $('#clearInventory').show();
+    if (document.getElementsByClassName("selected").length != 0)
+    {
+        document.getElementById('clearInventory').classList.add("visible");
+    }
+
+    await intitializeInventory();
 }
 
 // no test because this uitilizes only tested functions
@@ -145,6 +148,18 @@ saveToFirebase = (datapath, data) =>
     return new Promise((resolve) => 
     {
         firebase.database().ref(datapath).update(data);
+        resolve();
+    })
+}
+
+// function that enables asynchronous deleting of data from database
+// (deletes the object in the datapath)
+// (not tested since this is a third-party function from Google)
+deleteFromFirebase = (datapath) =>
+{
+    return new Promise((resolve) => 
+    {
+        firebase.database().ref(datapath).set(null);
         resolve();
     })
 }

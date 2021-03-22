@@ -17,10 +17,44 @@ class Inventory extends List
       var count = products[i].count;
 
       if (name != "" && count != 0)
-        html += '<li class="listProduct" id="' + barcode + '" name="inventoryItem"><span class="material-icons mx-2" data-toggle="modal" data-target="#editItemModal" data-backdrop="false">edit</span>' + name + ': ' + count + '</li>';      
+        html += '<li class="listProduct" id="' + barcode + '" name="inventoryItem"><span class="material-icons mx-2" data-toggle="modal" data-target="#editItemModal" data-backdrop="false">edit</span>'
+          + '<span name="crossoutItem">' + name + ': ' + count + '</span></li>'; 
     }
 
     $("#inventory").html(html);
+  }
+
+  async clearSelectedItems()
+  {
+    var selectedItems = document.getElementsByClassName("selected");
+
+    // console.log(selectedItems[0].parentElement.id);
+    
+    var products = this.products;
+    
+    for (var i = 0; i < selectedItems.length; i++)
+    {
+      for (var j = 0; j < products.length; j++)
+      {
+        if (products[j].barcode == selectedItems[i].parentElement.id)
+        {
+          // Found barcode to be deleted
+          console.log("barcode to be deleted:");
+          console.log(products[j].barcode);
+          var barcodeToDelete = products[j].barcode;
+
+          var productToDelete = this.getProduct(barcodeToDelete);
+
+          // Delete product from the database
+          await deleteFromFirebase("ProductList/ListID_TEST/" + barcodeToDelete);
+
+          // // Delete product from the UI
+          this.products.splice(j, 1);
+        }
+      }
+    }
+
+    return true;
   }
 
   async editIdealCount(barcode, idealCount)

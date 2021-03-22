@@ -53,8 +53,8 @@
     <!-- inventory buttons -->
     <div class="col-lg-2 col-4 my-3 text-center">
       <!-- Clear list -->
-      <button class="clearbutton m-3" type="button" data-toggle="modal" data-target="#clearListModal" data-backdrop="false" style="display:none" id="clearInventory">CLEAR</button>
-      </div>
+      <button class="clearbutton m-3" type="button" data-toggle="modal" data-target="#clearSelectedItemsModal" data-backdrop="false" id="clearInventory">CLEAR</button>
+    </div>
   </div>
 
   <!-- Modal for editing items-->
@@ -100,6 +100,26 @@
     </div>
   </div>
 
+  <!-- Clear selected items modal -->
+  <div id="clearSelectedItemsModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+      <!-- Modal content-->
+      <div class="modal-content p-5">
+          <div class="row mb-5">
+            <h3 class="col-12 title text-center">You are about to clear all crossed-out items, do you want to continue?</h3>
+          </div>
+          <div class="row mt-5">
+            <div class="col-6 text-center">
+              <a class="cancelpopupButtons" data-dismiss="modal">CANCEL</a>
+            </div>
+            <div class="col-6 text-center">
+              <a class="clearpopupButtons" onclick= "return executeClearSelectedItems()" data-dismiss="modal">CONTINUE</a>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- JQUERY -->
   <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <!-- BOOTSTRAP JS CDN -->
@@ -140,6 +160,24 @@
       fillEditFields();
     })
 
+    $(document).on("click", "[name='crossoutItem']", function()
+    {
+      this.classList.toggle("selected");
+
+      // Show Clear Button
+      if (document.getElementsByClassName("selected").length != 0)
+      {
+        document.getElementById('clearInventory').classList.add("visible");
+
+      }
+      // Hide Clear Button
+      else
+      {
+        document.getElementById('clearInventory').classList.toggle("visible");
+      }
+      
+    })
+
     // no test since it combines built in js functions and tested functions
     function fillEditFields()
     {
@@ -164,6 +202,19 @@
         inventory.formatList();
 
         $('#editItemModal').modal('hide');
+      }
+    }
+
+    async function executeClearSelectedItems()
+    {
+      console.log("Clear Selected Items");
+      // await inventory.getProducts();
+      console.log(inventory);
+
+      if (await inventory.clearSelectedItems())
+      {
+        await inventory.formatList();
+        console.log(inventory);
       }
     }
 
