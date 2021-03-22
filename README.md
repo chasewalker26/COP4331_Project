@@ -149,7 +149,7 @@ All team members worked together in this sprint to create the user stories in th
 - [Source Code](https://github.com/chasewalker26/COP4331_Project/tree/main/project/)
 - [Test Code (Site)](https://github.com/chasewalker26/COP4331_Project/tree/main/project/Website/public/js)
 - [Test Code (Scanner)](https://github.com/chasewalker26/COP4331_Project/tree/main/project/RaspberryPi)
-- [Product Demonstration]()
+- [Product Demonstration](https://www.youtube.com/watch?v=WjfPIhT2vw0)
 
 ## Task Allocation
 - Chase Walker - I completed the user story "As a paper lover, I want to be able to print my shopping list so that I can bring a physical copy to the store" U011.
