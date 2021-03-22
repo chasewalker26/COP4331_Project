@@ -9,9 +9,10 @@ if (isTesting == true)
         appUser.uid = "ListID_TEST";
 
         getCurrentDate();
+        await inventoryPageInitialize();
+
         runTests();
 
-        await inventoryPageInitialize();
     }
 }
 
@@ -36,11 +37,7 @@ async function runTests()
 // in Inventory.js
 async function formatListFunctionalTest()
 {
-    let inventory = new Inventory("ListID_TEST");
-
-    await inventory.getProducts();
-
-    inventory.formatList();
+    userInventory.formatList();
 
     // change expectedElements
     var expectedElements = '<li class="listProduct" id="Barcode0" name="inventoryItem"><span class="material-icons mx-2" data-toggle="modal" data-target="#editItemModal" data-backdrop="false">edit</span><span name="crossoutItem">water: 6</span></li>' +
@@ -63,9 +60,7 @@ async function formatListFunctionalTest()
 // in Inventory.js
 async function formatListVisualTest()
 {
-    let inventory = new Inventory("ListID_TEST");
-    await inventory.getProducts();
-    inventory.formatList();
+    userInventory.formatList();
 
     var siteInventoryElements = document.getElementsByClassName("listProduct");
 
@@ -80,19 +75,21 @@ async function formatListVisualTest()
 
         console.assert(color == "rgba(89, 139, 196, 0.81)", "formatListVisualTest FAILED");
         console.assert(FF == '"Lucida Bright", Georgia, serif', "formatListVisualTest FAILED");
-        console.assert(FSize == "30px", "formatListVisualTest FAILED");
         console.assert(FStyle == "normal", "formatListVisualTest FAILED");
         console.assert(FW == "700", "formatListVisualTest FAILED");
+
+        if ($(window).width() > 800)
+            console.assert(FSize == "30px", "formatListVisualTest FAILED");
+        else if ($(window).width() <= 800)
+            console.assert(FSize == "15px", "formatListVisualTest FAILED");
+        else if ($(window).width() <= 600)
+            console.assert(FSize == "15px", "formatListVisualTest FAILED");
     }
 }
 
 async function getProductTest()
 {
-    var data = false;
-    let inventory = new Inventory("ListID_TEST");
-    await inventory.getProducts();
-    
-    var product = inventory.getProduct("Barcode0");
+    var product = userInventory.getProduct("Barcode0");
 
     var expectedProduct = 
     {
@@ -113,8 +110,6 @@ async function getProductTest()
 async function replaceProductTest()
 {
     var data = false;
-    let testInventory = new Inventory("ListID_TEST");
-    await testInventory.getProducts();
 
     var newProduct = 
     {
@@ -126,25 +121,26 @@ async function replaceProductTest()
         "warningDay":  -1 
     }
     
-    testInventory.replaceProduct("Barcode1", newProduct);
+    userInventory.replaceProduct("Barcode1", newProduct);
     
     let expectedInventory = new Inventory("ListID_TEST");
     await expectedInventory.getProducts();
 
     expectedInventory.products[1] = newProduct; // replacement at known location of Barcode1
 
-    if (JSON.stringify(testInventory.products) == JSON.stringify(expectedInventory.products))
+    if (JSON.stringify(userInventory.products) == JSON.stringify(expectedInventory.products))
         data = true;
 
     console.assert(data == true, "replaceProductTest() FAILED");
+
+    await userInventory.getProducts();
 }
 
 function alertUserTest()
 {
     var data = false;
-    let inventory = new Inventory("ListID_TEST");
 
-    inventory.alertUser("#editItemAlert", "Hello There!");
+    userInventory.alertUser("#editItemAlert", "Hello There!");
 
     if ($("#editItemAlert")[0].innerHTML == "Hello There!")
         data = true;
@@ -155,9 +151,8 @@ function alertUserTest()
 function validInputEmptyStringTest()
 {
     var data = false;
-    let inventory = new Inventory("ListID_TEST");
 
-    console.assert(inventory.validInput("") == false, "validInputEmptyStringTest() FAILED");
+    console.assert(userInventory.validInput("") == false, "validInputEmptyStringTest() FAILED");
 
     if ($("#editItemAlert")[0].innerHTML == "All inputs must be filled!")
         data = true;
@@ -168,9 +163,8 @@ function validInputEmptyStringTest()
 function validInputStringTest()
 {
     var data = false;
-    let inventory = new Inventory("ListID_TEST");
 
-    console.assert(inventory.validInput("hi") == false, "validInputStringTest() FAILED");
+    console.assert(userInventory.validInput("hi") == false, "validInputStringTest() FAILED");
 
     if ($("#editItemAlert")[0].innerHTML == "Your input must be a number!")
         data = true;
@@ -181,9 +175,8 @@ function validInputStringTest()
 function validInputZeroTest()
 {
     var data = false;
-    let inventory = new Inventory("ListID_TEST");
 
-    console.assert(inventory.validInput("0") == false, "validInputZeroTest() FAILED");
+    console.assert(userInventory.validInput("0") == false, "validInputZeroTest() FAILED");
 
     if ($("#editItemAlert")[0].innerHTML == "Your input must be greater than 0!")
         data = true;
@@ -194,9 +187,8 @@ function validInputZeroTest()
 function validInputNegativeTest()
 {
     var data = false;
-    let inventory = new Inventory("ListID_TEST");
 
-    console.assert(inventory.validInput("-5") == false, "validInputNegativeTest() FAILED");
+    console.assert(userInventory.validInput("-5") == false, "validInputNegativeTest() FAILED");
 
     if ($("#editItemAlert")[0].innerHTML == "Your input must be greater than 0!")
         data = true;
@@ -206,17 +198,14 @@ function validInputNegativeTest()
 
 function validInputPositiveTest()
 {
-    let inventory = new Inventory("ListID_TEST");
-    console.assert(inventory.validInput("10") == true, "validInputPositiveTest() FAILED");
+    console.assert(userInventory.validInput("10") == true, "validInputPositiveTest() FAILED");
 }
 
 async function editIdealCountTest()
 {
     var data = false;
-    let inventory = new Inventory("ListID_TEST");
-    await inventory.getProducts();
 
-    inventory.editIdealCount("Barcode1", 25);
+    userInventory.editIdealCount("Barcode1", 25);
 
     var expectedProduct = 
     {
@@ -236,15 +225,14 @@ async function editIdealCountTest()
 
     // clean up
     await saveToFirebase("ProductList/ListID_TEST/Barcode1/", {idealCount: 1});
+    await userInventory.getProducts();
 }
 
 async function editCountTest()
 {
     var data = false;
-    let inventory = new Inventory("ListID_TEST");
-    await inventory.getProducts()
 
-    inventory.editCount("Barcode1", 11);
+    userInventory.editCount("Barcode1", 11);
 
     var expectedProduct =
     {
@@ -263,17 +251,16 @@ async function editCountTest()
     console.assert(data == true, "editCountTest() FAILED");
 
     // clean up
-    await saveToFirebase("ProductList/ListID_TEST/Barcode1/", {count: 8})
+    await saveToFirebase("ProductList/ListID_TEST/Barcode1/", {count: 8});
+    await userInventory.getProducts();
 }
 
 function editItemUITest()
 {
-    var data = false;
     var editInventoryItemButton = document.getElementsByName("inventoryItem")[0].children[0];
 
     editInventoryItemButton.click();
 
-    // modal visible
     console.assert($('#editItemModal').is(':visible') == true, 'editItemUITest() FAILED');
 
     // shown product color correct
@@ -286,35 +273,29 @@ function editItemUITest()
 
 async function clearSelectedItemTest()
 {
-    let testInventory = new Inventory("ListID_TEST");
-    await testInventory.getProducts();
+    // crossout the test data
+    document.getElementsByName("crossoutItem")[4].click();
 
-    console.log(testInventory.products);
-    
-    await document.getElementById("toDeleteTest").lastChild.classList.toggle("selected");
+    await userInventory.clearSelectedItems();
 
-    testInventory.clearSelectedItems();
+    // grab and verify changed data
+    await userInventory.getProducts();
 
-    var products = testInventory.products;
+    var products = userInventory.products
 
     for (var i = 0; i < products.length; i++)
+        console.assert(products[i].barcode != "toDeleteTest", "clearSelectedItemTest() FAILED");
+
+    // Clean up, return toDeleteTest to DB
+    var toDeleteTest = 
     {
-        await console.assert(products[i].barcode != "toDeleteTest", "clearSelectedItemTest() FAILED");
+            "count" : 5,
+            "idealCount": 1,
+            "name" : "toDeleteTest",
+            "dayRemoved": -1,
+            "warningDay":  1
     }
-
-    
-    // Clean up, return toDeleteTest product
-    let returnProduct = new Product("toDeleteTest", {
-        "count" : 5,
-        "idealCount": 1,
-        "name" : "toDeleteTest",
-        "dayRemoved": -1,
-        "warningDay":  1
-      });
-    
-    products.push(returnProduct);
-    var JSONProducts = testInventory.formatProductsJSON();
-    await testInventory.updateDatabase(JSONProducts); 
-
-    await testInventory.formatList();
+    await saveToFirebase("ProductList/ListID_TEST/", {toDeleteTest});
+    await userInventory.getProducts();
+    userInventory.formatList();
 }

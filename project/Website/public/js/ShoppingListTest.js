@@ -9,9 +9,10 @@ if (isTesting == true)
         appUser.uid = "ListID_TEST";
 
         getCurrentDate();
+        await shoppingListPageInitialize();
+
         runTests();
 
-        await shoppingListPageInitialize();
     }
 }
 
@@ -23,7 +24,6 @@ async function runTests()
     UserTest();
     
     await getProductsWithExistingListIDTest();
-    await getProductsWithBadListIDTest();
 
     await updateDatabaseTest();
 
@@ -148,24 +148,6 @@ async function getProductsWithExistingListIDTest()
 
     if (JSON.stringify(list.products) == JSON.stringify(expectedProducts))
         data = true;
-
-    console.assert(data == true, "getProductsTest FAILED");
-}
-
-// error message displayed from bad getProducts input should match the expected message
-async function getProductsWithBadListIDTest()
-{
-    var data = false;
-    let list = new List("listylisty");
-    await list.getProducts();
-
-    if ($("#errorMessage").innerHTML = "There is no list associated with this account. Have you scanned any items?")
-        data = true;
-
-    // clean up
-    setTimeout(() => {
-        $("#errorMessage").hide();
-    }, 1000);
 
     console.assert(data == true, "getProductsTest FAILED");
 }
@@ -338,9 +320,15 @@ async function formatListVisualTest()
 
     console.assert(color == "rgba(89, 139, 196, 0.81)", "formatListVisualTest FAILED");
     console.assert(FF == '"Lucida Bright", Georgia, serif', "formatListVisualTest FAILED");
-    console.assert(FSize == "30px", "formatListVisualTest FAILED");
     console.assert(FStyle == "normal", "formatListVisualTest FAILED");
     console.assert(FW == "700", "formatListVisualTest FAILED");
+
+    if ($(window).width() > 800)
+        console.assert(FSize == "30px", "formatListVisualTest FAILED");
+    else if ($(window).width() <= 800)
+        console.assert(FSize == "15px", "formatListVisualTest FAILED");
+    else if ($(window).width() <= 600)
+        console.assert(FSize == "15px", "formatListVisualTest FAILED");
 
     // check if the unrecognized item formatting is right
     var style = getComputedStyle(siteListElements[1]);
