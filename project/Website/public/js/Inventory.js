@@ -26,35 +26,23 @@ class Inventory extends List
 
   async clearSelectedItems()
   {
-    var selectedItems = document.getElementsByClassName("selected");
-
-    // console.log(selectedItems[0].parentElement.id);
-    
+    var selectedItems = document.getElementsByClassName("listProduct");    
     var products = this.products;
     
     for (var i = 0; i < selectedItems.length; i++)
     {
-      for (var j = 0; j < products.length; j++)
-      {
-        if (products[j].barcode == selectedItems[i].parentElement.id)
-        {
-          // Found barcode to be deleted
-          console.log("barcode to be deleted:");
-          console.log(products[j].barcode);
-          var barcodeToDelete = products[j].barcode;
+      // current item is selected
+      if ($(selectedItems[i].children[1]).hasClass("selected"))
+      {        
+        // Found barcode to be deleted
+        var barcodeToDelete = products[i].barcode;
 
-          var productToDelete = this.getProduct(barcodeToDelete);
-
-          // Delete product from the database
-          await deleteFromFirebase("ProductList/ListID_TEST/" + barcodeToDelete);
-
-          // // Delete product from the UI
-          this.products.splice(j, 1);
-        }
+        // Delete product from the database
+        await saveToFirebase("ProductList/" + this.listID, {[barcodeToDelete]: null});
       }
     }
 
-    return true;
+    $('#clearInventory').hide();
   }
 
   async editIdealCount(barcode, idealCount)

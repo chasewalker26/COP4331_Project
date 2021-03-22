@@ -1,5 +1,5 @@
 // ALWAYS set false when not testing
-var isTesting = true;
+var isTesting = false;
 var appUser;
 var account;
 var date;
@@ -14,7 +14,7 @@ if (isTesting == false)
         var page = window.location.pathname;
 
         // if user is not on login page
-        if (page == "/shoppingList.html" || page == "/inventory.html" || page == "/Contact.html")
+        if (page == "/shoppingList.html" || page == "/inventory.html" || page == "/contact.html")
             appUser = await redirectIfNotFirebaseUser();
 
         getCurrentDate();
@@ -47,12 +47,6 @@ async function shoppingListPageInitialize()
 // no test because this uitilizes only tested code or built in js code
 async function inventoryPageInitialize()
 {
-
-    if (document.getElementsByClassName("selected").length != 0)
-    {
-        document.getElementById('clearInventory').classList.add("visible");
-    }
-
     await intitializeInventory();
 }
 
@@ -148,18 +142,6 @@ saveToFirebase = (datapath, data) =>
     return new Promise((resolve) => 
     {
         firebase.database().ref(datapath).update(data);
-        resolve();
-    })
-}
-
-// function that enables asynchronous deleting of data from database
-// (deletes the object in the datapath)
-// (not tested since this is a third-party function from Google)
-deleteFromFirebase = (datapath) =>
-{
-    return new Promise((resolve) => 
-    {
-        firebase.database().ref(datapath).set(null);
         resolve();
     })
 }

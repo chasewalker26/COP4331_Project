@@ -11,10 +11,7 @@ class List
     var dbProducts = await pullFromFirebase("ProductList/" + this.listID);
 
     if (dbProducts == null)
-    {
-      $("#errorMessage").append("There is no list associated with this account. Have you scanned any items?");
       return;
-    }
 
     var barcodes = Object.keys(dbProducts);
 
