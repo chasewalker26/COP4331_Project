@@ -36,6 +36,7 @@ if (isTesting == false)
 async function shoppingListPageInitialize()
 {
     await intitializeShoppingList();
+    getUserName();
 
     if ($('#shoppingList').html() != "")
     {
@@ -47,6 +48,7 @@ async function shoppingListPageInitialize()
 // no test because this uitilizes only tested code or built in js code
 async function inventoryPageInitialize()
 {
+    getUserName();
     await intitializeInventory();
 }
 
@@ -160,3 +162,8 @@ function closeNav() {
 $(document).on("click", "#signOut", async function(){
     await appUser.signOut();
 });
+
+function getUserName(){
+    currUserName = appUser.username;
+    $('#addUser').html(currUserName);
+}
