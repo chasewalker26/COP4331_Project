@@ -11,7 +11,7 @@ body {
 }
 
 /* Popup */
-.popup .overlay
+/* .popup .overlay
 {
   position: fixed;
   top: 0px;
@@ -64,30 +64,8 @@ body {
 {
   transition: all 300ms ease-in-out;
   transform: translate(-50%, -50%) scale(1);
-}
+} */
 /* Popup end  */
-
-.form-container {
-  position: absolute;
-  top: 15vh;
-  background: #fff;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px 0px #000;
-}
-
-.listProduct{
-    color: #598BC4;
-    font-family: "Lucida Bright", Georgia, serif;
-    font-style: normal;
-    font-size: 30px;
-    font-weight: Demibold;
-    list-style: none;
-}
-
-.listProduct:hover{
-  cursor: pointer;
-}
 
 /* colors */
 .redWarning {
@@ -179,13 +157,6 @@ body {
 
 .navlink:hover {
   cursor: pointer;
-}
-
-@media only screen and (max-width: 800px)
-{
-  .navlink{
-    text-align: center !important;
-  }
 }
 
 .sidenav {
@@ -295,16 +266,6 @@ body {
   color: white;
 }
 
-.clearPopupText {
-  color: #598BC4;
-  font-family: "Lucida Bright", Georgia, serif;
-  font-style: normal;
-  font-size: 25px;
-  font-weight: Demibold;
-  padding: 10px 20px;
-  text-align: center;
-}
-
 .clearpopupButtons {
   background-color:rgba(31, 133, 0, .81); /* Green */
   border: 1px;
@@ -337,6 +298,7 @@ body {
   margin-left: 15px;
   box-shadow: 0 3px 3px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
+
 .cancelpopupButtons:hover {
   background-color: rgba(151, 54, 54, 0.81); /* Darker Red */
   color: white;
@@ -363,6 +325,7 @@ body {
 
 .modal-content
 {
+  padding: 4em;
   box-shadow: 10px 10px 10px 1px rgba(0,0,0,0.24);
 }
 
@@ -371,12 +334,55 @@ body {
   text-decoration: line-through;
 }
 
+/* mobile styles */
+@media only screen and (max-width: 800px)
+{
+  p, label, input {
+    font-size: 15px;
+  }
+  .listProduct{
+    font-size: 15px;
+  }
 
-/* To hide/show clear button */
-#clearInventory {
-  display: none;
+  .title{
+    font-size: 25px !important;
+  }
+
+  #errorMessage{
+    font-size: 10px !important;
+  }
+
+  .material-icons{
+    font-size: 15px !important;
+  }
+
+  .navlink{
+    text-align: center !important;
+  }
+
+  .clearbutton, .addbutton, .exportbutton {
+    padding: 3px 7px !important;
+    font-size: 13px !important;
+  }
+
+  .cancelpopupButtons, .clearpopupButtons, #submitContact {
+    padding: 3px 8px !important;
+    font-size: 17px !important;
+  }
+
+  .modal-content
+  {
+    padding: 1em !important;
+  }
 }
 
-#clearInventory.visible {
-  display: block;
+@media only screen and (max-width: 600px)
+{
+  p, label, input {
+    font-size: 12px;
+  }
+
+  .title{
+    font-size: 20px !important;
+  }
 }

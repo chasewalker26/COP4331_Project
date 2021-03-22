@@ -25,7 +25,7 @@
         <span class="material-icons md-36 closebtn m-3" onclick="closeNav()" id="navClose">close</span>
         <a class="navbar-brand navlink" href="inventory.html" id="inventoryLink">Inventory List</a>
         <a class="navbar-brand navlink" href="shoppingList.html" id="shoppingListLink">Shopping List</a>
-        <a class="navbar-brand navlink" href="Contact.html" id="contactLink">Contact</a>
+        <a class="navbar-brand navlink" href="contact.html" id="contactLink">Contact</a>
         <a class="navbar-brand navlink redWarning" id="signOut">Signout</a>
     </div>
     <span class="material-icons md-36 navlines mx-3" style="color: #ffffff; cursor:pointer" id="navOpen" onclick="openNav()">menu</span>
@@ -33,27 +33,27 @@
 
   
   <div class="row text-left">
-    <div class="col-lg-10 col-8">
+    <div class="col-lg-10 col-7">
       <!--inventory header-->
       <h1 class="title mt-3 mx-3">Name's Inventory</h1>
       <!-- inventory error message -->
       <div class="row text-left">
         <div class="col-12">
-          <h5 class="title mx-5 redWarning" id="errorMessage"></h5>
-        </div>
-      </div>
-      <!-- inventory items -->
-      <div class="row">
-        <div class="col-12">
-            <ul id="inventory">
-            </ul>
+          <h5 class="title mx-0 redWarning" id="errorMessage"></h5>
         </div>
       </div>
     </div>
     <!-- inventory buttons -->
-    <div class="col-lg-2 col-4 my-3 text-center">
+    <div class="col-lg-2 col-5 mt-3 text-center">
       <!-- Clear list -->
-      <button class="clearbutton m-3" type="button" data-toggle="modal" data-target="#clearSelectedItemsModal" data-backdrop="false" id="clearInventory">CLEAR</button>
+      <button class="clearbutton" type="button" data-toggle="modal" data-target="#clearSelectedItemsModal" data-backdrop="false" id="clearInventory" style="display: none;">CLEAR</button>
+    </div>
+  </div>
+  <!-- inventory items -->
+  <div class="row text-left">
+    <div class="col-12">
+        <ul id="inventory" class="px-4">
+        </ul>
     </div>
   </div>
 
@@ -61,7 +61,7 @@
   <div id="editItemModal" class="modal fade" role="dialog">
     <div class="modal-dialog modal-dialog-centered col-12">
       <!-- Modal content-->
-      <div class="modal-content p-5">
+      <div class="modal-content">
         <div class="row">
           <h3 class="col-12 title text-left">Editing: <span class="light-blue" id="currentProduct"></span></h3>
         </div>
@@ -69,16 +69,16 @@
           <div class="redWarning" id="editItemAlert"></div>
         </div>
         <div class="row text-center">
-          <div>
+          <p class="my-1">
             <b>Current Count:</b> The amount of this item currently in your possession. Set this number if you want an
             immediately up-to-date statistic of your current inventory.
-          </div>
-          <div>
+          </p>
+          <p class="my-1">
             <b>Ideal Count:</b> The minimum count of this item you prefer to have after shopping. The shopping
             list will tell you how many to buy to reach this count.
-          </div>
+          </p>
         </div>
-        <form class="row mt-3 mb-5" id="editItemForm">
+        <form class="row my-4" id="editItemForm">
           <div class="form-group col-6">
             <label class="mx-2">Current Count</label>
             <input class="form-control" id="editItemCount">
@@ -108,7 +108,7 @@
           <div class="row mb-5">
             <h3 class="col-12 title text-center">You are about to clear all crossed-out items, do you want to continue?</h3>
           </div>
-          <div class="row mt-5">
+          <div class="row">
             <div class="col-6 text-center">
               <a class="cancelpopupButtons" data-dismiss="modal">CANCEL</a>
             </div>
@@ -146,13 +146,11 @@
 
   <script>
     var currentBarcode;
-    var inventory;
 
     // no test since it combines built in js functions and tested functions
     $(document).on("click", "[name='inventoryItem']", async function()
     {
-      inventory = new Inventory(appUser.uid);
-      await inventory.getProducts();
+      await userInventory.getProducts();
 
       // clicked product id holds the products barode
       currentBarcode = this.id;
@@ -165,28 +163,28 @@
       this.classList.toggle("selected");
 
       clearButtonToggle();
-      
     })
 
     function clearButtonToggle()
     {
-      // Show Clear Button
       if (document.getElementsByClassName("selected").length != 0)
-      {
-        document.getElementById('clearInventory').classList.add("visible");
-
-      }
-      // Hide Clear Button
+        $('#clearInventory').show();
       else
-      {
-        document.getElementById('clearInventory').classList.toggle("visible");
-      }
+        $('#clearInventory').hide();
+    }
+
+    async function executeClearSelectedItems()
+    {
+      await userInventory.clearSelectedItems();
+
+      await userInventory.getProducts();
+      await userInventory.formatList();
     }
 
     // no test since it combines built in js functions and tested functions
     function fillEditFields()
     {
-      var product = inventory.getProduct(currentBarcode);
+      var product = userInventory.getProduct(currentBarcode);
 
       $("#editItemCount").val(product.count);
       $("#editItemIdealCount").val(product.idealCount);
@@ -200,29 +198,15 @@
       var idealCount = document.getElementById("editItemIdealCount").value;
 
       // if both functions are successful allow the modal to close and the list to repopulate
-      if (await inventory.editIdealCount(currentBarcode, idealCount) && await inventory.editCount(currentBarcode, count))
+      if (await userInventory.editIdealCount(currentBarcode, idealCount) && await userInventory.editCount(currentBarcode, count))
       {
         document.getElementById("editItemForm").reset();
 
-        inventory.formatList();
+        userInventory.formatList();
 
         $('#editItemModal').modal('hide');
       }
     }
-
-    async function executeClearSelectedItems()
-    {
-      console.log("Clear Selected Items");
-      // await inventory.getProducts();
-      console.log(inventory);
-
-      if (await inventory.clearSelectedItems())
-      {
-        await inventory.formatList();
-        clearButtonToggle();
-      }
-    }
-
   </script>
     
 </body>

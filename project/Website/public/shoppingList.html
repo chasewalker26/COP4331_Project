@@ -23,7 +23,7 @@
         <span class="material-icons md-36 closebtn m-3" onclick="closeNav()" id="navClose">close</span>
         <a class="navbar-brand navlink" href="inventory.html" id="inventoryLink">Inventory List</a>
         <a class="navbar-brand navlink" href="shoppingList.html" id="shoppingListLink">Shopping List</a>
-        <a class="navbar-brand navlink" href="Contact.html" id="contactLink">Contact</a>
+        <a class="navbar-brand navlink" href="contact.html" id="contactLink">Contact</a>
         <a class="navbar-brand navlink redWarning" id="signOut">Signout</a>
     </div>
     <span class="material-icons md-36 navlines mx-3" style="color: #ffffff; cursor:pointer" id="navOpen" onclick="openNav()">menu</span>
@@ -31,7 +31,7 @@
 
   
   <div class="row text-left">
-    <div class="col-lg-9 col-8">
+    <div class="col-lg-9 col-7">
       <!--shopping list header-->
       <h1 class="title mt-3 mx-3">Name's Shopping List</h1>
       <!-- shopping list error message -->
@@ -40,27 +40,27 @@
           <h5 class="title mx-5 redWarning" id="errorMessage"></h5>
         </div>
       </div>
-      <!-- shopping list items -->
-      <div class="row">
-        <div class="col-12">
-            <ul id="shoppingList">
-            </ul>
-            <ul id="printedShoppingList" style="display: none;">
-            </ul>
-        </div>
-      </div>
     </div>
     <!-- shopping list buttons -->
-    <div class="col-lg-3 col-4 my-3 text-center">
+    <div class="col-lg-3 col-5 my-3 text-center">
       <!--Add item-->
       <button class="addbutton" type="button" data-toggle="modal" data-target="#addItemModal" data-backdrop="false">ADD</button>
       <!-- Clear list -->
-      <button class="clearbutton m-3" type="button" data-toggle="modal" data-target="#clearListModal" data-backdrop="false" style="display:none" id="clearShoppingList">CLEAR</button>
+      <button class="clearbutton mx-1" type="button" data-toggle="modal" data-target="#clearListModal" data-backdrop="false" style="display:none" id="clearShoppingList">CLEAR</button>
       <!--Add item-->
-      <button class="exportbutton" type="button" onclick="executeExport()" style="display:none" id="export">EXPORT</button>
+      <button class="exportbutton mt-2" type="button" onclick="executeExport()" style="display:none" id="export">EXPORT</button>
     </div>
     </div>
   </div>
+        <!-- shopping list items -->
+        <div class="row text-left">
+          <div class="col-12">
+              <ul id="shoppingList">
+              </ul>
+              <ul id="printedShoppingList" style="display: none;">
+              </ul>
+          </div>
+        </div>
 
   
 
@@ -68,26 +68,24 @@
   <div id="addItemModal" class="modal fade" role="dialog">
     <div class="modal-dialog modal-dialog-centered">
       <!-- Modal content-->
-      <div class="modal-content p-5">
+      <div class="modal-content">
           <div class="row">
             <h3 class="col-12 title text-center">Add an Item</h3>
           </div>
           <div class="row text-center">
-            <div>
+            <p class="my-0">
               <b>Reminder Period:</b> Give a number in days that you would like to elapse since the list was cleared until 
               the item is re-added with the count below. This is useful for produce which cannot be scanned. 
               Ex: Reminder period of 7 would add this item to the list 7 days after it was cleared.
-            </div>
+            </p>
+            <p class="redWarning my-0 mt-2" id="addItemAlert"></p>
           </div>
-          <div class="row text-center">
-            <div class="redWarning" id="addItemAlert"></div>
-          </div>
-          <form class="row mt-3 mb-5" id="addItemForm">
+          <form class="row my-4" id="addItemForm">
             <div class="form-group">
               <label class="mx-2">Name</label>
               <input class="form-control" id="addItemName">
             </div>
-            <div class="form-group my-3">
+            <div class="form-group my-2">
               <label class="mx-2">Count</label>
               <input class="form-control" id="addItemCount">
             </div>
@@ -116,7 +114,7 @@
           <div class="row mb-5">
             <h3 class="col-12 title text-center">You are about to clear the entire list, do you want to continue?</h3>
           </div>
-          <div class="row mt-5">
+          <div class="row">
             <div class="col-6 text-center">
               <a class="cancelpopupButtons" data-dismiss="modal">CANCEL</a>
             </div>
