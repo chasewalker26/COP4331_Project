@@ -1,6 +1,18 @@
 {
   "rules": {
-    ".read": true,
-    ".write": false
+    "ProductList": {
+      "ListID" : {  
+        ".read": "auth != null",
+        ".write": "auth != null"
+      },
+      "ListID_TEST" : {  
+        ".read": "auth != null",
+        ".write": "auth != null"
+      },
+      "$user_id": {
+        ".read": "$user_id === auth.uid",
+        ".write": "$user_id === auth.uid"
+      }
+    }
   }
 }
