@@ -21,6 +21,10 @@ class Inventory extends List
           + '<span name="crossoutItem">' + name + ': ' + count + '</span></li>'; 
     }
 
+    // no items to show
+    if (html == "")
+      html = '<li class="listProduct">You do not have any items in your inventory yet!</li>';
+
     $("#inventory").html(html);
   }
 
@@ -33,7 +37,7 @@ class Inventory extends List
     {
       // current item is selected
       if ($(selectedItems[i].children[1]).hasClass("selected"))
-      {        
+      {      
         // Found barcode to be deleted
         var barcodeToDelete = products[i].barcode;
 

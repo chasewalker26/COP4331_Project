@@ -24,34 +24,13 @@ if (isTesting == false)
         getCurrentDate();
         console.log(date);
 
-        if (await userHasNonEmptyList())
-        {
-            console.log("List is good");
+        await buildListIfEmpty();
 
-            if (page == "/shoppingList.html")
-                await shoppingListPageInitialize();
-            else if (page == "/inventory.html")
-                await inventoryPageInitialize();
-        }
+        if (page == "/shoppingList.html")
+            await intitializeShoppingList();
+        else if (page == "/inventory.html")
+            await intitializeInventory();
     }
-}
-
-// no test because this uitilizes only tested code or built in js code
-async function shoppingListPageInitialize()
-{
-    await intitializeShoppingList();
-
-    if ($('#shoppingList').html() != "")
-    {
-        $('#clearShoppingList').show();
-        $('#export').show();
-    }
-}
-
-// no test because this uitilizes only tested code or built in js code
-async function inventoryPageInitialize()
-{
-    await intitializeInventory();
 }
 
 // no test because this uitilizes only tested functions
@@ -71,7 +50,7 @@ async function intitializeInventory()
 }
 
 // No test because only utilizes tested or API code
-async function userHasNonEmptyList()
+async function buildListIfEmpty()
 {
     // user has no list
     if (await pullFromFirebase("ProductList/" + appUser.uid) == null)

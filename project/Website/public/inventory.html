@@ -150,8 +150,6 @@
     // no test since it combines built in js functions and tested functions
     $(document).on("click", "[name='inventoryItem']", async function()
     {
-      await userInventory.getProducts();
-
       // clicked product id holds the products barode
       currentBarcode = this.id;
 
@@ -176,7 +174,6 @@
     async function executeClearSelectedItems()
     {
       await userInventory.clearSelectedItems();
-
       await userInventory.getProducts();
       await userInventory.formatList();
     }

@@ -9,7 +9,7 @@ if (isTesting == true)
         appUser.uid = "ListID_TEST";
 
         getCurrentDate();
-        await shoppingListPageInitialize();
+        await intitializeShoppingList();
 
         runTests();
 

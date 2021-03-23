@@ -8,14 +8,20 @@ class List
   
   async getProducts()
   {
+    this.products = [];
+
     var dbProducts = await pullFromFirebase("ProductList/" + this.listID);
 
     if (dbProducts == null)
+    {
+      await buildListIfEmpty();
       return;
+    }
 
+    if (dbProducts == "EmptyList")
+      return;
+    
     var barcodes = Object.keys(dbProducts);
-
-    this.products = [];
 
     for (var i = 0; i < barcodes.length; i++)
     {

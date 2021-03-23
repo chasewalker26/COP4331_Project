@@ -46,6 +46,17 @@ class ShoppingList extends List {
       html = '<li class="listProduct">Congratulations! Your list is empty!</li>';
 
     $("#shoppingList").html(html);
+
+    if ($("#shoppingList").html() != '<li class="listProduct">Congratulations! Your list is empty!</li>')
+    {
+        $('#clearShoppingList').show();
+        $('#export').show();
+    }
+    else
+    {
+      $('#clearShoppingList').hide();
+      $('#export').hide();
+    }
   }
   
   clearList()
@@ -174,6 +185,9 @@ class ShoppingList extends List {
 
   productExistsError(name)
   {
+    if (this.products == null)
+      return false;
+
     var products = this.products;
 
     for (var i = 0; i < products.length; i++)

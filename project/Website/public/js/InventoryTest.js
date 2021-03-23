@@ -9,7 +9,7 @@ if (isTesting == true)
         appUser.uid = "ListID_TEST";
 
         getCurrentDate();
-        await inventoryPageInitialize();
+        await intitializeInventory();
 
         runTests();
 

@@ -189,20 +189,15 @@
   <script src="jsLibraries/html2pdf.bundle.min.js"></script>
 
   <script>
-    var shoppingList;
     var selectedBarcode;
     
     async function executeAddItem()
     {
-      var shoppingList = new ShoppingList(appUser.uid);
-      
-      await shoppingList.getProducts();
-
-      if (await shoppingList.addItem())
+      if (await userShoppingList.addItem())
       {
         document.getElementById("addItemForm").reset();
 
-        shoppingList.formatList();
+        userShoppingList.formatList();
 
         $('#addItemModal').modal('hide');
       }
@@ -210,20 +205,12 @@
 
     async function executeClearList()
     {
-      var shoppingList = new ShoppingList(appUser.uid);
-      
-      await shoppingList.getProducts();
-
-      shoppingList.clearList(); 
+      userShoppingList.clearList(); 
     }
 
     // no test since it combines built in js functions and tested functions
     $(document).on("click", "[name='unrecognizedItem']", async function()
     {
-      shoppingList = new ShoppingList(appUser.uid);
-      await shoppingList.getProducts();
-
-      // clicked product id holds the products barode
       selectedBarcode = this.id;
 
       fillAddNameFields();
@@ -243,11 +230,11 @@
       var count = document.getElementById("addCount").value;
 
       // if both functions are successful allow the modal to close and the list to repopulate
-      if (await shoppingList.nameItem(selectedBarcode))
+      if (await userShoppingList.nameItem(selectedBarcode))
       {
         document.getElementById("addNameForm").reset();
 
-        shoppingList.formatList();
+        userShoppingList.formatList();
 
         $('#addNameModal').hide();
       }
