@@ -122,8 +122,9 @@ saveToFirebase = (datapath, data) =>
 {
     return new Promise((resolve) => 
     {
-        firebase.database().ref(datapath).update(data);
-        resolve();
+        firebase.database().ref(datapath).update(data).then(() => {
+            resolve();
+        })
     })
 }
 

@@ -13,7 +13,7 @@ if (isTesting == true)
 
         runTests();
 
-        firebase.database().ref('ProductList/' + appUser.uid).on('value', async function(){
+        await firebase.database().ref('ProductList/' + appUser.uid).on('value', async function(){
             await intitializeShoppingList();
         });
     }
@@ -209,16 +209,18 @@ async function formatListWarningDayItemsPastDueTest()
     // force date to be more than 5 days behind current date
     await saveToFirebase("ProductList/ListID_TEST/banana/", {dayRemoved:"66/21"});
 
-    userShoppingList.formatList();
-
     // expect a banana as the 2nd element on page due to known test data
+    var expectedElements = '<li class="listProduct" id="Barcode3" name="shoppingListItem">name: 3</li>' + 
+                           '<li class="listProduct" id="banana" name="shoppingListItem">banana: 4</li>' +
+                           '<li class="listProduct notFound" id="unrecognized" name="unrecognizedItem" data-toggle="modal" data-target="#addNameModal" data-backdrop="false">unrecognized</li>';
+
     var siteShoppingListElements = document.getElementById("shoppingList").children;
-    var expectedElement = '<li class="listProduct" id="banana" name="shoppingListItem">banana: 4</li>';
+    var actualElements = "";
 
-    if (siteShoppingListElements[1].outerHTML == expectedElement)
-        data = true;
-
-    console.assert(data == true, "formatListWarningDayItemsPastDueTest() FAILED");
+    for (var i = 0; i < siteShoppingListElements.length; i++)
+        actualElements += siteShoppingListElements[i].outerHTML;
+        
+    console.assert(expectedElements == actualElements, "formatListWarningDayItemsPastDueTest() FAILED");
 
     data = false;
     
@@ -240,8 +242,7 @@ async function formatListWarningDayItemsPastDueTest()
     console.assert(data == true, "formatListWarningDayItemsPastDueTest() FAILED");
 
     // clean up all changed data and rebuild list
-    await saveToFirebase("ProductList/ListID_TEST/banana/", {count: 4});
-    await saveToFirebase("ProductList/ListID_TEST/banana/", {dayRemoved: -1});
+    await saveToFirebase("ProductList/ListID_TEST/banana/", {dayRemoved: -1, count: 4});
 }
 
 // This test verifies that items with warningDay != -1 and dayRemoved != -1
@@ -292,8 +293,8 @@ async function formatListWarningDayItemsPreDueTest()
 
     // clean up all changed data and rebuild list
     getCurrentDate();
-    await saveToFirebase("ProductList/ListID_TEST/banana/", {count: 4});
     await saveToFirebase("ProductList/ListID_TEST/banana/", {dayRemoved: -1});
+    await saveToFirebase("ProductList/ListID_TEST/banana/", {count: 4});
 }
 
 // shopping list items should have correct styling as per UI diagrams

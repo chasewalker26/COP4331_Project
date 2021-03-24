@@ -23,17 +23,23 @@ async function runTests()
 {
     await formatListFunctionalTest();
     await formatListVisualTest();
+
     await getProductTest();
+
     await replaceProductTest();
+
     alertUserTest();
+
     validInputEmptyStringTest();
     validInputStringTest();
     validInputZeroTest();
     validInputNegativeTest();
     validInputPositiveTest();
+
     await editIdealCountTest();
     await editCountTest();
     editItemUITest();
+
     await clearSelectedItemTest();
 }
 
@@ -56,7 +62,6 @@ async function formatListFunctionalTest()
         actualElements += siteInventoryElements[i].outerHTML;
 
     console.assert(expectedElements == actualElements, "formatListFunctionalTest() FAILED");
-
 }
 
 // in Inventory.js
@@ -128,7 +133,8 @@ async function replaceProductTest()
     let expectedInventory = new Inventory("ListID_TEST");
     await expectedInventory.getProducts();
 
-    expectedInventory.products[1] = newProduct; // replacement at known location of Barcode1
+    // replacement at known location of Barcode1
+    expectedInventory.products[1] = newProduct;
 
     if (JSON.stringify(userInventory.products) == JSON.stringify(expectedInventory.products))
         data = true;
@@ -227,7 +233,6 @@ async function editIdealCountTest()
 
     // clean up
     await saveToFirebase("ProductList/ListID_TEST/Barcode1/", {idealCount: 1});
-    // await userInventory.getProducts();
 }
 
 async function editCountTest()
@@ -254,7 +259,6 @@ async function editCountTest()
 
     // clean up
     await saveToFirebase("ProductList/ListID_TEST/Barcode1/", {count: 8});
-    // await userInventory.getProducts();
 }
 
 function editItemUITest()
@@ -281,7 +285,6 @@ async function clearSelectedItemTest()
     await userInventory.clearSelectedItems();
 
     // grab and verify changed data
-    // await userInventory.getProducts();
 
     var products = userInventory.products
 
@@ -295,7 +298,7 @@ async function clearSelectedItemTest()
             "idealCount": 1,
             "name" : "toDeleteTest",
             "dayRemoved": -1,
-            "warningDay":  1
+            "warningDay":  -1
     }
     await saveToFirebase("ProductList/ListID_TEST/", {toDeleteTest});
 }

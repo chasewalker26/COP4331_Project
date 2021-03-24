@@ -57,6 +57,7 @@ class Inventory extends List
 
     // find the targeted product
     var currentProduct = this.getProduct(barcode);
+
     currentProduct.idealCount = idealCount;
 
     // replace the target product to update idealCount 
