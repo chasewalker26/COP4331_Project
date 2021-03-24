@@ -178,7 +178,7 @@ function validInputZeroTest()
 {
     var data = false;
 
-    console.assert(userInventory.validInput("0") == false, "validInputZeroTest() FAILED");
+    console.assert(userInventory.validInput("0", 1) == false, "validInputZeroTest() FAILED");
 
     if ($("#editItemAlert")[0].innerHTML == "Your input must be greater than 0!")
         data = true;
@@ -190,7 +190,7 @@ function validInputNegativeTest()
 {
     var data = false;
 
-    console.assert(userInventory.validInput("-5") == false, "validInputNegativeTest() FAILED");
+    console.assert(userInventory.validInput("-5", 1) == false, "validInputNegativeTest() FAILED");
 
     if ($("#editItemAlert")[0].innerHTML == "Your input must be greater than 0!")
         data = true;

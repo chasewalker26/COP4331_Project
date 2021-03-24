@@ -75,6 +75,6 @@ class List
     setTimeout(() =>
     {
       $(location).html("");
-    }, 2000);
+    }, 3000);
   }
 }

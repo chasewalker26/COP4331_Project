@@ -50,7 +50,7 @@ class Inventory extends List
 
   async editIdealCount(barcode, idealCount)
   {
-    if (this.validInput(idealCount) == false)
+    if (this.validInput(idealCount, 1) == false)
       return false;
 
     idealCount = parseInt(idealCount);
@@ -70,7 +70,7 @@ class Inventory extends List
 
   async editCount(barcode, count)
   {
-    if (this.validInput(count) == false)
+    if (this.validInput(count, 0) == false)
       return false;
 
     count = parseInt(count);
@@ -88,7 +88,7 @@ class Inventory extends List
     return true;
   }
 
-  validInput(input)
+  validInput(input, minimum)
   {
     if (input == "")
     {
@@ -103,7 +103,7 @@ class Inventory extends List
       this.alertUser("#editItemAlert", "Your input must be a number!");
       return false;
     }
-    else if (input <= 0)
+    else if (input < minimum)
     {
       this.alertUser("#editItemAlert", "Your input must be greater than 0!");
       return false;

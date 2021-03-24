@@ -120,21 +120,29 @@ class ShoppingList extends List {
 
   validAddItemInput(name, count, warningDay, location)
   {
-    count = parseInt(count);
-    warningDay = parseInt(warningDay);
-
-    if (name.length == 0)
+    if (name.length == 0 || count.length == 0 || warningDay.length == 0)
     {
-      this.alertUser(location, "Please check your input, empty name, count, and warning period must be filled");
+      this.alertUser(location, "Please check your input, name, count, and warning period must be filled");
       return false;
     }
-    else if (isNaN(count) || isNaN(warningDay))
+   
+    count = parseInt(count);
+    warningDay = parseInt(warningDay);
+    
+    if (isNaN(count) || isNaN(warningDay))
     {
       this.alertUser(location, "Please check your input, count and warning period must be numbers");
       return false;
     }
-    else
-      return true;
+
+    if (count <= 0 || warningDay <= 0)
+    {
+      this.alertUser(location, "Please check your input, count and warning period must be greater than 0");
+      return false;
+    }
+    
+
+    return true;
   }
   
   async nameItem(barcode) 

@@ -443,7 +443,7 @@ async function addItemEmptyStringInputFailureTest()
     await userShoppingList.addItem();
 
     // alert for name = ""
-    if ($("#addItemAlert")[0].innerHTML == "Please check your input, empty name, count, and warning period must be filled")
+    if ($("#addItemAlert")[0].innerHTML == "Please check your input, name, count, and warning period must be filled")
         data = true;
     
     console.assert(data == true, "addItemBadInputFailureTest() FAILED");
