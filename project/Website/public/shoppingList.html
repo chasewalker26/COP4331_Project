@@ -194,12 +194,10 @@
     
     async function executeAddItem()
     {
+      // if function is successful allow the modal to close and reset the form
       if (await userShoppingList.addItem())
       {
         document.getElementById("addItemForm").reset();
-
-        userShoppingList.formatList();
-
         $('#addItemModal').modal('hide');
       }
     }
@@ -230,13 +228,10 @@
       var name = document.getElementById("addName").value;
       var count = document.getElementById("addCount").value;
 
-      // if both functions are successful allow the modal to close and the list to repopulate
+      // if function is successful allow the modal to close and reset the form
       if (await userShoppingList.nameItem(selectedBarcode))
       {
         document.getElementById("addNameForm").reset();
-
-        userShoppingList.formatList();
-
         $('#addNameModal').hide();
       }
     }
@@ -270,9 +265,6 @@
           targetData.children[i-1].classList.add("html2pdf__page-break");
 
       return targetData;
-      
-      
-      
     }
   </script>
 

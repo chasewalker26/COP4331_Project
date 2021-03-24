@@ -85,8 +85,6 @@ class ShoppingList extends List {
 
     var JSONProducts = this.formatProductsJSON();
     this.updateDatabase(JSONProducts);
-
-    this.formatList();
   }
 
   async addItem() 

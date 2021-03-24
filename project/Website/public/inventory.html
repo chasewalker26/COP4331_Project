@@ -175,8 +175,6 @@
     async function executeClearSelectedItems()
     {
       await userInventory.clearSelectedItems();
-      await userInventory.getProducts();
-      await userInventory.formatList();
     }
 
     // no test since it combines built in js functions and tested functions
@@ -199,9 +197,6 @@
       if (await userInventory.editIdealCount(currentBarcode, idealCount) && await userInventory.editCount(currentBarcode, count))
       {
         document.getElementById("editItemForm").reset();
-
-        userInventory.formatList();
-
         $('#editItemModal').modal('hide');
       }
     }

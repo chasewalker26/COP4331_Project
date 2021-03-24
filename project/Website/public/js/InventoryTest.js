@@ -13,6 +13,9 @@ if (isTesting == true)
 
         runTests();
 
+        firebase.database().ref('ProductList/' + appUser.uid).on('value', async function(){
+            await intitializeInventory();
+        });
     }
 }
 
@@ -52,8 +55,7 @@ async function formatListFunctionalTest()
     for (var i = 0; i < siteInventoryElements.length; i++)
         actualElements += siteInventoryElements[i].outerHTML;
 
-
-    console.assert(expectedElements == actualElements, "Inventory.formatListTest() FAILED");
+    console.assert(expectedElements == actualElements, "formatListFunctionalTest() FAILED");
 
 }
 
@@ -79,11 +81,11 @@ async function formatListVisualTest()
         console.assert(FW == "700", "formatListVisualTest FAILED");
 
         if ($(window).width() > 800)
-            console.assert(FSize == "30px", "formatListVisualTest FAILED");
+            console.assert(FSize == "30px", "formatListVisualTest() FAILED");
         else if ($(window).width() <= 800)
-            console.assert(FSize == "15px", "formatListVisualTest FAILED");
+            console.assert(FSize == "15px", "formatListVisualTest() FAILED");
         else if ($(window).width() <= 600)
-            console.assert(FSize == "15px", "formatListVisualTest FAILED");
+            console.assert(FSize == "15px", "formatListVisualTest() FAILED");
     }
 }
 
@@ -225,7 +227,7 @@ async function editIdealCountTest()
 
     // clean up
     await saveToFirebase("ProductList/ListID_TEST/Barcode1/", {idealCount: 1});
-    await userInventory.getProducts();
+    // await userInventory.getProducts();
 }
 
 async function editCountTest()
@@ -252,7 +254,7 @@ async function editCountTest()
 
     // clean up
     await saveToFirebase("ProductList/ListID_TEST/Barcode1/", {count: 8});
-    await userInventory.getProducts();
+    // await userInventory.getProducts();
 }
 
 function editItemUITest()
@@ -279,7 +281,7 @@ async function clearSelectedItemTest()
     await userInventory.clearSelectedItems();
 
     // grab and verify changed data
-    await userInventory.getProducts();
+    // await userInventory.getProducts();
 
     var products = userInventory.products
 
@@ -296,6 +298,4 @@ async function clearSelectedItemTest()
             "warningDay":  1
     }
     await saveToFirebase("ProductList/ListID_TEST/", {toDeleteTest});
-    await userInventory.getProducts();
-    userInventory.formatList();
 }

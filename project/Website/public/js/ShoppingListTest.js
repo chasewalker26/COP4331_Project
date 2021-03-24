@@ -13,6 +13,9 @@ if (isTesting == true)
 
         runTests();
 
+        firebase.database().ref('ProductList/' + appUser.uid).on('value', async function(){
+            await intitializeShoppingList();
+        });
     }
 }
 
@@ -182,7 +185,6 @@ async function updateDatabaseTest()
 // warningDay = -1 and/or dayRemoved = -1
 async function formatListNonWarningDayItemsTest()
 {
-    // build list
     userShoppingList.formatList();
 
     var expectedElements = '<li class="listProduct" id="Barcode3" name="shoppingListItem">name: 3</li>' + 
@@ -207,8 +209,6 @@ async function formatListWarningDayItemsPastDueTest()
     // force date to be more than 5 days behind current date
     await saveToFirebase("ProductList/ListID_TEST/banana/", {dayRemoved:"66/21"});
 
-    // build list
-    await userShoppingList.getProducts();
     userShoppingList.formatList();
 
     // expect a banana as the 2nd element on page due to known test data
@@ -242,8 +242,6 @@ async function formatListWarningDayItemsPastDueTest()
     // clean up all changed data and rebuild list
     await saveToFirebase("ProductList/ListID_TEST/banana/", {count: 4});
     await saveToFirebase("ProductList/ListID_TEST/banana/", {dayRemoved: -1});
-    await userShoppingList.getProducts();
-    userShoppingList.formatList();
 }
 
 // This test verifies that items with warningDay != -1 and dayRemoved != -1
@@ -260,8 +258,6 @@ async function formatListWarningDayItemsPreDueTest()
 
     await saveToFirebase("ProductList/ListID_TEST/banana/", {dayRemoved: date});
 
-    // build list
-    await userShoppingList.getProducts();
     userShoppingList.formatList();
 
     var expectedElements = '<li class="listProduct" id="Barcode3" name="shoppingListItem">name: 3</li>' + 
@@ -298,14 +294,11 @@ async function formatListWarningDayItemsPreDueTest()
     getCurrentDate();
     await saveToFirebase("ProductList/ListID_TEST/banana/", {count: 4});
     await saveToFirebase("ProductList/ListID_TEST/banana/", {dayRemoved: -1});
-    await userShoppingList.getProducts();
-    userShoppingList.formatList();
 }
 
 // shopping list items should have correct styling as per UI diagrams
 async function formatListVisualTest()
 {
-    // build list
     userShoppingList.formatList();
 
     var siteListElements = document.getElementsByClassName("listProduct");
@@ -363,8 +356,6 @@ async function clearListTest()
     await saveToFirebase("ProductList/ListID_TEST/banana/", {dayRemoved: -1});
     await saveToFirebase("ProductList/ListID_TEST/unrecognized/", {name:""});
     await saveToFirebase("ProductList/ListID_TEST/unrecognized/", {idealCount:1});
-    await userShoppingList.getProducts();
-    userShoppingList.formatList();
 }
 
 // formatProductsJSON should create the correct database JSON format from the list's products array
@@ -436,8 +427,6 @@ async function addItemItemExistsFailureTest()
 
     // clean up all changed data
     await saveToFirebase("ProductList/ListID_TEST/", {mango: null});
-    await userShoppingList.getProducts();
-    userShoppingList.formatList();
     document.getElementById("addItemForm").reset();
 }
 
@@ -487,7 +476,6 @@ async function addItemStringForNumberFailureTest()
 async function nameItemTest()
 {
     var data = false;
-    // build list
 
     // nameItem data
     document.getElementById("addName").value = "water";
@@ -515,8 +503,6 @@ async function nameItemTest()
     // clean up all changed data and rebuild list
     await saveToFirebase("ProductList/ListID_TEST/unrecognized/", {name:""});
     await saveToFirebase("ProductList/ListID_TEST/unrecognized/", {idealCount:1});
-    await userShoppingList.getProducts();
-    userShoppingList.formatList();
     document.getElementById("addNameForm").reset();
 }
 

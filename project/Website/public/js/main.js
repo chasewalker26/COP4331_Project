@@ -20,9 +20,7 @@ if (isTesting == false)
             getUserName();
         }
             
-
         getCurrentDate();
-        console.log(date);
 
         await buildListIfEmpty();
 
@@ -30,6 +28,13 @@ if (isTesting == false)
             await intitializeShoppingList();
         else if (page == "/inventory.html")
             await intitializeInventory();
+    
+        firebase.database().ref('ProductList/' + appUser.uid).on('value', async function(){
+            if (page == "/shoppingList.html")
+                await intitializeShoppingList();
+            else if (page == "/inventory.html")
+                await intitializeInventory();
+        });
     }
 }
 
@@ -38,7 +43,7 @@ async function intitializeShoppingList()
 {
     userShoppingList = new ShoppingList(appUser.uid);
     await userShoppingList.getProducts();
-    userShoppingList.formatList();
+    await userShoppingList.formatList();
 }
 
 // no test because this uitilizes only tested functions
@@ -55,19 +60,13 @@ async function buildListIfEmpty()
     // user has no list
     if (await pullFromFirebase("ProductList/" + appUser.uid) == null)
     {
-        console.log("No list exists for this user. Initializing empty list.");
-
         await saveToFirebase("ProductList/", {[appUser.uid]: "EmptyList"});
 
         return false;
     }
     // user's list is empty
     else if (await pullFromFirebase("ProductList/" + appUser.uid) == "EmptyList")
-    {
-        console.log("Empty list for user");
-
         return false;
-    }
     else
         return true;
 }
@@ -84,7 +83,6 @@ redirectIfNotFirebaseUser = () =>
             if (user)
             {
                 var currUser = new User(user.displayName, user.email, user.uid);
-                console.log(currUser);
                 resolve(currUser);
             }
             else

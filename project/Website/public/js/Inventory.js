@@ -31,7 +31,6 @@ class Inventory extends List
   async clearSelectedItems()
   {
     var selectedItems = document.getElementsByClassName("listProduct");    
-    var products = this.products;
     
     for (var i = 0; i < selectedItems.length; i++)
     {
@@ -39,7 +38,7 @@ class Inventory extends List
       if ($(selectedItems[i].children[1]).hasClass("selected"))
       {      
         // Found barcode to be deleted
-        var barcodeToDelete = products[i].barcode;
+        var barcodeToDelete = selectedItems[i].id;
 
         // Delete product from the database
         await saveToFirebase("ProductList/" + this.listID, {[barcodeToDelete]: null});
