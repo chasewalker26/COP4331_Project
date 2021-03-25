@@ -30,20 +30,18 @@ class Inventory extends List
 
   async clearSelectedItems()
   {
-    var selectedItems = document.getElementsByClassName("listProduct");    
+    var inventoryItems = document.getElementsByClassName("listProduct");
+    var currProducts = this.formatProductsJSON();
     
-    for (var i = 0; i < selectedItems.length; i++)
-    {
-      // current item is selected
-      if ($(selectedItems[i].children[1]).hasClass("selected"))
-      {      
-        // Found barcode to be deleted
-        var barcodeToDelete = selectedItems[i].id;
+    for (var i = 0; i < inventoryItems.length; i++)
+      // current item is selected, found barcode to be deleted, set its respective product to null
+      if ($(inventoryItems[i].children[1]).hasClass("selected"))
+        currProducts[inventoryItems[i].id] = null;
 
-        // Delete product from the database
-        await saveToFirebase("ProductList/" + this.listID, {[barcodeToDelete]: null});
-      }
-    }
+    var newProducts = currProducts;
+
+    // Deletes all null products from the database
+    await saveToFirebase("ProductList/" + this.listID, newProducts);
 
     $('#clearInventory').hide();
   }
