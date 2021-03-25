@@ -240,7 +240,7 @@
     async function executeExport()
     {
       var targetData = await addPageBreaksForPrint();
-      var fileName = "yourShoppingList";
+      var fileName = appUser.username + "_ShoppingList";
 
       var opt = {
           margin:       [1.0,0.3,1.0,0.3],
@@ -258,10 +258,16 @@
     {
       var targetData = document.getElementById("shoppingList");
       var elementChildren = targetData.children;
+      var modulo;
 
-      // every 18 items add a page break to prevent cutoff items
+      if ($(window).width() < 1400)
+        modulo = 38;
+      else
+        modulo = 18;
+
+      // every modulo items add a page break to prevent cutoff items
       for (var i = 1; i <= elementChildren.length; i++)
-        if (i % 18 == 0 && i != elementChildren.length)
+        if (i % modulo == 0 && i != elementChildren.length)
           targetData.children[i-1].classList.add("html2pdf__page-break");
 
       return targetData;

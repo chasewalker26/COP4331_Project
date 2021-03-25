@@ -259,8 +259,6 @@ async function formatListWarningDayItemsPreDueTest()
 
     await saveToFirebase("ProductList/ListID_TEST/banana/", {dayRemoved: date});
 
-    userShoppingList.formatList();
-
     var expectedElements = '<li class="listProduct" id="Barcode3" name="shoppingListItem">name: 3</li>' + 
                            '<li class="listProduct notFound" id="unrecognized" name="unrecognizedItem" data-toggle="modal" data-target="#addNameModal" data-backdrop="false">unrecognized</li>';
 
@@ -293,8 +291,7 @@ async function formatListWarningDayItemsPreDueTest()
 
     // clean up all changed data and rebuild list
     getCurrentDate();
-    await saveToFirebase("ProductList/ListID_TEST/banana/", {dayRemoved: -1});
-    await saveToFirebase("ProductList/ListID_TEST/banana/", {count: 4});
+    await saveToFirebase("ProductList/ListID_TEST/banana/", {dayRemoved: -1, count: 4});
 }
 
 // shopping list items should have correct styling as per UI diagrams
@@ -535,9 +532,16 @@ async function addPageBreaksForPrintTest()
 
     var siteListElements = document.getElementsByClassName("listProduct");
     
+    var modulo;
+
+    if ($(window).width() < 1400)
+      modulo = 38;
+    else
+      modulo = 18;
+
     // check that every 18 items starting at 18 excluding EoL item (item89)
     // have page break class
-    for (var i = 17; i < 89; i += 18)
+    for (var i = modulo - 1; i < 89; i += modulo)
     {
         var pageBreakLi = '<li class="listProduct html2pdf__page-break">Item' + i + '</li>';
         console.assert(siteListElements[i].outerHTML == pageBreakLi, "addPageBreaksForPrintTest() FAILED");

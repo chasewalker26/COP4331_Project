@@ -198,7 +198,7 @@ class ShoppingList extends List {
 
     for (var i = 0; i < products.length; i++)
     {
-      if (products[i].name.toLowerCase().replace(/\s+/g, "") == name.toLowerCase().replace(/\s+/g, ""))
+      if (products[i].name.toLowerCase().replace(/\s/g, "") == name.toLowerCase().replace(/\s/g, ""))
       {
         this.alertUser("#addItemAlert", "This item already exists");
 
