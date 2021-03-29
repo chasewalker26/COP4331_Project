@@ -68,7 +68,7 @@ The only business rule that defines architectural processes is the requirement t
 
 # User Interface Design
 
-![UI Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/UI4.png?raw=true)
+![UI Diagram](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/images/UI5.png?raw=true)
 
 |    UI diagram      |    User Interaction    |     UUID(s)    |
 | ------------------ | ---------------------- | -------------- |
@@ -80,14 +80,13 @@ The only business rule that defines architectural processes is the requirement t
 | 6 | This is the shopping list after the clear operation has been done, or when the list is empty. | U016 |
 | 7 | This is the shopping list template on mobile screens.| U023 |
 | 8 | This is the sidenav template on mobile screens. | U023 |
-| 9 | This is the sidenav for the site. | general requirement for a site |
+| 9 | This is the sidenav for the site. | general requirement for a site, U013, U026 |
 | 10 | This is the contact form, it is navigated to using the nav menu. Submitting a message emails the developers. | U014 |
 | 11 | This screen allows users to set preferred inventory amounts for items in their inventory, and edit current amounts. This is done by clicking on the pencil next to an inventory item. | U008, U010 |
 | 12 | This is the inventory screen layout | U006, U017, U021 |
-| 13 | This is the help page that holds embedded youtube videos of the tutorials. | U012, U013, U026 |
-| 14 | This is what it looks like when an inventory item is clicked on. They are crossed out and marked for removal | U007 |
-| 15 | This box appears when the user presses clear with specific items crossed out, saving removes them, and cancel leaves the items crossed-out on the list. | U007 |
-| 16 | This is the user’s inventory screen, after they have cleared an item. | U007 |
+| 13 | This is what it looks like when an inventory item is clicked on. They are crossed out and marked for removal | U007 |
+| 14 | This box appears when the user presses clear with specific items crossed out, saving removes them, and cancel leaves the items crossed-out on the list. | U007 |
+| 15 | This is the user’s inventory screen, after they have cleared an item. | U007 |
 
 # Resource Management
 
