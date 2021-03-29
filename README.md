@@ -178,7 +178,7 @@ All team members worked together in this sprint to create the user stories in th
 
 - Christopher Gray - I completed "As a user, I would like to have my name on my lists so when I view the page I can have a feeling of personalization" U021, I also worked on the powerpoint and demo of the contact page, and the help page. 
 
-- Omer Gul - 
+- Omer Gul - I worked on the Project Power Point. In addition, I recorded video in which I discussed the uses of the scanner.
 
 - Anjali Ramsahai - I completed the user store "As a busy person, I want to be able to press a help button to take me to a playlist of the tutorials so that I can view them with ease." U012, I also worked on the powerpoint and demo for the shopping list.
 
