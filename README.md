@@ -176,11 +176,11 @@ All team members worked together in this sprint to create the user stories in th
 ## Task Allocation
 - Chase Walker - I completed the user story "As a frequent user of my phone, I would like to be able to view the application on my phone" U023. I also worked with Alisher on "As an older shopper unfamiliar with web apps, I would like to have a tutorial for how to use the website, so that I can get the most out of it" U026 by recording the tutorials for shopping list and inventory. I recorded the inventory demo.
 
-- Christopher Gray - I completed "As a user, I would like to have my name on my lists so when I view the page I can have a feeling of personalization" U021, I also worked on the powerpoint and demostration of the contact page, and the help page. 
+- Christopher Gray - I completed "As a user, I would like to have my name on my lists so when I view the page I can have a feeling of personalization" U021, I also worked on the powerpoint and demo of the contact page, and the help page. 
 
 - Omer Gul - 
 
-- Anjali Ramsahai - 
+- Anjali Ramsahai - I completed the user store "As a busy person, I want to be able to press a help button to take me to a playlist of the tutorials so that I can view them with ease." U012, I also worked on the powerpoint and demo for the shopping list.
 
 - Alisher Sultangazin - I completed the user story "As a shopper, I would like to be able to select specific items to permanently remove from my inventory so that they are no longer tracked until I scan them again, so that I am not told to buy things that I don't want" U007. I recorded a demo for Sign In/ Sign out feature.
  
