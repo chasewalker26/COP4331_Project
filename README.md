@@ -164,9 +164,27 @@ All team members worked together in this sprint to create the user stories in th
 
 
 # Sprint 8
+- [Trello Board](https://trello.com/b/Af6rjxIc/cop4331)
+- [Burndown Chart](https://docs.google.com/spreadsheets/d/183Dg6Bm59MUCFB1R2GCbdrus6IbwDEImLzfAo2zPLKg/edit#gid=1274856586)
+- [Velocity Chart](https://docs.google.com/spreadsheets/d/1IDBxwgaPQL3OXrfwmEl2Y9RwI4CI29koruPL0Dz6inc/edit?usp=sharing)
+- [System Architecture](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/architecture.md)
+- [Source Code](https://github.com/chasewalker26/COP4331_Project/tree/main/project/)
+- [Test Code (Site)](https://github.com/chasewalker26/COP4331_Project/tree/main/project/Website/public/js)
+- [Test Code (Scanner)](https://github.com/chasewalker26/COP4331_Project/tree/main/project/RaspberryPi)
+- [Product Demonstration](ADD LINK HERE)
 
 ## Task Allocation
-- Alisher Sultangazin - I completed the user story "As a shopper, I would like to be able to select specific items to permanently remove from my inventory so that they are no longer tracked until I scan them again, so that I am not told to buy things that I don't want" U007.
+- Chase Walker - 
+
+- Christopher Gray - 
+
+- Omer Gul - 
+
+- Anjali Ramsahai - 
+
+- Alisher Sultangazin - I completed the user story "As a shopper, I would like to be able to select specific items to permanently remove from my inventory so that they are no longer tracked until I scan them again, so that I am not told to buy things that I don't want" U007. I recorded a demo for Sign In/ Sign out feature.
+ 
+- All team members worked together in this sprint to create the Project Power Point Presentation. All team members have also recorded the demonstration videos for different features of the project.
 
 
 
