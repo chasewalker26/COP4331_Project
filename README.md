@@ -165,16 +165,16 @@ All team members worked together in this sprint to create the user stories in th
 
 # Sprint 8
 - [Trello Board](https://trello.com/b/Af6rjxIc/cop4331)
-- [Burndown Chart](https://docs.google.com/spreadsheets/d/183Dg6Bm59MUCFB1R2GCbdrus6IbwDEImLzfAo2zPLKg/edit#gid=1274856586)
+- [Burndown Chart](https://docs.google.com/spreadsheets/d/183Dg6Bm59MUCFB1R2GCbdrus6IbwDEImLzfAo2zPLKg/edit#gid=1147757311)
 - [Velocity Chart](https://docs.google.com/spreadsheets/d/1IDBxwgaPQL3OXrfwmEl2Y9RwI4CI29koruPL0Dz6inc/edit?usp=sharing)
 - [System Architecture](https://github.com/chasewalker26/COP4331_Project/blob/main/artifacts/architecture.md)
 - [Source Code](https://github.com/chasewalker26/COP4331_Project/tree/main/project/)
 - [Test Code (Site)](https://github.com/chasewalker26/COP4331_Project/tree/main/project/Website/public/js)
 - [Test Code (Scanner)](https://github.com/chasewalker26/COP4331_Project/tree/main/project/RaspberryPi)
-- [Product Demonstration](ADD LINK HERE)
+- [Product Demonstration](https://www.youtube.com/watch?v=6VJv_O-CITk)
 
 ## Task Allocation
-- Chase Walker - 
+- Chase Walker - I completed the user story "As a frequent user of my phone, I would like to be able to view the application on my phone" U023. I also worked with Alisher on "As an older shopper unfamiliar with web apps, I would like to have a tutorial for how to use the website, so that I can get the most out of it" U026 by recording the tutorials for shopping list and inventory. I recorded the inventory demo.
 
 - Christopher Gray - 
 
